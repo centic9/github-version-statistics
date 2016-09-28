@@ -3,16 +3,21 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
+}
+
+configurations {
+    all*.exclude group: 'org.jenkins-ci'
 }
 
 dependencies {
-	compile 'commons-io:commons-io:2.4'
-	compile 'org.apache.commons:commons-lang3:3.4'
-	compile 'org.dstadler:commons-dost:1.0.0.20'
+    compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'org.dstadler:commons-dost:1.0.0.20'
+    compile 'org.kohsuke:github-api:1.77'
 
-	testCompile "junit:junit:[4.12,)"
-	testCompile 'org.dstadler:commons-test:1.0.0.11'
+    testCompile "junit:junit:[4.12,)"
+    testCompile 'org.dstadler:commons-test:1.0.0.12'
 }
 
 task wrapper(type: Wrapper) {
