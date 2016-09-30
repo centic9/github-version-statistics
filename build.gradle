@@ -24,10 +24,14 @@ configurations {
 }
 
 dependencies {
-    compile 'commons-io:commons-io:2.4'
+    compile 'commons-io:commons-io:2.5'
     compile 'org.apache.commons:commons-lang3:3.4'
     compile 'org.dstadler:commons-dost:1.0.0.20'
     compile 'org.kohsuke:github-api:1.77'
+
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.7.4'
 
     testCompile "junit:junit:[4.12,)"
     testCompile 'org.dstadler:commons-test:1.0.0.12'

@@ -9,6 +9,7 @@ import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedSearchIterable;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Matcher;
@@ -56,7 +57,7 @@ public class Search {
                 continue;
             }
 
-            String str = IOUtils.toString(stream);
+            String str = IOUtils.toString(stream, "UTF-8");
             if(!str.contains(GROUP)) {
                 System.out.println("Did not find " + GROUP + " in content of repo " + repo + " at " + htmlUrl);
                 continue;
@@ -88,6 +89,8 @@ public class Search {
         for(String version : versions.keySet()) {
             System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
         }
+
+        CSVWriter.write(new File("stats.json"), versions);
     }
 
     private static String reducedContent(String str) {
