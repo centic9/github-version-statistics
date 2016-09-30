@@ -1,0 +1,40 @@
+<html>
+<head><script src="https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js"></script>
+<style>#graphdiv { position: absolute; left: 10px; right: 10px; top: 10px; bottom: 10px; }</style>
+</head>
+<body><div id="graphdiv"></div>
+<script type="text/javascript">
+  g = new Dygraph(
+
+    // containing div
+    document.getElementById("graphdiv"),
+
+    // CSV or path to a CSV file.
+    "Date,Time\n" +
+   "2016-09-30 00:00,\n" ,
+    {
+       title: 'Results for \'Apache POI\'',
+       fillGraph: true,
+       stackedGraph: true,
+       drawPoints: true,
+       includeZero: true,
+       xRangePad: 20,
+       yAxisLabelWidth: 60,
+   axes: {
+       y: {
+                valueFormatter: function(y) {
+                  return parseFloat(Math.round(y * 100) / 100).toFixed(2) + 's';
+                },
+                axisLabelFormatter: function(y) {
+                  return y + 's';
+                }
+              }
+   },
+colors: ['#000000', '#ff0000', '#ff8000', '#ffff00', '#40ff00', '#0040ff', '#ff00ff', '#757e83', '#75c5d5', '#663300'],
+    }
+
+  );
+
+</script>
+</body>
+</html>
