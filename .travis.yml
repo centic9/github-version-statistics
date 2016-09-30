@@ -6,7 +6,7 @@ before_install:
  - chmod +x gradlew
 
 script:
-  - ./gradlew buildPlugin
+  - ./gradlew check installDist
 
 after_failure:
 - cat build/test-results/*.xml
