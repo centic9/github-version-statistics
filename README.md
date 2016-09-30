@@ -4,6 +4,14 @@
 
 A small application which uses the GitHub API to search for usages of a Java library and prepares some statistics about which versions are used how often
 
+#### Initial URL for looking at results
+
+For now the results can be looked at directly from the Git repository, for github you can use:
+
+https://rawgit.com/centic9/github-version-statistics/master/results/results.html
+
+However this is likely to change with some better deployment setup in the future.
+
 #### Getting started
 
 ##### Grab it
@@ -28,6 +36,15 @@ Then you can run it via
 
 * Currently only Gradle `build.gradle` files are searched, the same should be done for Maven `pom.xml` files.
 * The GitHub API currently limits the number of results to 1000, so you only get 1000 results at max and the statistics for popular Java libraries will not be complete.
+
+## Cron-entry to run the job every night
+
+    0 0 * * * bash /opt/github-version-statistics/runStatistics.sh
+
+## How to setup password-less pushes to github.com
+
+* Go to https://github.com/settings/ssh and follow the steps to create and add a ssh-key
+* See http://mattmakesmaps.com/blog/2013/06/16/auto-push-to-github-via-machine-user/ for more details
 
 #### Contribute
 
