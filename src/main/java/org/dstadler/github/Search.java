@@ -1,6 +1,8 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
@@ -38,6 +40,7 @@ public class Search {
         System.out.println("Had: " + list.getTotalCount() + " total results");
 
         // paginate through results, filtering out interesting files
+        Multimap<String,String> versions = ArrayListMultimap.create();
         for(GHContent match : list) {
             final String htmlUrl = match.getHtmlUrl();
             String repo = getRepository(github, htmlUrl);
@@ -62,14 +65,17 @@ public class Search {
             Matcher matcher = PATTERN_SHORT.matcher(str);
             if(matcher.find()) {
                System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
+                versions.put(matcher.group(1), htmlUrl);
             } else {
                 matcher = PATTERN_LONG.matcher(str);
                 if (matcher.find()) {
                     System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
+                    versions.put(matcher.group(1), htmlUrl);
                 } else {
                     matcher = PATTERN_SHORT_VAR.matcher(str);
                     if(matcher.find()) {
                         System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
+                        versions.put(matcher.group(1), htmlUrl);
                     } else {
                         System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str) + "\n");
                     }
@@ -78,6 +84,10 @@ public class Search {
         }
 
         // combine results into the actual statistics, taking into account forks and how many stars a repo has
+        System.out.println("Had " + versions.size() + " different versions for " + versions.size() + " projects");
+        for(String version : versions.keySet()) {
+            System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
+        }
     }
 
     private static String reducedContent(String str) {
