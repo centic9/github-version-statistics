@@ -84,7 +84,7 @@ public class Search {
         }
 
         // combine results into the actual statistics, taking into account forks and how many stars a repo has
-        System.out.println("Had " + versions.size() + " different versions for " + versions.size() + " projects");
+        System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");
         for(String version : versions.keySet()) {
             System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
         }

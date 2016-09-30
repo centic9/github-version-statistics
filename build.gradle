@@ -1,4 +1,17 @@
 apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'org.dstadler.github.Search'
+
+sourceCompatibility = 1.8
+
+version = '1.0'
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'GitHub Java library version usage Statistics', 'Implementation-Version': version
+    }
+}
 
 sourceCompatibility = 1.8
 
