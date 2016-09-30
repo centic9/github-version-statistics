@@ -24,6 +24,11 @@ Then you can run it via
 
     build/install/github-version-statistics/bin/github-version-statistics
 
+#### Limitations
+
+* Currently only Gradle `build.gradle` files are searched, the same should be done for Maven `pom.xml` files.
+* The GitHub API currently limits the number of results to 1000, so you only get 1000 results at max and the statistics for popular Java libraries will not be complete.
+
 #### Contribute
 
 If you are missing things or have suggestions how to improve the plugin, please either send pull requests or create [issues](https://github.com/centic9/github-version-statistics/issues).
