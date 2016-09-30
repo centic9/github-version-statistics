@@ -90,7 +90,7 @@ public class Search {
             System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
         }
 
-        CSVWriter.write(new File("stats.json"), versions);
+        JSONWriter.write(new File("stats.json"), versions);
     }
 
     private static String reducedContent(String str) {
