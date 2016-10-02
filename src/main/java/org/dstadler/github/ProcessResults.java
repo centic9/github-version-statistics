@@ -99,6 +99,69 @@ public class ProcessResults {
         "</body>\n" +
         "</html>\n";
 
+    private static final String TEMPLATE_PIE =
+            "<html>\n" +
+                    "<head>" +
+                    "</head>\n" +
+                    "<body>" +
+                    "<div id=\"container\" style=\"min-width: 310px; height: 400px; margin: 0 auto\">\n" +
+                    "</div>\n" +
+                    "\n" +
+                    "<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +
+                    "</script>\n" +
+                    "<script src=\"http://code.highcharts.com/highcharts.js\">\n" +
+                    "</script>\n" +
+                    "<script src=\"http://code.highcharts.com/modules/exporting.js\">\n" +
+                    "</script>\n" +
+                    "\n" +
+                    "<script type=\"text/javascript\">\n" +
+                    "\n" +
+                    "$(function () {\n" +
+                    "        $('#container').highcharts({\n" +
+                    "            chart: {\n" +
+                    "                        plotBackgroundColor: null,\n" +
+                    "                        plotBorderWidth: null,\n" +
+                    "                        plotShadow: false,\n" +
+                    "                        type: 'pie'\n" +
+                    "                    },\n" +
+                    "            title: {\n" +
+                    "                text: 'Current version distribution',\n" +
+                    "                x: -20 //center\n" +
+                    "            },\n" +
+                    "            subtitle: {\n" +
+                    "                text: 'Fetched from the first 1000 results of a Github search',\n" +
+                    "                x: -20\n" +
+                    "            },\n" +
+                    "            legend: {\n" +
+                    "                layout: 'vertical',\n" +
+                    "                align: 'right',\n" +
+                    "                verticalAlign: 'middle',\n" +
+                    "                borderWidth: 0\n" +
+                    "            },\n" +
+                    "            plotOptions: {\n" +
+                    "                pie: {\n" +
+                    "                    allowPointSelect: true,\n" +
+                    "                    cursor: 'pointer',\n" +
+                    "                    dataLabels: {\n" +
+                    "                        enabled: true,\n" +
+                    "                        format: '<b>{point.name}</b>: {point.y:.0f}',\n" +
+                    "                        style: {\n" +
+                    "                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
+                    "                        }\n" +
+                    "                    }\n" +
+                    "                }\n" +
+                    "            },\n" +
+                    "            series: [{\n" +
+                    "                name: 'Version',\n" +
+                    "                data: [${piedata}]\n" +
+                    "            }]\n" +
+                    "        });\n" +
+                    "    });\n" +
+                    "\n" +
+                    "</script>" +
+                    "</body>\n" +
+                    "</html>\n";
+
     public static void main(String[] args) throws IOException, ParseException {
         // read stats.json
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
@@ -185,7 +248,31 @@ public class ProcessResults {
         File results = new File("docs", "results.html");
         FileUtils.writeStringToFile(results, html, "UTF-8");
 
-        System.out.println("Wrote results to " + results);
+        File pie = new File("docs", "resultsCurrent.html");
+        writeCurrentResults(pie, values.row(maxDateStr));
+
+        System.out.println("Wrote results to " + results + " and " + pie);
+    }
+
+    private static void writeCurrentResults(File pie, Map<String, Integer> row) throws IOException {
+        Map<String,Integer> versions = new TreeMap<>(Collections.reverseOrder(new VersionComparator()));
+        versions.putAll(row);
+
+        // add pie-data
+        /*
+        {name: '3.10', y: 3.9}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8
+         */
+        StringBuilder pieData = new StringBuilder();
+        for(Map.Entry<String,Integer> entry : versions.entrySet()) {
+            if(entry.getValue() != 0) {
+                pieData.append(String.format("{name: '%s', y:%d},", entry.getKey(), entry.getValue()));
+            }
+        }
+        // cut off trailing comma
+        pieData.setLength(pieData.length()-1);
+        String html = TEMPLATE_PIE.replace("${piedata}", pieData);
+
+        FileUtils.writeStringToFile(pie, html, "UTF-8");
     }
 
     private static String getHeaderData(Collection<String> versions) {
