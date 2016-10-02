@@ -171,7 +171,7 @@ public class ProcessResults {
 
         html = html.replace("${annotations}", annotations);
 
-        FileUtils.writeStringToFile(new File("results", "results.html"), html, "UTF-8");
+        FileUtils.writeStringToFile(new File("docs", "results.html"), html, "UTF-8");
     }
 
     private static String getHeaderData(Collection<String> versions) {
