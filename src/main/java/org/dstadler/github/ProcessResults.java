@@ -118,11 +118,18 @@ public class ProcessResults {
                 String date = holder.getDate();
 
                 // combine all the non-version things like build-script variables, ...
+                String versionKey = version;
                 if(!VERSION_PATTERN.matcher(version).matches()) {
-                    version = "other";
+                    versionKey = "other";
                 }
 
-                values.put(date, version, versions.get(version).size());
+                Integer value = values.get(date, versionKey);
+                if(value == null) {
+                    value = versions.get(version).size();
+                } else {
+                    value += versions.get(version).size();
+                }
+                values.put(date, versionKey, value);
                 if(maxDateStr == null || maxDateStr.compareTo(date) <= 0) {
                     maxDateStr = date;
                 }
