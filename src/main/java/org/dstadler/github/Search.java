@@ -59,27 +59,29 @@ public class Search {
             }
 
             String str = IOUtils.toString(stream, "UTF-8");
+
+            // filter out some unwanted matches
+            str = str.replaceAll("'org\\.apache\\.poi:ooxml-schemas:1\\.\\d+'", "");
+
+            // skip this if the group-tag is not found any more now
             if(!str.contains(GROUP)) {
                 System.out.println("Did not find " + GROUP + " in content of repo " + repo + " at " + htmlUrl);
                 continue;
             }
 
-            // filter out some unwanted matches
-            str = str.replaceAll("'org\\.apache\\.poi:ooxml-schemas:1\\.\\d+'", "");
-
             Matcher matcher = PATTERN_SHORT.matcher(str);
             if(matcher.find()) {
-                addVersion(versions, htmlUrl, matcher, repo);
+                addVersion(versions, htmlUrl, repo, str, matcher.group(1));
             } else {
                 matcher = PATTERN_LONG.matcher(str);
                 if (matcher.find()) {
-                    addVersion(versions, htmlUrl, matcher, repo);
+                    addVersion(versions, htmlUrl, repo, str, matcher.group(1));
                 } else {
                     matcher = PATTERN_SHORT_VAR.matcher(str);
                     if(matcher.find()) {
-                        addVersion(versions, htmlUrl, matcher, repo);
+                        addVersion(versions, htmlUrl, repo, str, matcher.group(1));
                     } else {
-                        System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str) + "\n");
+                        System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
                     }
                 }
             }
@@ -94,15 +96,44 @@ public class Search {
         JSONWriter.write(new File("stats.json"), versions);
     }
 
-    private static void addVersion(Multimap<String, String> versions, String htmlUrl, Matcher matcher, String repo) {
-        String version = StringUtils.remove(matcher.group(1), "-FINAL");
+    // poiVersion = '3.10-FINAL'
+    private static final String VERSION_VAR_PATTERN = "\\s*=\\s*" + QUOTE + VERSION + QUOTE;
+
+    private static void addVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str, String match) {
+        String version = match;
+
+        // try to resolve simple variables
+        if(version.startsWith("$")) {
+            Matcher matcher = Pattern.compile(
+                    StringUtils.removeStart(StringUtils.removeEnd(version.substring(1), "}"), "{")
+                            + VERSION_VAR_PATTERN).matcher(str);
+            if(matcher.find()) {
+                version = matcher.group(1);
+            }
+        }
+
+        // def poiVersion='3.7'
+        // compile 'org.apache.poi:poi:'+poiVersion
+        if(str.contains("'+" + version)) {
+            Matcher matcher = Pattern.compile(
+                    "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
+            if(matcher.find()) {
+                version = matcher.group(1);
+            }
+        }
+
+        // remove a trailing "-FINAL" that was used sometimes to make the comparisons easier
+        version = StringUtils.removeEnd(version, "-FINAL");
+        // sanitize versions like [3.8-beta5,)
+        version = StringUtils.removeStart(version, "[");
+
         System.out.println("Found " + version + " for repo " + repo + " at " + htmlUrl);
         versions.put(version, htmlUrl);
     }
 
-    private static String reducedContent(String str) {
+    private static String reducedContent(String str, String htmlUrl) {
         int pos = str.indexOf(GROUP);
-        Preconditions.checkState(pos >= 0);
+        Preconditions.checkState(pos >= 0, "Did not find " + GROUP + " at " + htmlUrl);
 
         return str.substring(Math.max(0, pos - 100), Math.min(str.length(), pos + 100));
     }
