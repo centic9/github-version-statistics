@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
@@ -66,17 +67,17 @@ public class Search {
             Matcher matcher = PATTERN_SHORT.matcher(str);
             if(matcher.find()) {
                System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                versions.put(matcher.group(1), htmlUrl);
+                addVersion(versions, htmlUrl, matcher);
             } else {
                 matcher = PATTERN_LONG.matcher(str);
                 if (matcher.find()) {
                     System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                    versions.put(matcher.group(1), htmlUrl);
+                    addVersion(versions, htmlUrl, matcher);
                 } else {
                     matcher = PATTERN_SHORT_VAR.matcher(str);
                     if(matcher.find()) {
                         System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                        versions.put(matcher.group(1), htmlUrl);
+                        addVersion(versions, htmlUrl, matcher);
                     } else {
                         System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str) + "\n");
                     }
@@ -91,6 +92,10 @@ public class Search {
         }
 
         JSONWriter.write(new File("stats.json"), versions);
+    }
+
+    private static void addVersion(Multimap<String, String> versions, String htmlUrl, Matcher matcher) {
+        versions.put(StringUtils.remove(matcher.group(1), "-FINAL"), htmlUrl);
     }
 
     private static String reducedContent(String str) {

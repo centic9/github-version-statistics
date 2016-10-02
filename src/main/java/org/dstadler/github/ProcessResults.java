@@ -67,6 +67,9 @@ public class ProcessResults {
                 "       yAxisLabelWidth: 60,\n" +
                 //"       yLabelWidth: 100,\n" +
 
+                "       labelsSeparateLines: true,\n" +
+                "       legend: 'follow',\n" +
+
                 "   axes: {\n" +
                 "       y: {\n" +
                 "                valueFormatter: function(y) {\n" +
@@ -171,7 +174,10 @@ public class ProcessResults {
 
         html = html.replace("${annotations}", annotations);
 
-        FileUtils.writeStringToFile(new File("docs", "results.html"), html, "UTF-8");
+        File results = new File("docs", "results.html");
+        FileUtils.writeStringToFile(results, html, "UTF-8");
+
+        System.out.println("Wrote results to " + results);
     }
 
     private static String getHeaderData(Collection<String> versions) {

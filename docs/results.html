@@ -10,7 +10,7 @@
     document.getElementById("graphdiv"),
 
     // CSV or path to a CSV file.
-    "Date,1.0,1.1,1.3,3.0-FINAL,3.10-FINAL,3.10-beta2,3.10.1,3.11,3.11-beta2,3.11-beta3,3.12,3.12-beta1,3.13,3.13-beta1,3.14,3.15,3.15-beta1,3.15-beta2,3.2-FINAL,3.5-beta3,3.6,3.7,3.8,3.8-beta3,3.8-beta4,3.8-beta5,3.9,other\n" +
+    "Date,1.0,1.1,1.3,3.0,3.10,3.10-beta2,3.10.1,3.11,3.11-beta2,3.11-beta3,3.12,3.12-beta1,3.13,3.13-beta1,3.14,3.15,3.15-beta1,3.15-beta2,3.2,3.5-beta3,3.6,3.7,3.8,3.8-beta3,3.8-beta4,3.8-beta5,3.9,other\n" +
    "2016-09-30,2,1,3,1,63,7,33,61,4,7,99,6,130,5,144,4,9,10,4,3,5,26,15,3,1,1,143,0\n" + 
 "2016-10-01,2,1,,1,69,7,34,64,4,9,102,5,119,4,139,4,8,10,6,3,7,27,15,3,1,1,140,0\n" ,
     {
@@ -21,6 +21,8 @@
        includeZero: true,
        xRangePad: 20,
        yAxisLabelWidth: 60,
+       labelsSeparateLines: true,
+       legend: 'follow',
    axes: {
        y: {
                 valueFormatter: function(y) {
@@ -41,8 +43,8 @@ colors: ['#000000', '#ff0000', '#ff8000', '#ffff00', '#40ff00', '#0040ff', '#ff0
         {series: "1.0",x: "2016-10-01",shortText: "1.0",text: "2016-10-01", "width": 100},
     {series: "1.1",x: "2016-10-01",shortText: "1.1",text: "2016-10-01", "width": 100},
     {series: "1.3",x: "2016-10-01",shortText: "1.3",text: "2016-10-01", "width": 100},
-    {series: "3.0-FINAL",x: "2016-10-01",shortText: "3.0-FINAL",text: "2016-10-01", "width": 100},
-    {series: "3.10-FINAL",x: "2016-10-01",shortText: "3.10-FINAL",text: "2016-10-01", "width": 100},
+    {series: "3.0",x: "2016-10-01",shortText: "3.0",text: "2016-10-01", "width": 100},
+    {series: "3.10",x: "2016-10-01",shortText: "3.10",text: "2016-10-01", "width": 100},
     {series: "3.10-beta2",x: "2016-10-01",shortText: "3.10-beta2",text: "2016-10-01", "width": 100},
     {series: "3.10.1",x: "2016-10-01",shortText: "3.10.1",text: "2016-10-01", "width": 100},
     {series: "3.11",x: "2016-10-01",shortText: "3.11",text: "2016-10-01", "width": 100},
@@ -56,7 +58,7 @@ colors: ['#000000', '#ff0000', '#ff8000', '#ffff00', '#40ff00', '#0040ff', '#ff0
     {series: "3.15",x: "2016-10-01",shortText: "3.15",text: "2016-10-01", "width": 100},
     {series: "3.15-beta1",x: "2016-10-01",shortText: "3.15-beta1",text: "2016-10-01", "width": 100},
     {series: "3.15-beta2",x: "2016-10-01",shortText: "3.15-beta2",text: "2016-10-01", "width": 100},
-    {series: "3.2-FINAL",x: "2016-10-01",shortText: "3.2-FINAL",text: "2016-10-01", "width": 100},
+    {series: "3.2",x: "2016-10-01",shortText: "3.2",text: "2016-10-01", "width": 100},
     {series: "3.5-beta3",x: "2016-10-01",shortText: "3.5-beta3",text: "2016-10-01", "width": 100},
     {series: "3.6",x: "2016-10-01",shortText: "3.6",text: "2016-10-01", "width": 100},
     {series: "3.7",x: "2016-10-01",shortText: "3.7",text: "2016-10-01", "width": 100},
