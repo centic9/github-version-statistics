@@ -1,31 +1,32 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.Table;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateUtils;
-import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.regex.Pattern;
+
+import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 
 public class ProcessResults {
     private static final Date START_DATE;
-
-    private static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm");
-
     static {
         try {
-            START_DATE = DATE_FORMAT.parse("2016-09-30 00:00");
+            START_DATE = DATE_FORMAT.parse("2016-09-30");
         } catch (ParseException e) {
             throw new IllegalStateException("Failed to parse date", e);
         }
     }
+
+    // parse 3.10, 3.10-FINAL, 3.10-beta1
+    private final static Pattern VERSION_PATTERN = Pattern.compile("[0-9][0-9.]+[-A-Za-z0-9]*");
 
     private static final String TEMPLATE =
         "<html>\n" +
@@ -69,10 +70,10 @@ public class ProcessResults {
                 "   axes: {\n" +
                 "       y: {\n" +
                 "                valueFormatter: function(y) {\n" +
-                "                  return parseFloat(Math.round(y * 100) / 100).toFixed(2) + 's';\n" +
+                "                  return y;\n" +
                 "                },\n" +
                 "                axisLabelFormatter: function(y) {\n" +
-                "                  return y + 's';\n" +
+                "                  return y;\n" +
                 "                }\n" +
                 "              }\n" +
                 "   },\n" +
@@ -86,13 +87,11 @@ public class ProcessResults {
                 "\n" +
                 "  );\n" +
                 "\n" +
-                /*"  g.ready(function() {\n" +
+                "  g.ready(function() {\n" +
                 "    g.setAnnotations([\n" +
-                "    {series: \"Test.TestOOXMLLite\",x: \"2016-08-01\",shortText: \"A\",text: \"OOXMLLite build change\"},\n" +
-                "    {series: \"Test.TestIntegration\",x: \"2016-09-15\",shortText: \"B\",text: \"Server upgrade\",attachAtBottom: true},\n" +
-                "    {series: \"Test.TestOOXMLLite\",x: \"2016-09-17\",shortText: \"C\",text: \"OOXMLLite enabled again\"},\n" +
+                "    ${annotations}\n" +
                 "    ]);\n" +
-                "  });\n" +*/
+                "  });\n" +
                 "</script>\n" +
         "</body>\n" +
         "</html>\n";
@@ -100,13 +99,13 @@ public class ProcessResults {
     public static void main(String[] args) throws IOException, ParseException {
         // read stats.json
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
-        Map<String,Integer> values = new TreeMap<>();
+        Table<String,String,Integer> values = HashBasedTable.create();
         String maxDateStr = readLines(lines, values);
 
         generateHtmlFiles(values, maxDateStr);
     }
 
-    private static String readLines(List<String> lines, Map<String, Integer> values) throws IOException {
+    private static String readLines(List<String> lines, Table<String, String, Integer> values) throws IOException {
         String maxDateStr = null;
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
@@ -114,7 +113,13 @@ public class ProcessResults {
             Multimap<String, String> versions = holder.getVersions();
             for(String version : versions.keySet()) {
                 String date = holder.getDate();
-                values.put(date, versions.get(version).size());
+
+                // combine all the non-version things like build-script variables, ...
+                if(!VERSION_PATTERN.matcher(version).matches()) {
+                    version = "other";
+                }
+
+                values.put(date, version, versions.get(version).size());
                 if(maxDateStr == null || maxDateStr.compareTo(date) <= 0) {
                     maxDateStr = date;
                 }
@@ -126,15 +131,24 @@ public class ProcessResults {
         return maxDateStr;
     }
 
-    private static void generateHtmlFiles(Map<String, Integer> values, String maxDateStr) throws ParseException, IOException {
-        StringBuilder data = new StringBuilder();
+    private static void generateHtmlFiles(Table<String, String, Integer> values, String maxDateStr) throws ParseException, IOException {
+        // use a tree-set to have a simple sorting by version, this will not
+        // work well for -beta, we can improve on it via a custom comparator later
+        Set<String> columns = new TreeSet<>(values.columnKeySet());
+
         Date date = START_DATE;
+        StringBuilder data = new StringBuilder();
         while(date.compareTo(DATE_FORMAT.parse(maxDateStr)) <= 0) {
             String dateStr = DATE_FORMAT.format(date);
-            Integer value = values.get(dateStr);
+            Map<String, Integer> row = values.row(dateStr);
 
             // Format: "    \"2008-05-07,75\\n\" +\n" +
-            data.append("\"").append(dateStr).append(",").append(formatValue(value)).append("\\n\" + \n");
+            data.append("\"").append(dateStr);
+            for(String column : columns) {
+                data.append(",").append(formatValue(row.get(column)));
+            }
+
+            data.append("\\n\" + \n");
 
             date = DateUtils.addDays(date, 1);
         }
@@ -143,10 +157,30 @@ public class ProcessResults {
         data.setLength(data.length() - 3);
 
         String html = TEMPLATE.replace("${data}", data);
-        html = html.replace("${dataheader}", "Date,Time");
+        html = html.replace("${dataheader}", "Date" + getHeaderData(columns));
         html = html.replace("${benchmark}", "Apache POI");
 
+        StringBuilder annotations = new StringBuilder();
+        for(String column : columns) {
+            annotations.append("    {series: \"").append(column).append("\",x: \"").append(maxDateStr).
+                    append("\",shortText: \"").append(column).append("\",text: \"").append(maxDateStr).append("\", \"width\": 100},\n");
+        }
+
+        // cut away trailing comma and newline
+        annotations.setLength(annotations.length() - 2);
+
+        html = html.replace("${annotations}", annotations);
+
         FileUtils.writeStringToFile(new File("results", "results.html"), html, "UTF-8");
+    }
+
+    private static String getHeaderData(Collection<String> versions) {
+        StringBuilder headers = new StringBuilder();
+        for(String version : versions) {
+            headers.append(",").append(version);
+        }
+
+        return headers.toString();
     }
 
     private static String formatValue(Integer value) {

@@ -13,7 +13,7 @@ public class JSONWriter {
             .registerModule(new GuavaModule())
             ;
 
-    private static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd HH:mm");
+    public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
     public static void write(File file, Multimap<String, String> versions) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
