@@ -64,20 +64,20 @@ public class Search {
                 continue;
             }
 
+            // filter out some unwanted matches
+            str = str.replaceAll("'org\\.apache\\.poi:ooxml-schemas:1\\.\\d+'", "");
+
             Matcher matcher = PATTERN_SHORT.matcher(str);
             if(matcher.find()) {
-               System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                addVersion(versions, htmlUrl, matcher);
+                addVersion(versions, htmlUrl, matcher, repo);
             } else {
                 matcher = PATTERN_LONG.matcher(str);
                 if (matcher.find()) {
-                    System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                    addVersion(versions, htmlUrl, matcher);
+                    addVersion(versions, htmlUrl, matcher, repo);
                 } else {
                     matcher = PATTERN_SHORT_VAR.matcher(str);
                     if(matcher.find()) {
-                        System.out.println("Found " + matcher.group(1) + " for repo " + repo + " at " + htmlUrl);
-                        addVersion(versions, htmlUrl, matcher);
+                        addVersion(versions, htmlUrl, matcher, repo);
                     } else {
                         System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str) + "\n");
                     }
@@ -94,8 +94,10 @@ public class Search {
         JSONWriter.write(new File("stats.json"), versions);
     }
 
-    private static void addVersion(Multimap<String, String> versions, String htmlUrl, Matcher matcher) {
-        versions.put(StringUtils.remove(matcher.group(1), "-FINAL"), htmlUrl);
+    private static void addVersion(Multimap<String, String> versions, String htmlUrl, Matcher matcher, String repo) {
+        String version = StringUtils.remove(matcher.group(1), "-FINAL");
+        System.out.println("Found " + version + " for repo " + repo + " at " + htmlUrl);
+        versions.put(version, htmlUrl);
     }
 
     private static String reducedContent(String str) {
