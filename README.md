@@ -36,7 +36,7 @@ Then you can run it via
 
 * Currently only Gradle `build.gradle` files are searched, the same should be done for Maven `pom.xml` files.
 * The GitHub API currently limits the number of results to 1000, so you only get 1000 results at max and the statistics for popular Java libraries will not be complete.
-* If there are multiple files in one repository currently, we may count the version multiple times, it would probably better to count each GitHub repository only once.
+* If there are multiple files in one repository currently, we may count the version multiple times, it would probably be better to count each GitHub repository only once.
 
 ## Cron-entry to run the job every night
 
