@@ -137,7 +137,8 @@ public class ProcessResults {
     private static void generateHtmlFiles(Table<String, String, Integer> values, String maxDateStr) throws ParseException, IOException {
         // use a tree-set to have a simple sorting by version, this will not
         // work well for -beta, we can improve on it via a custom comparator later
-        Set<String> columns = new TreeSet<>(values.columnKeySet());
+        Set<String> columns = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
+        columns.addAll(values.columnKeySet());
 
         Date date = START_DATE;
         StringBuilder data = new StringBuilder();
