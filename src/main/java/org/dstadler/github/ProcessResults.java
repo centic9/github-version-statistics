@@ -36,9 +36,10 @@ public class ProcessResults {
         "</head>\n" +
         "<body>" +
                 "<div id=\"graphdiv\"></div>\n" +
+                /* need to add Jekyll-tags to make this work
                 "<div class=\"docs-header-bottom\">\n" +
                 "    {% include footer.html %}\n" +
-                "</div>\n" +
+                "</div>\n" +*/
                 "\n" +
                 "<script type=\"text/javascript\">\n" +
                 "  g = new Dygraph(\n" +
@@ -111,10 +112,11 @@ public class ProcessResults {
                     "<div id=\"container\" style=\"min-width: 310px; height: 400px; margin: 0 auto\">\n" +
                     "</div>\n" +
                     "\n" +
+                    /* need to add Jekyll-tags to make this work
                     "<div class=\"docs-header-bottom\">\n" +
                     "    {% include footer.html %}\n" +
                     "</div>\n" +
-                    "\n" +
+                    "\n" +*/
                     "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +
                     "</script>\n" +
                     "<script src=\"https://code.highcharts.com/highcharts.js\">\n" +
