@@ -13,6 +13,8 @@ public class VersionComparatorTest {
         TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.0-beta1", true);
         TestHelpers.ComparatorTest(new VersionComparator(), "1.0-beta1", String.format("1.0-beta1"), "1.0", false);
         TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.10.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", String.format("3.10-beta1"), "3.10.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", String.format("3.10-beta1"), "3.10.1.2", false);
         TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.12.1", false);
         TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.9", true);
         TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.9.1", true);

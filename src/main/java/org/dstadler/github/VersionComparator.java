@@ -9,6 +9,7 @@ public class VersionComparator implements Comparator<String> {
     private final static Pattern SIMPLE_VERSION = Pattern.compile("[0-9.][0-9.]+[0-9.]");
     private final static Pattern BETA_VERSION = Pattern.compile("[0-9.][0-9.]+[0-9.]-beta\\d+");
 
+    @Override
     public final int compare(String var1, String var2) {
         boolean simple1 = var1 != null && SIMPLE_VERSION.matcher(var1).matches();
         boolean simple2 = var2 != null && SIMPLE_VERSION.matcher(var2).matches();
@@ -40,10 +41,18 @@ public class VersionComparator implements Comparator<String> {
 
                 // handle cases of different beta-ness
                 if (betaPos1 && !betaPos2) {
+                    // one is beta, but the other not, if the non-beta has more elements, it is actually higher
+                    if(parts1.length <= parts2.length) {
+                        return -1;
+                    }
                     // first is beta, second not, but they were equal up to now
                     // indicate that the second should come first
                     return 1;
                 } else if (!betaPos1 && betaPos2) {
+                    // one is beta, but the other not, if the non-beta has more elements, it is actually higher
+                    if(parts1.length >= parts2.length) {
+                        return 1;
+                    }
                     // first is normal, second is beta, but they were equal up to now
                     // indicate that the first should come first
                     return -1;
