@@ -8,7 +8,7 @@ A small application which uses the GitHub API to search for usages of a Java lib
 
 For now the results can be looked at directly from the Git repository, for github you can use:
 
-https://rawgit.com/centic9/github-version-statistics/master/results/results.html
+https://centic9.github.io/github-version-statistics/
 
 However this is likely to change with some better deployment setup in the future.
 
