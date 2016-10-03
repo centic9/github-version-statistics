@@ -40,3 +40,10 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.14.1'
 }
+
+task processResults(type:JavaExec) {
+    description = 'Post-processes results to charts'
+
+    main = 'org.dstadler.github.ProcessResults'
+    classpath = sourceSets.main.runtimeClasspath
+}
