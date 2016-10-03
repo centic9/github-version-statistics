@@ -107,11 +107,11 @@ public class ProcessResults {
                     "<div id=\"container\" style=\"min-width: 310px; height: 400px; margin: 0 auto\">\n" +
                     "</div>\n" +
                     "\n" +
-                    "<script src=\"http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +
+                    "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +
                     "</script>\n" +
-                    "<script src=\"http://code.highcharts.com/highcharts.js\">\n" +
+                    "<script src=\"https://code.highcharts.com/highcharts.js\">\n" +
                     "</script>\n" +
-                    "<script src=\"http://code.highcharts.com/modules/exporting.js\">\n" +
+                    "<script src=\"https://code.highcharts.com/modules/exporting.js\">\n" +
                     "</script>\n" +
                     "\n" +
                     "<script type=\"text/javascript\">\n" +
