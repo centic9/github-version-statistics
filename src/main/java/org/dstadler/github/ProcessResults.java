@@ -36,6 +36,10 @@ public class ProcessResults {
         "</head>\n" +
         "<body>" +
                 "<div id=\"graphdiv\"></div>\n" +
+                "<div class=\"docs-header-bottom\">\n" +
+                "    {% include footer.html %}\n" +
+                "</div>\n" +
+                "\n" +
                 "<script type=\"text/javascript\">\n" +
                 "  g = new Dygraph(\n" +
                 "\n" +
@@ -105,6 +109,10 @@ public class ProcessResults {
                     "</head>\n" +
                     "<body>" +
                     "<div id=\"container\" style=\"min-width: 310px; height: 400px; margin: 0 auto\">\n" +
+                    "</div>\n" +
+                    "\n" +
+                    "<div class=\"docs-header-bottom\">\n" +
+                    "    {% include footer.html %}\n" +
                     "</div>\n" +
                     "\n" +
                     "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +

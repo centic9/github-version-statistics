@@ -3,6 +3,10 @@
 <body><div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">
 </div>
 
+<div class="docs-header-bottom">
+    {% include footer.html %}
+</div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
 </script>
 <script src="https://code.highcharts.com/highcharts.js">
@@ -49,7 +53,7 @@ $(function () {
             },
             series: [{
                 name: 'Version',
-                data: [{name: 'other', y:50},{name: '3.15', y:4},{name: '3.15-beta2', y:14},{name: '3.15-beta1', y:9},{name: '3.14', y:150},{name: '3.14-beta1', y:4},{name: '3.13', y:126},{name: '3.13-beta1', y:4},{name: '3.12', y:108},{name: '3.12-beta1', y:8},{name: '3.11', y:63},{name: '3.11-beta3', y:8},{name: '3.11-beta2', y:3},{name: '3.10-beta2', y:7},{name: '3.10.1', y:38},{name: '3.10', y:75},{name: '3.9', y:153},{name: '3.8', y:18},{name: '3.8-beta5', y:2},{name: '3.8-beta4', y:1},{name: '3.8-beta3', y:3},{name: '3.7', y:34},{name: '3.6', y:7},{name: '3.5-beta3', y:4},{name: '3.2', y:5},{name: '3.0', y:1},{name: '1.0', y:2}]
+                data: [{name: 'other', y:50},{name: '3.15', y:4},{name: '3.15-beta2', y:14},{name: '3.15-beta1', y:9},{name: '3.14', y:150},{name: '3.14-beta1', y:4},{name: '3.13', y:126},{name: '3.13-beta1', y:4},{name: '3.12', y:108},{name: '3.12-beta1', y:8},{name: '3.11', y:63},{name: '3.11-beta3', y:8},{name: '3.11-beta2', y:3},{name: '3.10.1', y:38},{name: '3.10', y:75},{name: '3.10-beta2', y:7},{name: '3.9', y:153},{name: '3.8', y:18},{name: '3.8-beta5', y:2},{name: '3.8-beta4', y:1},{name: '3.8-beta3', y:3},{name: '3.7', y:34},{name: '3.6', y:7},{name: '3.5-beta3', y:4},{name: '3.2', y:5},{name: '3.0', y:1},{name: '1.0', y:2}]
             }]
         });
     });
