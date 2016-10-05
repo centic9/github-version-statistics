@@ -61,7 +61,7 @@ public class Search {
             String str = IOUtils.toString(stream, "UTF-8");
 
             // filter out some unwanted matches
-            str = str.replaceAll("'org\\.apache\\.poi:ooxml-schemas:1\\.\\d+'", "");
+            str = str.replaceAll("[\"']org\\.apache\\.poi:ooxml-schemas:1\\.\\d+['\"]", "");
 
             // skip this if the group-tag is not found any more now
             if(!str.contains(GROUP)) {
