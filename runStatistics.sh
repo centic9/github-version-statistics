@@ -9,5 +9,5 @@ rm -rf build && \
 ./gradlew check installDist && \
 build/install/github-version-statistics/bin/github-version-statistics && \
 ./gradlew processResults && \
-git add docs && git ci -m "Add daily results" && \
+git add stats* && git add docs && git ci -m "Add daily results" && \
 git push
