@@ -101,6 +101,7 @@ public class ProcessResults {
                 "    ]);\n" +
                 "  });\n" +
                 "</script>\n" +
+                "${footer}\n" +
         "</body>\n" +
         "</html>\n";
 
@@ -169,6 +170,7 @@ public class ProcessResults {
                     "    });\n" +
                     "\n" +
                     "</script>" +
+                    "${footer}\n" +
                     "</body>\n" +
                     "</html>\n";
 
@@ -254,6 +256,7 @@ public class ProcessResults {
         annotations.setLength(annotations.length() - 2);
 
         html = html.replace("${annotations}", annotations);
+        html = addFooter(html);
 
         File results = new File("docs", "results.html");
         FileUtils.writeStringToFile(results, html, "UTF-8");
@@ -262,6 +265,10 @@ public class ProcessResults {
         writeCurrentResults(pie, values.row(maxDateStr));
 
         System.out.println("Wrote results to " + results + " and " + pie);
+    }
+
+    private static String addFooter(String html) {
+        return html.replace("${footer}", "<br/><br/>Created at " + new Date());
     }
 
     private static void writeCurrentResults(File pie, Map<String, Integer> row) throws IOException {
@@ -281,6 +288,7 @@ public class ProcessResults {
         // cut off trailing comma
         pieData.setLength(pieData.length()-1);
         String html = TEMPLATE_PIE.replace("${piedata}", pieData);
+        html = addFooter(html);
 
         FileUtils.writeStringToFile(pie, html, "UTF-8");
     }
