@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo Look at https://centic9.github.io/github-version-statistics/ for results
+
 cd `dirname $0`
 
 git fetch && \
