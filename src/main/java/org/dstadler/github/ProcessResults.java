@@ -90,7 +90,10 @@ public class ProcessResults {
                 //"      showRoller: true,\n" +
                 //"connectSeparatedPoints: true,\n" +
                 //"       drawPoints: true\n" +
-                "colors: ['#000000', '#ff0000', '#ff8000', '#ffff00', '#40ff00', '#0040ff', '#ff00ff', '#757e83', '#75c5d5', '#663300'],\n" +
+
+                // taken from http://www.mulinblog.com/a-color-palette-optimized-for-data-visualization/
+                "colors: ['#4D4D4D', '#5DA5DA', '#FAA43A', '#60BD68', '#F17CB0', '#B2912F', '#B276B2', '#DECF3F', '#F15854'],\n" +
+
                 "    }\n" +
                 "\n" +
                 "  );\n" +
@@ -140,7 +143,7 @@ public class ProcessResults {
                     "                x: -20 //center\n" +
                     "            },\n" +
                     "            subtitle: {\n" +
-                    "                text: 'Fetched from the first 1000 results of a Github search',\n" +
+                    "                text: 'Fetched from Github search of the first 1000 results for build.gradle and the first 1000 results for pom.xml',\n" +
                     "                x: -20\n" +
                     "            },\n" +
                     "            legend: {\n" +
@@ -187,6 +190,7 @@ public class ProcessResults {
         String maxDateStr = null;
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
+            System.out.println("Had " + holder.getVersions().size() + " entries for " + holder.getDate());
 
             Multimap<String, String> versions = holder.getVersions();
             for(String version : versions.keySet()) {
