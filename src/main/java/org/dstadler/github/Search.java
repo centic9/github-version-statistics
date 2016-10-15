@@ -1,7 +1,7 @@
 package org.dstadler.github;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.SetMultimap;
 import org.kohsuke.github.GitHub;
 
 import java.io.File;
@@ -14,7 +14,8 @@ public class Search {
     public static void main(String[] args) throws IOException {
         GitHub github = BaseSearch.connect();
 
-        Multimap<String,String> versions = ArrayListMultimap.create();
+        // use a SetMultimap here to not record duplicates
+        SetMultimap<String,String> versions = HashMultimap.create();
         new GradleBuildSearch().search(github, versions);
         new MavenPomSearch().search(github, versions);
 

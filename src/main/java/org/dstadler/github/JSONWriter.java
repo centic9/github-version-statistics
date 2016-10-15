@@ -2,7 +2,7 @@ package org.dstadler.github;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.*;
@@ -15,7 +15,7 @@ public class JSONWriter {
 
     public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
-    public static void write(File file, Multimap<String, String> versions) throws IOException {
+    public static void write(File file, SetMultimap<String, String> versions) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             Holder holder = new Holder(DATE_FORMAT.format(new Date()), versions);
 
@@ -33,12 +33,14 @@ public class JSONWriter {
     @SuppressWarnings("unused")
     protected static class Holder {
         private String date;
-        private Multimap<String, String> versions;
+        // use a SetMultimap on purpose here to not write
+        // duplicates
+        private SetMultimap<String, String> versions;
 
         public Holder() {
         }
 
-        public Holder(String date, Multimap<String, String> versions) {
+        public Holder(String date, SetMultimap<String, String> versions) {
             this.date = date;
             this.versions = versions;
         }
@@ -47,7 +49,7 @@ public class JSONWriter {
             return date;
         }
 
-        public Multimap<String, String> getVersions() {
+        public SetMultimap<String, String> getVersions() {
             return versions;
         }
     }

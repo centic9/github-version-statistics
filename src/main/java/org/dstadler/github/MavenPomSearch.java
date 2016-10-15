@@ -1,7 +1,8 @@
 package org.dstadler.github;
 
-import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.StringUtils;
 import org.dstadler.commons.net.UrlUtils;
 import org.kohsuke.github.GHContent;
@@ -34,7 +35,7 @@ public class MavenPomSearch extends BaseSearch {
     public static void main(String[] args) throws IOException {
         GitHub github = connect();
 
-        Multimap<String,String> versions = ArrayListMultimap.create();
+        SetMultimap<String,String> versions = HashMultimap.create();
         new MavenPomSearch().search(github, versions);
 
         System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");

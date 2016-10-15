@@ -1,13 +1,11 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.regex.Matcher;

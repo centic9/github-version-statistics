@@ -2,7 +2,7 @@ package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Table;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateUtils;
@@ -192,7 +192,7 @@ public class ProcessResults {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
             System.out.println("Had " + holder.getVersions().size() + " entries for " + holder.getDate());
 
-            Multimap<String, String> versions = holder.getVersions();
+            SetMultimap<String, String> versions = holder.getVersions();
             for(String version : versions.keySet()) {
                 String date = holder.getDate();
 
@@ -284,6 +284,7 @@ public class ProcessResults {
         {name: '3.10', y: 3.9}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8
          */
         StringBuilder pieData = new StringBuilder();
+        //noinspection Convert2streamapi
         for(Map.Entry<String,Integer> entry : versions.entrySet()) {
             if(entry.getValue() != 0) {
                 pieData.append(String.format("{name: '%s', y:%d},", entry.getKey(), entry.getValue()));
