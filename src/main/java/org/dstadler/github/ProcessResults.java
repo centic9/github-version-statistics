@@ -1,9 +1,7 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.time.DateUtils;
 
@@ -188,6 +186,7 @@ public class ProcessResults {
 
     private static String readLines(List<String> lines, Table<String, String, Integer> values) throws IOException {
         String maxDateStr = null;
+        JSONWriter.Holder previousHolder = null;
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
             System.out.println("Had " + holder.getVersions().size() + " entries for " + holder.getDate());
@@ -213,6 +212,24 @@ public class ProcessResults {
                     maxDateStr = date;
                 }
             }
+
+            if(previousHolder != null) {
+                for(Map.Entry<String,String> entry : versions.entries()) {
+                    if(previousHolder.getVersions().containsEntry(entry.getKey(), entry.getValue())) {
+                        // was already in previous holder
+                        continue;
+                    }
+
+                    if(previousHolder.getVersions().containsValue(entry.getValue())) {
+                        ImmutableMultimap<String, String> inverse = ImmutableMultimap.copyOf(previousHolder.getVersions()).inverse();
+                        System.out.println("Did find a different version for " + entry.getValue() +
+                                ", previously at " + inverse.get(entry.getValue()) +
+                                ", now at " + entry.getKey());
+                    }
+                }
+            }
+
+            previousHolder = holder;
         }
 
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");
