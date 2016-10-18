@@ -106,74 +106,6 @@ public class ProcessResults {
         "</body>\n" +
         "</html>\n";
 
-    private static final String TEMPLATE_PIE =
-            "<html>\n" +
-                    "<head>" +
-                    "</head>\n" +
-                    "<body>" +
-                    "<div id=\"container\" style=\"min-width: 310px; height: 400px; margin: 0 auto\">\n" +
-                    "</div>\n" +
-                    "\n" +
-                    /* need to add Jekyll-tags to make this work
-                    "<div class=\"docs-header-bottom\">\n" +
-                    "    {% include footer.html %}\n" +
-                    "</div>\n" +
-                    "\n" +*/
-                    "<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js\">\n" +
-                    "</script>\n" +
-                    "<script src=\"https://code.highcharts.com/highcharts.js\">\n" +
-                    "</script>\n" +
-                    "<script src=\"https://code.highcharts.com/modules/exporting.js\">\n" +
-                    "</script>\n" +
-                    "\n" +
-                    "<script type=\"text/javascript\">\n" +
-                    "\n" +
-                    "$(function () {\n" +
-                    "        $('#container').highcharts({\n" +
-                    "            chart: {\n" +
-                    "                        plotBackgroundColor: null,\n" +
-                    "                        plotBorderWidth: null,\n" +
-                    "                        plotShadow: false,\n" +
-                    "                        type: 'pie'\n" +
-                    "                    },\n" +
-                    "            title: {\n" +
-                    "                text: 'Current version distribution',\n" +
-                    "                x: -20 //center\n" +
-                    "            },\n" +
-                    "            subtitle: {\n" +
-                    "                text: 'Fetched from Github search of the first 1000 results for build.gradle and the first 1000 results for pom.xml',\n" +
-                    "                x: -20\n" +
-                    "            },\n" +
-                    "            legend: {\n" +
-                    "                layout: 'vertical',\n" +
-                    "                align: 'right',\n" +
-                    "                verticalAlign: 'middle',\n" +
-                    "                borderWidth: 0\n" +
-                    "            },\n" +
-                    "            plotOptions: {\n" +
-                    "                pie: {\n" +
-                    "                    allowPointSelect: true,\n" +
-                    "                    cursor: 'pointer',\n" +
-                    "                    dataLabels: {\n" +
-                    "                        enabled: true,\n" +
-                    "                        format: '<b>{point.name}</b>: {point.y:.0f}',\n" +
-                    "                        style: {\n" +
-                    "                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'\n" +
-                    "                        }\n" +
-                    "                    }\n" +
-                    "                }\n" +
-                    "            },\n" +
-                    "            series: [{\n" +
-                    "                name: 'Version',\n" +
-                    "                data: [${piedata}]\n" +
-                    "            }]\n" +
-                    "        });\n" +
-                    "    });\n" +
-                    "\n" +
-                    "</script>" +
-                    "${footer}\n" +
-                    "</body>\n" +
-                    "</html>\n";
 
     public static void main(String[] args) throws IOException, ParseException {
         // read stats.json
@@ -282,7 +214,7 @@ public class ProcessResults {
         File results = new File("docs", "results.html");
         FileUtils.writeStringToFile(results, html, "UTF-8");
 
-        File pie = new File("docs", "resultsCurrent.html");
+        File pie = new File("docs", "resultsCurrent.csv");
         writeCurrentResults(pie, values.row(maxDateStr));
 
         System.out.println("Wrote results to " + results + " and " + pie);
@@ -301,18 +233,15 @@ public class ProcessResults {
         {name: '3.10', y: 3.9}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8
          */
         StringBuilder pieData = new StringBuilder();
+        pieData.append("label,count\n");
         //noinspection Convert2streamapi
         for(Map.Entry<String,Integer> entry : versions.entrySet()) {
             if(entry.getValue() != 0) {
-                pieData.append(String.format("{name: '%s', y:%d},", entry.getKey(), entry.getValue()));
+                pieData.append(String.format("%s,%d\n", entry.getKey(), entry.getValue()));
             }
         }
-        // cut off trailing comma
-        pieData.setLength(pieData.length()-1);
-        String html = TEMPLATE_PIE.replace("${piedata}", pieData);
-        html = addFooter(html);
 
-        FileUtils.writeStringToFile(pie, html, "UTF-8");
+        FileUtils.writeStringToFile(pie, pieData.toString(), "UTF-8");
     }
 
     private static String getHeaderData(Collection<String> versions) {
