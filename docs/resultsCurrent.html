@@ -94,9 +94,12 @@
           var path = svg.selectAll('path')
             .data(pie(dataset))
             .enter()
+                  .append("a")
+                  .attr("xlink:href", function(d) {
+                        return d.data.link; })
             .append('path')
             .attr('d', arc)
-            .attr('fill', function(d, i) {
+            .attr('fill', function(d) {
               return color(d.data.label + ': ' + d.data.count);
             })
             .each(function(d) { this._current = d; });
@@ -116,7 +119,7 @@
             tooltip.style('display', 'none');
           });
 
-          path.on('mousemove', function(d) {
+          path.on('mousemove', function() {
             tooltip.style('top', (d3.event.layerY + 10) + 'px')
               .style('left', (d3.event.layerX + 10) + 'px');
           });
@@ -174,7 +177,12 @@
                 });
             });
 
-          legend.append('text')
+          legend
+          /* Tried to add a link, but d is the name here, not the data-object...
+                  .append("a")
+                  .attr("xlink:href", function(d) {
+                      return d.link; })*/
+            .append('text')
             .attr('x', legendRectSize + legendSpacing)
             .attr('y', legendRectSize - legendSpacing)
             .text(function(d) { return d; });

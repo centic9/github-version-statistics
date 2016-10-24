@@ -110,41 +110,53 @@ public class ProcessResults {
     public static void main(String[] args) throws IOException, ParseException {
         // read stats.json
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
-        Table<String,String,Integer> values = HashBasedTable.create();
+        Table<String,String,Data> values = HashBasedTable.create();
         String maxDateStr = readLines(lines, values);
 
         generateHtmlFiles(values, maxDateStr);
     }
 
-    private static String readLines(List<String> lines, Table<String, String, Integer> values) throws IOException {
+    private static class Data {
+        public Integer count;
+        public String link;
+
+        public Data(Integer count, String link) {
+            this.count = count;
+            this.link = link;
+        }
+    }
+
+    private static String readLines(List<String> lines, Table<String, String, Data> dateVersionTable) throws IOException {
         String maxDateStr = null;
         JSONWriter.Holder previousHolder = null;
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
-            System.out.println("Had " + holder.getVersions().size() + " entries for " + holder.getDate());
-
             SetMultimap<String, String> versions = holder.getVersions();
-            for(String version : versions.keySet()) {
-                String date = holder.getDate();
+            String date = holder.getDate();
 
+            System.out.println("Had " + versions.size() + " entries for " + date);
+            for(String version : versions.keySet()) {
                 // combine all the non-version things like build-script variables, ...
                 String versionKey = version;
                 if(!VERSION_PATTERN.matcher(version).matches()) {
                     versionKey = "other";
                 }
 
-                Integer value = values.get(date, versionKey);
+                // add the count in the table, there can be multiple lines with the same date!
+                Data value = dateVersionTable.get(date, versionKey);
                 if(value == null) {
-                    value = versions.get(version).size();
+                    value = new Data(versions.get(version).size(), versions.get(version).iterator().next());
                 } else {
-                    value += versions.get(version).size();
+                    value.count += versions.get(version).size();
                 }
-                values.put(date, versionKey, value);
+                dateVersionTable.put(date, versionKey, value);
+
                 if(maxDateStr == null || maxDateStr.compareTo(date) <= 0) {
                     maxDateStr = date;
                 }
             }
 
+            // report if we found projects that switched versions
             if(previousHolder != null) {
                 for(Map.Entry<String,String> entry : versions.entries()) {
                     if(previousHolder.getVersions().containsEntry(entry.getKey(), entry.getValue())) {
@@ -169,22 +181,21 @@ public class ProcessResults {
         return maxDateStr;
     }
 
-    private static void generateHtmlFiles(Table<String, String, Integer> values, String maxDateStr) throws ParseException, IOException {
-        // use a tree-set to have a simple sorting by version, this will not
-        // work well for -beta, we can improve on it via a custom comparator later
-        Set<String> columns = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
-        columns.addAll(values.columnKeySet());
+    private static void generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
+        // use a tree-set to get the versions in correct order
+        Set<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
+        versionsSorted.addAll(dateVersionTable.columnKeySet());
 
         Date date = START_DATE;
         StringBuilder data = new StringBuilder();
         while(date.compareTo(DATE_FORMAT.parse(maxDateStr)) <= 0) {
             String dateStr = DATE_FORMAT.format(date);
-            Map<String, Integer> row = values.row(dateStr);
+            Map<String, Data> row = dateVersionTable.row(dateStr);
 
             // Format: "    \"2008-05-07,75\\n\" +\n" +
             data.append("\"").append(dateStr);
-            for(String column : columns) {
-                data.append(",").append(formatValue(row.get(column)));
+            for(String column : versionsSorted) {
+                data.append(",").append(formatValue(row.get(column) == null ? null : row.get(column).count));
             }
 
             data.append("\\n\" + \n");
@@ -196,11 +207,11 @@ public class ProcessResults {
         data.setLength(data.length() - 3);
 
         String html = TEMPLATE.replace("${data}", data);
-        html = html.replace("${dataheader}", "Date" + getHeaderData(columns));
+        html = html.replace("${dataheader}", "Date" + getHeaderData(versionsSorted));
         html = html.replace("${benchmark}", "Apache POI");
 
         StringBuilder annotations = new StringBuilder();
-        for(String column : columns) {
+        for(String column : versionsSorted) {
             annotations.append("    {series: \"").append(column).append("\",x: \"").append(maxDateStr).
                     append("\",shortText: \"").append(column).append("\",text: \"").append(maxDateStr).append("\", \"width\": 100},\n");
         }
@@ -215,7 +226,7 @@ public class ProcessResults {
         FileUtils.writeStringToFile(results, html, "UTF-8");
 
         File pie = new File("docs", "resultsCurrent.csv");
-        writeCurrentResults(pie, values.row(maxDateStr));
+        writeCurrentResults(pie, dateVersionTable.row(maxDateStr));
 
         System.out.println("Wrote results to " + results + " and " + pie);
     }
@@ -224,8 +235,8 @@ public class ProcessResults {
         return html.replace("${footer}", "<br/><br/>Created at " + new Date());
     }
 
-    private static void writeCurrentResults(File pie, Map<String, Integer> row) throws IOException {
-        Map<String,Integer> versions = new TreeMap<>(Collections.reverseOrder(new VersionComparator()));
+    private static void writeCurrentResults(File pie, Map<String, Data> row) throws IOException {
+        Map<String,Data> versions = new TreeMap<>(Collections.reverseOrder(new VersionComparator()));
         versions.putAll(row);
 
         // add pie-data
@@ -233,11 +244,11 @@ public class ProcessResults {
         {name: '3.10', y: 3.9}, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8
          */
         StringBuilder pieData = new StringBuilder();
-        pieData.append("label,count\n");
+        pieData.append("label,count,link\n");
         //noinspection Convert2streamapi
-        for(Map.Entry<String,Integer> entry : versions.entrySet()) {
-            if(entry.getValue() != 0) {
-                pieData.append(String.format("%s,%d\n", entry.getKey(), entry.getValue()));
+        for(Map.Entry<String,Data> entry : versions.entrySet()) {
+            if(entry.getValue().count != 0) {
+                pieData.append(String.format("%s,%d,%s\n", entry.getKey(), entry.getValue().count, entry.getValue().link));
             }
         }
 

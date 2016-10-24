@@ -33,8 +33,13 @@ public class JSONWriter {
     @SuppressWarnings("unused")
     protected static class Holder {
         private String date;
-        // use a SetMultimap on purpose here to not write
-        // duplicates
+
+        /**
+         * The Multimap contains the version as key and the list of
+         * found files on GitHub
+         *
+         * We use a SetMultimap on purpose here to not write duplicates
+         */
         private SetMultimap<String, String> versions;
 
         public Holder() {
