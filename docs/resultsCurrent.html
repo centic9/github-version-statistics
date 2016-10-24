@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress JSUnresolvedFunction, CssUnusedSymbol, JSUnresolvedLibraryURL, JSUnresolvedVariable -->
 <html>
 <head>
     <meta charset="utf-8">
@@ -96,7 +97,7 @@
             .append('path')
             .attr('d', arc)
             .attr('fill', function(d, i) {
-              return color(d.data.label);
+              return color(d.data.label + ': ' + d.data.count);
             })
             .each(function(d) { this._current = d; });
 
