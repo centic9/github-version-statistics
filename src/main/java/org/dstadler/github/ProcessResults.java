@@ -140,9 +140,6 @@ public class ProcessResults {
         String maxDateStr = null;
         SetMultimap<String, String> previousVersions = null;
 
-        // reverse order to have the latest changes on top
-        Collections.reverse(lines);
-
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
             SetMultimap<String, String> versions = holder.getVersions();
@@ -301,6 +298,9 @@ public class ProcessResults {
     }
 
     private static void writeVersionChanges(File changesFile, List<VersionChange> changes) throws IOException {
+        // reverse order to have the latest changes on top
+        Collections.reverse(changes);
+
         StringBuilder changesData = new StringBuilder("date,repository,versionBefore,versionNow\n");
         for(VersionChange change : changes) {
             change.writeCSV(changesData);
