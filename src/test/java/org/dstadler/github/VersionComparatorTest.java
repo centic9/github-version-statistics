@@ -28,8 +28,8 @@ public class VersionComparatorTest {
         TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.9.1", true);
         TestHelpers.ComparatorTest(new VersionComparator(), "3.15", String.format("3.15"), "3.9.0", true);
 
-        // 'other' currently is sorted higher than numbers
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "other", false);
+        // 'other' currently is sorted lower than numbers
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "other", true);
 
         // arbitrary text is still sorted as good as possible
         TestHelpers.ComparatorTest(new VersionComparator(), "blabla1", String.format("blabla1"), "blabla2", false);

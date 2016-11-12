@@ -110,6 +110,7 @@ public class ProcessResults {
     public static void main(String[] args) throws IOException, ParseException {
         // read stats.json
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
+
         Table<String,String,Data> values = HashBasedTable.create();
         List<VersionChange> changes = new ArrayList<>();
         String maxDateStr = readLines(lines, values, changes);

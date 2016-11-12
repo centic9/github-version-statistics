@@ -1,8 +1,11 @@
 package org.dstadler.github;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.time.FastDateFormat;
 
@@ -16,6 +19,8 @@ public class JSONWriter {
             ;
 
     public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
+
+    private static VersionComparator COMPARATOR = new VersionComparator();
 
     public static void write(File file, SetMultimap<String, String> versions) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
@@ -57,9 +62,24 @@ public class JSONWriter {
         }
 
         public SetMultimap<String, String> getVersions() {
-            return versions;
+            final Multimap<String, String> repoVersions = HashMultimap.create();
+            for (Map.Entry<String, String> entry : versions.entries()) {
+                repoVersions.put(BaseSearch.getRepository(entry.getValue()), entry.getKey());
+            }
+
+            return Multimaps.filterEntries(versions, input -> {
+                //noinspection ConstantConditions
+                for(String version1 : repoVersions.get(BaseSearch.getRepository(input.getValue()))) {
+                    if(COMPARATOR.compare(version1, input.getKey()) > 0) {
+                        return false;
+                    }
+                }
+
+                return true;
+            });
         }
 
+        @JsonIgnore
         public SetMultimap<String, String> getRepositoryVersions() {
             SetMultimap<String, String> repositories = HashMultimap.create();
             for (Map.Entry<String, String> entry : getVersions().entries()) {

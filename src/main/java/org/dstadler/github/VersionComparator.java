@@ -25,7 +25,7 @@ public class VersionComparator implements Comparator<String> {
 
             // sort these as highest version for now
             if(version.equals("other")) {
-                v.major = 99;
+                v.major = 0;
                 return v;
             }
 
