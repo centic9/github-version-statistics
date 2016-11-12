@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2016-11-13,robcaruso/ehmp,$versions.poi,3.10
+2016-11-13,bibitoo/converter,3.9,3.10
 2016-11-12,robcaruso/ehmp,3.10,$versions.poi
 2016-11-12,bibitoo/converter,3.10,3.9
 2016-11-12,KRMAssociatesInc/eHMP,$versions.poi,3.10
