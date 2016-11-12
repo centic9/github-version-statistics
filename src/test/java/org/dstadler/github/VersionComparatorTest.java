@@ -77,11 +77,11 @@ public class VersionComparatorTest {
         list.add("3.0.1");
         list.add("3.0");
 
-        assertEquals("[3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
+        assertEquals("[other, 3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
                         "3.7-beta3, 3.7, 3.8-beta2, 3.8-beta3, 3.8-beta4, 3.8-beta5, 3.8, 3.9, 3.9.0, " +
-                        "3.10-beta1, 3.10-beta2, 3.10, 3.10.1, 3.11-beta2, 3.11-BETA3, 3.11-beta3, 3.11, 3.12-SNAPSHOT, 3.12-beta1, 3.12, 3.12-bbn, " +
+                        "3.10-beta1, 3.10-beta2, 3.10, 3.10.1, 3.11-beta2, 3.11-BETA3, 3.11-beta3, 3.11, 3.12-SNAPSHOT, 3.12-bbn, 3.12-beta1, 3.12, " +
                         "3.13-SNAPSHOT, 3.13-beta1, 3.13, 3.14-beta1, 3.14-beta1-20151223, 3.14-beta2, 3.14, " +
-                        "3.15-beta1, 3.15-beta2, 3.15, other]",
+                        "3.15-beta1, 3.15-beta2, 3.15]",
                 list.toString());
     }
 
@@ -129,11 +129,11 @@ public class VersionComparatorTest {
 
         Collections.sort(list, new VersionComparator());
 
-        assertEquals("[3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
+        assertEquals("[other, 3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
                         "3.7-beta3, 3.7, 3.8-beta2, 3.8-beta3, 3.8-beta4, 3.8-beta5, 3.8, 3.9, 3.9.0, " +
-                        "3.10-beta1, 3.10-beta2, 3.10, 3.10.1, 3.11-beta2, 3.11-BETA3, 3.11-beta3, 3.11, 3.12-SNAPSHOT, 3.12-beta1, 3.12, 3.12-bbn, " +
+                        "3.10-beta1, 3.10-beta2, 3.10, 3.10.1, 3.11-beta2, 3.11-BETA3, 3.11-beta3, 3.11, 3.12-SNAPSHOT, 3.12-bbn, 3.12-beta1, 3.12, " +
                         "3.13-SNAPSHOT, 3.13-beta1, 3.13, 3.14-beta1, 3.14-beta1-20151223, 3.14-beta2, 3.14, " +
-                        "3.15-beta1, 3.15-beta2, 3.15, other]",
+                        "3.15-beta1, 3.15-beta2, 3.15]",
                 list.toString());
     }
 
@@ -181,11 +181,11 @@ public class VersionComparatorTest {
 
         Collections.sort(list, new VersionComparator());
 
-        assertEquals("[3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
+        assertEquals("[other, 3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
                         "3.7-beta3, 3.7, 3.8-beta2, 3.8-beta3, 3.8-beta4, 3.8-beta5, 3.8, 3.9, 3.9.0, " +
                         "3.10-beta1, 3.10-beta2, 3.10, 3.10.1, 3.11-beta2, 3.11-BETA3, 3.11-beta3, 3.11, 3.12-SNAPSHOT, 3.12-bbn, 3.12-beta1, 3.12, " +
                         "3.13-SNAPSHOT, 3.13-beta1, 3.13, 3.14-beta1, 3.14-beta1-20151223, 3.14-beta2, 3.14, " +
-                        "3.15-beta1, 3.15-beta2, 3.15, other]",
+                        "3.15-beta1, 3.15-beta2, 3.15]",
                 list.toString());
     }
 
@@ -202,7 +202,7 @@ public class VersionComparatorTest {
         assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=20151223}", VersionComparator.Version.parse("3.5-beta-20151223").toString());
         assertEquals("Version{major=3, minor=14, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=1}", VersionComparator.Version.parse("3.14-beta1-20151223").toString());
         assertEquals("Version{major=3, minor=9, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("3.9.0").toString());
-        assertEquals("Version{major=99, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("other").toString());
+        assertEquals("Version{major=0, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("other").toString());
     }
 
     @Test
