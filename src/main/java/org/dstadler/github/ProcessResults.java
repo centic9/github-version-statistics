@@ -111,9 +111,18 @@ public class ProcessResults {
         // read stats.json
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
         Table<String,String,Data> values = HashBasedTable.create();
-        String maxDateStr = readLines(lines, values);
+        List<VersionChange> changes = new ArrayList<>();
+        String maxDateStr = readLines(lines, values, changes);
 
-        generateHtmlFiles(values, maxDateStr);
+        File results = generateHtmlFiles(values, maxDateStr);
+
+        File pie = new File("docs", "resultsCurrent.csv");
+        writeCurrentResults(pie, values.row(maxDateStr));
+
+        File changesFile = new File("docs/_data", "versionChanges.csv");
+        writeVersionChanges(changesFile, changes);
+
+        System.out.println("Wrote results to " + results + " and " + pie);
     }
 
     private static class Data {
@@ -126,54 +135,25 @@ public class ProcessResults {
         }
     }
 
-    private static String readLines(List<String> lines, Table<String, String, Data> dateVersionTable) throws IOException {
+    private static String readLines(List<String> lines, Table<String, String, Data> dateVersionTable,
+                                    List<VersionChange> changes) throws IOException {
         String maxDateStr = null;
-        JSONWriter.Holder previousHolder = null;
+        SetMultimap<String, String> previousVersions = null;
+
+        // reverse order to have the latest changes on top
+        Collections.reverse(lines);
+
         for(String line : lines) {
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
             SetMultimap<String, String> versions = holder.getVersions();
             String date = holder.getDate();
 
-            System.out.println("Had " + versions.size() + " entries for " + date);
-            for(String version : versions.keySet()) {
-                // combine all the non-version things like build-script variables, ...
-                String versionKey = version;
-                if(!VERSION_PATTERN.matcher(version).matches()) {
-                    versionKey = "other";
-                }
+            maxDateStr = populateTable(dateVersionTable, maxDateStr, versions, date);
 
-                // add the count in the table, there can be multiple lines with the same date!
-                Data value = dateVersionTable.get(date, versionKey);
-                if(value == null) {
-                    value = new Data(versions.get(version).size(), versions.get(version).iterator().next());
-                } else {
-                    value.count += versions.get(version).size();
-                }
-                dateVersionTable.put(date, versionKey, value);
+            // print out if we found projects that switched versions
+            compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes);
 
-                if(maxDateStr == null || maxDateStr.compareTo(date) <= 0) {
-                    maxDateStr = date;
-                }
-            }
-
-            // report if we found projects that switched versions
-            if(previousHolder != null) {
-                for(Map.Entry<String,String> entry : versions.entries()) {
-                    if(previousHolder.getVersions().containsEntry(entry.getKey(), entry.getValue())) {
-                        // was already in previous holder
-                        continue;
-                    }
-
-                    if(previousHolder.getVersions().containsValue(entry.getValue())) {
-                        ImmutableMultimap<String, String> inverse = ImmutableMultimap.copyOf(previousHolder.getVersions()).inverse();
-                        System.out.println("Did find a different version for " + entry.getValue() +
-                                ", previously at " + inverse.get(entry.getValue()) +
-                                ", now at " + entry.getKey());
-                    }
-                }
-            }
-
-            previousHolder = holder;
+            previousVersions = holder.getRepositoryVersions();
         }
 
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");
@@ -181,7 +161,75 @@ public class ProcessResults {
         return maxDateStr;
     }
 
-    private static void generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
+    public static class VersionChange {
+        public final String date;
+        public final String repository;
+        public final String versionBefore;
+        public final String versionNow;
+
+        public VersionChange(String date, String repository, String versionBefore, String versionNow) {
+            this.date = date;
+            this.repository = repository;
+            this.versionBefore = versionBefore;
+            this.versionNow = versionNow;
+        }
+
+        public void writeCSV(StringBuilder sb) {
+            sb.append(date).append(",").append(repository).append(",").append(versionBefore).append(",").append(versionNow).append("\n");
+        }
+    }
+
+    protected static void compareToPrevious(String date, SetMultimap<String, String> previousVersions,
+                                            SetMultimap<String, String> versions,
+                                            List<VersionChange> changes) {
+        if(previousVersions != null) {
+            for(Map.Entry<String,String> entry : versions.entries()) {
+                String version = entry.getKey();
+                String repository = entry.getValue();
+                if(previousVersions.containsEntry(version, repository)) {
+                    // was already in previous holder
+                    continue;
+                }
+
+                if(previousVersions.containsValue(repository)) {
+                    ImmutableMultimap<String, String> inverse = ImmutableMultimap.copyOf(previousVersions).inverse();
+                    String versionBefore = inverse.get(repository).iterator().next();
+                    System.out.println("Did find a different version for " + repository +
+                            ", previously at " + versionBefore +
+                            ", now at " + version);
+
+                    changes.add(new VersionChange(date, repository, versionBefore, version));
+                }
+            }
+        }
+    }
+
+    private static String populateTable(Table<String, String, Data> dateVersionTable, String maxDateStr, SetMultimap<String, String> versions, String date) {
+        System.out.println("Had " + versions.size() + " entries for " + date);
+        for(String version : versions.keySet()) {
+            // combine all the non-version things like build-script variables, ...
+            String versionKey = version;
+            if(!VERSION_PATTERN.matcher(version).matches()) {
+                versionKey = "other";
+            }
+
+            // add the count in the table, there can be multiple lines with the same date!
+            Data value = dateVersionTable.get(date, versionKey);
+            if(value == null) {
+                value = new Data(versions.get(version).size(), versions.get(version).iterator().next());
+            } else {
+                value.count += versions.get(version).size();
+            }
+            dateVersionTable.put(date, versionKey, value);
+
+            if(maxDateStr == null || maxDateStr.compareTo(date) <= 0) {
+                maxDateStr = date;
+            }
+        }
+        return maxDateStr;
+    }
+
+    private static File generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
         // use a tree-set to get the versions in correct order
         Set<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
         versionsSorted.addAll(dateVersionTable.columnKeySet());
@@ -225,10 +273,7 @@ public class ProcessResults {
         File results = new File("docs", "results.html");
         FileUtils.writeStringToFile(results, html, "UTF-8");
 
-        File pie = new File("docs", "resultsCurrent.csv");
-        writeCurrentResults(pie, dateVersionTable.row(maxDateStr));
-
-        System.out.println("Wrote results to " + results + " and " + pie);
+        return results;
     }
 
     private static String addFooter(String html) {
@@ -254,6 +299,16 @@ public class ProcessResults {
 
         FileUtils.writeStringToFile(pie, pieData.toString(), "UTF-8");
     }
+
+    private static void writeVersionChanges(File changesFile, List<VersionChange> changes) throws IOException {
+        StringBuilder changesData = new StringBuilder("date,repository,versionBefore,versionNow\n");
+        for(VersionChange change : changes) {
+            change.writeCSV(changesData);
+        }
+
+        FileUtils.writeStringToFile(changesFile, changesData.toString(), "UTF-8");
+    }
+
 
     private static String getHeaderData(Collection<String> versions) {
         StringBuilder headers = new StringBuilder();

@@ -2,11 +2,13 @@ package org.dstadler.github;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.*;
 import java.util.Date;
+import java.util.Map;
 
 public class JSONWriter {
     protected static final ObjectMapper mapper = new ObjectMapper()
@@ -56,6 +58,14 @@ public class JSONWriter {
 
         public SetMultimap<String, String> getVersions() {
             return versions;
+        }
+
+        public SetMultimap<String, String> getRepositoryVersions() {
+            SetMultimap<String, String> repositories = HashMultimap.create();
+            for (Map.Entry<String, String> entry : getVersions().entries()) {
+                repositories.put(entry.getKey(), BaseSearch.getRepository(entry.getValue()));
+            }
+            return repositories;
         }
     }
 }

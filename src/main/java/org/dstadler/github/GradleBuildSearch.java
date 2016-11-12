@@ -55,7 +55,7 @@ public class GradleBuildSearch extends BaseSearch {
         // paginate through results, filtering out interesting files
         for(GHContent match : list) {
             final String htmlUrl = match.getHtmlUrl();
-            String repo = getRepository(github, htmlUrl);
+            String repo = getNonForkRepository(github, htmlUrl);
             if (repo == null) {
                 continue;
             }

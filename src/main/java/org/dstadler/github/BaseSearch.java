@@ -57,19 +57,27 @@ public abstract class BaseSearch {
         return str.substring(Math.max(0, pos - 100), Math.min(str.length(), pos + 100));
     }
 
-    protected String getRepository(GitHub github, String htmlUrl) throws IOException {
-        Matcher matcher = REPO_NAME.matcher(htmlUrl);
-        if(!matcher.matches()) {
-            System.out.println("Could not parse repo of " + htmlUrl + " with regex " + REPO_NAME.pattern());
+    protected String getNonForkRepository(GitHub github, String htmlUrl) throws IOException {
+        String repo = getRepository(htmlUrl);
+        if(repo == null) {
             return null;
         }
-        String repo = matcher.group(1);
+
         final GHRepository repository = github.getRepository(repo);
         if(repository.isFork()) {
             System.out.println("Ignoring forked repo " + repo);
             return null;
         }
         return repo;
+    }
+
+    public static String getRepository(String htmlUrl) {
+        Matcher matcher = REPO_NAME.matcher(htmlUrl);
+        if(!matcher.matches()) {
+            System.out.println("Could not parse repo of " + htmlUrl + " with regex " + REPO_NAME.pattern());
+            return null;
+        }
+        return matcher.group(1);
     }
 
     protected static GitHub connect() throws IOException {

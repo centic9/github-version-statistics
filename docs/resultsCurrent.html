@@ -1,56 +1,28 @@
-<!DOCTYPE html>
+---
+layout: home
+title: Current version distribution of Apache POI on Github
+---
 <!--suppress JSUnresolvedFunction, CssUnusedSymbol, JSUnresolvedLibraryURL, JSUnresolvedVariable, JSValidateTypes -->
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Current version distribution of Apache POI on Github</title>
-    <link rel="stylesheet" href="normalize.css">
-    <style>
-        #chart {
-            height: 360px;
-            margin: 0 auto;
-            position: relative;
-            width: 360px;
-        }
-        .tooltip {
-            background: #eee;
-            box-shadow: 0 0 5px #999999;
-            color: #333;
-            display: none;
-            font-size: 12px;
-            left: 130px;
-            padding: 10px;
-            position: absolute;
-            text-align: center;
-            top: 95px;
-            width: 80px;
-            z-index: 10;
-        }
-        .legend {
-            font-size: 12px;
-        }
-        rect {
-            cursor: pointer;
-            stroke-width: 2;
-        }
-        rect.disabled {
-            fill: transparent !important;
-        }
-        h1 {
-            font-size: 14px;
-            text-align: center;
-        }
-    </style>
-</head>
-<body>
 <h1>Current version distribution of Apache POI on Github</h1>
-<div id="chart"></div>
 
-<!-- No Jekyll here yet until I figure out how to run it locally...
+<div id="chart" style="width:1100px;height:1100px"></div>
+
+
+<h2>Recent version-changes</h2>
+
+<ul>
+    {% for versionChange in site.data.versionChanges %}
+    <li>
+        {{ versionChange.date }}: <a href="https://github.com/{{ versionChange.repository }}">
+            {{ versionChange.repository }}
+        </a> changed version from {{ versionChange.versionBefore }} to {{ versionChange.versionNow }}
+    </li>
+    {% endfor %}
+</ul>
+
 <div class=\"docs-header-bottom\">
     {% include footer.html %}
 </div>
--->
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.7/d3.min.js"></script>
 <script>
@@ -189,5 +161,3 @@
         });
     })(window.d3);
 </script>
-</body>
-</html>
