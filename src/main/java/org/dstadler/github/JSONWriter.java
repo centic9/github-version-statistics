@@ -33,6 +33,7 @@ public class JSONWriter {
                 strWriter.close();
             }
 
+            // Need to write in one go as mapper.writeValue() closes the stream...
             writer.write(strWriter.toString() + "\n");
         }
     }
