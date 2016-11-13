@@ -2,15 +2,15 @@
 [![Gradle Status](https://gradleupdate.appspot.com/centic9/github-version-statistics/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/github-version-statistics/status)
 [![Release](https://img.shields.io/github/release/centic9/github-version-statistics.svg)](https://github.com/centic9/github-version-statistics/releases)
 
-A small application which uses the GitHub API to search for usages of a Java library and prepares some statistics about which versions are used how often
+A small application which uses the GitHub API to search for usages of a Java library and 
+prepares some statistics about which versions are used how often.
+
+Currently it looks for usages of [Apache POI](http://poi.apache.org/), but this can be adjusted
+by modifying the source slightly.
 
 #### Initial URL for looking at results
 
-For now the results can be looked at directly from the Git repository, for github you can use:
-
-https://centic9.github.io/github-version-statistics/
-
-However this is likely to change with some better deployment setup in the future.
+The results of a daily run of the scan can be found at [https://centic9.github.io/github-version-statistics/](]https://centic9.github.io/github-version-statistics/).
 
 #### Getting started
 
@@ -24,9 +24,11 @@ However this is likely to change with some better deployment setup in the future
 
 #### Run it
 
-Currently the file `Search.java` contains `org.apache.poi` as indicator of the Java library to look for. Change this if you want to run it for a different project.
+Currently the file `BaseSearch.java` contains `org.apache.poi` as indicator of the Java library to look for. 
+Change this if you want to run it for a different project.
 
-The application uses the Java GitHub API from http://github-api.kohsuke.org/, in order to set credentials, create a file `~/.github` with the contents as described at http://github-api.kohsuke.org/
+The application uses the Java GitHub API from [http://github-api.kohsuke.org/](http://github-api.kohsuke.org/), in order to set credentials, 
+create a file `~/.github` with the contents as described at [http://github-api.kohsuke.org/](http://github-api.kohsuke.org/)
 
 Then you can run it via
 
@@ -34,9 +36,12 @@ Then you can run it via
 
 #### Limitations
 
-* Currently only Gradle `build.gradle` files are searched, the same should be done for Maven `pom.xml` files.
-* The GitHub API currently limits the number of results to 1000, so you only get 1000 results at max and the statistics for popular Java libraries will not be complete.
-* If there are multiple files in one repository currently, we may count the version multiple times, it would probably be better to count each GitHub repository only once.
+* Currently only Gradle `build.gradle` and `pom.xml` files are searched, the same should 
+be done for other buildsystems that use declarative dependencies of third-party libraries,
+ e.g. Apache Ivy
+* The GitHub API currently limits the number of results to 1000, so you only 
+get 1000 results at max per type of buildsystem and the statistics for popular 
+Java libraries will not be complete.
 
 ## Cron-entry to run the job every night
 
@@ -44,12 +49,14 @@ Then you can run it via
 
 ## How to setup password-less pushes to github.com
 
-* Go to https://github.com/settings/ssh and follow the steps to create and add a ssh-key
-* See http://mattmakesmaps.com/blog/2013/06/16/auto-push-to-github-via-machine-user/ for more details
+* Go to [https://github.com/settings/ssh](https://github.com/settings/ssh) and follow the steps to create and add a ssh-key
+* See [http://mattmakesmaps.com/blog/2013/06/16/auto-push-to-github-via-machine-user/](http://mattmakesmaps.com/blog/2013/06/16/auto-push-to-github-via-machine-user/) 
+for more details
 
 #### Contribute
 
-If you are missing things or have suggestions how to improve the plugin, please either send pull requests or create [issues](https://github.com/centic9/github-version-statistics/issues).
+If you are missing things or have suggestions how to improve the project, please either 
+send pull requests or create [issues](https://github.com/centic9/github-version-statistics/issues).
 
 #### Licensing
 
