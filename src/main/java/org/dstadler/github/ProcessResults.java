@@ -3,9 +3,11 @@ package org.dstadler.github;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
@@ -108,12 +110,15 @@ public class ProcessResults {
 
 
     public static void main(String[] args) throws IOException, ParseException {
-        // read stats.json
-        List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
+        // read stats
+        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
+        Preconditions.checkNotNull(files);
+
+        Arrays.sort(files);
 
         Table<String,String,Data> values = HashBasedTable.create();
         List<VersionChange> changes = new ArrayList<>();
-        String maxDateStr = readLines(lines, values, changes);
+        String maxDateStr = readLines(files, values, changes);
 
         File results = generateHtmlFiles(values, maxDateStr);
 
@@ -136,22 +141,26 @@ public class ProcessResults {
         }
     }
 
-    private static String readLines(List<String> lines, Table<String, String, Data> dateVersionTable,
+    private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
                                     List<VersionChange> changes) throws IOException {
-        String maxDateStr = null;
         SetMultimap<String, String> previousVersions = null;
+        String maxDateStr = null;
 
-        for(String line : lines) {
-            JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
-            SetMultimap<String, String> versions = holder.getVersions();
-            String date = holder.getDate();
+        for(File file : files) {
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
 
-            maxDateStr = populateTable(dateVersionTable, maxDateStr, versions, date);
+            for (String line : lines) {
+                JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
+                SetMultimap<String, String> versions = holder.getVersions();
+                String date = holder.getDate();
 
-            // print out if we found projects that switched versions
-            compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes);
+                maxDateStr = populateTable(dateVersionTable, maxDateStr, versions, date);
 
-            previousVersions = holder.getRepositoryVersions();
+                // print out if we found projects that switched versions
+                compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes);
+
+                previousVersions = holder.getRepositoryVersions();
+            }
         }
 
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");

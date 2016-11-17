@@ -10,7 +10,6 @@ import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.*;
-import java.util.Date;
 import java.util.Map;
 
 public class JSONWriter {
@@ -18,13 +17,17 @@ public class JSONWriter {
             .registerModule(new GuavaModule())
             ;
 
+    public static File STATS_DIR = new File("stats");
+
     public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
     private static VersionComparator COMPARATOR = new VersionComparator();
 
-    public static void write(File file, SetMultimap<String, String> versions) throws IOException {
+    public static void write(String date, SetMultimap<String, String> versions) throws IOException {
+        File file = new File(STATS_DIR, "stats" + date + ".json");
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            Holder holder = new Holder(DATE_FORMAT.format(new Date()), versions);
+            Holder holder = new Holder(date, versions);
 
             StringWriter strWriter = new StringWriter();
             try {

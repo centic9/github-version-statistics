@@ -22,24 +22,27 @@ public class JSONWriterTest {
 
     @Test
     public void write() throws Exception {
-        File file = File.createTempFile("github-version-statistics", ".json");
-        assertTrue(file.delete());
+        File dir = File.createTempFile("github-version-statistics", ".dir");
+        assertTrue(dir.delete());
+        assertTrue(dir.mkdir());
+        JSONWriter.STATS_DIR = dir;
+        File testFile = new File(dir, "stats2016-01-01.json");
         try {
             SetMultimap<String, String> map = HashMultimap.create();
-            JSONWriter.write(file, map);
-            assertTrue(file.exists());
-            assertEquals(1, FileUtils.readLines(file, "UTF-8").size());
+            JSONWriter.write("2016-01-01", map);
+            assertTrue(dir.exists());
+            assertEquals(1, FileUtils.readLines(testFile, "UTF-8").size());
 
             map.put("1.0", URL_1);
             map.put("2.0", URL_1);
             assertEquals(2, map.size());
-            JSONWriter.write(file, map);
-            assertEquals(2, FileUtils.readLines(file, "UTF-8").size());
+            JSONWriter.write("2016-01-01", map);
+            assertEquals(2, FileUtils.readLines(testFile, "UTF-8").size());
 
             map.put("3.0", URL_1);
             assertEquals(3, map.size());
-            JSONWriter.write(file, map);
-            List<String> lines = FileUtils.readLines(file, "UTF-8");
+            JSONWriter.write("2016-01-01", map);
+            List<String> lines = FileUtils.readLines(testFile, "UTF-8");
             assertEquals(3, lines.size());
 
             JSONWriter.Holder holder = JSONWriter.mapper.readValue(lines.get(0), JSONWriter.Holder.class);
@@ -54,8 +57,10 @@ public class JSONWriterTest {
             assertNotNull(holder.getDate());
             assertEquals(1, holder.getVersions().size());
         } finally {
-            assertTrue(file.exists());
-            assertTrue(file.delete());
+            assertTrue(dir.exists());
+            assertTrue(testFile.exists());
+            assertTrue(testFile.delete());
+            assertTrue(dir.delete());
         }
     }
 

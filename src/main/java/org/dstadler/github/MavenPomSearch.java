@@ -9,10 +9,12 @@ import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedSearchIterable;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 
 public class MavenPomSearch extends BaseSearch {
     /*
@@ -43,7 +45,7 @@ public class MavenPomSearch extends BaseSearch {
             System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
         }
 
-        JSONWriter.write(new File("stats.json"), versions);
+        JSONWriter.write(DATE_FORMAT.format(new Date()), versions);
     }
 
     @Override
