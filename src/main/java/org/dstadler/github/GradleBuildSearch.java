@@ -79,7 +79,7 @@ public class GradleBuildSearch extends BaseSearch {
                     if(matcher.find()) {
                         addVersion(versions, htmlUrl, repo, str, matcher.group(1));
                     } else {
-                        System.out.println("Did not find for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
+                        System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
                     }
                 }
             }
@@ -114,7 +114,7 @@ public class GradleBuildSearch extends BaseSearch {
         // sanitize versions like [3.8-beta5,)
         version = StringUtils.removeStart(version, "[");
 
-        System.out.println("Found " + version + " for repo " + repo + " at " + htmlUrl);
+        //System.out.println("Found " + version + " for repo " + repo + " at " + htmlUrl);
         versions.put(version, htmlUrl);
     }
 }
