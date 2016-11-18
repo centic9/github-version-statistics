@@ -17,6 +17,8 @@ import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 
 public class ProcessResults {
     private static final Date START_DATE;
+    private static final VersionComparator VERSION_COMPARATOR = new VersionComparator();
+
     static {
         try {
             START_DATE = DATE_FORMAT.parse("2016-09-30");
@@ -118,7 +120,10 @@ public class ProcessResults {
 
         Table<String,String,Data> values = HashBasedTable.create();
         List<VersionChange> changes = new ArrayList<>();
-        String maxDateStr = readLines(files, values, changes);
+        // repo as key, highest seen version as value
+        Map<String, String> seenRepositoryVersions = new HashMap<>();
+
+        String maxDateStr = readLines(files, values, changes, seenRepositoryVersions);
 
         File results = generateHtmlFiles(values, maxDateStr);
 
@@ -142,7 +147,7 @@ public class ProcessResults {
     }
 
     private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
-                                    List<VersionChange> changes) throws IOException {
+                                    List<VersionChange> changes, Map<String, String> seenRepositoryVersions) throws IOException {
         SetMultimap<String, String> previousVersions = null;
         String maxDateStr = null;
 
@@ -157,7 +162,10 @@ public class ProcessResults {
                 maxDateStr = populateTable(dateVersionTable, maxDateStr, versions, date);
 
                 // print out if we found projects that switched versions
-                compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes);
+                compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes, seenRepositoryVersions);
+
+                // now update the map of highest version per Repository for the next date
+                addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
 
                 previousVersions = holder.getRepositoryVersions();
             }
@@ -166,6 +174,17 @@ public class ProcessResults {
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");
 
         return maxDateStr;
+    }
+
+    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, SetMultimap<String, String> repositoryVersions) {
+        for (Map.Entry<String, String> entry : repositoryVersions.entries()) {
+            String version = seenRepositoryVersions.get(entry.getValue());
+            if(version == null) {
+                seenRepositoryVersions.put(entry.getValue(), entry.getKey());
+            } else if (VERSION_COMPARATOR.compare(version, entry.getKey()) < 0) {
+                seenRepositoryVersions.put(entry.getValue(), entry.getKey());
+            }
+        }
     }
 
     public static class VersionChange {
@@ -188,7 +207,7 @@ public class ProcessResults {
 
     protected static void compareToPrevious(String date, SetMultimap<String, String> previousVersions,
                                             SetMultimap<String, String> versions,
-                                            List<VersionChange> changes) {
+                                            List<VersionChange> changes, Map<String, String> seenRepositoryVersions) {
         if(previousVersions != null) {
             for(Map.Entry<String,String> entry : versions.entries()) {
                 String version = entry.getKey();
@@ -198,7 +217,10 @@ public class ProcessResults {
                     continue;
                 }
 
-                if(previousVersions.containsValue(repository)) {
+                String prevRepoVersion = seenRepositoryVersions.get(repository);
+
+                if(previousVersions.containsValue(repository) &&
+                        (prevRepoVersion == null || VERSION_COMPARATOR.compare(prevRepoVersion, version) < 0)) {
                     ImmutableMultimap<String, String> inverse = ImmutableMultimap.copyOf(previousVersions).inverse();
                     String versionBefore = inverse.get(repository).iterator().next();
                     System.out.println("Did find a different version for " + repository +

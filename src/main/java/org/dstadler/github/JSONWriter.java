@@ -65,6 +65,9 @@ public class JSONWriter {
             return date;
         }
 
+        /**
+         * @return A multimap with version as key and found file-URLs as value.
+         */
         public SetMultimap<String, String> getVersions() {
             final Multimap<String, String> repoVersions = HashMultimap.create();
             for (Map.Entry<String, String> entry : versions.entries()) {
@@ -83,6 +86,11 @@ public class JSONWriter {
             });
         }
 
+        /**
+         *
+         * @return A Multimap with version as key and the repositories that use
+         *          this version.
+         */
         @JsonIgnore
         public SetMultimap<String, String> getRepositoryVersions() {
             SetMultimap<String, String> repositories = HashMultimap.create();

@@ -300,4 +300,10 @@ public class VersionComparatorTest {
         assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
                 ret < 0);
     }
+
+    @Test
+    public void testNull() {
+        assertEquals(1, new VersionComparator().compare("Bla", null));
+        assertEquals(-1, new VersionComparator().compare(null, "Bla"));
+    }
 }
