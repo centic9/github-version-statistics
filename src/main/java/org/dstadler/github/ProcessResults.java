@@ -69,10 +69,7 @@ public class ProcessResults {
                 //"       strokeWidth: 0.0,\n" +
 
                 "       includeZero: true,\n" +
-                "       xRangePad: 20,\n" +
-
-                "       yAxisLabelWidth: 60,\n" +
-                //"       yLabelWidth: 100,\n" +
+                "       xRangePad: 40,\n" +
 
                 "       labelsSeparateLines: true,\n" +
                 "       legend: 'follow',\n" +
@@ -84,7 +81,9 @@ public class ProcessResults {
                 "                },\n" +
                 "                axisLabelFormatter: function(y) {\n" +
                 "                  return y;\n" +
-                "                }\n" +
+                "                },\n" +
+                "                axisLabelWidth: 50\n" +
+                //"             labelWidth: 100,\n" +
                 "              }\n" +
                 "   },\n" +
 
@@ -289,8 +288,12 @@ public class ProcessResults {
 
         StringBuilder annotations = new StringBuilder();
         for(String column : versionsSorted) {
-            annotations.append("    {series: \"").append(column).append("\",x: \"").append(maxDateStr).
-                    append("\",shortText: \"").append(column).append("\",text: \"").append(maxDateStr).append("\", \"width\": 100},\n");
+            Data currentVersions = dateVersionTable.row(maxDateStr).get(column);
+            annotations.append("    ").
+                    append("{series: \"").append(column).append("\",x: \"").append(maxDateStr).
+                    append("\",shortText: \"").append(column).
+                    append("\",text: \"On ").append(maxDateStr).append(": ").append(currentVersions == null ? "0" : currentVersions.count).
+                    append("\",width: ").append(column.length() * 10).append("},\n");
         }
 
         // cut away trailing comma and newline
