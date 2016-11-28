@@ -15,7 +15,7 @@ title: Current version distribution of Apache POI on Github
     <li>
         {{ versionChange.date }}: <a href="https://github.com/{{ versionChange.repository }}">
             {{ versionChange.repository }}
-        </a> changed version from {{ versionChange.versionBefore }} to {{ versionChange.versionNow }}
+        </a> changed version from {{ versionChange.versionBefore | xml_escape }} to {{ versionChange.versionNow | xml_escape }}
     </li>
     {% endfor %}
 </ul>
