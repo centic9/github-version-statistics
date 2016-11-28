@@ -19,7 +19,6 @@ public class ProcessResultsTest {
     private final static String LINE_NOW = "{\"date\":\"2016-11-12\",\"versions\":{\"3.15\":[\"https://github.com/centic9/poi-mail-merge/blob/837194207f83c9274bfd175ca94fbac45282f5e4//build.gradle\"]}}";
 
     // compare two lines where we had a difference
-    private SetMultimap<String, String> previousVersions;
     private SetMultimap<String, String> versions;
 
     // print out if we found projects that switched versions
@@ -28,24 +27,23 @@ public class ProcessResultsTest {
 
     @Before
     public void setUp() throws IOException {
-        previousVersions = JSONWriter.mapper.readValue(LINE_PREV, JSONWriter.Holder.class).getRepositoryVersions();
         versions = JSONWriter.mapper.readValue(LINE_NOW, JSONWriter.Holder.class).getRepositoryVersions();
     }
 
     @Test
-    public void testCompareToPrevious() throws IOException {
-        compareToPrevious("", previousVersions, versions, changes, seenRepositoryVersions);
+    public void testCompareToPreviousNewRepo() throws IOException {
+        compareToPrevious("", versions, changes, seenRepositoryVersions);
 
         assertEquals("Had: " + changes, 1, changes.size());
         assertEquals("Had: " + changes, "centic9/poi-mail-merge", changes.get(0).repository);
-        assertEquals("Had: " + changes, "3.15-beta2", changes.get(0).versionBefore);
+        assertEquals("Had: " + changes, "<new>", changes.get(0).versionBefore);
         assertEquals("Had: " + changes, "3.15", changes.get(0).versionNow);
     }
 
     @Test
     public void testCompareToPreviousWithLowerPrevVersion() throws IOException {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15-beta2");
-        compareToPrevious("", previousVersions, versions, changes, seenRepositoryVersions);
+        compareToPrevious("", versions, changes, seenRepositoryVersions);
 
         assertEquals("Had: " + changes, 1, changes.size());
         assertEquals("Had: " + changes, "centic9/poi-mail-merge", changes.get(0).repository);
@@ -56,7 +54,7 @@ public class ProcessResultsTest {
     @Test
     public void testCompareToPreviousWithEqualPrevVersion() throws IOException {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15");
-        compareToPrevious("", previousVersions, versions, changes, seenRepositoryVersions);
+        compareToPrevious("", versions, changes, seenRepositoryVersions);
 
         assertEquals("Had: " + changes, 0, changes.size());
     }
@@ -64,13 +62,15 @@ public class ProcessResultsTest {
     @Test
     public void testCompareToPreviousWithHigherPrevVersion() throws IOException {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.16");
-        compareToPrevious("", previousVersions, versions, changes, seenRepositoryVersions);
+        compareToPrevious("", versions, changes, seenRepositoryVersions);
 
         assertEquals("Had: " + changes, 0, changes.size());
     }
 
     @Test
-    public void testAddHigherVersion() {
+    public void testAddHigherVersion() throws IOException {
+        SetMultimap<String, String> previousVersions = JSONWriter.mapper.readValue(LINE_PREV, JSONWriter.Holder.class).getRepositoryVersions();
+
         assertEquals(0, seenRepositoryVersions.size());
 
         addHigherVersions(seenRepositoryVersions, previousVersions);

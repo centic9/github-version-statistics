@@ -147,7 +147,6 @@ public class ProcessResults {
 
     private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
                                     List<VersionChange> changes, Map<String, String> seenRepositoryVersions) throws IOException {
-        SetMultimap<String, String> previousVersions = null;
         String maxDateStr = null;
 
         for(File file : files) {
@@ -161,12 +160,10 @@ public class ProcessResults {
                 maxDateStr = populateTable(dateVersionTable, maxDateStr, versions, date);
 
                 // print out if we found projects that switched versions
-                compareToPrevious(date, previousVersions, holder.getRepositoryVersions(), changes, seenRepositoryVersions);
+                compareToPrevious(date, holder.getRepositoryVersions(), changes, seenRepositoryVersions);
 
                 // now update the map of highest version per Repository for the next date
                 addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
-
-                previousVersions = holder.getRepositoryVersions();
             }
         }
 
@@ -204,30 +201,27 @@ public class ProcessResults {
         }
     }
 
-    protected static void compareToPrevious(String date, SetMultimap<String, String> previousVersions,
-                                            SetMultimap<String, String> versions,
+    protected static void compareToPrevious(String date, SetMultimap<String, String> versions,
                                             List<VersionChange> changes, Map<String, String> seenRepositoryVersions) {
-        if(previousVersions != null) {
-            for(Map.Entry<String,String> entry : versions.entries()) {
-                String version = entry.getKey();
-                String repository = entry.getValue();
-                if(previousVersions.containsEntry(version, repository)) {
-                    // was already in previous holder
-                    continue;
-                }
+        for(Map.Entry<String,String> entry : versions.entries()) {
+            String version = entry.getKey();
+            String repository = entry.getValue();
+            String prevRepoVersion = seenRepositoryVersions.get(repository);
 
-                String prevRepoVersion = seenRepositoryVersions.get(repository);
-
-                if(previousVersions.containsValue(repository) &&
-                        (prevRepoVersion == null || VERSION_COMPARATOR.compare(prevRepoVersion, version) < 0)) {
-                    ImmutableMultimap<String, String> inverse = ImmutableMultimap.copyOf(previousVersions).inverse();
-                    String versionBefore = inverse.get(repository).iterator().next();
+            if(prevRepoVersion == null || VERSION_COMPARATOR.compare(prevRepoVersion, version) < 0) {
+                final String versionBefore;
+                if(prevRepoVersion == null) {
+                    versionBefore = "<new>";
+                    System.out.println("Did find a new repository for " + repository +
+                            ", now at " + version);
+                } else {
+                    versionBefore = prevRepoVersion;
                     System.out.println("Did find a different version for " + repository +
                             ", previously at " + versionBefore +
                             ", now at " + version);
-
-                    changes.add(new VersionChange(date, repository, versionBefore, version));
                 }
+
+                changes.add(new VersionChange(date, repository, versionBefore, version));
             }
         }
     }
