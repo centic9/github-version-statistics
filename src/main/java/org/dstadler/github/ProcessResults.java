@@ -163,24 +163,13 @@ public class ProcessResults {
                 compareToPrevious(date, holder.getRepositoryVersions(), changes, seenRepositoryVersions);
 
                 // now update the map of highest version per Repository for the next date
-                addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
+                JSONWriter.addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
             }
         }
 
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");
 
         return maxDateStr;
-    }
-
-    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, SetMultimap<String, String> repositoryVersions) {
-        for (Map.Entry<String, String> entry : repositoryVersions.entries()) {
-            String version = seenRepositoryVersions.get(entry.getValue());
-            if(version == null) {
-                seenRepositoryVersions.put(entry.getValue(), entry.getKey());
-            } else if (VERSION_COMPARATOR.compare(version, entry.getKey()) < 0) {
-                seenRepositoryVersions.put(entry.getValue(), entry.getKey());
-            }
-        }
     }
 
     public static class VersionChange {

@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.dstadler.github.ProcessResults.addHigherVersions;
+import static org.dstadler.github.JSONWriter.addHigherVersions;
 import static org.dstadler.github.ProcessResults.compareToPrevious;
 import static org.junit.Assert.assertEquals;
 

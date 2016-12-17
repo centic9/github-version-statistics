@@ -3,14 +3,14 @@ package org.dstadler.github;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
+import com.google.common.base.Preconditions;
+import com.google.common.collect.*;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.*;
-import java.util.Map;
+import java.util.*;
 
 public class JSONWriter {
     protected static final ObjectMapper mapper = new ObjectMapper()
@@ -21,7 +21,7 @@ public class JSONWriter {
 
     public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
-    private static VersionComparator COMPARATOR = new VersionComparator();
+    private static final VersionComparator COMPARATOR = new VersionComparator();
 
     public static void write(String date, SetMultimap<String, String> versions) throws IOException {
         File file = new File(STATS_DIR, "stats" + date + ".json");
@@ -98,6 +98,42 @@ public class JSONWriter {
                 repositories.put(entry.getKey(), BaseSearch.getRepository(entry.getValue()));
             }
             return repositories;
+        }
+    }
+
+    /**
+     * Returns all repositories found until now with the highest version that we
+     * found for them.
+     *
+     * @return repo as key, highest seen version as value
+     * @throws IOException If a file cannot be read
+     */
+    public static Map<String, String> getHighestVersions() throws IOException {
+        // read stats
+        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
+        Preconditions.checkNotNull(files);
+
+        Arrays.sort(files);
+
+        Map<String, String> seenRepositoryVersions = new HashMap<>();
+        for(File file : files) {
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
+            for (String line : lines) {
+                JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
+                // now update the map of highest version per Repository for the next date
+                addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
+            }
+        }
+
+        return seenRepositoryVersions;
+    }
+
+    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, SetMultimap<String, String> repositoryVersions) {
+        for (Map.Entry<String, String> entry : repositoryVersions.entries()) {
+            String version = seenRepositoryVersions.get(entry.getValue());
+            if(version == null || COMPARATOR.compare(version, entry.getKey()) < 0) {
+                seenRepositoryVersions.put(entry.getValue(), entry.getKey());
+            }
         }
     }
 }
