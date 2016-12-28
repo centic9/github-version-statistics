@@ -42,7 +42,7 @@ public abstract class BaseSearch {
 
         // skip this if the group-tag is not found any more now
         if(!str.contains(GROUP)) {
-            System.out.println("Did not find " + GROUP + " in content of repo " + repo + " at " + htmlUrl);
+            //System.out.println("Did not find " + GROUP + " in content of repo " + repo + " at " + htmlUrl);
             return null;
         }
         return str;

@@ -78,7 +78,11 @@ public class GradleBuildSearch extends BaseSearch {
                     matcher = PATTERN_SHORT_VAR.matcher(str);
                     if(matcher.find()) {
                         addVersion(versions, htmlUrl, repo, str, matcher.group(1));
-                    } else {
+                    } else if (
+                            // don't log for some obvious reasons for not finding a version
+                            !str.contains("compile 'org.apache.poi:poi'") &&
+                            !str.contains("compile 'fr.opensagres.xdocreport:org.apache.poi.") &&
+                            !str.contains("main = 'org.apache.poi.benchmark")) {
                         System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
                     }
                 }

@@ -201,8 +201,8 @@ public class ProcessResults {
                 final String versionBefore;
                 if(prevRepoVersion == null) {
                     versionBefore = "<new>";
-                    System.out.println("Did find a new repository for " + repository +
-                            ", now at " + version);
+                    /*System.out.println("Did find a new repository for " + repository +
+                            ", now at " + version);*/
                 } else {
                     versionBefore = prevRepoVersion;
                     System.out.println("Did find a different version for " + repository +
