@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2017-01-01,zgq344929174/excelToJson,<new>,3.7
+2017-01-01,ShanalieMaritaSilva/chatbot,<new>,1.3
+2017-01-01,v5analytics/visallo,<new>,${apache.poi.version}
 2016-12-31,ponmanipozhilan/CI_Testing,<new>,3.10
 2016-12-31,morganebridges/myRetailRESTService,<new>,3.11
 2016-12-31,srfunksensei/msodor,<new>,3.15
