@@ -65,7 +65,7 @@ public abstract class BaseSearch {
 
         final GHRepository repository = github.getRepository(repo);
         if(repository.isFork()) {
-            System.out.println("Ignoring forked repo " + repo);
+            //System.out.println("Ignoring forked repo " + repo);
             return null;
         }
         return repo;

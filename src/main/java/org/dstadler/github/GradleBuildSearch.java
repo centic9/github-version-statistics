@@ -28,7 +28,9 @@ public class GradleBuildSearch extends BaseSearch {
     private static final String VERSION_VAR_PATTERN = "\\s*=\\s*" + QUOTE + VERSION + QUOTE;
 
     // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
-    private static final String EXCLUDE_REGEX = "[\"']org\\.apache\\.poi:ooxml-schemas:1\\.\\d+['\"]";
+    protected static final String EXCLUDE_REGEX = "(?:[\"']org\\.apache\\.poi:ooxml-schemas:1\\.\\d+['\"]|" +
+            //  [group: 'org.apache.poi', name: 'openxml4j', version: '1.0-beta'],
+            "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j')";
 
     public static void main(String[] args) throws IOException {
         GitHub github = connect();
@@ -67,30 +69,35 @@ public class GradleBuildSearch extends BaseSearch {
                 continue;
             }
 
-            Matcher matcher = PATTERN_SHORT.matcher(str);
-            if(matcher.find()) {
-                addVersion(versions, htmlUrl, repo, str, matcher.group(1));
+            parseVersion(versions, htmlUrl, repo, str);
+        }
+    }
+
+    protected void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
+        Matcher matcher = PATTERN_SHORT.matcher(str);
+        if(matcher.find()) {
+            addVersion(versions, htmlUrl, str, matcher.group(1));
+        } else {
+            matcher = PATTERN_LONG.matcher(str);
+            if (matcher.find()) {
+                addVersion(versions, htmlUrl, str, matcher.group(1));
             } else {
-                matcher = PATTERN_LONG.matcher(str);
-                if (matcher.find()) {
-                    addVersion(versions, htmlUrl, repo, str, matcher.group(1));
-                } else {
-                    matcher = PATTERN_SHORT_VAR.matcher(str);
-                    if(matcher.find()) {
-                        addVersion(versions, htmlUrl, repo, str, matcher.group(1));
-                    } else if (
-                            // don't log for some obvious reasons for not finding a version
-                            !str.contains("compile 'org.apache.poi:poi'") &&
-                            !str.contains("compile 'fr.opensagres.xdocreport:org.apache.poi.") &&
-                            !str.contains("main = 'org.apache.poi.benchmark")) {
-                        System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
-                    }
+                matcher = PATTERN_SHORT_VAR.matcher(str);
+                if(matcher.find()) {
+                    addVersion(versions, htmlUrl, str, matcher.group(1));
+                } else if (str.contains("'org.apache.poi:poi'")) {
+                    versions.put("noVersion", htmlUrl);
+                } else if (
+                        // don't log for some obvious reasons for not finding a version
+                        !str.contains("compile 'fr.opensagres.xdocreport:org.apache.poi.") &&
+                        !str.contains("main = 'org.apache.poi.benchmark")) {
+                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
                 }
             }
         }
     }
 
-    private static void addVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str, String match) {
+    protected static void addVersion(Multimap<String, String> versions, String htmlUrl, String str, String match) {
         String version = match;
 
         // try to resolve simple variables

@@ -29,6 +29,11 @@ public class MavenPomSearch extends BaseSearch {
     // compile 'org.apache.poi:poi:3.13'
     private final static Pattern PATTERN_DEPENDENCY = Pattern.compile("<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>.*</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>");
 
+    private final static Pattern PATTERN_NO_VERSION = Pattern.compile("<dependency>" + NEWLINE +
+            "<groupId>org.apache.poi</groupId>" + NEWLINE +
+            "<artifactId>poi</artifactId>" + NEWLINE +
+            "</dependency>");
+
     //private final static Pattern PATTERN_SHORT_VAR = Pattern.compile(QUOTE + GROUP_REGEX + ":[-a-z]+:" + QUOTE + "\\s*\\+\\s*" + VERSION);
 
     // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
@@ -73,12 +78,15 @@ public class MavenPomSearch extends BaseSearch {
 
             Matcher matcher = PATTERN_DEPENDENCY.matcher(str);
             if(matcher.find()) {
-                addVersion(versions, htmlUrl, repo, str, matcher.group(1));
+                addVersion(versions, htmlUrl, str, matcher.group(1));
             } else {
+                matcher = PATTERN_NO_VERSION.matcher(str);
+                if(matcher.find()) {
+                    versions.put("noVersion", htmlUrl);
                 /*matcher = PATTERN_SHORT_VAR.matcher(str);
                 if(matcher.find()) {
-                    addVersion(versions, htmlUrl, repo, str, matcher.group(1));
-                } else*/ {
+                    addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
+                } else {
                     System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
                 }
             }
@@ -124,7 +132,7 @@ public class MavenPomSearch extends BaseSearch {
         return null;
     }
 
-    private static void addVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str, String match) {
+    protected static void addVersion(Multimap<String, String> versions, String htmlUrl, String str, String match) {
         String version = match;
 
         // try to resolve simple variables
