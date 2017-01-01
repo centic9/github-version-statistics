@@ -1,6 +1,7 @@
 package org.dstadler.github;
 
 import org.dstadler.commons.testing.TestHelpers;
+import org.dstadler.github.VersionComparator.Version;
 import org.junit.Test;
 
 import java.util.*;
@@ -37,7 +38,7 @@ public class VersionComparatorTest {
 
     @Test
     public void testSortedSet() {
-        Set<String> list = new TreeSet<>(new VersionComparator());
+        Collection<String> list = new TreeSet<>(new VersionComparator());
         list.add("other");
         list.add("3.15");
         list.add("3.15-beta2");
@@ -127,7 +128,7 @@ public class VersionComparatorTest {
         list.add("3.0.1");
         list.add("3.0");
 
-        Collections.sort(list, new VersionComparator());
+        list.sort(new VersionComparator());
 
         assertEquals("[other, 3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
                         "3.7-beta3, 3.7, 3.8-beta2, 3.8-beta3, 3.8-beta4, 3.8-beta5, 3.8, 3.9, 3.9.0, " +
@@ -179,7 +180,7 @@ public class VersionComparatorTest {
         list.add("other");
         list.add("3.11-beta3");
 
-        Collections.sort(list, new VersionComparator());
+        list.sort(new VersionComparator());
 
         assertEquals("[other, 3.0, 3.0.1, 3.2, 3.5-beta3, 3.5-beta5, 3.6, " +
                         "3.7-beta3, 3.7, 3.8-beta2, 3.8-beta3, 3.8-beta4, 3.8-beta5, 3.8, 3.9, 3.9.0, " +
@@ -191,27 +192,27 @@ public class VersionComparatorTest {
 
     @Test
     public void testParse() {
-        assertEquals("Version{major=1, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("1.0").toString());
-        assertEquals("Version{major=3, minor=0, revision=1, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("3.0.1").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("3.5-beta").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=2}", VersionComparator.Version.parse("3.5-beta2").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=2}", VersionComparator.Version.parse("3.5-BETA2").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=true, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("3.5-SNAPSHOT").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=true, other=false, betaSnapshotOther=17}", VersionComparator.Version.parse("3.5-SNAPSHOT17").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=false, other=true, betaSnapshotOther=0}", VersionComparator.Version.parse("3.5-bbn").toString());
-        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=20151223}", VersionComparator.Version.parse("3.5-beta-20151223").toString());
-        assertEquals("Version{major=3, minor=14, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=1}", VersionComparator.Version.parse("3.14-beta1-20151223").toString());
-        assertEquals("Version{major=3, minor=9, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("3.9.0").toString());
-        assertEquals("Version{major=0, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", VersionComparator.Version.parse("other").toString());
+        assertEquals("Version{major=1, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", Version.parse("1.0").toString());
+        assertEquals("Version{major=3, minor=0, revision=1, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", Version.parse("3.0.1").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=0}", Version.parse("3.5-beta").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=2}", Version.parse("3.5-beta2").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=2}", Version.parse("3.5-BETA2").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=true, other=false, betaSnapshotOther=0}", Version.parse("3.5-SNAPSHOT").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=true, other=false, betaSnapshotOther=17}", Version.parse("3.5-SNAPSHOT17").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=false, snapshot=false, other=true, betaSnapshotOther=0}", Version.parse("3.5-bbn").toString());
+        assertEquals("Version{major=3, minor=5, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=20151223}", Version.parse("3.5-beta-20151223").toString());
+        assertEquals("Version{major=3, minor=14, revision=0, beta=true, snapshot=false, other=false, betaSnapshotOther=1}", Version.parse("3.14-beta1-20151223").toString());
+        assertEquals("Version{major=3, minor=9, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", Version.parse("3.9.0").toString());
+        assertEquals("Version{major=0, minor=0, revision=0, beta=false, snapshot=false, other=false, betaSnapshotOther=0}", Version.parse("other").toString());
     }
 
     @Test
     public void testFailingCase1() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("1.0-SNAPSHOT");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("1.0");
+        Version v1 = Version.parse("1.0-SNAPSHOT");
+        Version v2 = Version.parse("1.0");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);
@@ -223,11 +224,11 @@ public class VersionComparatorTest {
 
     @Test
     public void testFailingCase2() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("3.0.1");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("3.12-SNAPSHOT");
+        Version v1 = Version.parse("3.0.1");
+        Version v2 = Version.parse("3.12-SNAPSHOT");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);
@@ -239,11 +240,11 @@ public class VersionComparatorTest {
 
     @Test
     public void testFailingCase3() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("3.2");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("3.8-beta5");
+        Version v1 = Version.parse("3.2");
+        Version v2 = Version.parse("3.8-beta5");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);
@@ -255,11 +256,11 @@ public class VersionComparatorTest {
 
     @Test
     public void testFailingCase4() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("3.2-beta");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("3.9");
+        Version v1 = Version.parse("3.2-beta");
+        Version v2 = Version.parse("3.9");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);
@@ -271,11 +272,11 @@ public class VersionComparatorTest {
 
     @Test
     public void testFailingCase5() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("3.2");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("3.14-beta1-20151223");
+        Version v1 = Version.parse("3.2");
+        Version v2 = Version.parse("3.14-beta1-20151223");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);
@@ -287,11 +288,11 @@ public class VersionComparatorTest {
 
     @Test
     public void testFailingCase6() {
-        VersionComparator.Version v1 = VersionComparator.Version.parse("3.14-beta1-20151223");
-        VersionComparator.Version v2 = VersionComparator.Version.parse("3.14-beta2");
+        Version v1 = Version.parse("3.14-beta1-20151223");
+        Version v2 = Version.parse("3.14-beta2");
 
-        assertTrue(v1.compareTo(v1) == 0);
-        assertTrue(v2.compareTo(v2) == 0);
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
 
         assertTrue(v1.compareTo(v2) < 0);
         assertTrue(v2.compareTo(v1) > 0);

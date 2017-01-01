@@ -40,14 +40,14 @@ public class GradleBuildSearch extends BaseSearch {
 
         System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");
         for(String version : versions.keySet()) {
-            System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
+            System.out.println("Had: " + version + ' ' + versions.get(version).size() + " times");
         }
 
         JSONWriter.write(DATE_FORMAT.format(new Date()), versions);
     }
 
     @Override
-    String getExcludeRegex() {
+    final String getExcludeRegex() {
         return EXCLUDE_REGEX;
     }
 
@@ -91,7 +91,7 @@ public class GradleBuildSearch extends BaseSearch {
                         // don't log for some obvious reasons for not finding a version
                         !str.contains("compile 'fr.opensagres.xdocreport:org.apache.poi.") &&
                         !str.contains("main = 'org.apache.poi.benchmark")) {
-                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
+                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + '\n');
                 }
             }
         }

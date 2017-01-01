@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 import static org.dstadler.github.GradleBuildSearch.EXCLUDE_REGEX;
 import static org.junit.Assert.*;
 
-public class TestGradleBuildSearch {
-    private Multimap<String, String> versions = HashMultimap.create();
+public class GradleBuildSearchTest {
+    private static final Pattern EXCLUDE_PATTERN = Pattern.compile(EXCLUDE_REGEX);
+
+    private final Multimap<String, String> versions = HashMultimap.create();
 
     @Test
     public void testRegex() throws Exception {
@@ -21,7 +23,7 @@ public class TestGradleBuildSearch {
         assertTrue(excludeRegex.matcher("group: 'org.apache.poi', name: 'openxml4j'").find());
         assertTrue(excludeRegex.matcher("\"org.apache.poi:ooxml-schemas:1.4\"").find());
 
-        assertEquals("", "group: 'org.apache.poi', name: 'openxml4j'".replaceAll(EXCLUDE_REGEX, ""));
+        assertEquals("", EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").replaceAll(""));
     }
 
     @Test

@@ -24,7 +24,7 @@ public class VersionComparator implements Comparator<String> {
             Version v = new Version();
 
             // sort these as highest version for now
-            if(version.equals("other")) {
+            if("other".equals(version)) {
                 v.major = 0;
                 return v;
             }
@@ -35,11 +35,11 @@ public class VersionComparator implements Comparator<String> {
             v.major = Integer.parseInt(parts[0]);
             v.minor = Integer.parseInt(parts[1]);
             if(parts.length > 2) {
-                handleBetaSnapshortOrRevision(v, parts[2]);
+                handleBetaSnapshotOrRevision(v, parts[2]);
             }
             if(parts.length > 3) {
                 if(!v.beta && !v.snapshot && !v.other) {
-                    handleBetaSnapshortOrRevision(v, parts[3]);
+                    handleBetaSnapshotOrRevision(v, parts[3]);
                 } else if (v.betaSnapshotOther == 0) {
                     v.betaSnapshotOther = Integer.parseInt(parts[3]);
                 }
@@ -48,7 +48,7 @@ public class VersionComparator implements Comparator<String> {
             return v;
         }
 
-        private static void handleBetaSnapshortOrRevision(Version v, String part) {
+        private static void handleBetaSnapshotOrRevision(Version v, String part) {
             if (isBeta(part)) {
                 v.beta = true;
                 part = StringUtils.removeStartIgnoreCase(part, "beta");
@@ -62,6 +62,7 @@ public class VersionComparator implements Comparator<String> {
                     v.betaSnapshotOther = Integer.parseInt(part);
                 }
             } else {
+                //noinspection UnusedCatchParameter
                 try {
                     v.revision = Integer.parseInt(part);
                 } catch (NumberFormatException e) {
@@ -163,19 +164,21 @@ public class VersionComparator implements Comparator<String> {
         // finally resort to normal textual comparison
         if(var1 == null && var2 == null) {
             return 0;
-        } else if(var1 == null) {
+        }
+        if(var1 == null) {
             return -1;
-        } else if(var2 == null) {
+        }
+        if(var2 == null) {
             return 1;
         }
         return var1.compareTo(var2);
     }
 
-    private static boolean isBeta(String part) {
+    private static boolean isBeta(CharSequence part) {
         return StringUtils.startsWithIgnoreCase(part, "BETA");
     }
 
-    private static boolean isSnapshot(String part) {
+    private static boolean isSnapshot(CharSequence part) {
         return StringUtils.startsWithIgnoreCase(part, "SNAPSHOT");
     }
 }

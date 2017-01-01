@@ -11,6 +11,7 @@ import org.apache.commons.lang3.time.FastDateFormat;
 
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class JSONWriter {
     protected static final ObjectMapper mapper = new ObjectMapper()
@@ -21,7 +22,7 @@ public class JSONWriter {
 
     public static final FastDateFormat DATE_FORMAT = FastDateFormat.getInstance("yyyy-MM-dd");
 
-    private static final VersionComparator COMPARATOR = new VersionComparator();
+    private static final Comparator<String> COMPARATOR = new VersionComparator();
 
     public static void write(String date, SetMultimap<String, String> versions) throws IOException {
         File file = new File(STATS_DIR, "stats" + date + ".json");
@@ -37,7 +38,7 @@ public class JSONWriter {
             }
 
             // Need to write in one go as mapper.writeValue() closes the stream...
-            writer.write(strWriter.toString() + "\n");
+            writer.write(strWriter.toString() + '\n');
         }
     }
 
@@ -70,7 +71,7 @@ public class JSONWriter {
          */
         public SetMultimap<String, String> getVersions() {
             final Multimap<String, String> repoVersions = HashMultimap.create();
-            for (Map.Entry<String, String> entry : versions.entries()) {
+            for (Entry<String, String> entry : versions.entries()) {
                 repoVersions.put(BaseSearch.getRepository(entry.getValue()), entry.getKey());
             }
 
@@ -94,7 +95,7 @@ public class JSONWriter {
         @JsonIgnore
         public SetMultimap<String, String> getRepositoryVersions() {
             SetMultimap<String, String> repositories = HashMultimap.create();
-            for (Map.Entry<String, String> entry : getVersions().entries()) {
+            for (Entry<String, String> entry : getVersions().entries()) {
                 repositories.put(entry.getKey(), BaseSearch.getRepository(entry.getValue()));
             }
             return repositories;
@@ -110,7 +111,7 @@ public class JSONWriter {
      */
     public static Map<String, String> getHighestVersions() throws IOException {
         // read stats
-        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
+        File[] files = STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
         Preconditions.checkNotNull(files);
 
         Arrays.sort(files);
@@ -119,7 +120,7 @@ public class JSONWriter {
         for(File file : files) {
             List<String> lines = FileUtils.readLines(file, "UTF-8");
             for (String line : lines) {
-                JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
+                Holder holder = mapper.readValue(line, Holder.class);
                 // now update the map of highest version per Repository for the next date
                 addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
             }
@@ -128,8 +129,8 @@ public class JSONWriter {
         return seenRepositoryVersions;
     }
 
-    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, SetMultimap<String, String> repositoryVersions) {
-        for (Map.Entry<String, String> entry : repositoryVersions.entries()) {
+    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, Multimap<String, String> repositoryVersions) {
+        for (Entry<String, String> entry : repositoryVersions.entries()) {
             String version = seenRepositoryVersions.get(entry.getValue());
             if(version == null || COMPARATOR.compare(version, entry.getKey()) < 0) {
                 seenRepositoryVersions.put(entry.getValue(), entry.getKey());

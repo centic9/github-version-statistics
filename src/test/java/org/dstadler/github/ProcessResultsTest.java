@@ -1,6 +1,8 @@
 package org.dstadler.github;
 
 import com.google.common.collect.SetMultimap;
+import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.ProcessResults.VersionChange;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,12 +24,12 @@ public class ProcessResultsTest {
     private SetMultimap<String, String> versions;
 
     // print out if we found projects that switched versions
-    private List<ProcessResults.VersionChange> changes = new ArrayList<>();
-    private Map<String, String> seenRepositoryVersions = new HashMap<>();
+    private final List<VersionChange> changes = new ArrayList<>();
+    private final Map<String, String> seenRepositoryVersions = new HashMap<>();
 
     @Before
     public void setUp() throws IOException {
-        versions = JSONWriter.mapper.readValue(LINE_NOW, JSONWriter.Holder.class).getRepositoryVersions();
+        versions = JSONWriter.mapper.readValue(LINE_NOW, Holder.class).getRepositoryVersions();
     }
 
     @Test
@@ -69,7 +71,7 @@ public class ProcessResultsTest {
 
     @Test
     public void testAddHigherVersion() throws IOException {
-        SetMultimap<String, String> previousVersions = JSONWriter.mapper.readValue(LINE_PREV, JSONWriter.Holder.class).getRepositoryVersions();
+        SetMultimap<String, String> previousVersions = JSONWriter.mapper.readValue(LINE_PREV, Holder.class).getRepositoryVersions();
 
         assertEquals(0, seenRepositoryVersions.size());
 

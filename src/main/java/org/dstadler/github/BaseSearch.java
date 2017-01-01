@@ -29,9 +29,10 @@ public abstract class BaseSearch {
     protected String readFileContent(GHContent match, String htmlUrl, String repo) throws IOException {
         final InputStream stream;
         try {
+            //noinspection resource
             stream = match.read();
         } catch (IOException e) {
-            System.out.println("Could not read content of " + htmlUrl + " of repo " + repo);
+            System.out.println("Could not read content of " + htmlUrl + " of repo " + repo + ": " + e);
             return null;
         }
 
@@ -57,7 +58,7 @@ public abstract class BaseSearch {
         return str.substring(Math.max(0, pos - 100), Math.min(str.length(), pos + 100));
     }
 
-    protected String getNonForkRepository(GitHub github, String htmlUrl) throws IOException {
+    protected String getNonForkRepository(GitHub github, CharSequence htmlUrl) throws IOException {
         String repo = getRepository(htmlUrl);
         if(repo == null) {
             return null;
@@ -71,7 +72,7 @@ public abstract class BaseSearch {
         return repo;
     }
 
-    public static String getRepository(String htmlUrl) {
+    public static String getRepository(CharSequence htmlUrl) {
         Matcher matcher = REPO_NAME.matcher(htmlUrl);
         if(!matcher.matches()) {
             System.out.println("Could not parse repo of " + htmlUrl + " with regex " + REPO_NAME.pattern());

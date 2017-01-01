@@ -38,6 +38,7 @@ public class MavenPomSearch extends BaseSearch {
 
     // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
     private static final String EXCLUDE_REGEX = "(<artifactId>ooxml-schemas</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>|<artifactId>org\\.apache\\.poi\\.xwpf\\.converter\\.[a-z]+</artifactId>)";
+    private static final int TIMEOUT = 30_000;
 
     public static void main(String[] args) throws IOException {
         GitHub github = connect();
@@ -47,7 +48,7 @@ public class MavenPomSearch extends BaseSearch {
 
         System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");
         for(String version : versions.keySet()) {
-            System.out.println("Had: " + version + " " + versions.get(version).size() + " times");
+            System.out.println("Had: " + version + ' ' + versions.get(version).size() + " times");
         }
 
         JSONWriter.write(DATE_FORMAT.format(new Date()), versions);
@@ -87,17 +88,17 @@ public class MavenPomSearch extends BaseSearch {
                 if(matcher.find()) {
                     addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
                 } else {
-                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + "\n");
+                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + '\n');
                 }
             }
         }
     }
 
-    private static String getVariable(String str, String version) {
+    private static String getVariable(CharSequence str, String version) {
         final String var = StringUtils.removeStart(StringUtils.removeEnd(version.substring(1), "}"), "{");
         Matcher matcher = Pattern.compile(
                 // <poi.version>3.14</poi.version>
-                "<" + var + ">" + VERSION + "</" + var + ">").matcher(str);
+                '<' + var + '>' + VERSION + "</" + var + '>').matcher(str);
         if(matcher.find()) {
             return matcher.group(1);
         }
@@ -105,34 +106,38 @@ public class MavenPomSearch extends BaseSearch {
         return null;
     }
 
-    private static String getVariableRecursive(String htmlUrl, String str, String version) {
-        // first try with the current content
-        String newVersion = getVariable(str, version);
-        if(newVersion != null) {
-            return newVersion;
-        }
-
-        // if not found, try to retrieve the parent pom and continue from there
-        // https://github.com/cesardl/code-examples/blob/456f7b2d282eb1b9fa56f4b90fdae34c72e6db5e/apache-poi/pom.xml
-        // the regex selects the direct parent directory of the current pom.xml
-        Matcher matcher = Pattern.compile("https://github\\.com/([-a-zA-Z0-9_.]+/[-a-zA-Z0-9_.]+/)blob/([a-f0-9]+/.*?)[^/]+/pom.xml").matcher(htmlUrl);
-        if(matcher.find()) {
-            // https://raw.githubusercontent.com/seeyoula/sbs/576bd28004562d235b1472504d3c5849790fc343/tools/com.sbs.tools/pom.xml
-            final String url = "https://raw.githubusercontent.com/" + matcher.group(1) + matcher.group(2) + "pom.xml";
-            try {
-                String parent = UrlUtils.retrieveData(url, 30_000);
-
-                // recurse here to check the content and step up more directory levels if necessary
-                return getVariableRecursive(url, parent, version);
-            } catch (IOException e) {
-                System.out.println("Could not find parent pom at " + url + " for " + htmlUrl);
+    private static String getVariableRecursive(CharSequence htmlUrl, CharSequence str, String version) {
+        while (true) {
+            // first try with the current content
+            String newVersion = getVariable(str, version);
+            if (newVersion != null) {
+                return newVersion;
             }
-        }
 
-        return null;
+            // if not found, try to retrieve the parent pom and continue from there
+            // https://github.com/cesardl/code-examples/blob/456f7b2d282eb1b9fa56f4b90fdae34c72e6db5e/apache-poi/pom.xml
+            // the regex selects the direct parent directory of the current pom.xml
+            Matcher matcher = Pattern.compile("https://github\\.com/([-a-zA-Z0-9_.]+/[-a-zA-Z0-9_.]+/)blob/([a-f0-9]+/.*?)[^/]+/pom.xml").matcher(htmlUrl);
+            if (matcher.find()) {
+                // https://raw.githubusercontent.com/seeyoula/sbs/576bd28004562d235b1472504d3c5849790fc343/tools/com.sbs.tools/pom.xml
+                final String url = "https://raw.githubusercontent.com/" + matcher.group(1) + matcher.group(2) + "pom.xml";
+                try {
+                    String parent = UrlUtils.retrieveData(url, TIMEOUT);
+
+                    // recurse here to check the content and step up more directory levels if necessary
+                    htmlUrl = url;
+                    str = parent;
+                    continue;
+                } catch (IOException ignored) {
+                    System.out.println("Could not find parent pom at " + url + " for " + htmlUrl);
+                }
+            }
+
+            return null;
+        }
     }
 
-    protected static void addVersion(Multimap<String, String> versions, String htmlUrl, String str, String match) {
+    protected static void addVersion(Multimap<String, String> versions, String htmlUrl, CharSequence str, String match) {
         String version = match;
 
         // try to resolve simple variables

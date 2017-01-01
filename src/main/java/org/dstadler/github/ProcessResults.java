@@ -5,19 +5,21 @@ import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
+import org.dstadler.github.JSONWriter.Holder;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
 import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 
 public class ProcessResults {
     private static final Date START_DATE;
-    private static final VersionComparator VERSION_COMPARATOR = new VersionComparator();
+    private static final Comparator<String> VERSION_COMPARATOR = new VersionComparator();
 
     static {
         try {
@@ -42,13 +44,13 @@ public class ProcessResults {
                 "<div class=\"docs-header-bottom\">\n" +
                 "    {% include footer.html %}\n" +
                 "</div>\n" +*/
-                "\n" +
+                '\n' +
                 "<script type=\"text/javascript\">\n" +
                 "  g = new Dygraph(\n" +
-                "\n" +
+                '\n' +
                 "    // containing div\n" +
                 "    document.getElementById(\"graphdiv\"),\n" +
-                "\n" +
+                '\n' +
                 "    // CSV or path to a CSV file.\n" +
                 "    \"${dataheader}\\n\" +\n" +
                 "   ${data},\n" +
@@ -96,9 +98,9 @@ public class ProcessResults {
                 "colors: ['#4D4D4D', '#5DA5DA', '#FAA43A', '#60BD68', '#F17CB0', '#B2912F', '#B276B2', '#DECF3F', '#F15854'],\n" +
 
                 "    }\n" +
-                "\n" +
+                '\n' +
                 "  );\n" +
-                "\n" +
+                '\n' +
                 "  g.ready(function() {\n" +
                 "    g.setAnnotations([\n" +
                 "    ${annotations}\n" +
@@ -146,14 +148,14 @@ public class ProcessResults {
     }
 
     private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
-                                    List<VersionChange> changes, Map<String, String> seenRepositoryVersions) throws IOException {
+                                    Collection<VersionChange> changes, Map<String, String> seenRepositoryVersions) throws IOException {
         String maxDateStr = null;
 
         for(File file : files) {
             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
             for (String line : lines) {
-                JSONWriter.Holder holder = JSONWriter.mapper.readValue(line, JSONWriter.Holder.class);
+                Holder holder = JSONWriter.mapper.readValue(line, Holder.class);
                 SetMultimap<String, String> versions = holder.getVersions();
                 String date = holder.getDate();
 
@@ -186,13 +188,13 @@ public class ProcessResults {
         }
 
         public void writeCSV(StringBuilder sb) {
-            sb.append(date).append(",").append(repository).append(",").append(versionBefore).append(",").append(versionNow).append("\n");
+            sb.append(date).append(',').append(repository).append(',').append(versionBefore).append(',').append(versionNow).append('\n');
         }
     }
 
-    protected static void compareToPrevious(String date, SetMultimap<String, String> versions,
-                                            List<VersionChange> changes, Map<String, String> seenRepositoryVersions) {
-        for(Map.Entry<String,String> entry : versions.entries()) {
+    protected static void compareToPrevious(String date, Multimap<String, String> versions,
+                                            Collection<VersionChange> changes, Map<String, String> seenRepositoryVersions) {
+        for(Entry<String,String> entry : versions.entries()) {
             String version = entry.getKey();
             String repository = entry.getValue();
             String prevRepoVersion = seenRepositoryVersions.get(repository);
@@ -215,7 +217,7 @@ public class ProcessResults {
         }
     }
 
-    private static String populateTable(Table<String, String, Data> dateVersionTable, String maxDateStr, SetMultimap<String, String> versions, String date) {
+    private static String populateTable(Table<String, String, Data> dateVersionTable, String maxDateStr, Multimap<String, String> versions, String date) {
         System.out.println("Had " + versions.size() + " entries for " + date);
         for(String version : versions.keySet()) {
             // combine all the non-version things like build-script variables, ...
@@ -242,7 +244,7 @@ public class ProcessResults {
 
     private static File generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
         // use a tree-set to get the versions in correct order
-        Set<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
+        Collection<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
         versionsSorted.addAll(dateVersionTable.columnKeySet());
 
         Date date = START_DATE;
@@ -252,9 +254,9 @@ public class ProcessResults {
             Map<String, Data> row = dateVersionTable.row(dateStr);
 
             // Format: "    \"2008-05-07,75\\n\" +\n" +
-            data.append("\"").append(dateStr);
+            data.append('"').append(dateStr);
             for(String column : versionsSorted) {
-                data.append(",").append(formatValue(row.get(column) == null ? null : row.get(column).count));
+                data.append(',').append(formatValue(row.get(column) == null ? null : row.get(column).count));
             }
 
             data.append("\\n\" + \n");
@@ -305,8 +307,8 @@ public class ProcessResults {
          */
         StringBuilder pieData = new StringBuilder();
         pieData.append("label,count,link\n");
-        //noinspection Convert2streamapi
-        for(Map.Entry<String,Data> entry : versions.entrySet()) {
+
+        for(Entry<String,Data> entry : versions.entrySet()) {
             if(entry.getValue().count != 0) {
                 pieData.append(String.format("%s,%d,%s\n", entry.getKey(), entry.getValue().count, entry.getValue().link));
             }
@@ -328,10 +330,10 @@ public class ProcessResults {
     }
 
 
-    private static String getHeaderData(Collection<String> versions) {
+    private static String getHeaderData(Iterable<String> versions) {
         StringBuilder headers = new StringBuilder();
         for(String version : versions) {
-            headers.append(",").append(version);
+            headers.append(',').append(version);
         }
 
         return headers.toString();

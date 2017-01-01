@@ -3,6 +3,7 @@ package org.dstadler.github;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.io.FileUtils;
+import org.dstadler.github.JSONWriter.Holder;
 import org.junit.Test;
 
 import java.io.File;
@@ -48,15 +49,15 @@ public class JSONWriterTest {
                 List<String> lines = FileUtils.readLines(testFile, "UTF-8");
                 assertEquals(3, lines.size());
 
-                JSONWriter.Holder holder = JSONWriter.mapper.readValue(lines.get(0), JSONWriter.Holder.class);
+                Holder holder = JSONWriter.mapper.readValue(lines.get(0), Holder.class);
                 assertNotNull(holder.getDate());
                 assertEquals(0, holder.getVersions().size());
 
-                holder = JSONWriter.mapper.readValue(lines.get(1), JSONWriter.Holder.class);
+                holder = JSONWriter.mapper.readValue(lines.get(1), Holder.class);
                 assertNotNull(holder.getDate());
                 assertEquals(1, holder.getVersions().size());
 
-                holder = JSONWriter.mapper.readValue(lines.get(2), JSONWriter.Holder.class);
+                holder = JSONWriter.mapper.readValue(lines.get(2), Holder.class);
                 assertNotNull(holder.getDate());
                 assertEquals(1, holder.getVersions().size());
             } finally {
@@ -93,7 +94,7 @@ public class JSONWriterTest {
 
     @Test
     public void testGetVersions() throws IOException {
-        JSONWriter.Holder holder = JSONWriter.mapper.readValue(JSON, JSONWriter.Holder.class);
+        Holder holder = JSONWriter.mapper.readValue(JSON, Holder.class);
 
         SetMultimap<String, String> repos = holder.getVersions();
         assertEquals("Had: " + repos, 1, repos.keySet().size());
@@ -105,7 +106,7 @@ public class JSONWriterTest {
 
     @Test
     public void testGetRepositoryVersions() throws IOException {
-        JSONWriter.Holder holder = JSONWriter.mapper.readValue(JSON, JSONWriter.Holder.class);
+        Holder holder = JSONWriter.mapper.readValue(JSON, Holder.class);
 
         SetMultimap<String, String> repos = holder.getRepositoryVersions();
         assertEquals("Had: " + repos, 1, repos.keySet().size());
@@ -119,7 +120,7 @@ public class JSONWriterTest {
     public void getHighestVersions() throws Exception {
         Map<String, String> repoVersions = JSONWriter.getHighestVersions();
         assertNotNull(repoVersions);
-        assertTrue(repoVersions.size() > 0);
+        assertFalse(repoVersions.isEmpty());
 
         assertTrue(repoVersions.containsKey("centic9/poi-mail-merge"));
     }
