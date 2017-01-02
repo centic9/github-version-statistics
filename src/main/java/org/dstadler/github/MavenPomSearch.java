@@ -29,9 +29,9 @@ public class MavenPomSearch extends BaseSearch {
     // compile 'org.apache.poi:poi:3.13'
     private final static Pattern PATTERN_DEPENDENCY = Pattern.compile("<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>.*</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>");
 
-    private final static Pattern PATTERN_NO_VERSION = Pattern.compile("<dependency>" + NEWLINE +
-            "<groupId>org.apache.poi</groupId>" + NEWLINE +
-            "<artifactId>poi</artifactId>" + NEWLINE +
+    protected final static Pattern PATTERN_NO_VERSION = Pattern.compile("<dependency>" + NEWLINE +
+            "<groupId>org\\.apache\\.poi</groupId>" + NEWLINE +
+            "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE +
             "</dependency>");
 
     //private final static Pattern PATTERN_SHORT_VAR = Pattern.compile(QUOTE + GROUP_REGEX + ":[-a-z]+:" + QUOTE + "\\s*\\+\\s*" + VERSION);
@@ -65,31 +65,22 @@ public class MavenPomSearch extends BaseSearch {
         System.out.println("Had: " + list.getTotalCount() + " total results");
 
         // paginate through results, filtering out interesting files
-        for(GHContent match : list) {
-            final String htmlUrl = match.getHtmlUrl();
-            String repo = getNonForkRepository(github, htmlUrl);
-            if (repo == null) {
-                continue;
-            }
+        processResults(github, versions, list);
+    }
 
-            String str = readFileContent(match, htmlUrl, repo);
-            if (str == null) {
-                continue;
-            }
-
-            Matcher matcher = PATTERN_DEPENDENCY.matcher(str);
+    protected void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
+        Matcher matcher = PATTERN_DEPENDENCY.matcher(str);
+        if(matcher.find()) {
+            addVersion(versions, htmlUrl, str, matcher.group(1));
+        } else {
+            matcher = PATTERN_NO_VERSION.matcher(str);
             if(matcher.find()) {
-                addVersion(versions, htmlUrl, str, matcher.group(1));
+                versions.put("noVersion", htmlUrl);
+            /*matcher = PATTERN_SHORT_VAR.matcher(str);
+            if(matcher.find()) {
+                addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
             } else {
-                matcher = PATTERN_NO_VERSION.matcher(str);
-                if(matcher.find()) {
-                    versions.put("noVersion", htmlUrl);
-                /*matcher = PATTERN_SHORT_VAR.matcher(str);
-                if(matcher.find()) {
-                    addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
-                } else {
-                    System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + '\n');
-                }
+                System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + '\n');
             }
         }
     }

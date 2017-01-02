@@ -16,13 +16,12 @@ public class GradleBuildSearchTest {
 
     @Test
     public void testRegex() throws Exception {
-        Pattern excludeRegex = Pattern.compile(EXCLUDE_REGEX);
-        assertFalse(excludeRegex.matcher("").find());
-        assertFalse(excludeRegex.matcher("compile 'org.apache.poi:poi:3.16-beta1'").find());
+        assertFalse(EXCLUDE_PATTERN.matcher("").find());
+        assertFalse(EXCLUDE_PATTERN.matcher("compile 'org.apache.poi:poi:3.16-beta1'").find());
 
-        assertTrue(excludeRegex.matcher("group: 'org.apache.poi', name: 'openxml4j'").find());
-        assertTrue(excludeRegex.matcher("\"org.apache.poi:ooxml-schemas:1.4\"").find());
-        assertTrue(excludeRegex.matcher("compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'").find());
+        assertTrue(EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").find());
+        assertTrue(EXCLUDE_PATTERN.matcher("\"org.apache.poi:ooxml-schemas:1.4\"").find());
+        assertTrue(EXCLUDE_PATTERN.matcher("compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'").find());
 
         assertEquals("", EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").replaceAll(""));
     }

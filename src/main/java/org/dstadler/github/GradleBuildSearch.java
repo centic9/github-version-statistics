@@ -60,20 +60,7 @@ public class GradleBuildSearch extends BaseSearch {
         System.out.println("Had: " + list.getTotalCount() + " total results");
 
         // paginate through results, filtering out interesting files
-        for(GHContent match : list) {
-            final String htmlUrl = match.getHtmlUrl();
-            String repo = getNonForkRepository(github, htmlUrl);
-            if (repo == null) {
-                continue;
-            }
-
-            String str = readFileContent(match, htmlUrl, repo);
-            if (str == null) {
-                continue;
-            }
-
-            parseVersion(versions, htmlUrl, repo, str);
-        }
+        processResults(github, versions, list);
     }
 
     protected void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {

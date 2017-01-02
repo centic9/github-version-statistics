@@ -1,6 +1,7 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
@@ -26,6 +27,23 @@ public abstract class BaseSearch {
     // parse out the name of the repository from the URL returned by the GitHub search
     private final static Pattern REPO_NAME = Pattern.compile("https://github\\.com/([-a-zA-Z0-9_.]+/[-a-zA-Z0-9_.]+)/blob/.*");
 
+    protected void processResults(GitHub github, Multimap<String, String> versions, Iterable<GHContent> list) throws IOException {
+        for(GHContent match : list) {
+            final String htmlUrl = match.getHtmlUrl();
+            String repo = getNonForkRepository(github, htmlUrl);
+            if (repo == null) {
+                continue;
+            }
+
+            String str = readFileContent(match, htmlUrl, repo);
+            if (str == null) {
+                continue;
+            }
+
+            parseVersion(versions, htmlUrl, repo, str);
+        }
+    }
+
     protected String readFileContent(GHContent match, String htmlUrl, String repo) throws IOException {
         final InputStream stream;
         try {
@@ -50,6 +68,8 @@ public abstract class BaseSearch {
     }
 
     abstract String getExcludeRegex();
+
+    abstract void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str);
 
     protected String reducedContent(String str, String htmlUrl) {
         int pos = str.indexOf(GROUP);
