@@ -5,10 +5,12 @@ import org.junit.Test;
 import org.kohsuke.github.GitHub;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Date;
 
 import static org.dstadler.github.JSONWriter.DATE_FORMAT;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assume.assumeFalse;
 
 public class SearchTest {
     @Test
@@ -26,6 +28,12 @@ public class SearchTest {
             assertTrue(file.delete());
             assertTrue(dir.exists());
             assertTrue(dir.delete());
+        } catch (IOException e) {
+            // ignore test if we do not have .github credentials
+            assumeFalse(e.getMessage().contains("Failed to resolve credentials from ~/.github or the environment."));
+
+            // throw any other exception
+            throw e;
         } finally {
             JSONWriter.STATS_DIR = backupDir;
         }
