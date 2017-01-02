@@ -67,6 +67,8 @@ public abstract class BaseSearch {
         return str;
     }
 
+    abstract void search(GitHub github, Multimap<String, String> versions) throws IOException;
+
     abstract String getExcludeRegex();
 
     abstract void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str);

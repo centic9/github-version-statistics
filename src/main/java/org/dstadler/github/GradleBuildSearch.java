@@ -1,19 +1,14 @@
 package org.dstadler.github;
 
-import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.SetMultimap;
 import org.apache.commons.lang3.StringUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedSearchIterable;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 
 public class GradleBuildSearch extends BaseSearch {
     // compile 'org.apache.poi:poi:3.13'
@@ -34,20 +29,6 @@ public class GradleBuildSearch extends BaseSearch {
             "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j'|" +
             // compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'
             "group:\\s*'org.apache.poi',\\s*name:\\s*'ooxml-schemas')";
-
-    public static void main(String[] args) throws IOException {
-        GitHub github = connect();
-
-        SetMultimap<String,String> versions = HashMultimap.create();
-        new GradleBuildSearch().search(github, versions);
-
-        System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");
-        for(String version : versions.keySet()) {
-            System.out.println("Had: " + version + ' ' + versions.get(version).size() + " times");
-        }
-
-        JSONWriter.write(DATE_FORMAT.format(new Date()), versions);
-    }
 
     @Override
     final String getExcludeRegex() {

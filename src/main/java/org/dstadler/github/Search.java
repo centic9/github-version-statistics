@@ -14,12 +14,25 @@ import static org.dstadler.github.JSONWriter.DATE_FORMAT;
  */
 public class Search {
     public static void main(String[] args) throws IOException {
+        runSearch(
+
+                // search for build.gradle files
+                new GradleBuildSearch(),
+
+                // search for pom.xml files
+                new MavenPomSearch()
+
+        );
+    }
+
+    protected static void runSearch(BaseSearch... searches) throws IOException {
         GitHub github = BaseSearch.connect();
 
         // use a SetMultimap here to not record duplicates
         SetMultimap<String,String> versions = HashMultimap.create();
-        new GradleBuildSearch().search(github, versions);
-        new MavenPomSearch().search(github, versions);
+        for (BaseSearch search : searches) {
+            search.search(github, versions);
+        }
 
         System.out.println("Had " + versions.keySet().size() + " different versions for " + versions.size() + " projects");
         for(String version : versions.keySet()) {
