@@ -22,6 +22,7 @@ public class GradleBuildSearchTest {
 
         assertTrue(excludeRegex.matcher("group: 'org.apache.poi', name: 'openxml4j'").find());
         assertTrue(excludeRegex.matcher("\"org.apache.poi:ooxml-schemas:1.4\"").find());
+        assertTrue(excludeRegex.matcher("compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'").find());
 
         assertEquals("", EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").replaceAll(""));
     }

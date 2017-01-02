@@ -27,10 +27,13 @@ public class GradleBuildSearch extends BaseSearch {
     // poiVersion = '3.10-FINAL'
     private static final String VERSION_VAR_PATTERN = "\\s*=\\s*" + QUOTE + VERSION + QUOTE;
 
-    // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
+    // exclude some pattern that caused false versions to be reported,
+    // we currently simple remove these from the found file before looking for the version
     protected static final String EXCLUDE_REGEX = "(?:[\"']org\\.apache\\.poi:ooxml-schemas:1\\.\\d+['\"]|" +
             //  [group: 'org.apache.poi', name: 'openxml4j', version: '1.0-beta'],
-            "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j')";
+            "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j'|" +
+            // compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'
+            "group:\\s*'org.apache.poi',\\s*name:\\s*'ooxml-schemas')";
 
     public static void main(String[] args) throws IOException {
         GitHub github = connect();
