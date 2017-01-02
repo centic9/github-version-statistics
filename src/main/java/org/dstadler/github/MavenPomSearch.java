@@ -80,7 +80,7 @@ public class MavenPomSearch extends BaseSearch {
             if(matcher.find()) {
                 addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
             } else {
-                System.out.println("Did not find a version for repo " + repo + " in content: \n" + reducedContent(str, htmlUrl) + '\n');
+                System.out.println("Did not find a version for repo " + repo + " in file at " + htmlUrl + " with content: \n" + reducedContent(str, htmlUrl) + '\n');
             }
         }
     }
