@@ -129,7 +129,14 @@ public class JSONWriter {
         return seenRepositoryVersions;
     }
 
+    /**
+     * Populate the given map with the highest version ever found for a repository.
+     *
+     * @param seenRepositoryVersions A set of repositories and their versions as values
+     * @param repositoryVersions A multimap with version as key and the matching repositories as value
+     */
     protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, Multimap<String, String> repositoryVersions) {
+        // entry is <version, repository>
         for (Entry<String, String> entry : repositoryVersions.entries()) {
             String version = seenRepositoryVersions.get(entry.getValue());
             if(version == null || COMPARATOR.compare(version, entry.getKey()) < 0) {

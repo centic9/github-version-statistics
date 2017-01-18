@@ -20,8 +20,21 @@ title: Current version distribution of Apache POI on Github
     {% endfor %}
 </ul>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.7/d3.min.js"></script>
+<!-- taken from https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.7/d3.min.js -->
+<script src="d3.min.js"></script>
 <script>
+    function getParameterByName(name, url) {
+        if (!url) {
+            url = window.location.href;
+        }
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     (function(d3) {
         'use strict';
         var width = 1100;
@@ -53,7 +66,9 @@ title: Current version distribution of Apache POI on Github
                 .attr('class', 'count');
         tooltip.append('div')
                 .attr('class', 'percent');
-        d3.csv('resultsCurrent.csv', function(error, dataset) {
+        d3.csv(
+            getParameterByName('type') == 'all' ? 'resultsAll.csv' : 'resultsCurrent.csv',
+            function(error, dataset) {
             dataset.forEach(function(d) {
                 d.count = +d.count;
                 d.enabled = true;

@@ -1,7 +1,10 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.*;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Table;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
@@ -34,8 +37,9 @@ public class ProcessResults {
 
     private static final String TEMPLATE =
         "<html>\n" +
-        "<head>" +
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js\"></script>\n" +
+        "<head>\n" +
+                "<!-- taken from https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js -->\n" +
+                "<script src=\"dygraph-combined.js\"></script>\n" +
                 "<style>#graphdiv { position: absolute; left: 10px; right: 10px; top: 10px; bottom: 10px; }</style>\n" +
         "</head>\n" +
         "<body>" +
@@ -128,13 +132,16 @@ public class ProcessResults {
 
         File results = generateHtmlFiles(values, maxDateStr);
 
-        File pie = new File("docs", "resultsCurrent.csv");
-        writeCurrentResults(pie, values.row(maxDateStr));
+        File current = new File("docs", "resultsCurrent.csv");
+        writeCurrentResults(current, values.row(maxDateStr));
+
+        File all = new File("docs", "resultsAll.csv");
+        writeAllResults(all, values.row(maxDateStr), seenRepositoryVersions, readRepositories(files[files.length-1]));
 
         File changesFile = new File("docs/_data", "versionChanges.csv");
         writeVersionChanges(changesFile, changes);
 
-        System.out.println("Wrote results to " + results + " and " + pie);
+        System.out.println("Wrote results to " + results + ", " + current + " and " + all);
     }
 
     private static class Data {
@@ -145,6 +152,21 @@ public class ProcessResults {
             this.count = count;
             this.link = link;
         }
+    }
+
+    private static Collection<String> readRepositories(File file) throws IOException {
+        List<String> lines = FileUtils.readLines(file, "UTF-8");
+
+        Collection<String> map = new HashSet<>();
+        for (String line : lines) {
+            Holder holder = JSONWriter.mapper.readValue(line, Holder.class);
+            SetMultimap<String, String> repositoryVersions = holder.getRepositoryVersions();
+            for (Entry<String, String> entry : repositoryVersions.entries()) {
+                map.add(entry.getValue());
+            }
+        }
+
+        return map;
     }
 
     private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
@@ -221,10 +243,7 @@ public class ProcessResults {
         System.out.println("Had " + versions.size() + " entries for " + date);
         for(String version : versions.keySet()) {
             // combine all the non-version things like build-script variables, ...
-            String versionKey = version;
-            if(!VERSION_PATTERN.matcher(version).matches()) {
-                versionKey = "other";
-            }
+            String versionKey = getPrintableVersion(version);
 
             // add the count in the table, there can be multiple lines with the same date!
             Data value = dateVersionTable.get(date, versionKey);
@@ -240,6 +259,14 @@ public class ProcessResults {
             }
         }
         return maxDateStr;
+    }
+
+    private static String getPrintableVersion(String version) {
+        String versionKey = version;
+        if(!VERSION_PATTERN.matcher(version).matches()) {
+            versionKey = "other";
+        }
+        return versionKey;
     }
 
     private static File generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
@@ -297,7 +324,7 @@ public class ProcessResults {
         return html.replace("${footer}", "<br/><br/>Created at " + new Date());
     }
 
-    private static void writeCurrentResults(File pie, Map<String, Data> row) throws IOException {
+    private static void writeCurrentResults(File file, Map<String, Data> row) throws IOException {
         Map<String,Data> versions = new TreeMap<>(Collections.reverseOrder(new VersionComparator()));
         versions.putAll(row);
 
@@ -314,7 +341,42 @@ public class ProcessResults {
             }
         }
 
-        FileUtils.writeStringToFile(pie, pieData.toString(), "UTF-8");
+        FileUtils.writeStringToFile(file, pieData.toString(), "UTF-8");
+
+        System.out.println("Writing " + versions.size() + " versions" +
+                " and " + countRepositories(versions) + " repositories.");
+    }
+
+    private static void writeAllResults(File all, Map<String, Data> row,
+                                        Map<String, String> seenRepositoryVersions,
+                                        Collection<String> repositories) throws IOException {
+        // use the current found versions
+        Map<String, Data> versions = new HashMap<>(row);
+
+        // add all previously found repositories that we do not have in the list yet
+        int count = 0;
+        for(Entry<String,String> entry : seenRepositoryVersions.entrySet()) {
+            String repository = entry.getKey();
+            // only count repositories that we did not found today
+            if(!repositories.contains(repository)) {
+                String version = getPrintableVersion(entry.getValue());
+                if (versions.containsKey(version)) {
+                    versions.get(version).count++;
+                } else {
+                    versions.put(version, new Data(1, repository));
+                }
+                count++;
+            }
+        }
+
+        System.out.println("Added " + count + " versions to 'all' from repositories that were seen previously.");
+
+        // use the existing method to actually write the data out
+        writeCurrentResults(all, versions);
+    }
+
+    private static int countRepositories(Map<String, Data> versions) {
+        return versions.values().stream().mapToInt(value -> value.count).sum();
     }
 
     private static void writeVersionChanges(File changesFile, List<VersionChange> changes) throws IOException {
