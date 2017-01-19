@@ -40,6 +40,7 @@ public class MavenPomSearch extends BaseSearch {
         return EXCLUDE_REGEX;
     }
 
+    @Override
     protected void search(GitHub github, Multimap<String, String> versions) throws IOException {
         // start search
         final PagedSearchIterable<GHContent> list = github.searchContent().filename("pom.xml").in("file").language("maven").q(GROUP_REGEX).list();
@@ -49,6 +50,7 @@ public class MavenPomSearch extends BaseSearch {
         processResults(github, versions, list);
     }
 
+    @Override
     protected void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
         Matcher matcher = PATTERN_DEPENDENCY.matcher(str);
         if(matcher.find()) {

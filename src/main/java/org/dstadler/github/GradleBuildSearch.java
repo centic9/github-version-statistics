@@ -35,6 +35,7 @@ public class GradleBuildSearch extends BaseSearch {
         return EXCLUDE_REGEX;
     }
 
+    @Override
     protected void search(GitHub github, Multimap<String, String> versions) throws IOException {
         // start search
         final PagedSearchIterable<GHContent> list = github.searchContent().filename("build.gradle").in("file").language("gradle").q(GROUP_REGEX).list();
@@ -44,6 +45,7 @@ public class GradleBuildSearch extends BaseSearch {
         processResults(github, versions, list);
     }
 
+    @Override
     protected void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
         Matcher matcher = PATTERN_SHORT.matcher(str);
         if(matcher.find()) {
