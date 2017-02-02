@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-02-03,Khaleesy/StudentTool,<new>,3.9
+2017-02-03,octomonoli1/tfg-us-2017,<new>,3.14
+2017-02-03,Navakanthtunga/Voonik-sample-framework,<new>,3.14
+2017-02-03,bcdev/sst-cci-toolbox,<new>,3.15
+2017-02-03,manishchaks/ApachePoITest,<new>,3.15
+2017-02-03,kimdongwon/ExcelReport,<new>,3.15
 2017-02-02,technokratos/GenerateAbacus,<new>,3.7
 2017-02-02,zhangyuxs/Ais_Settlement,<new>,+
 2017-02-02,gabe00122/matchatronic,<new>,$apachePoiVersion
