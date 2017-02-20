@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2017-02-21,rromank/plug,<new>,3.9
+2017-02-21,mishin/readXlsxInJava,<new>,3.8
+2017-02-21,bbossgroups/bboss-pdp,<new>,3.10
+2017-02-21,atiliov/goBqaFmwk,<new>,3.13
+2017-02-21,geocollections/geokogud,<new>,3.14
+2017-02-21,alxndrtarasov/SocNet,<new>,3.15
+2017-02-21,Onlymaker/leo,<new>,3.15
+2017-02-21,visallo/visallo,<new>,${apache.poi.version}
+2017-02-21,artemrudenko/testng-junit-35,<new>,3.16-beta2
 2017-02-20,rnsahu2008/GO-Jek,<new>,3.9
 2017-02-20,enp/ElasticViewApp,<new>,3.+
 2017-02-20,jackyheh/mybatis,<new>,3.10
