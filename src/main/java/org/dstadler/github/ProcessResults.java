@@ -1,10 +1,7 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Table;
+import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
@@ -124,13 +121,19 @@ public class ProcessResults {
         Arrays.sort(files);
 
         Table<String,String,Data> values = HashBasedTable.create();
+        Table<String,String,Data> valuesAccumulative = HashBasedTable.create();
         List<VersionChange> changes = new ArrayList<>();
+
         // repo as key, highest seen version as value
         Map<String, String> seenRepositoryVersions = new HashMap<>();
 
-        String maxDateStr = readLines(files, values, changes, seenRepositoryVersions);
+        String maxDateStr = readLines(files, values, valuesAccumulative, changes, seenRepositoryVersions);
 
-        File results = generateHtmlFiles(values, maxDateStr);
+        File results = new File("docs", "results.html");
+        generateHtmlFiles(values, maxDateStr, results);
+
+        File resultsAll = new File("docs", "resultsAll.html");
+        generateHtmlFiles(valuesAccumulative, maxDateStr, resultsAll);
 
         File current = new File("docs", "resultsCurrent.csv");
         writeCurrentResults(current, values.row(maxDateStr));
@@ -170,11 +173,12 @@ public class ProcessResults {
     }
 
     private static String readLines(File[] files, Table<String, String, Data> dateVersionTable,
-                                    Collection<VersionChange> changes, Map<String, String> seenRepositoryVersions) throws IOException {
+                                    Table<String, String, Data> valuesAccumulative, Collection<VersionChange> changes,
+                                    Map<String, String> seenRepositoryVersions) throws IOException {
         String maxDateStr = null;
 
         for(File file : files) {
-            List<String> lines = FileUtils.readLines(file, "UTF-8");
+             List<String> lines = FileUtils.readLines(file, "UTF-8");
 
             for (String line : lines) {
                 Holder holder = JSONWriter.mapper.readValue(line, Holder.class);
@@ -188,7 +192,18 @@ public class ProcessResults {
 
                 // now update the map of highest version per Repository for the next date
                 JSONWriter.addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
+
+                // add the current values for
+                for(Entry<String,String> entry : seenRepositoryVersions.entrySet()) {
+                    Data data = valuesAccumulative.get(date, entry.getValue());
+                    if(data == null) {
+                        valuesAccumulative.put(date, entry.getValue(), new Data(1, entry.getKey()));
+                    } else {
+                        data.count++;
+                    }
+                }
             }
+
         }
 
         Preconditions.checkNotNull(maxDateStr, "Should have a max date now!");
@@ -269,7 +284,7 @@ public class ProcessResults {
         return versionKey;
     }
 
-    private static File generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr) throws ParseException, IOException {
+    private static void generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr, File results) throws ParseException, IOException {
         // use a tree-set to get the versions in correct order
         Collection<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
         versionsSorted.addAll(dateVersionTable.columnKeySet());
@@ -314,10 +329,7 @@ public class ProcessResults {
         html = html.replace("${annotations}", annotations);
         html = addFooter(html);
 
-        File results = new File("docs", "results.html");
         FileUtils.writeStringToFile(results, html, "UTF-8");
-
-        return results;
     }
 
     private static String addFooter(String html) {
