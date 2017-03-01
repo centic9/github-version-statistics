@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-03-02,biqasoft/exporter-excel-microservice,<new>,3.12
+2017-03-02,vladimir-lugin/mmDataToMmPlatform,<new>,3.14
+2017-03-02,TestLeafPages/SEL_FEB17_STEVE_JOBS,<new>,3.15
+2017-03-02,zhaoyang0501/xwgl,<new>,3.15
+2017-03-02,lijingen/cglib-test,<new>,3.15-beta2
+2017-03-02,danghongdang/work_in_weizhu,<new>,${poi.version}
 2017-03-01,sullylei/j2se_research,<new>,3.9
 2017-03-01,monde16/poi-demo,<new>,3.9
 2017-03-01,leixin131/Surey,<new>,3.9
