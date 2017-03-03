@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-03-04,didinj/Grails3ExcelImport,<new>,3.9
+2017-03-04,YueYeShen/DocAndDocxContentReader,<new>,3.9
+2017-03-04,Alanluochong/Java,<new>,3.8
+2017-03-04,kasunsk/XLTableReadJava,<new>,3.10
+2017-03-04,wangxiao-xiw/framework,<new>,3.10
+2017-03-04,allenyuzhenlong/update-server,<new>,3.11
 2017-03-03,troytung/mrp,<new>,3.10.1
 2017-03-03,ZackZhou/Automation,<new>,3.9
 2017-03-03,AziCat/JavaLittleUtils,<new>,3.9
