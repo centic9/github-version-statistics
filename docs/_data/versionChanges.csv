@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-03-08,deif2005/2017project,<new>,3.12
+2017-03-08,sormgabriel/veggie-word,<new>,3.13
+2017-03-08,SaiRajeshT/cosmic-cubes,<new>,3.15
+2017-03-08,elveny/elven-boot,<new>,${poiVersion}
+2017-03-08,mingjingtang/Selenium,<new>,3.16-beta2
+2017-03-08,mdomasevicius/item-list,<new>,3.16-beta2
 2017-03-07,monkeyshell/seller,<new>,3.9
 2017-03-07,shizhouyong/DivisionSystem,<new>,3.13
 2017-03-07,hhaixing/turing,<new>,3.15
