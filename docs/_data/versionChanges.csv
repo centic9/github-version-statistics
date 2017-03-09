@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-03-10,ghycn/lucene,<new>,3.7
+2017-03-10,Justlie/Orion,<new>,3.12
+2017-03-10,bran4he/JsonDiff,<new>,3.14
+2017-03-10,thebigsun/Demo2,<new>,3.15
+2017-03-10,zhaoyang0501/lygs,<new>,3.15
+2017-03-10,brendanbenson/SpringExcelWorkbookExample,<new>,3.15
 2017-03-09,stdlzp/spring-boot-test,<new>,3.15
 2017-03-09,jilion107/WebSpringBoilerplate,<new>,3.15
 2017-03-09,centic9/poi-on-android,3.16-beta1,3.16-beta2
