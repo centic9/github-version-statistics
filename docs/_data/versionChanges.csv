@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-03-31,yoara/biz-framework,<new>,${poi_ooxml_version}
+2017-03-31,confluxtoo/BankReconciliationTool,<new>,3.9
+2017-03-31,Sunshineuun/minnie,<new>,3.9
+2017-03-31,CisaChen/MyTestRep,<new>,3.9
+2017-03-31,danilkuznetsov/export-google-spreadsheets-commnets,<new>,3.15
+2017-03-31,docampog30/Yunus,<new>,3.15
+2017-03-31,YinXuCun/Demo,<new>,3.16-beta2
 2017-03-30,Wandering/zgk_pay,<new>,3.9
 2017-03-30,atumu/scripts,<new>,3.9
 2017-03-30,Wandering/zgk_system,<new>,3.9
