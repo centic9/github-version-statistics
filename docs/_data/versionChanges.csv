@@ -1,4 +1,15 @@
 date,repository,versionBefore,versionNow
+2017-04-01,prateekch/SpringEvents,<new>,3.9
+2017-04-01,okaywang/JavaExpress,<new>,3.9
+2017-04-01,Nidhi0257/SpringEvent-JDBC,<new>,3.9
+2017-04-01,gliderabhi/BudgetManagement,<new>,3.9
+2017-04-01,zerohyuan/J2SEStudy,<new>,3.9
+2017-04-01,sharko809/lab1-netcracker-sorting-reflection,<new>,3.10
+2017-04-01,HelloWorldIamJackie/company-cooperation-web-app,<new>,3.12
+2017-04-01,khoibv/POI,<new>,3.14
+2017-04-01,pmanikandan11/Appium_cucumber,<new>,3.15
+2017-04-01,KrisCheng/GraduationDesign,<new>,3.15
+2017-04-01,jmbriano/timesheets-poc,<new>,3.15
 2017-03-31,yoara/biz-framework,<new>,${poi_ooxml_version}
 2017-03-31,confluxtoo/BankReconciliationTool,<new>,3.9
 2017-03-31,Sunshineuun/minnie,<new>,3.9
