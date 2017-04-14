@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2017-04-15,OSEHRA-Sandbox/eHMP,<new>,$versions.poi
+2017-04-15,wubins/SCF,<new>,3.12
+2017-04-15,ButterflyKiller/data_manager,<new>,3.15
 2017-04-14,peterguo3019/java,<new>,3.9
 2017-04-14,doublecancel/simple_protice,<new>,$poiVersion
 2017-04-14,Qwamot/msufilter,<new>,3.14
