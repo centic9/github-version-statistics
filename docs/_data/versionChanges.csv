@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2017-04-16,acuteMouse/utils,<new>,3.15
+2017-04-16,semyonova/java_test,<new>,3.15
 2017-04-15,OSEHRA-Sandbox/eHMP,<new>,$versions.poi
 2017-04-15,wubins/SCF,<new>,3.12
 2017-04-15,ButterflyKiller/data_manager,<new>,3.15
