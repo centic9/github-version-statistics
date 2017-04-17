@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2017-04-18,heyanjing/Maven-Projects,<new>,noVersion
+2017-04-18,xindawang/dataImport,<new>,3.5-beta6
+2017-04-18,haydenflinner/spreadsheet-mapping-tool,<new>,3.9
+2017-04-18,PolomskiBartlomiej/SeleniumPractical,<new>,3.9
+2017-04-18,dtanner/camplotto,<new>,3.13
+2017-04-18,saddam0509/NewToursFullAutomation,<new>,3.15
+2017-04-18,li-yu/SQLiteToExcel,<new>,3.15
+2017-04-18,Lab409-SSE-Tongji/WebGIS-BackEnd,<new>,3.15
+2017-04-18,palych-piter/Excel2DB,<new>,3.15
+2017-04-18,centic9/poi-mail-merge,3.16-beta1,3.16-beta2
 2017-04-17,joker1618/WholeManager,<new>,noVersion
 2017-04-17,dev4btw/tax-backend,<new>,$poiVersion
 2017-04-17,realsnake1975/SpringBootSampleServer,<new>,3.14
