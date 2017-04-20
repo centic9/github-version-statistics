@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-04-21,robsonflorentino/mockup-spring-boot,<new>,noVersion
+2017-04-21,bennyGG/autoPOI,<new>,3.9
+2017-04-21,doublecancel/simple_test,<new>,$poiVersion
+2017-04-21,macedo-ca/util1,<new>,3.15
+2017-04-21,jclecak/seltest,<new>,3.15
+2017-04-21,woodylic/oxlrm,<new>,3.15
+2017-04-21,aspic2/DFP-CreativeShare,<new>,3.16-beta2
 2017-04-20,moqui/moqui-kie,3.15,3.16
 2017-04-20,mixhttp/microservice-office,<new>,3.9
 2017-04-20,yacy/yacy_grid_parser,<new>,3.+
