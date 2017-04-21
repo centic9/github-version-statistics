@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2017-04-22,rightm/hbaseETL,<new>,3.9
+2017-04-22,Sriman-Java-Gyan-Mantra/Parse-Excel-XML-ViceVersa,<new>,3.13
+2017-04-22,wang7liang/shavuot,<new>,3.14
 2017-04-21,robsonflorentino/mockup-spring-boot,<new>,noVersion
 2017-04-21,bennyGG/autoPOI,<new>,3.9
 2017-04-21,doublecancel/simple_test,<new>,$poiVersion
