@@ -15,13 +15,11 @@ import static org.dstadler.github.JSONWriter.DATE_FORMAT;
 public class Search {
     public static void main(String[] args) throws IOException {
         runSearch(
-
                 // search for build.gradle files
                 new GradleBuildSearch(),
 
                 // search for pom.xml files
                 new MavenPomSearch()
-
         );
     }
 

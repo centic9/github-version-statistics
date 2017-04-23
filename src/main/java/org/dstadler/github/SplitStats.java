@@ -11,6 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+/**
+ * Tool used to split existing stats by date. This was used
+ * when migrating from one large file to one-file-per-day.
+ */
 public class SplitStats {
     public static void main(String[] args) throws IOException {
         List<String> lines = FileUtils.readLines(new File("stats.json"), "UTF-8");
