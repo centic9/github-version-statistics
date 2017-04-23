@@ -22,9 +22,17 @@ public class MavenPomSearch extends BaseSearch {
     private final static String NEWLINE = "[\\n\\r\\s]*";
 
     // compile 'org.apache.poi:poi:3.13'
-    private final static Pattern PATTERN_DEPENDENCY = Pattern.compile("<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>.*</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>");
+    private final static Pattern PATTERN_DEPENDENCY = Pattern.compile(
+            "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE +
+            "<artifactId>.*</artifactId>" + NEWLINE +
+            "<version>" + VERSION + "</version>");
+    private final static Pattern PATTERN_DEPENDENCY_2 = Pattern.compile(
+            "<artifactId>.*</artifactId>" + NEWLINE +
+            "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE +
+            "<version>" + VERSION + "</version>");
 
-    protected final static Pattern PATTERN_NO_VERSION = Pattern.compile("<dependency>" + NEWLINE +
+    protected final static Pattern PATTERN_NO_VERSION = Pattern.compile(
+            "<dependency>" + NEWLINE +
             "<groupId>org\\.apache\\.poi</groupId>" + NEWLINE +
             "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE +
             "</dependency>");
@@ -56,14 +64,20 @@ public class MavenPomSearch extends BaseSearch {
         if(matcher.find()) {
             addVersion(versions, htmlUrl, str, matcher.group(1));
         } else {
-            matcher = PATTERN_NO_VERSION.matcher(str);
+            matcher = PATTERN_DEPENDENCY_2.matcher(str);
             if(matcher.find()) {
-                versions.put("noVersion", htmlUrl);
-            /*matcher = PATTERN_SHORT_VAR.matcher(str);
-            if(matcher.find()) {
-                addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
+                addVersion(versions, htmlUrl, str, matcher.group(1));
             } else {
-                System.out.println("Did not find a version for repo " + repo + " in file at " + htmlUrl + " with content: \n" + reducedContent(str, htmlUrl) + '\n');
+                matcher = PATTERN_NO_VERSION.matcher(str);
+                if (matcher.find()) {
+                    versions.put("noVersion", htmlUrl);
+                    /*matcher = PATTERN_SHORT_VAR.matcher(str);
+                    if(matcher.find()) {
+                        addVersion(versions, htmlUrl, repo, str, matcher.group(1));*/
+                } else if (!str.contains("'com.springsource.org.apache.poi'") &&
+                        !str.contains("org.apache.poi.xwpf.converter")) {
+                    System.out.println("Did not find a version for repo " + repo + " in file at " + htmlUrl + " with content: \n" + reducedContent(str, htmlUrl) + '\n');
+                }
             }
         }
     }
