@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-04-26,kedargaekwad/testapiframework,<new>,3.16
+2017-04-26,kimtaesu/StockScheduler,<new>,3.16
+2017-04-26,mpark4656/Reconcile,<new>,3.9
+2017-04-26,qq605905613/excle,<new>,3.8
+2017-04-26,sanketkp/GCP-Cumulus,<new>,3.13
+2017-04-26,sanketkp/Cumulus-GCP,<new>,3.13
+2017-04-26,yangkejun/domino,<new>,3.14
 2017-04-25,fercarcedo/AlgMeter,<new>,3.16
 2017-04-25,IgnacioEsparza/Escuela,<new>,3.16
 2017-04-25,imprezka88/pipeline-kickoff,<new>,3.9
