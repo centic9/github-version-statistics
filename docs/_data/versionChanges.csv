@@ -1,4 +1,15 @@
 date,repository,versionBefore,versionNow
+2017-04-27,camiloahm/spring,<new>,noVersion
+2017-04-27,schoolofnetcom/apache-poi-java,<new>,3.16
+2017-04-27,ZuInnoTe/hadoopoffice,3.15,3.16
+2017-04-27,w1992wishes/redis-starter,<new>,3.9
+2017-04-27,jimcke/bhd-aut-server,<new>,3.9
+2017-04-27,MrLW/poi-sample,<new>,3.9
+2017-04-27,rockjjp2/DowLoyalty,<new>,3.9
+2017-04-27,sultan-mirza/wordcloud,<new>,3.9
+2017-04-27,oldIceBar/graduation,<new>,3.8
+2017-04-27,NilamP3006/AutomationADS,<new>,3.6
+2017-04-27,pnvsvivek/Automation,<new>,3.16-beta1
 2017-04-26,kedargaekwad/testapiframework,<new>,3.16
 2017-04-26,kimtaesu/StockScheduler,<new>,3.16
 2017-04-26,mpark4656/Reconcile,<new>,3.9
