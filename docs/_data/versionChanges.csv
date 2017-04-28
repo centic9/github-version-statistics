@@ -2237,6 +2237,7 @@ date,repository,versionBefore,versionNow
 2016-09-30,cittasila/demoAPI,<new>,${poi_version}
 2016-09-30,bhagavathin/Restassured_Gradle,<new>,3.8-beta4
 2016-09-30,andresteingress/gsheets,<new>,3.8-beta5
+2016-09-30,Hubbitus/GExcelBuilder,<new>,3.8-beta5
 2016-09-30,metridoc-archives/metridoc-job-core,<new>,3.8-beta3
 2016-09-30,metridoc/metridoc-job,<new>,3.8-beta3
 2016-09-30,ashishdd/ERegister,<new>,3.8-beta3
@@ -2272,7 +2273,6 @@ date,repository,versionBefore,versionNow
 2016-09-30,fuhoujun/e,<new>,${poiExcelantVersion}
 2016-09-30,hatimiti/doxls,<new>,POI_VERSION
 2016-09-30,pkaq/FrankDemo,<new>,3.10+
-2016-09-30,Hubbitus/GExcelBuilder,<new>,[3.8-beta5
 2016-09-30,jenoosia/progenitor-java,<new>,3.5-beta3
 2016-09-30,ashique7777/photo-pcc,<new>,3.5-beta3
 2016-09-30,KRMAssociatesInc/eHMP,<new>,$versions.poi
