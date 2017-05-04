@@ -278,7 +278,8 @@ public class ProcessResults {
 
     private static String getPrintableVersion(String version) {
         String versionKey = version;
-        if(!VERSION_PATTERN.matcher(version).matches()) {
+        // put everything that we cannot parse and some versions where we historically used the ooxml-schema version into "other"
+        if(!VERSION_PATTERN.matcher(version).matches() || "1.0".equals(version) || "1.1".equals(version) || "1.3".equals(version)) {
             versionKey = "other";
         }
         return versionKey;
