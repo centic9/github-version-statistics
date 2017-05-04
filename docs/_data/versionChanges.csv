@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-05-05,qatesting30/HPA,<new>,3.16
+2017-05-05,xzel23/meja,3.15,3.16
+2017-05-05,kunalselenium/Kunal,<new>,3.7
+2017-05-05,ChoudhuryIqbal/HybridFramework,<new>,3.10
+2017-05-05,Sriman-Java-Gyan-Mantra/create-folder-from-excel-path,<new>,3.13
+2017-05-05,Sriman-Java-Gyan-Mantra/create-file-from-excel-path,<new>,3.13
 2017-05-04,qatesting30/SeleniumPractice,<new>,3.16
 2017-05-04,Seunguk-Kim/ExcelModify,<new>,3.16
 2017-05-04,ponyataeva/test-generator-podem,<new>,3.12
