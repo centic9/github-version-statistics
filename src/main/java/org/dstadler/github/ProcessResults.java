@@ -193,11 +193,13 @@ public class ProcessResults {
                 // now update the map of highest version per Repository for the next date
                 JSONWriter.addHigherVersions(seenRepositoryVersions, holder.getRepositoryVersions());
 
-                // add the current values for
+                // add the current values to the combined table
                 for(Entry<String,String> entry : seenRepositoryVersions.entrySet()) {
-                    Data data = valuesAccumulative.get(date, entry.getValue());
+                    // combine the unparsable versions into "other"
+                    final String version = getPrintableVersion(entry.getValue());
+                    Data data = valuesAccumulative.get(date, version);
                     if(data == null) {
-                        valuesAccumulative.put(date, entry.getValue(), new Data(1, entry.getKey()));
+                        valuesAccumulative.put(date, version, new Data(1, entry.getKey()));
                     } else {
                         data.count++;
                     }
