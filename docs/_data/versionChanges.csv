@@ -1,4 +1,15 @@
 date,repository,versionBefore,versionNow
+2017-05-06,vitormarcal/CalculaBancoDeHoras,<new>,3.16
+2017-05-06,delayrejerrol/Portfolio,<new>,3.16
+2017-05-06,striderarun/events-management,<new>,3.9
+2017-05-06,woodmawa/GroovyOffice,<new>,3.8
+2017-05-06,ss-zz/boms-manager,<new>,3.7
+2017-05-06,simbataisa/cci,<new>,rootProject.lib_version.poi
+2017-05-06,hanzhejason/EventSchedulingQueue,<new>,3.12
+2017-05-06,jozdoo/leetcode,<new>,3.12
+2017-05-06,hanzhejason/JAVA-Excel,<new>,3.12
+2017-05-06,lapots/pptx-dsl,<new>,$apachePoiVersion
+2017-05-06,YinXuCun/Appservice,<new>,3.16-beta2
 2017-05-05,qatesting30/HPA,<new>,3.16
 2017-05-05,xzel23/meja,3.15,3.16
 2017-05-05,kunalselenium/Kunal,<new>,3.7
