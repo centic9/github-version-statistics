@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-05-19,webinglin/excel-import,<new>,3.16
+2017-05-19,TeslaGov/parsley,3.14,POI_VERSION
+2017-05-19,w1992wishes/redis-start,<new>,3.9
+2017-05-19,HugoGlz/apache-camel,<new>,3.1
+2017-05-19,lengshiyang/ccm,<new>,3.14
+2017-05-19,Elitsohwws/Graduation-Project,<new>,3.15
+2017-05-19,NHSRC/facilities-assessment-server,<new>,3.16-beta2
 2017-05-18,wffff/mytest,<new>,3+
 2017-05-18,ywc2016/stock,<new>,3.13
 2017-05-18,zmasao/JavaSamples,<new>,3.15
