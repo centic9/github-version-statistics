@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2017-05-20,choutman/allinn-koos,<new>,3.16
+2017-05-20,weibin268/zhuang-poi,<new>,3.16
 2017-05-19,webinglin/excel-import,<new>,3.16
 2017-05-19,TeslaGov/parsley,3.14,POI_VERSION
 2017-05-19,w1992wishes/redis-start,<new>,3.9
