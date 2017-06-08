@@ -130,10 +130,12 @@ public class ProcessResults {
         String maxDateStr = readLines(files, values, valuesAccumulative, changes, seenRepositoryVersions);
 
         File results = new File("docs", "results.html");
-        generateHtmlFiles(values, maxDateStr, results);
+        File resultsPercentage = new File("docs", "resultsPercentage.html");
+        generateHtmlFiles(values, maxDateStr, results, resultsPercentage);
 
         File resultsAll = new File("docs", "resultsAll.html");
-        generateHtmlFiles(valuesAccumulative, maxDateStr, resultsAll);
+        File resultsAllPercentage = new File("docs", "resultsAllPercentage.html");
+        generateHtmlFiles(valuesAccumulative, maxDateStr, resultsAll, resultsAllPercentage);
 
         File current = new File("docs", "resultsCurrent.csv");
         writeCurrentResults(current, values.row(maxDateStr));
@@ -287,31 +289,47 @@ public class ProcessResults {
         return versionKey;
     }
 
-    private static void generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr, File results) throws ParseException, IOException {
+    private static void generateHtmlFiles(Table<String, String, Data> dateVersionTable, String maxDateStr, File results, File percentageResults) throws ParseException, IOException {
         // use a tree-set to get the versions in correct order
         Collection<String> versionsSorted = new TreeSet<>(Collections.reverseOrder(new VersionComparator()));
         versionsSorted.addAll(dateVersionTable.columnKeySet());
 
         Date date = START_DATE;
         StringBuilder data = new StringBuilder();
+        StringBuilder dataPercentage = new StringBuilder();
         while(date.compareTo(DATE_FORMAT.parse(maxDateStr)) <= 0) {
             String dateStr = DATE_FORMAT.format(date);
             Map<String, Data> row = dateVersionTable.row(dateStr);
 
+            int count = 0;
+            for(String column : versionsSorted) {
+                count += row.get(column) == null ? 0 : row.get(column).count;
+            }
+
             // Format: "    \"2008-05-07,75\\n\" +\n" +
             data.append('"').append(dateStr);
+            dataPercentage.append('"').append(dateStr);
             for(String column : versionsSorted) {
-                data.append(',').append(formatValue(row.get(column) == null ? null : row.get(column).count));
+                final Data value = row.get(column);
+                data.append(',').append(formatValue(value == null ? null : value.count));
+                dataPercentage.append(',').append(formatValue(value == null ? null : (double)(value.count)/count*100));
             }
 
             data.append("\\n\" + \n");
+            dataPercentage.append("\\n\" + \n");
 
             date = DateUtils.addDays(date, 1);
         }
 
         // remove last trailing "+"
         data.setLength(data.length() - 3);
+        dataPercentage.setLength(dataPercentage.length() - 3);
 
+        writeResultsToTemplate(dateVersionTable, maxDateStr, results, versionsSorted, data);
+        writeResultsToTemplate(dateVersionTable, maxDateStr, percentageResults, versionsSorted, dataPercentage);
+    }
+
+    private static void writeResultsToTemplate(Table<String, String, Data> dateVersionTable, String maxDateStr, File results, Collection<String> versionsSorted, StringBuilder data) throws IOException {
         String html = TEMPLATE.replace("${data}", data);
         html = html.replace("${dataheader}", "Date" + getHeaderData(versionsSorted));
         html = html.replace("${benchmark}", "Apache POI");
@@ -416,7 +434,11 @@ public class ProcessResults {
         return headers.toString();
     }
 
-    private static String formatValue(Integer value) {
-        return value == null ? "" : "" + value;
+    private static String formatValue(Number value) {
+        return value == null ? "" :
+                (value instanceof Double ?
+                        // round double to two decimal places
+                        Double.toString((double)Math.round(100*value.doubleValue())/100) :
+                        Integer.toString((Integer)value));
     }
 }
