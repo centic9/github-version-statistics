@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2017-06-09,masterselenium/CucumberTraining,<new>,LATEST
+2017-06-09,scottsun1986/emailjob,<new>,3.14
+2017-06-09,AndyQu/jiangrui-data,<new>,3.15
+2017-06-09,KinetixTrading/ice-clearing-tool,<new>,${poiVersion}
 2017-06-08,johnealcawaling/Training.Automation,<new>,3.16
 2017-06-08,ak243871/Gsescan,<new>,3.16
 2017-06-08,NikolayAbysov/SimpleProject,<new>,3.9
