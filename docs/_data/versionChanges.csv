@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-06-17,Paulukr/XLImporter,<new>,3.16
+2017-06-17,sanzhar73ismailov/oncoregistry,<new>,3.16
+2017-06-17,basstone40/DataImportTool3,<new>,3.9
+2017-06-17,Cherkesov/tpl-reg-helper,<new>,3.12
+2017-06-17,javasrd/github,<new>,3.15
+2017-06-17,jihang110/scfyd,<new>,3.15
+2017-06-17,Acacia1986/UI-framework,<new>,3.15
 2017-06-16,simonbahuchet/excel-poi-xssf-reader,<new>,${apachepoi_version}
 2017-06-16,cd871127/CarbonMiao,<new>,3.16
 2017-06-16,zkRou/webmagic-test,<new>,3.16
