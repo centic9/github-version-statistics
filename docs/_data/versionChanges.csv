@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2017-07-01,centic9/poi-on-android,3.16,3.17-beta1
+2017-07-01,racheliurui/javautil,<new>,3.16
+2017-07-01,VarunBarad/dptk-contacts-uploader,<new>,3.16
+2017-07-01,ak243871/GSE_CA,<new>,3.16
+2017-07-01,lavanya-Manikdandan/Virtuagym-live,<new>,3.16
+2017-07-01,xinaml/origin,<new>,$poi_version
+2017-07-01,luislorenzom/lubel,<new>,3.5
+2017-07-01,SaNo345/FirstRep,<new>,3.12
+2017-07-01,GrupoDIIA/DataFaker,<new>,3.15
 2017-06-29,BanyaKrylov/Selenium,<new>,3.17-beta1
 2017-06-29,centic9/poi-mail-merge,3.16-beta2,3.17-beta1
 2017-06-29,KING1301/homeworkpush,<new>,3.16
