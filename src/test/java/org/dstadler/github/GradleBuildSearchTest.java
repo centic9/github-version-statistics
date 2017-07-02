@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.util.regex.Pattern;
 
+import static org.dstadler.github.BaseSearch.GROUP;
 import static org.dstadler.github.GradleBuildSearch.EXCLUDE_REGEX;
 import static org.junit.Assert.*;
 
@@ -71,14 +72,14 @@ public class GradleBuildSearchTest {
     @Test
     public void parseVersionShort() throws Exception {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
-                "centic9/poi-mail-merge", "compile 'org.apache.poi:poi:3.13");
+                "centic9/poi-mail-merge", "compile '" + GROUP + ":poi:3.13");
         assertEquals("{3.13=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
     public void parseVersionShortVar() throws Exception {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
-                "centic9/poi-mail-merge", "compile 'org.apache.poi:poi:' +poiver");
+                "centic9/poi-mail-merge", "compile '" + GROUP + ":poi:' +poiver");
         assertEquals("{poiver=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
@@ -92,7 +93,7 @@ public class GradleBuildSearchTest {
     @Test
     public void parseVersionLong() throws Exception {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
-                "centic9/poi-mail-merge", "compile group: \t 'org.apache.poi', name: 'poi',  version: '3.15'");
+                "centic9/poi-mail-merge", "compile group: \t '" + GROUP + "', name: 'poi',  version: '3.15'");
         assertEquals("{3.15=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
@@ -110,7 +111,7 @@ public class GradleBuildSearchTest {
     @Test
     public void parseVersionNotFound() throws Exception {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
-                "centic9/poi-mail-merge", BaseSearch.GROUP);
+                "centic9/poi-mail-merge", GROUP);
         assertEquals("{}", versions.toString());
     }
 
