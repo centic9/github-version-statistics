@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-07-03,luq-0/Upis15Crawler,<new>,3.16
+2017-07-03,slezhnev/AddmissionParser,<new>,3.16
+2017-07-03,MrLoyal/flat-excel-mapper,<new>,3.16
+2017-07-03,jcarvalhogo/ofbiz-plugins,<new>,3.14
+2017-07-03,restart1025/MISDesign,<new>,3.14
+2017-07-03,ts-s/timespacexstar,<new>,3.14
 2017-07-02,erkennt/learn-java,<new>,3.16
 2017-07-02,tragent/lte,<new>,3.11
 2017-07-02,yangjava/kylin-risk,<new>,3.13
