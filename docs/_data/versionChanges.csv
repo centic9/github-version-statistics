@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2017-07-16,Tremend-Testing/CarrefourPickerApp,<new>,3.17-beta1
+2017-07-16,thu/ESR,<new>,3.16
+2017-07-16,MetadataConsulting/spreadsheet-builder,3.13,3.16
+2017-07-16,michaelenglert/handpover,<new>,3.14
 2017-07-14,l19980623/SteamKeyManager,<new>,3.17-beta1
 2017-07-14,oldlepa/Example,<new>,3.16
 2017-07-14,OpenSHA/opensha-core,<new>,3.16
