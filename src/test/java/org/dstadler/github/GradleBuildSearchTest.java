@@ -2,6 +2,8 @@ package org.dstadler.github;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+
+import org.dstadler.commons.testing.TestHelpers;
 import org.junit.Test;
 
 import java.util.regex.Pattern;
@@ -49,6 +51,18 @@ public class GradleBuildSearchTest {
     public void addVersionVariables() throws Exception {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "def var = 3.16; '+var", "var");
         assertEquals("{3.16=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
+    }
+
+    @Test
+    public void addVersionInvalidRegex() throws Exception {
+        final String url = "http://github.com/centic9/poi-mail-merge";
+        final String match = "poiVersion)";
+        try {
+            GradleBuildSearch.addVersion(versions, url, "def var = 3.16; '+poiVersion)", match);
+            fail("Should catch an exception here");
+        } catch (IllegalStateException e) {
+            TestHelpers.assertContains(e, url, match);
+        }
     }
 
     @Test

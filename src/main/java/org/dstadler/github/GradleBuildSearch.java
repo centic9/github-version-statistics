@@ -9,6 +9,7 @@ import org.kohsuke.github.PagedSearchIterable;
 import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class GradleBuildSearch extends BaseSearch {
     // compile 'org.apache.poi:poi:3.13'
@@ -86,10 +87,14 @@ public class GradleBuildSearch extends BaseSearch {
         // def poiVersion='3.7'
         // compile 'org.apache.poi:poi:'+poiVersion
         if(str.contains("'+" + version)) {
-            Matcher matcher = Pattern.compile(
-                    "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
-            if(matcher.find()) {
-                version = matcher.group(1);
+            try {
+                Matcher matcher = Pattern.compile(
+                        "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
+                if(matcher.find()) {
+                    version = matcher.group(1);
+                }
+            } catch (PatternSyntaxException e) {
+                throw new IllegalStateException("For version " + version + " found at " + htmlUrl, e);
             }
         }
 
