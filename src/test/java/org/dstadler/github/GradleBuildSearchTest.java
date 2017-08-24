@@ -54,11 +54,31 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void addVersionInvalidRegex() throws Exception {
+    public void addVersionVarBracket() throws Exception {
         final String url = "http://github.com/centic9/poi-mail-merge";
         final String match = "poiVersion)";
+        GradleBuildSearch.addVersion(versions, url, "def poiVersion = 3.16; '+poiVersion)", match);
+        assertEquals("{3.16=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
+    }
+
+    @Test
+    public void addVersionInvalidRegex() throws Exception {
+        final String url = "http://github.com/centic9/poi-mail-merge";
+        final String match = "poiVersion))";
         try {
-            GradleBuildSearch.addVersion(versions, url, "def var = 3.16; '+poiVersion)", match);
+            GradleBuildSearch.addVersion(versions, url, "def var = 3.16; '+poiVersion))", match);
+            fail("Should catch an exception here");
+        } catch (IllegalStateException e) {
+            TestHelpers.assertContains(e, url, match);
+        }
+    }
+
+    @Test
+    public void addVersionInvalidRegex2() throws Exception {
+        final String url = "http://github.com/centic9/poi-mail-merge";
+        final String match = "poiVersion)a";
+        try {
+            GradleBuildSearch.addVersion(versions, url, "def var = 3.16; '+poiVersion)a", match);
             fail("Should catch an exception here");
         } catch (IllegalStateException e) {
             TestHelpers.assertContains(e, url, match);

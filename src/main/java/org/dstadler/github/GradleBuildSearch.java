@@ -88,13 +88,17 @@ public class GradleBuildSearch extends BaseSearch {
         // compile 'org.apache.poi:poi:'+poiVersion
         if(str.contains("'+" + version)) {
             try {
-                Matcher matcher = Pattern.compile(
-                        "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
-                if(matcher.find()) {
-                    version = matcher.group(1);
-                }
+                version = matchVersionVar(str, version);
             } catch (PatternSyntaxException e) {
-                throw new IllegalStateException("For version " + version + " found at " + htmlUrl, e);
+                if(version.endsWith(")") && !version.contains("(")) {
+                    try {
+                        version = matchVersionVar(str, version.substring(0, version.length() - 1));
+                    } catch (PatternSyntaxException e1) {
+                        throw new IllegalStateException("For version " + version + " found at " + htmlUrl, e1);
+                    }
+                } else {
+                    throw new IllegalStateException("For version " + version + " found at " + htmlUrl, e);
+                }
             }
         }
 
@@ -105,5 +109,14 @@ public class GradleBuildSearch extends BaseSearch {
 
         //System.out.println("Found " + version + " for repo " + repo + " at " + htmlUrl);
         versions.put(version, htmlUrl);
+    }
+
+    private static String matchVersionVar(String str, String version) {
+        Matcher matcher = Pattern.compile(
+                "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
+        if(matcher.find()) {
+            version = matcher.group(1);
+        }
+        return version;
     }
 }
