@@ -25,6 +25,7 @@ public class GradleBuildSearchTest {
         assertTrue(EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").find());
         assertTrue(EXCLUDE_PATTERN.matcher("\"org.apache.poi:ooxml-schemas:1.4\"").find());
         assertTrue(EXCLUDE_PATTERN.matcher("compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'").find());
+        assertTrue(EXCLUDE_PATTERN.matcher(" compile files('libs/org.apache.poi.xwpf.converter.xhtml-1.0.0.jar')").find());
 
         assertEquals("", EXCLUDE_PATTERN.matcher("group: 'org.apache.poi', name: 'openxml4j'").replaceAll(""));
     }
@@ -121,6 +122,13 @@ public class GradleBuildSearchTest {
     public void parseVersionNoVersion() throws Exception {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile 'org.apache.poi:poi'");
+        assertEquals("{noVersion=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
+    }
+
+    @Test
+    public void parseVersionNoVersionDoubleQuotes() throws Exception {
+        new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
+                "centic9/poi-mail-merge", "compile \"org.apache.poi:poi\"");
         assertEquals("{noVersion=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 

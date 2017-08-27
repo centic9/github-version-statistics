@@ -26,10 +26,12 @@ public class GradleBuildSearch extends BaseSearch {
     // exclude some pattern that caused false versions to be reported,
     // we currently simple remove these from the found file before looking for the version
     protected static final String EXCLUDE_REGEX = "(?:[\"']org\\.apache\\.poi:ooxml-schemas:1\\.\\d+['\"]|" +
-            //  [group: 'org.apache.poi', name: 'openxml4j', version: '1.0-beta'],
+            // [group: 'org.apache.poi', name: 'openxml4j', version: '1.0-beta'],
             "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j'|" +
             // compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'
-            "group:\\s*'org.apache.poi',\\s*name:\\s*'ooxml-schemas')";
+            "group:\\s*'org.apache.poi',\\s*name:\\s*'ooxml-schemas'|" +
+            // compile files('libs/org.apache.poi.xwpf.converter.xhtml-1.0.0.jar')
+            "org\\.apache\\.poi\\.xwpf\\.)";
 
     @Override
     final String getExcludeRegex() {
@@ -59,7 +61,8 @@ public class GradleBuildSearch extends BaseSearch {
                 matcher = PATTERN_SHORT_VAR.matcher(str);
                 if(matcher.find()) {
                     addVersion(versions, htmlUrl, str, matcher.group(1));
-                } else if (str.contains("'org.apache.poi:poi'")) {
+                } else if (str.contains("'org.apache.poi:poi'") ||
+                        str.contains("\"org.apache.poi:poi\"")) {
                     versions.put("noVersion", htmlUrl);
                 } else if (
                         // don't log for some obvious reasons for not finding a version
@@ -111,7 +114,7 @@ public class GradleBuildSearch extends BaseSearch {
         versions.put(version, htmlUrl);
     }
 
-    private static String matchVersionVar(String str, String version) {
+    private static String matchVersionVar(CharSequence str, String version) {
         Matcher matcher = Pattern.compile(
                 "def\\s+" + version + VERSION_VAR_PATTERN).matcher(str);
         if(matcher.find()) {
