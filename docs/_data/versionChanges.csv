@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-10-03,HugoHe24/BigDataVerification,<new>,3.16
+2017-10-03,qwazr/library-modules,3.16,3.17
+2017-10-03,yakworks/grails-jasper-reports,<new>,3.9
+2017-10-03,benczeistvan/KIR,<new>,3.8
+2017-10-03,thanh2050/ReadFileExcelToSql,<new>,3.7
+2017-10-03,jonahreinhardt/maillist-format-convert,<new>,3.13
+2017-10-03,teanalab/myscope-sequential-analysis,<new>,3.15
 2017-10-02,hqxqyly/ccmt,<new>,noVersion
 2017-10-02,yangjava/kylin-risk,3.13,noVersion
 2017-10-02,sidTeal/TisdaleK-Means,<new>,3.16
