@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
+import org.kohsuke.github.HttpException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -86,12 +87,29 @@ public abstract class BaseSearch {
             return null;
         }
 
-        final GHRepository repository = github.getRepository(repo);
-        if(repository.isFork()) {
-            //System.out.println("Ignoring forked repo " + repo);
-            return null;
+        // try up to three times to cater for some connection issues that
+        // we see from time to time
+        int retries = 3;
+        while(true) {
+            try {
+                final GHRepository repository = github.getRepository(repo);
+                if (repository.isFork()) {
+                    //System.out.println("Ignoring forked repo " + repo);
+                    return null;
+                }
+                return repo;
+            } catch (HttpException e) {
+                retries--;
+
+                if(retries <= 0) {
+                    throw e;
+                }
+
+                // retry once more
+                System.out.println("Retry " + retries + " after failing to talk to Github");
+                e.printStackTrace(System.out);
+            }
         }
-        return repo;
     }
 
     public static String getRepository(CharSequence htmlUrl) {
