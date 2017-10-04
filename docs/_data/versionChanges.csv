@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2017-10-05,WijayaPrinting/wp-javafx,<new>,$versions.commons.poi
+2017-10-05,BanyaKrylov/Cian,<new>,3.17-beta1
+2017-10-05,dmrhimali/power-point,<new>,3.17
+2017-10-05,StrasbourgEurometropole/Strasbourg-Next,<new>,3.17
+2017-10-05,ujacha/onmyoji-bot,<new>,3.17
+2017-10-05,inmaytide/orbit,<new>,$poiVersion
 2017-10-03,HugoHe24/BigDataVerification,<new>,3.16
 2017-10-03,qwazr/library-modules,3.16,3.17
 2017-10-03,yakworks/grails-jasper-reports,<new>,3.9
