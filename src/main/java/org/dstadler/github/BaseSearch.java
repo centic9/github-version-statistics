@@ -29,19 +29,38 @@ public abstract class BaseSearch {
     private final static Pattern REPO_NAME = Pattern.compile("https://github\\.com/([-a-zA-Z0-9_.]+/[-a-zA-Z0-9_.]+)/blob/.*");
 
     protected void processResults(GitHub github, Multimap<String, String> versions, Iterable<GHContent> list) throws IOException {
-        for(GHContent match : list) {
-            final String htmlUrl = match.getHtmlUrl();
-            String repo = getNonForkRepository(github, htmlUrl);
-            if (repo == null) {
-                continue;
-            }
+        // try up to three times to cater for some connection issues that
+        // we see from time to time
+        int retries = 3;
+        while(true) {
+            try {
+                for(GHContent match : list) {
+                    final String htmlUrl = match.getHtmlUrl();
+                    String repo = getNonForkRepository(github, htmlUrl);
+                    if (repo == null) {
+                        continue;
+                    }
 
-            String str = readFileContent(match, htmlUrl, repo);
-            if (str == null) {
-                continue;
-            }
+                    String str = readFileContent(match, htmlUrl, repo);
+                    if (str == null) {
+                        continue;
+                    }
 
-            parseVersion(versions, htmlUrl, repo, str);
+                    parseVersion(versions, htmlUrl, repo, str);
+                }
+
+                break;
+            } catch (HttpException e) {
+                retries--;
+
+                if(retries <= 0) {
+                    throw e;
+                }
+
+                // retry once more
+                System.out.println("Retry " + retries + " after failing to talk to Github");
+                e.printStackTrace(System.out);
+            }
         }
     }
 
