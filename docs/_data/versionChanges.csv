@@ -1,4 +1,16 @@
 date,repository,versionBefore,versionNow
+2017-10-20,sunshineshaw/codes,<new>,3.16
+2017-10-20,ZhangJiupeng/Chollima,<new>,3.16
+2017-10-20,Vovchik22/NSD,3.15,3.16
+2017-10-20,jruanoDev/ExcelAPI,<new>,3.17
+2017-10-20,RadhakrishnanKandasamy/Workspace,<new>,3.17
+2017-10-20,piumnl/example-poi-formula,<new>,3.9
+2017-10-20,chrxbd/HelloLsGradle,<new>,3.9
+2017-10-20,JulyaDon/ExelProject,<new>,3.12
+2017-10-20,licc168/admin-api,<new>,3.13
+2017-10-20,jianyuanzh/yflog-crumbs,<new>,3.14
+2017-10-20,bonetoday/naton_study,<new>,3.14
+2017-10-20,yifeistudio-developer/sao,<new>,${poiVersion}
 2017-10-18,coryodell/FootballPool,<new>,3.17
 2017-10-18,lengqiufeifeng/spring-cloud,<new>,3.+
 2017-10-18,Vovchik22/NSD,<new>,3.15
