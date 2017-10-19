@@ -2,6 +2,9 @@ package org.dstadler.github;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
+import org.junit.Assume;
 import org.junit.Test;
 import org.kohsuke.github.GitHub;
 
@@ -10,7 +13,14 @@ import com.google.common.collect.Multimap;
 public class BaseSearchTest {
     @Test
     public void testConnect() throws Exception {
-        final GitHub connect = BaseSearch.connect();
+        final GitHub connect;
+        try {
+            connect = BaseSearch.connect();
+        } catch (IOException e) {
+            Assume.assumeTrue(e.getMessage().contains("Failed to resolve credentials"));
+            throw e;
+        }
+
         assertNotNull(connect);
     }
 
@@ -39,7 +49,12 @@ public class BaseSearchTest {
             }
         };
 
-        assertNull(search.getNonForkRepository(BaseSearch.connect(), ""));
+        try {
+            assertNull(search.getNonForkRepository(BaseSearch.connect(), ""));
+        } catch (IOException e) {
+            Assume.assumeTrue(e.getMessage().contains("Failed to resolve credentials"));
+            throw e;
+        }
 
         assertNotNull(search.getNonForkRepository(BaseSearch.connect(),
                 "https://github.com/centic9/jgit-cookbook/blob/README.md"));
