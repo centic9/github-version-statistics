@@ -2,7 +2,6 @@ package org.dstadler.github;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.Assume;
@@ -17,11 +16,8 @@ public class BaseSearchTest {
         final GitHub connect;
         try {
             connect = BaseSearch.connect();
-        } catch (FileNotFoundException e) {
-            Assume.assumeTrue("Ignore missing credentials", false);
-            return;
         } catch (IOException e) {
-            Assume.assumeTrue("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
+            Assume.assumeFalse("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
             throw e;
         }
 
@@ -55,10 +51,8 @@ public class BaseSearchTest {
 
         try {
             assertNull(search.getNonForkRepository(BaseSearch.connect(), ""));
-        } catch (FileNotFoundException e) {
-            Assume.assumeTrue("Ignore missing credentials", false);
         } catch (IOException e) {
-            Assume.assumeTrue("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
+            Assume.assumeFalse("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
             throw e;
         }
 
