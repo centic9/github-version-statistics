@@ -9,4 +9,4 @@ script:
   - ./gradlew check installDist
 
 after_failure:
-- cat build/test-results/*.xml
+- cat build/test-results/test/*.xml
