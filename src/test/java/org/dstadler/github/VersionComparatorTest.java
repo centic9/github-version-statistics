@@ -9,6 +9,7 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+@SuppressWarnings("EqualsWithItself")
 public class VersionComparatorTest {
     @SuppressWarnings("RedundantStringFormatCall")
     @Test
@@ -298,6 +299,22 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.14-beta1-20151223", "3.14-beta2");
+        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
+                ret < 0);
+    }
+
+    @Test
+    public void testFailingCase() {
+        Version v1 = Version.parse("1.0-SNAPSHOT1");
+        Version v2 = Version.parse("1.0");
+
+        assertEquals(0, v1.compareTo(v1));
+        assertEquals(0, v2.compareTo(v2));
+
+        assertTrue(v1.compareTo(v2) < 0);
+        assertTrue(v2.compareTo(v1) > 0);
+
+        final int ret = new VersionComparator().compare("1.0-SNAPSHOT", "1.0");
         assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
                 ret < 0);
     }

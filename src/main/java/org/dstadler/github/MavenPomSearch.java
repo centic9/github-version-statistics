@@ -20,20 +20,20 @@ public class MavenPomSearch extends BaseSearch {
 </dependency>
      */
     private final static String NEWLINE = "[\\n\\r\\s]*";
+    private static final String GROUP_ID_PATTERN = "<groupId>" + GROUP_REGEX + "</groupId>";
 
     // compile 'org.apache.poi:poi:3.13'
     private final static Pattern PATTERN_DEPENDENCY = Pattern.compile(
-            "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE +
+            GROUP_ID_PATTERN + NEWLINE +
             "<artifactId>.*</artifactId>" + NEWLINE +
             "<version>" + VERSION + "</version>");
     private final static Pattern PATTERN_DEPENDENCY_2 = Pattern.compile(
             "<artifactId>.*</artifactId>" + NEWLINE +
-            "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE +
+            GROUP_ID_PATTERN + NEWLINE +
             "<version>" + VERSION + "</version>");
-
     protected final static Pattern PATTERN_NO_VERSION = Pattern.compile(
             "<dependency>" + NEWLINE +
-            "<groupId>org\\.apache\\.poi</groupId>" + NEWLINE +
+            GROUP_ID_PATTERN + NEWLINE +
             "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE +
             "</dependency>");
 

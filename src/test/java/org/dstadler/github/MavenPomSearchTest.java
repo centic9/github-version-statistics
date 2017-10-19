@@ -1,5 +1,6 @@
 package org.dstadler.github;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.junit.Test;
@@ -67,5 +68,40 @@ public class MavenPomSearchTest {
     @Test
     public void getExcludeRegex() throws Exception {
         assertNotNull(new MavenPomSearch().getExcludeRegex());
+    }
+
+    @Test
+    public void testParseVersion() {
+        MavenPomSearch search = new MavenPomSearch();
+        final ArrayListMultimap<String, String> versions = ArrayListMultimap.create();
+        search.parseVersion(versions, "", "", "org.apache.poi");
+        assertTrue("Had: " + versions, versions.isEmpty());
+
+        search.parseVersion(versions, "url", "",
+                "<groupId>org.apache.poi</groupId>\n"
+                + "<artifactId>some</artifactId>\n"
+                + "<version>3.15</version>");
+        assertEquals("Had: " + versions, 1, versions.size());
+        assertEquals("3.15", versions.keySet().iterator().next());
+        assertEquals("url", versions.values().iterator().next());
+
+        versions.clear();
+        search.parseVersion(versions, "url", "",
+                "<artifactId>some</artifactId>\n"
+                + "<groupId>org.apache.poi</groupId>\n"
+                + "<version>3.15</version>");
+        assertEquals("Had: " + versions, 1, versions.size());
+        assertEquals("3.15", versions.keySet().iterator().next());
+        assertEquals("url", versions.values().iterator().next());
+
+        versions.clear();
+        search.parseVersion(versions, "url", "",
+                "<dependency>\n"
+                        + "<groupId>org.apache.poi</groupId>\n"
+                        + "<artifactId>poi-some</artifactId>\n"
+                        + "</dependency>");
+        assertEquals("Had: " + versions, 1, versions.size());
+        assertEquals("noVersion", versions.keySet().iterator().next());
+        assertEquals("url", versions.values().iterator().next());
     }
 }
