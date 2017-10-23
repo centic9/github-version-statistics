@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2017-10-24,jmreyesgarcia/VARIAMOS3,<new>,3.16
+2017-10-24,sifrproject/cladimed2skos,<new>,3.17
+2017-10-24,yifeistudio-developer/sao,${poiVersion},3.17
+2017-10-24,nihcas700/FileUploadToGoogleStorage,<new>,3.9
+2017-10-24,abstractdog/apache-poi-util,<new>,3.12
+2017-10-24,santileira/GenerateExcel,<new>,3.14
+2017-10-24,jisqaqov/toptal-backend,<new>,3.15
+2017-10-24,wpcfan/spring-boot-tut,<new>,${poiVersion}
 2017-10-23,frostbytten/translator-excel-spreadsheet,<new>,3.16
 2017-10-23,wuworker/common,<new>,3.17
 2017-10-23,smartcredit/brickseek,<new>,3.9
