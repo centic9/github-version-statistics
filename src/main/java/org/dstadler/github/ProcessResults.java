@@ -35,9 +35,12 @@ public class ProcessResults {
     private static final String TEMPLATE =
         "<html>\n" +
         "<head>\n" +
-                "<!-- taken from https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js -->\n" +
-                "<script src=\"dygraph-combined.js\"></script>\n" +
-                "<style>#graphdiv { position: absolute; left: 10px; right: 10px; top: 10px; bottom: 10px; }</style>\n" +
+                "    <!-- downloaded from https://cdnjs.cloudflare.com/ajax/libs/dygraph/2.0.0/dygraph.min.css -->\n" +
+                "    <link rel=\"stylesheet\" href=\"dygraph.min.css\">\n" +
+                '\n' +
+                "    <!-- taken from https://cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js -->\n" +
+                "    <script src=\"dygraph.min.js\"></script>\n" +
+                "    <style>#graphdiv { position: absolute; left: 10px; right: 10px; top: 10px; bottom: 10px; }</style>\n" +
         "</head>\n" +
         "<body>" +
                 "<div id=\"graphdiv\"></div>\n" +
@@ -329,7 +332,8 @@ public class ProcessResults {
         writeResultsToTemplate(dateVersionTable, maxDateStr, percentageResults, versionsSorted, dataPercentage);
     }
 
-    private static void writeResultsToTemplate(Table<String, String, Data> dateVersionTable, String maxDateStr, File results, Collection<String> versionsSorted, StringBuilder data) throws IOException {
+    private static void writeResultsToTemplate(Table<String, String, Data> dateVersionTable, String maxDateStr,
+                                               File results, Iterable<String> versionsSorted, CharSequence data) throws IOException {
         String html = TEMPLATE.replace("${data}", data);
         html = html.replace("${dataheader}", "Date" + getHeaderData(versionsSorted));
         html = html.replace("${benchmark}", "Apache POI");
@@ -435,8 +439,11 @@ public class ProcessResults {
     }
 
     private static String formatValue(Number value) {
-        return value == null ? "" :
-                (value instanceof Double ?
+        if(value == null) {
+            return "";
+        }
+
+        return (value instanceof Double ?
                         // round double to two decimal places
                         Double.toString((double)Math.round(100*value.doubleValue())/100) :
                         Integer.toString((Integer)value));

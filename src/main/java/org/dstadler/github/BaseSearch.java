@@ -49,6 +49,7 @@ public abstract class BaseSearch {
                     parseVersion(versions, htmlUrl, repo, str);
                 }
 
+                //noinspection BreakStatement
                 break;
             } catch (HttpException e) {
                 retries--;

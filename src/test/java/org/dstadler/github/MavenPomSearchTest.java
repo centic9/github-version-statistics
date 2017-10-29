@@ -1,6 +1,5 @@
 package org.dstadler.github;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.junit.Test;
@@ -86,7 +85,6 @@ public class MavenPomSearchTest {
     @Test
     public void testParseVersion() {
         MavenPomSearch search = new MavenPomSearch();
-        final ArrayListMultimap<String, String> versions = ArrayListMultimap.create();
         search.parseVersion(versions, "", "", "org.apache.poi");
         assertTrue("Had: " + versions, versions.isEmpty());
 

@@ -34,20 +34,7 @@ public class BaseSearchTest {
 
     @Test
     public void testGetNonForkRepository() throws Exception {
-        BaseSearch search = new BaseSearch() {
-            @Override
-            void search(GitHub github, Multimap<String, String> versions) {
-            }
-
-            @Override
-            String getExcludeRegex() {
-                return null;
-            }
-
-            @Override
-            void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
-            }
-        };
+        BaseSearch search = new MyBaseSearch();
 
         try {
             assertNull(search.getNonForkRepository(BaseSearch.connect(), ""));
@@ -61,5 +48,20 @@ public class BaseSearchTest {
 
         assertNull(search.getNonForkRepository(BaseSearch.connect(),
                 "https://github.com/a0xec0/Spoon-Knife/blob/README.md"));
+    }
+
+    private static class MyBaseSearch extends BaseSearch {
+        @Override
+        void search(GitHub github, Multimap<String, String> versions) {
+        }
+
+        @Override
+        String getExcludeRegex() {
+            return null;
+        }
+
+        @Override
+        void parseVersion(Multimap<String, String> versions, String htmlUrl, String repo, String str) {
+        }
     }
 }
