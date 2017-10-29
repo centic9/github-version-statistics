@@ -2,15 +2,15 @@
 [![Gradle Status](https://gradleupdate.appspot.com/centic9/github-version-statistics/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/github-version-statistics/status)
 [![Release](https://img.shields.io/github/release/centic9/github-version-statistics.svg)](https://github.com/centic9/github-version-statistics/releases)
 
-A small application which uses the GitHub API to search for usages of a Java library and 
+A small application which uses the [GitHub API](https://github.com/kohsuke/github-api) to search for usages of a Java library and 
 prepares some statistics about which versions are used how often.
 
 Currently it looks for usages of [Apache POI](http://poi.apache.org/), but this can be adjusted
 by modifying the source slightly.
 
-#### Initial URL for looking at results
+#### Results for Apache POI
 
-The results of a daily run of the scan can be found at [https://centic9.github.io/github-version-statistics/](]https://centic9.github.io/github-version-statistics/).
+The results of a daily run of the scan for Apache POI can be found at [https://centic9.github.io/github-version-statistics/](]https://centic9.github.io/github-version-statistics/).
 
 #### Getting started
 
@@ -18,17 +18,19 @@ The results of a daily run of the scan can be found at [https://centic9.github.i
 
     git clone git://github.com/centic9/github-version-statistics
 
-##### Build it using Gradle
-
-    ./gradlew check installDist
-
-#### Run it
+#### Configure library and credentials
 
 Currently the file `BaseSearch.java` contains `org.apache.poi` as indicator of the Java library to look for. 
 Change this if you want to run it for a different project.
 
 The application uses the Java GitHub API from [http://github-api.kohsuke.org/](http://github-api.kohsuke.org/), in order to set credentials, 
 create a file `~/.github` with the contents as described at [http://github-api.kohsuke.org/](http://github-api.kohsuke.org/)
+
+##### Build it using Gradle
+
+    ./gradlew check installDist
+
+##### Run it
 
 Then you can run it via
 
@@ -60,7 +62,7 @@ send pull requests or create [issues](https://github.com/centic9/github-version-
 
 #### Licensing
 
-   Copyright 2013-2016 Dominik Stadler
+   Copyright 2013-2017 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

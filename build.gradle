@@ -13,8 +13,6 @@ jar {
     }
 }
 
-sourceCompatibility = 1.8
-
 repositories {
     mavenCentral()
 }
@@ -24,10 +22,10 @@ configurations {
 }
 
 dependencies {
-    compile 'commons-io:commons-io:2.5'
+    compile 'commons-io:commons-io:2.6'
     compile 'org.apache.commons:commons-lang3:3.6'
     compile 'org.dstadler:commons-dost:1.0.0.23'
-    compile 'org.kohsuke:github-api:1.89'
+    compile 'org.kohsuke:github-api:1.90'
 
     compile 'com.fasterxml.jackson.core:jackson-core:2.9.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.9.2'
