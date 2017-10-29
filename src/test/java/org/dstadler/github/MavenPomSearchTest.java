@@ -67,7 +67,20 @@ public class MavenPomSearchTest {
 
     @Test
     public void getExcludeRegex() throws Exception {
-        assertNotNull(new MavenPomSearch().getExcludeRegex());
+        String excludeRegex = new MavenPomSearch().getExcludeRegex();
+        assertNotNull(excludeRegex);
+
+        assertFalse("".matches(excludeRegex));
+        assertFalse("org.apache.poi".matches(excludeRegex));
+
+        String str =
+                "<groupId>org.apache.poi</groupId>\n" +
+                "    <artifactId>poi-parent</artifactId>\n" +
+                "    <packaging>pom</packaging>";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "<module.name>org.apache.poi</module.name>";
+        assertTrue(str.matches(excludeRegex));
     }
 
     @Test

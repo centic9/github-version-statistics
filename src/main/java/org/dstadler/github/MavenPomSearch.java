@@ -40,7 +40,12 @@ public class MavenPomSearch extends BaseSearch {
     //private final static Pattern PATTERN_SHORT_VAR = Pattern.compile(QUOTE + GROUP_REGEX + ":[-a-z]+:" + QUOTE + "\\s*\\+\\s*" + VERSION);
 
     // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
-    private static final String EXCLUDE_REGEX = "(<artifactId>ooxml-schemas</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>|<artifactId>org\\.apache\\.poi\\.xwpf\\.converter\\.[a-z]+</artifactId>)";
+    private static final String EXCLUDE_REGEX = "(?:" +
+                "<artifactId>ooxml-schemas</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>|" +
+                "<artifactId>org\\.apache\\.poi\\.xwpf\\.converter\\.[a-z]+</artifactId>|" +
+                "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>poi-parent</artifactId>" + NEWLINE + "<packaging>pom</packaging>|" +
+                "<module\\.name>" + GROUP_REGEX + "</module\\.name>" +
+            ')';
     private static final int TIMEOUT = 30_000;
 
     @Override
