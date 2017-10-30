@@ -159,6 +159,25 @@ public class GradleBuildSearchTest {
 
     @Test
     public void getExcludeRegex() throws Exception {
-        assertNotNull(new GradleBuildSearch().getExcludeRegex());
+        String excludeRegex = new GradleBuildSearch().getExcludeRegex();
+        assertNotNull(excludeRegex);
+
+        assertFalse("".matches(excludeRegex));
+        assertFalse("org.apache.poi".matches(excludeRegex));
+
+        String str =
+                "<groupId>org.apache.poi</groupId>\n" +
+                        "    <artifactId>poi-parent</artifactId>\n" +
+                        "    <packaging>pom</packaging>";
+        assertFalse(str.matches(excludeRegex));
+
+        str = "<module.name>org.apache.poi</module.name>";
+        assertFalse(str.matches(excludeRegex));
+
+        str = "exclude group: 'org.apache.poi', module: 'poi'";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "org.apache.poi.xwpf.";
+        assertTrue(str.matches(excludeRegex));
     }
 }
