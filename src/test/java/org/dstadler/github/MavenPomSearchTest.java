@@ -83,6 +83,13 @@ public class MavenPomSearchTest {
 
         str = "<org.apache.poi.util.POILogger>org.apache.poi.util.NullLogger</org.apache.poi.util.POILogger>";
         assertTrue(str.matches(excludeRegex));
+
+        str = "<dependency>\n" +
+                "      <groupId>org.apache.poi</groupId>\n" +
+                "      <artifactId>poi-ooxml</artifactId>\n" +
+                "      <type>jar</type>\n" +
+                "    </dependency>";
+        assertTrue(str.matches(excludeRegex));
     }
 
     @Test

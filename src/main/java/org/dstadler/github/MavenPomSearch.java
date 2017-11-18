@@ -42,10 +42,11 @@ public class MavenPomSearch extends BaseSearch {
     // exclude some pattern that caused false versions to be reported, we currently simple remove these from the found file before looking for the version
     private static final String EXCLUDE_REGEX = "(?:" +
                 "<artifactId>ooxml-schemas</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>|" +
-                "<artifactId>org\\.apache\\.poi\\.xwpf\\.converter\\.[a-z]+</artifactId>|" +
-                "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>poi-parent</artifactId>" + NEWLINE + "<packaging>pom</packaging>|" +
+                "<artifactId>" + GROUP_REGEX + "\\.xwpf\\.converter\\.[a-z]+</artifactId>|" +
+                GROUP_ID_PATTERN + NEWLINE + "<artifactId>poi-parent</artifactId>" + NEWLINE + "<packaging>pom</packaging>|" +
                 "<module\\.name>" + GROUP_REGEX + "</module\\.name>|" +
-                "<org\\.apache\\.poi\\.util\\.POILogger>org\\.apache\\.poi\\.util\\.[a-zA-Z]+Logger</org\\.apache\\.poi\\.util\\.POILogger>" +
+                '<' + GROUP_REGEX + "\\.util\\.POILogger>" + GROUP_REGEX + "\\.util\\.[a-zA-Z]+Logger</" + GROUP_REGEX + "\\.util\\.POILogger>|" +
+                "<dependency>" + NEWLINE + GROUP_ID_PATTERN + NEWLINE + "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE + "<type>jar</type>" + NEWLINE + "</dependency>" +
             ')';
     private static final int TIMEOUT = 30_000;
 
