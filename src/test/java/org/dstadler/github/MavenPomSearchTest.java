@@ -80,6 +80,9 @@ public class MavenPomSearchTest {
 
         str = "<module.name>org.apache.poi</module.name>";
         assertTrue(str.matches(excludeRegex));
+
+        str = "<org.apache.poi.util.POILogger>org.apache.poi.util.NullLogger</org.apache.poi.util.POILogger>";
+        assertTrue(str.matches(excludeRegex));
     }
 
     @Test

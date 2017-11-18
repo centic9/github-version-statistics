@@ -44,7 +44,8 @@ public class MavenPomSearch extends BaseSearch {
                 "<artifactId>ooxml-schemas</artifactId>" + NEWLINE + "<version>" + VERSION + "</version>|" +
                 "<artifactId>org\\.apache\\.poi\\.xwpf\\.converter\\.[a-z]+</artifactId>|" +
                 "<groupId>" + GROUP_REGEX + "</groupId>" + NEWLINE + "<artifactId>poi-parent</artifactId>" + NEWLINE + "<packaging>pom</packaging>|" +
-                "<module\\.name>" + GROUP_REGEX + "</module\\.name>" +
+                "<module\\.name>" + GROUP_REGEX + "</module\\.name>|" +
+                "<org\\.apache\\.poi\\.util\\.POILogger>org\\.apache\\.poi\\.util\\.[a-zA-Z]+Logger</org\\.apache\\.poi\\.util\\.POILogger>" +
             ')';
     private static final int TIMEOUT = 30_000;
 
