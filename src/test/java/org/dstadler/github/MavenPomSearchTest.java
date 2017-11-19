@@ -90,6 +90,13 @@ public class MavenPomSearchTest {
                 "      <type>jar</type>\n" +
                 "    </dependency>";
         assertTrue(str.matches(excludeRegex));
+
+        str = "<dependency>\n" +
+                "      <groupId>org.apache.poi</groupId>\n" +
+                "      <artifactId>poi-ooxml-schemas</artifactId>\n" +
+                "      <type>jar</type>\n" +
+                "    </dependency>";
+        assertTrue(str.matches(excludeRegex));
     }
 
     @Test

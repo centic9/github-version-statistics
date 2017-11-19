@@ -34,7 +34,7 @@ public class MavenPomSearch extends BaseSearch {
     protected final static Pattern PATTERN_NO_VERSION = Pattern.compile(
             "<dependency>" + NEWLINE +
             GROUP_ID_PATTERN + NEWLINE +
-            "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE +
+            "<artifactId>poi(?:-[-a-z]+)?</artifactId>" + NEWLINE +
             "</dependency>");
 
     //private final static Pattern PATTERN_SHORT_VAR = Pattern.compile(QUOTE + GROUP_REGEX + ":[-a-z]+:" + QUOTE + "\\s*\\+\\s*" + VERSION);
@@ -46,7 +46,7 @@ public class MavenPomSearch extends BaseSearch {
                 GROUP_ID_PATTERN + NEWLINE + "<artifactId>poi-parent</artifactId>" + NEWLINE + "<packaging>pom</packaging>|" +
                 "<module\\.name>" + GROUP_REGEX + "</module\\.name>|" +
                 '<' + GROUP_REGEX + "\\.util\\.POILogger>" + GROUP_REGEX + "\\.util\\.[a-zA-Z]+Logger</" + GROUP_REGEX + "\\.util\\.POILogger>|" +
-                "<dependency>" + NEWLINE + GROUP_ID_PATTERN + NEWLINE + "<artifactId>poi(?:-[a-z]+)?</artifactId>" + NEWLINE + "<type>jar</type>" + NEWLINE + "</dependency>" +
+                "<dependency>" + NEWLINE + GROUP_ID_PATTERN + NEWLINE + "<artifactId>poi(?:-[-a-z]+)?</artifactId>" + NEWLINE + "<type>jar</type>" + NEWLINE + "</dependency>" +
             ')';
     private static final int TIMEOUT = 30_000;
 
