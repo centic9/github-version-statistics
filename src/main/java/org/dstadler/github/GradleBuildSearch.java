@@ -34,7 +34,9 @@ public class GradleBuildSearch extends BaseSearch {
             // compile files('libs/org.apache.poi.xwpf.converter.xhtml-1.0.0.jar')
             GROUP_REGEX + "\\.xwpf\\.|" +
             // exclude group: 'org.apache.poi', module: 'poi'
-            "exclude group: [\"']" + GROUP_REGEX + "[\"'], module: [\"'][-a-z]+[\"']" +
+            "exclude group: [\"']" + GROUP_REGEX + "[\"'], module: [\"'][-a-z]+[\"']|" +
+            // me: 'com.springsource.jxl', version: '2.6.6',configuration: "compile", ext : "jar" compile group: 'org.apache.poi', name: 'com.springsource.org.apache.poi', version: '3.9.0.FINAL',configuration: "com
+            "group:\\s*[\"']" + GROUP_REGEX + "[\"'],\\s*name:\\s*[\"']com.springsource.org.apache.poi[\"']" +
             ')';
 
     @Override

@@ -179,5 +179,8 @@ public class GradleBuildSearchTest {
 
         str = "org.apache.poi.xwpf.";
         assertTrue(str.matches(excludeRegex));
+
+        str = "group: 'org.apache.poi', name: 'com.springsource.org.apache.poi'";
+        assertTrue(str.matches(excludeRegex));
     }
 }
