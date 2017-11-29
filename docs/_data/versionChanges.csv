@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2017-11-30,bkenn/KWordAPI,<new>,${versions.apachePoi}
+2017-11-30,tarek-nawara/ExcelProject,<new>,3.17
+2017-11-30,NCIEVS/nci-report-writer2,<new>,3.17
+2017-11-30,eladi96/Progetto3,<new>,3.9
+2017-11-30,khanghiatai/NowSSO,<new>,3.10
+2017-11-30,svintsov/Svintsov_Lab1,<new>,3.12
+2017-11-30,rainlf/Excel2Json,<new>,3.15
+2017-11-30,leigme/toolbox,<new>,3.15
+2017-11-30,rpsandip/omri,<new>,3.15
 2017-11-29,sigh667/GenesisServer,<new>,3.17
 2017-11-29,HWOLFeng/excel-Tool,<new>,3.9
 2017-11-29,abijithring/secondRepository,<new>,3.7
