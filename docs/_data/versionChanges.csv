@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2017-12-09,testwebclient/sampletest,<new>,3.16
+2017-12-09,testwebclient/amazonTest,<new>,3.16
+2017-12-09,MedElba/Beppino,<new>,3.17
+2017-12-09,sz574702/document2,<new>,3.17
+2017-12-09,deveshaxovel/weafrican-testing-using-maven,<new>,3.17
+2017-12-09,Patresss/SatelliteConverter,<new>,3.17
+2017-12-09,szelcorg/TGA,<new>,3.9
+2017-12-09,zzwen6/easypoi-3.x,<new>,3.10
+2017-12-09,kevinxp919/Test,<new>,3.16-beta2
 2017-12-08,subsuby/projects,<new>,3.10.1
 2017-12-08,hs-web/hsweb-expands,3.14,3.17
 2017-12-08,vbouquet/integration_donnees_projet,<new>,3.9
