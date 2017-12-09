@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2017-12-10,walterjwhite/dependencies,<new>,3.17
+2017-12-10,kkareemk/ProjectObjectModel,<new>,3.9
+2017-12-10,pooja-chalamalasetty/SFDCdaimler,<new>,3.11
+2017-12-10,chaolinye/headfirst,<new>,3.14
+2017-12-10,huanlekkx/work,<new>,3.14
+2017-12-10,gkron/ridsarbqa,<new>,3.16-beta2
+2017-12-10,yluo2017/FreeCRMTest_Original,<new>,3.16-beta2
 2017-12-09,testwebclient/sampletest,<new>,3.16
 2017-12-09,testwebclient/amazonTest,<new>,3.16
 2017-12-09,MedElba/Beppino,<new>,3.17
