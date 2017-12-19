@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2017-12-20,Opetushallitus/java-utils,<new>,3.17
+2017-12-20,leerjet/ai.telepathy.db.old,<new>,3.17
+2017-12-20,luogui551/excel,<new>,3.17
+2017-12-20,action5/token-transfers-analyzer,<new>,3.17
+2017-12-20,KaneTing/poitools,<new>,3.17
+2017-12-20,rubypham/DataGenarator,<new>,3.9
+2017-12-20,cgpradeepkumar/javaSamples,<new>,3.9
+2017-12-20,kkapoor84/PageObjectModel,<new>,3.16-beta2
 2017-12-19,beyondLi71/maxmall,<new>,3.16
 2017-12-19,dante7qx/springboot,<new>,3.17
 2017-12-19,German89/TournamentLevelCalculator,<new>,3.17
