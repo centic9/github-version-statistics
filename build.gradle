@@ -23,16 +23,16 @@ configurations {
 
 dependencies {
     compile 'commons-io:commons-io:2.6'
-    compile 'org.apache.commons:commons-lang3:3.6'
-    compile 'org.dstadler:commons-dost:1.0.0.23'
-    compile 'org.kohsuke:github-api:1.90'
+    compile 'org.apache.commons:commons-lang3:3.7'
+    compile 'org.dstadler:commons-dost:1.0.0.24'
+    compile 'org.kohsuke:github-api:1.92'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.2'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.2'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.2'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.3'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.3'
 
     testCompile "junit:junit:4.12"
-    testCompile 'org.dstadler:commons-test:1.0.0.13'
+    testCompile 'org.dstadler:commons-test:1.0.0.14'
 }
 
 task wrapper(type: Wrapper) {
