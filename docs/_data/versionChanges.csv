@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2018-03-25,AndyKorn/PriceMaker,<new>,3.12
+2018-03-25,student-t/LabKey,<new>,${poiVersion}
 2018-03-24,lianrongfa/projects,<new>,3.16
 2018-03-24,congcongye/TeaSale_Backend,<new>,3.9
 2018-03-24,student-t/sadss,<new>,${poiVersion}
