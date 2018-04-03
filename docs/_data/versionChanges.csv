@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2018-04-04,reymont/CheckVersionExport,<new>,3.17
+2018-04-04,informationsea/tableio,3.12,3.17
+2018-04-04,ptalele/ExportExcel,<new>,3.17
+2018-04-04,shrutikhungar/freeCRMMavenTestNg,<new>,3.9
+2018-04-04,muyik/excel2xml,<new>,3.9
+2018-04-04,mpvipin/SeleniumHybridFWWithPOMDD,<new>,3.16-beta2
 2018-04-03,meamitatgit/newofficespace,<new>,3.16
 2018-04-03,etalai/ExcelAutomation,<new>,3.17
 2018-04-03,DemoData/Stock,<new>,3.17
