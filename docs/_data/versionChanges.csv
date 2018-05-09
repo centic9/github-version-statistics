@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2018-05-10,paulk-asert/MakeTestingGroovy,3.16,3.17
+2018-05-10,santoo/ChangeJavaUtil,<new>,3.17
+2018-05-10,uleetu/ko-base,<new>,3.17
+2018-05-10,ChaseDreamBoy/poi-excel,<new>,3.17
+2018-05-10,uleetu/practice-drafts,<new>,3.17
+2018-05-10,codetaylor/parst,<new>,3.17
+2018-05-10,uleetu/ko-cloud,<new>,${apachePOI}
+2018-05-10,kaiwang99/monthly-profit-parser,<new>,3.9
+2018-05-10,lqlkxk/p3-weixin,<new>,3.9
 2018-05-09,MurariKumarThakur/TailormanScriptforWebsite,<new>,3.16
 2018-05-09,kavita-tanwar/DemoRepo,<new>,3.17
 2018-05-09,Fniy/xls,<new>,3.17
