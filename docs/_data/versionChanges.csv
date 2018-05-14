@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2018-05-15,imossuy/poi,<new>,3.16
+2018-05-15,jonenet/ProjectTest01,<new>,3.16
+2018-05-15,csciakshay/HMS-Server,<new>,3.17
+2018-05-15,naz1719/ExcelParser2,<new>,3.17
+2018-05-15,Petros0/excel-generator,<new>,3.17
+2018-05-15,timtimdotqz/GParser,<new>,3.17
+2018-05-15,nikolajczn/Cuore_Maven_Niko,<new>,3.17
+2018-05-15,entse/TestDataProject,<new>,3.6
+2018-05-15,amit31/SeleniumPOMFramework,<new>,3.16-beta2
+2018-05-15,rnandyala/AutomationUsingSelenium,<new>,3.16-beta2
 2018-05-14,panrah/myTestNgProject,<new>,3.17
 2018-05-14,uleetu/framework-cloud,<new>,${apachePOI}
 2018-05-14,bouquet3035/nas,<new>,3.15
