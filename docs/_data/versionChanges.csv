@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2018-05-16,BartCertyn/ExcelRead,<new>,3.17
+2018-05-16,tramontaz/apache-poi-spring,<new>,3.17
+2018-05-16,shengxiluo20/poi,<new>,3.11
+2018-05-16,dreamoftch/kotlin-test,<new>,3.14
 2018-05-15,imossuy/poi,<new>,3.16
 2018-05-15,jonenet/ProjectTest01,<new>,3.16
 2018-05-15,csciakshay/HMS-Server,<new>,3.17
