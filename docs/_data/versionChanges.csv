@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2018-06-06,changgq/springboot-kotlin-elasticsearch-jest,<new>,3.17
+2018-06-06,Aligery/CrypToExcelART1,<new>,3.17
+2018-06-06,kishor41/TestAutomationDVLA,<new>,3.17
+2018-06-06,mygal/ParserXlsx,<new>,3.17
+2018-06-06,DmitryDudin/JavaLibraries,<new>,3.17
+2018-06-06,uleetu/framework-soa,<new>,${apachePOI}
+2018-06-06,mohansmart/pom,<new>,3.16-beta2
 2018-06-05,naz1719/Chrismangunza,<new>,3.17
 2018-06-05,schionato/apache-poi-sample,<new>,3.17
 2018-06-05,o2tha1/POIDocumentViewer,<new>,3.17
