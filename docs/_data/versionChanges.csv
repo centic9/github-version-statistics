@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2018-07-08,primaryks/ko-base,<new>,3.17
+2018-07-08,primaryks/tutorials,<new>,3.17
+2018-07-08,primaryks/prototype-xcloud,<new>,${apachePOI}
+2018-07-08,stursyn/tansara,<new>,3.9
+2018-07-08,suseendran93/Selenium-Tutorials,<new>,3.16-beta2
 2018-07-07,upendraknp89/automation_selenium_task_1,<new>,3.8-beta4
 2018-07-07,mastersaiprem/Selenium,<new>,3.17
 2018-07-07,csisanyi/reader_writer_exam,<new>,3.17
