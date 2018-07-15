@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2018-07-16,pandareen/excelreader,<new>,3.17
+2018-07-16,kayoing/kayo-repo,<new>,3.17
+2018-07-16,sriharans/excel2xml,<new>,3.17
+2018-07-16,yiwenjie007/gradle-hadoop,<new>,3.9
+2018-07-16,rahaprac/pracone,<new>,3.7
 2018-07-15,kayoing/prototype-xcloud,<new>,${apachePOI}
 2018-07-15,RohithSingirikonda/Rohith,<new>,3.16-beta2
 2018-07-15,sujithkumarn99/Sujith,<new>,3.16-beta2
