@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2018-07-18,dcallif/ExcelReader,<new>,3.16
+2018-07-18,melissabte/Retos,<new>,3.17
+2018-07-18,jeromelw/excel-tools,<new>,3.17
+2018-07-18,yangkun5636/myTest,<new>,3.17
+2018-07-18,alexeytra/GetColorFromXls,<new>,3.17
+2018-07-18,wdhxwz/com.krista.extend,<new>,3.9
+2018-07-18,HengYi-JAPP/mes,<new>,${poiVersion}
 2018-07-17,tonymnshk/eit-mer-report,<new>,3.17
 2018-07-17,motawfik98/sendSMS,<new>,3.17
 2018-07-17,JanLiao/c-v-t-e-dem-test1,<new>,3.17
