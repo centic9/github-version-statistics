@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2018-08-02,rfx520/Utils,<new>,3.17
+2018-08-02,cposada23/automation_framework,<new>,3.17
+2018-08-02,acelei/cloudglasses,<new>,3.17
+2018-08-02,halilaslanx/excelUtility,<new>,3.17
+2018-08-02,tdeep17/PHPTravelsFramwork,<new>,3.17
+2018-08-02,beknazar1/bekapache,<new>,3.17
+2018-08-02,beknazar1/akbarpoi,<new>,3.17
+2018-08-02,atultatke786/SeleniumTesting,<new>,3.16-beta2
+2018-08-02,maheshgopakkali/pom,<new>,3.16-beta2
+2018-08-02,chiran1/PageObjectModel,<new>,3.16-beta2
 2018-08-01,VIKASBISHEN/OnlineStore,<new>,3.17
 2018-08-01,WangShang1994/ExcelTool,<new>,3.17
 2018-08-01,luochaofang/qywxDemo,<new>,${poi}
