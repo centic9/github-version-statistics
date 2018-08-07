@@ -1,4 +1,15 @@
 date,repository,versionBefore,versionNow
+2018-08-08,bingoup/bingoup,<new>,$poi_verion
+2018-08-08,makiware/java,<new>,3.16
+2018-08-08,guigasparotto/minerva,<new>,3.17
+2018-08-08,arissmiller/stunning-octo-dollop,<new>,3.17
+2018-08-08,Wangyz2017/PKU_DOWNLOADER,<new>,3.17
+2018-08-08,zhaoxiaoyu19951122/zxyRepository,<new>,3.17
+2018-08-08,PengPeng-Li/studentSystem,<new>,3.17
+2018-08-08,zhouAnimal/Tools,<new>,3.7
+2018-08-08,bce1100/study,<new>,3.14
+2018-08-08,wuworker/java-utils,<new>,${poiVersion}
+2018-08-08,vijaykumar-sde/SeleniumFramework,<new>,3.16-beta2
 2018-08-07,martinq108/lunchito-menu-parser-bionea,<new>,noVersion
 2018-08-07,kohei-okazaki/work-3g,<new>,3.17
 2018-08-07,groebe1kenobi/TopBlocChallenge,<new>,3.17
