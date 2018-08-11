@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2018-08-12,musius/xlsx-jdbc,<new>,poiVersion
+2018-08-12,panwenzhuo2016/panz,<new>,3.17
+2018-08-12,TroyNeubauer/Lab-Grader,<new>,3.17
+2018-08-12,UlordChain/ux-wallet,<new>,3.17
+2018-08-12,hassanhussein/PMS,<new>,3.13
+2018-08-12,LoginDemo/PSSW16,<new>,3.16-beta2
 2018-08-11,mdong151/dp3bankupdate,<new>,3.17
 2018-08-11,PracticeSeleniumPJ/DemoRepo,<new>,3.17
 2018-08-11,hychou163/languageplugin,<new>,3.17
