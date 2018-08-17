@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2018-08-18,subugoe/fwb-importer,3.14,3.17
+2018-08-18,Pirlo/demo-app,<new>,3.17
+2018-08-18,Jose-R-Vieira/WorkspaceEstudosJava,<new>,3.14
+2018-08-18,ixtf/japp,<new>,${poiVersion}
+2018-08-18,sachinjosephroy/CFMApp,<new>,3.16-beta2
 2018-08-17,mukesh829150/WebDriverMaven,<new>,3.17
 2018-08-17,nano871022/pyt,<new>,3.17
 2018-08-17,EmanueleRossi/er,<new>,3.17
