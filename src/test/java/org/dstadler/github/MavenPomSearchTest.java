@@ -11,7 +11,7 @@ public class MavenPomSearchTest {
     private final Multimap<String, String> versions = HashMultimap.create();
 
     @Test
-    public void testRegex() throws Exception {
+    public void testRegex() {
         assertFalse(PATTERN_NO_VERSION.matcher("").find());
         assertFalse(PATTERN_NO_VERSION.matcher("compile 'org.apache.poi:poi:3.16-beta1'").find());
         assertFalse(PATTERN_NO_VERSION.matcher("<dependency>\n" +
@@ -31,25 +31,25 @@ public class MavenPomSearchTest {
     }
 
     @Test
-    public void addVersionSimple() throws Exception {
+    public void addVersionSimple() {
         MavenPomSearch.addVersion(versions, "http://github.com/centic9/jgit-cookbook", "", "1.0");
         assertEquals("{1.0=[http://github.com/centic9/jgit-cookbook]}", versions.toString());
     }
 
     @Test
-    public void addVersionFINAL() throws Exception {
+    public void addVersionFINAL() {
         MavenPomSearch.addVersion(versions, "http://github.com/centic9/jgit-cookbook", "", "1.0-FINAL");
         assertEquals("{1.0=[http://github.com/centic9/jgit-cookbook]}", versions.toString());
     }
 
     @Test
-    public void addVersionBracket() throws Exception {
+    public void addVersionBracket() {
         MavenPomSearch.addVersion(versions, "http://github.com/centic9/jgit-cookbook", "", "[1.0");
         assertEquals("{1.0=[http://github.com/centic9/jgit-cookbook]}", versions.toString());
     }
 
     @Test
-    public void addVersionVersionVariableNotFound() throws Exception {
+    public void addVersionVersionVariableNotFound() {
         MavenPomSearch.addVersion(versions, "http://github.com/centic9/jgit-cookbook", "", "${variable}");
         assertEquals("{${variable}=[http://github.com/centic9/jgit-cookbook]}", versions.toString());
     }
@@ -59,13 +59,13 @@ public class MavenPomSearchTest {
     https://github.com/seeidea/utils/blob/5200e0cffc33cc24a09ac5a6c4486115608a10a5/utils-poi/pom.xml
     */
     @Test
-    public void addVersionVersionVariableParentNotFound() throws Exception {
+    public void addVersionVersionVariableParentNotFound() {
         MavenPomSearch.addVersion(versions, "https://github.com/seeidea/utils/blob/5200e0cffc33cc24a09ac5a6c4486115608a10a5/utils-poi/pom.xml", "", "${variable}");
         assertEquals("{${variable}=[https://github.com/seeidea/utils/blob/5200e0cffc33cc24a09ac5a6c4486115608a10a5/utils-poi/pom.xml]}", versions.toString());
     }
 
     @Test
-    public void getExcludeRegex() throws Exception {
+    public void getExcludeRegex() {
         String excludeRegex = new MavenPomSearch().getExcludeRegex();
         assertNotNull(excludeRegex);
 
@@ -96,6 +96,12 @@ public class MavenPomSearchTest {
                 "      <artifactId>poi-ooxml-schemas</artifactId>\n" +
                 "      <type>jar</type>\n" +
                 "    </dependency>";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "exclude group:'org.apache.poi',module:'poi-ooxml'";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "<replacevalue>org.apache.poi.POIXMLTypeLoader</replacevalue>";
         assertTrue(str.matches(excludeRegex));
     }
 
