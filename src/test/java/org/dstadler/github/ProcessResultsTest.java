@@ -33,7 +33,7 @@ public class ProcessResultsTest {
     }
 
     @Test
-    public void testCompareToPreviousNewRepo() throws IOException {
+    public void testCompareToPreviousNewRepo() {
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
         assertEquals("Had: " + changes, 1, changes.size());
@@ -43,7 +43,7 @@ public class ProcessResultsTest {
     }
 
     @Test
-    public void testCompareToPreviousWithLowerPrevVersion() throws IOException {
+    public void testCompareToPreviousWithLowerPrevVersion() {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15-beta2");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
@@ -54,7 +54,7 @@ public class ProcessResultsTest {
     }
 
     @Test
-    public void testCompareToPreviousWithEqualPrevVersion() throws IOException {
+    public void testCompareToPreviousWithEqualPrevVersion() {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
@@ -62,7 +62,7 @@ public class ProcessResultsTest {
     }
 
     @Test
-    public void testCompareToPreviousWithHigherPrevVersion() throws IOException {
+    public void testCompareToPreviousWithHigherPrevVersion() {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.16");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 

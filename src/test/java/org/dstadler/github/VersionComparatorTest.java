@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class VersionComparatorTest {
     @SuppressWarnings("RedundantStringFormatCall")
     @Test
-    public void compare() throws Exception {
+    public void compare() {
         TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "2.0", false);
         TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.1", false);
         TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "0.9", true);

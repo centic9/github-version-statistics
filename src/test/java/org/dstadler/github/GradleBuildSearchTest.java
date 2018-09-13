@@ -18,7 +18,7 @@ public class GradleBuildSearchTest {
     private final Multimap<String, String> versions = HashMultimap.create();
 
     @Test
-    public void testRegex() throws Exception {
+    public void testRegex() {
         assertFalse(EXCLUDE_PATTERN.matcher("").find());
         assertFalse(EXCLUDE_PATTERN.matcher("compile 'org.apache.poi:poi:3.16-beta1'").find());
 
@@ -31,31 +31,31 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void addVersionSimple() throws Exception {
+    public void addVersionSimple() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "", "1.0");
         assertEquals("{1.0=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionFinal() throws Exception {
+    public void addVersionFinal() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "", "1.0-FINAL");
         assertEquals("{1.0=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionBracket() throws Exception {
+    public void addVersionBracket() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "", "[1.0");
         assertEquals("{1.0=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionVariables() throws Exception {
+    public void addVersionVariables() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "def var = 3.16; '+var", "var");
         assertEquals("{3.16=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionVarBracket() throws Exception {
+    public void addVersionVarBracket() {
         final String url = "http://github.com/centic9/poi-mail-merge";
         final String match = "poiVersion)";
         GradleBuildSearch.addVersion(versions, url, "def poiVersion = 3.16; '+poiVersion)", match);
@@ -63,7 +63,7 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void addVersionInvalidRegex() throws Exception {
+    public void addVersionInvalidRegex() {
         final String url = "http://github.com/centic9/poi-mail-merge";
         final String match = "poiVersion))";
         try {
@@ -75,7 +75,7 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void addVersionInvalidRegex2() throws Exception {
+    public void addVersionInvalidRegex2() {
         final String url = "http://github.com/centic9/poi-mail-merge";
         final String match = "poiVersion)a";
         try {
@@ -87,60 +87,60 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void addVersionDollarVariableBracket() throws Exception {
+    public void addVersionDollarVariableBracket() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "var = '3.16';", "${var}");
         assertEquals("{3.16=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionDollarVariable() throws Exception {
+    public void addVersionDollarVariable() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "var = '3.16';", "$var");
         assertEquals("{3.16=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void addVersionVariablesNotFound() throws Exception {
+    public void addVersionVariablesNotFound() {
         GradleBuildSearch.addVersion(versions, "http://github.com/centic9/poi-mail-merge", "def var = 3.16;", "var");
         assertEquals("{var=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionShort() throws Exception {
+    public void parseVersionShort() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile '" + GROUP + ":poi:3.13");
         assertEquals("{3.13=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionShortVar() throws Exception {
+    public void parseVersionShortVar() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile '" + GROUP + ":poi:' +poiver");
         assertEquals("{poiver=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionNoVersion() throws Exception {
+    public void parseVersionNoVersion() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile 'org.apache.poi:poi'");
         assertEquals("{noVersion=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionNoVersionDoubleQuotes() throws Exception {
+    public void parseVersionNoVersionDoubleQuotes() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile \"org.apache.poi:poi\"");
         assertEquals("{noVersion=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionLong() throws Exception {
+    public void parseVersionLong() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile group: \t '" + GROUP + "', name: 'poi',  version: '3.15'");
         assertEquals("{3.15=[http://github.com/centic9/poi-mail-merge]}", versions.toString());
     }
 
     @Test
-    public void parseVersionNoLog() throws Exception {
+    public void parseVersionNoLog() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", "compile 'fr.opensagres.xdocreport:org.apache.poi.");
         assertEquals("{}", versions.toString());
@@ -151,14 +151,14 @@ public class GradleBuildSearchTest {
     }
 
     @Test
-    public void parseVersionNotFound() throws Exception {
+    public void parseVersionNotFound() {
         new GradleBuildSearch().parseVersion(versions, "http://github.com/centic9/poi-mail-merge",
                 "centic9/poi-mail-merge", GROUP);
         assertEquals("{}", versions.toString());
     }
 
     @Test
-    public void getExcludeRegex() throws Exception {
+    public void getExcludeRegex() {
         String excludeRegex = new GradleBuildSearch().getExcludeRegex();
         assertNotNull(excludeRegex);
 

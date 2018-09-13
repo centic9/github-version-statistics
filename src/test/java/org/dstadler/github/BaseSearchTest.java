@@ -25,7 +25,7 @@ public class BaseSearchTest {
     }
 
     @Test
-    public void testGetRepository() throws Exception {
+    public void testGetRepository() {
         assertNull(BaseSearch.getRepository(""));
         assertNull(BaseSearch.getRepository("some url"));
 

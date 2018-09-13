@@ -71,6 +71,14 @@ public class VersionComparator implements Comparator<String> {
             }
         }
 
+        private static boolean isBeta(CharSequence part) {
+            return StringUtils.startsWithIgnoreCase(part, "BETA");
+        }
+
+        private static boolean isSnapshot(CharSequence part) {
+            return StringUtils.startsWithIgnoreCase(part, "SNAPSHOT");
+        }
+
         @Override
         public int compareTo(Version o) {
             if(major != o.major) {
@@ -136,6 +144,7 @@ public class VersionComparator implements Comparator<String> {
         }
     }
 
+    @SuppressWarnings("ObjectInstantiationInEqualsHashCode")
     @Override
     public final int compare(String var1, String var2) {
         boolean simple1 = var1 != null && SIMPLE_VERSION.matcher(var1).matches();
@@ -172,13 +181,5 @@ public class VersionComparator implements Comparator<String> {
             return 1;
         }
         return var1.compareTo(var2);
-    }
-
-    private static boolean isBeta(CharSequence part) {
-        return StringUtils.startsWithIgnoreCase(part, "BETA");
-    }
-
-    private static boolean isSnapshot(CharSequence part) {
-        return StringUtils.startsWithIgnoreCase(part, "SNAPSHOT");
     }
 }
