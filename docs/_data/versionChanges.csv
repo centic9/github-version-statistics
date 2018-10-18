@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2018-10-19,kai604111/ai-cms,<new>,3.9
+2018-10-19,lujicong/easypoi,<new>,3.10
+2018-10-19,DeepSamLuo/epc-bulk-service,<new>,${poiVersion}
+2018-10-19,gyanaranjan1994/crm-project,<new>,3.16-beta2
+2018-10-19,sachinjosephroy/ParallelTestApp,<new>,3.16-beta2
+2018-10-19,shaikhrafi08/learnseleniumjava,<new>,3.16-beta2
 2018-10-18,orgin1127/terraceHouse,<new>,3.17
 2018-10-18,xiaozhuhead/poi-util,<new>,3.17
 2018-10-18,sadath42/sql-scanner,<new>,4.0.0
