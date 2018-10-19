@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2018-10-20,linkqu/cloudkit-projects,3.17,4.0.0
+2018-10-20,jiazefeng/vesta-new-inter,<new>,3.6
+2018-10-20,jiazefeng/gundam,<new>,3.6
+2018-10-20,biradarpg/POM_Project,<new>,3.16-beta2
 2018-10-19,kai604111/ai-cms,<new>,3.9
 2018-10-19,lujicong/easypoi,<new>,3.10
 2018-10-19,DeepSamLuo/epc-bulk-service,<new>,${poiVersion}
