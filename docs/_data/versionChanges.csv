@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2018-11-12,nanacharya/WebDevelopment,<new>,3.17
+2018-11-12,junyamut/ExtractRideDetailsGrabEReceipt,<new>,3.17
+2018-11-12,rahulmunja8/Rahul_Selenium,<new>,3.17
+2018-11-12,anurag963/automationUI,<new>,4.0.0
+2018-11-12,Madhusudan-Devaraju/HomeSally,<new>,4.0.0
+2018-11-12,LabKey/snprcEHRModules,<new>,${poiVersion}
+2018-11-12,vinodgoyal/PageObjectModel,<new>,3.16-beta2
+2018-11-12,krthkraj7/TestGitHubIntegration,<new>,3.16-beta2
 2018-11-11,sushantdubal/luckystars_android,<new>,3.16
 2018-11-11,wuyongfei-1/gt3server-elastic-search,<new>,4.0.0
 2018-11-11,cdharmale30/datadriventest,<new>,3.9
