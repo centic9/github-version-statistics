@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2018-11-15,training12121212/BaseTest,<new>,3.16
+2018-11-15,sarethrojas/Data-Driven-Excel,<new>,3.16
+2018-11-15,fmillone/candidates-dataimport,<new>,4.0.0
+2018-11-15,aaric/gradle-achieve,<new>,$poiVersion
+2018-11-15,nongwenze/kmysr-shop-old,<new>,3.15
 2018-11-14,imalvisc/alvism-parent,<new>,noVersion
 2018-11-14,annegowda/SKERP,<new>,4.0.0
 2018-11-14,kmellero/DemoRepo,<new>,1.0-beta
