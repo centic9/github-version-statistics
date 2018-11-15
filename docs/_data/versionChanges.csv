@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2018-11-16,ptquynh/ui-test,<new>,3.10.1
+2018-11-16,lgb2460031528/Sign-Server,<new>,3.17
+2018-11-16,xiangzhurui/example-java,3.17,4.0.0
+2018-11-16,lakshmiprasanna555/ExcelUtil,<new>,3.16-beta2
 2018-11-15,training12121212/BaseTest,<new>,3.16
 2018-11-15,sarethrojas/Data-Driven-Excel,<new>,3.16
 2018-11-15,fmillone/candidates-dataimport,<new>,4.0.0
