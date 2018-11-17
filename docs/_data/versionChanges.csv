@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2018-11-18,s-itsol/victoria-type-src-generater,<new>,4.0.0
+2018-11-18,labkey-martyp/svn2git_cnprc,<new>,${poiVersion}
+2018-11-18,nimusha0203/POO-Project,<new>,3.16-beta2
 2018-11-17,flowercitywushuai/two,<new>,3.17
 2018-11-17,bairuifei/exceltoword,<new>,3.17
 2018-11-17,AprogrammingEnthusiast/headoftheheadactivity,<new>,3.15
