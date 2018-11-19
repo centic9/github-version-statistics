@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2018-11-20,ajkarande/DemoRepo,<new>,4.0.0
+2018-11-20,anidmarc/Test,<new>,4.0.0
+2018-11-20,LabKey/cnprcEHRModules,<new>,${poiVersion}
+2018-11-20,anandrocks7/Bonify_AutomationTest,3.9,3.16-beta2
+2018-11-20,pradeepabaqus/mgt-web,<new>,3.16-beta2
+2018-11-20,mitsantosh/TestRepo,<new>,3.16-beta1
 2018-11-19,szb24680/demo,<new>,4.0.0
 2018-11-19,JayantaAutomation/AutomationAssignments,<new>,4.0.0
 2018-11-19,EMENDEZ93/em-learning,<new>,3.9
