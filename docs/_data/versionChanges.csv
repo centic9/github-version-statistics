@@ -1,4 +1,16 @@
 date,repository,versionBefore,versionNow
+2018-11-21,kime900822/COGS-Analysis,<new>,3.16
+2018-11-21,CernuFunk/bbb-modify,<new>,3.17
+2018-11-21,apache/ofbiz-plugins,3.14,3.17
+2018-11-21,gambit135/provingkotlingrounds,<new>,3.17
+2018-11-21,pjfanning/poi-shared-strings,4.0.0,4.0.1
+2018-11-21,PavithraTSB/Assignment,<new>,4.0.0
+2018-11-21,FelStorm21/AC-Team-Match-Splitter,<new>,4.0.0
+2018-11-21,XPlay1990/WordToEA_Converter,<new>,4.0.0
+2018-11-21,tanvisaigal/FreeCRMTestProject,<new>,4.0.0
+2018-11-21,MytOrg/Selenium,<new>,japicmpversion
+2018-11-21,alexmihailov/excel2sql,<new>,3.9
+2018-11-21,fbarbu15/data_driven_simple,<new>,3.6
 2018-11-20,ajkarande/DemoRepo,<new>,4.0.0
 2018-11-20,anidmarc/Test,<new>,4.0.0
 2018-11-20,LabKey/cnprcEHRModules,<new>,${poiVersion}
