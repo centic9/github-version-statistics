@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2019-01-12,quangtn106/auto_research,<new>,3.17
+2019-01-12,rossetti/JSL,<new>,3.17
+2019-01-12,SrinivasSubramaniam/Personal,<new>,4.0.0
+2019-01-12,kkaok/refactoring,<new>,3.7
+2019-01-12,Saumyadip09/TestR,<new>,3.2
+2019-01-12,UniversityofWarwick/tabula,<new>,${poiVersion}
+2019-01-12,snehaautomation/POM,<new>,3.16-beta2
+2019-01-12,murtaza9teen91/UnationWebAutomationFramework,<new>,3.16-beta2
+2019-01-12,shaiktest111/firstproject,<new>,3.16-beta2
 2019-01-11,WestbrookWang/ViewOffice,<new>,3.16
 2019-01-11,AC-MicroServiceClub/FrameworkParentBackend,<new>,3.17
 2019-01-11,cas-bigdatalab/datasync,3.10,3.17
