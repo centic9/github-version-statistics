@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2019-01-27,cuba-platform/fts,<new>,bom.getVersion(
+2019-01-27,Acteur1116/HjyGameApi,<new>,3.16
+2019-01-27,SqaSxd/classes-project,<new>,3.16
+2019-01-27,phuongtailtranminh/xchart-poi-demo,<new>,4.0.1
+2019-01-27,shivam220791/ApplicationTest,<new>,4.0.1
+2019-01-27,Keith-Nirvana/SAhw3,<new>,3.14
+2019-01-27,saikrishna89/POM_Netflix,<new>,3.15
 2019-01-26,xiazunyang/LocalizationTools,<new>,3.15
 2019-01-26,Tejas-10/TejasQA,<new>,3.16-beta2
 2019-01-26,rahulmen/MultiThreading,<new>,3.16-beta2
