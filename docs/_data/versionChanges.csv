@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-01-31,Monkey-D-Jie/MySpringMultiDataSourceDemo,<new>,3.17
+2019-01-31,Greg-Pina/GTM-API,<new>,3.9
+2019-01-31,renga1987/drools,<new>,3.13
+2019-01-31,sudhirzpatil/SeleniumProject,<new>,3.15
+2019-01-31,nexiality/nexial-incubate,<new>,${poiVersion}
 2019-01-30,justinedelson/felix,<new>,3.0.1
 2019-01-30,shenjunjun1121/syhdoctor_server,<new>,3.17
 2019-01-29,ulyant/MyStoreTest,<new>,3.17
