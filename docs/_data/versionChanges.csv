@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-03-04,mikhail-putilov/xlsx-jdbc,<new>,3.17
+2019-03-04,PoojaRajkumar/AcmeProject,<new>,4.0.0
+2019-03-04,jayashreejayachander/proj.pom,<new>,4.0.0
+2019-03-04,cutekiller123/Repo_Name,<new>,4.0.0
+2019-03-04,vijayakula111/Machiene_Learning_Analysis,<new>,${poi.version}
 2019-03-03,sudhakarsh/PLWithProxy,<new>,3.17
 2019-03-03,nabliialaa/heros,<new>,3.17
 2019-03-03,varunmalik82/java-read-excel-vertically-and-horizontally-using-apache-poi,<new>,4.0.1
