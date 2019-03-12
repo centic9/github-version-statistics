@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2019-03-13,swanjala/Gamelbil,<new>,3.17
+2019-03-13,spareservice/spare-admin,<new>,3.17
+2019-03-13,VijayGahlot/VGProjects,<new>,4.0.1
+2019-03-13,camiloducon/pruebaCI,<new>,4.0.1
+2019-03-13,Chethan-Bidare/kaka1,<new>,4.0.1
+2019-03-13,vuhoangjohn/demo-xlsx-to-csv,<new>,4.0.0
+2019-03-13,guangdada/krmall,<new>,3.15
+2019-03-13,zhuquanwen/netty-jprotobuf,<new>,${poiVersion}
+2019-03-13,gsethisp/PageObjectModel-master,<new>,3.16-beta2
 2019-03-12,thankingfor/bzsy-example,<new>,3.17
 2019-03-12,le3t/ko-cloud,<new>,${apachePOI}
 2019-03-12,pradeepnyk/KeywordDrivenFramework,<new>,3.9
