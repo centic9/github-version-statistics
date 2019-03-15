@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2019-03-16,171106-JTA/MainBatch,<new>,3.16
+2019-03-16,wangshiminhome/poidemo,<new>,3.16
+2019-03-16,alvarorgt/CamaraDeComercio,<new>,4.0.1
+2019-03-16,djayaraj123/repository,<new>,4.0.0
+2019-03-16,Luv2C0de/automation-web,<new>,3.16-beta2
+2019-03-16,taverna-incubator/incubator-taverna-common-activities,<new>,${poi.version}
 2019-03-15,denniskkkk/tlogrpt,<new>,3.17
 2019-03-15,Tmasters1581/TestingMasters,<new>,3.13
 2019-03-14,shanmugaananth/selenium3Plus,<new>,3.16
