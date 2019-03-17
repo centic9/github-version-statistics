@@ -23,20 +23,20 @@ configurations {
 
 dependencies {
     compile 'commons-io:commons-io:2.6'
-    compile 'org.apache.commons:commons-lang3:3.8'
-    compile 'org.dstadler:commons-dost:1.0.0.26'
-    compile 'org.kohsuke:github-api:1.94'
+    compile 'org.apache.commons:commons-lang3:3.8.1'
+    compile 'org.dstadler:commons-dost:1.0.0.27'
+    compile 'org.kohsuke:github-api:1.95'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.6'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.6'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.6'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.8'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.8'
 
     testCompile "junit:junit:4.12"
-    testCompile 'org.dstadler:commons-test:1.0.0.15'
+    testCompile 'org.dstadler:commons-test:1.0.0.16'
 }
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.6'
+wrapper {
+    gradleVersion = '4.10.3'
 }
 
 task processResults(type:JavaExec) {
