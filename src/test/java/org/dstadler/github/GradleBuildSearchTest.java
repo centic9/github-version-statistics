@@ -177,7 +177,13 @@ public class GradleBuildSearchTest {
         str = "exclude group: 'org.apache.poi', module: 'poi'";
         assertTrue(str.matches(excludeRegex));
 
+        str = "exclude group:'org.apache.poi',module:'poi'";
+        assertTrue(str.matches(excludeRegex));
+
         str = "org.apache.poi.xwpf.";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "org.apache.poi.javax.";
         assertTrue(str.matches(excludeRegex));
 
         str = "group: 'org.apache.poi', name: 'com.springsource.org.apache.poi'";

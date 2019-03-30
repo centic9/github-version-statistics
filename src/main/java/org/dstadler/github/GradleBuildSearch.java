@@ -25,19 +25,23 @@ public class GradleBuildSearch extends BaseSearch {
 
     // exclude some pattern that caused false versions to be reported,
     // we currently simple remove these from the found file before looking for the version
-    protected static final String EXCLUDE_REGEX = "(?:" +
-            "[\"']" + GROUP_REGEX + ":ooxml-schemas:1\\.\\d+['\"]|" +
+    protected static final String EXCLUDE_REGEX = ("(?:" +
+            '\'' + GROUP_REGEX + ":ooxml-schemas:1\\.\\d+'|" +
             // [group: 'org.apache.poi', name: 'openxml4j', version: '1.0-beta'],
-            "group:\\s*'org.apache.poi',\\s*name:\\s*'openxml4j'|" +
+            "group: 'org.apache.poi', name: 'openxml4j'|" +
             // compile group: 'org.apache.poi', name: 'ooxml-schemas', version: '1.3'
-            "group:\\s*'org.apache.poi',\\s*name:\\s*'ooxml-schemas'|" +
+            "group: 'org.apache.poi', name: 'ooxml-schemas'|" +
             // compile files('libs/org.apache.poi.xwpf.converter.xhtml-1.0.0.jar')
-            GROUP_REGEX + "\\.xwpf\\.|" +
+            // relocate 'javax.xml.namespace', 'org.apache.poi.javax.xml.namespace'
+            GROUP_REGEX + "\\.(xwpf|javax)\\.|" +
             // exclude group: 'org.apache.poi', module: 'poi'
-            "exclude group: [\"']" + GROUP_REGEX + "[\"'], module: [\"'][-a-z]+[\"']|" +
+            "exclude group: '" + GROUP_REGEX + "', module: '[-a-z]+'|" +
             // me: 'com.springsource.jxl', version: '2.6.6',configuration: "compile", ext : "jar" compile group: 'org.apache.poi', name: 'com.springsource.org.apache.poi', version: '3.9.0.FINAL',configuration: "com
-            "group:\\s*[\"']" + GROUP_REGEX + "[\"'],\\s*name:\\s*[\"']com.springsource.org.apache.poi[\"']" +
-            ')';
+            "group: '" + GROUP_REGEX + "', name: 'com.springsource.org.apache.poi'" +
+            ')').
+            // adding \\s* and ["'] everywhere makes reading the strings above hard
+            replace(" ", "\\s*").
+            replace("'", "[\"']");
 
     @Override
     final String getExcludeRegex() {
