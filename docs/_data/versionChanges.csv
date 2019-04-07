@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2019-04-08,mazgajmaciek/excelcomparator,<new>,4.0.1
+2019-04-08,sridharyerra/seleniumprojects,<new>,4.0.1
+2019-04-08,vijayakd/Naveen4-5-19Assignment,<new>,4.0.1
+2019-04-08,TomMD/elastic-elasticsearch,<new>,${versions.poi}
+2019-04-08,acesfullmike/mas,<new>,3.10
+2019-04-08,AgrShashank/FreeCRMTest,<new>,3.16-beta2
 2019-04-07,jianchengwang/tl-lib,<new>,poiVersion
 2019-04-07,tuti133/boitoanweb,<new>,3.17
 2019-04-07,YauheniButurlia/ImportingApp,<new>,3.17
