@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2019-04-20,nessary/other_workplace,<new>,3.17
+2019-04-20,MyamotoMusashi/goals-spring-backend,<new>,3.17
+2019-04-20,umakvdu/Jenkins1,<new>,3.17
+2019-04-20,rachmania/studentblue,<new>,3.17
+2019-04-20,ashishsingh51/modules,<new>,4.0.1
+2019-04-20,liangjingjing1030/pactera2,<new>,3.9
+2019-04-20,erimk/elasticsearch,<new>,${versions.poi}
+2019-04-20,bhavna3001/ArgosUK,<new>,3.16-beta2
 2019-04-19,firegloves/MemPOI,<new>,4.0.1
 2019-04-19,zdavatz/aips2sqlite,<new>,3.9
 2019-04-19,BeeralingaAnimation/flash,<new>,3.16-beta2
