@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProjectStatuses {
+    private static final String FILE_NAME = "upgrades.csv";
+
     private final List<ProjectStatus> projectStatuses = new ArrayList<>();
 
     public void add(ProjectStatus status) {
@@ -30,9 +32,8 @@ public class ProjectStatuses {
         return null;
     }
 
-
     public void read() throws IOException {
-        try (Reader in = new FileReader("upgrades.csv");
+        try (Reader in = new FileReader(FILE_NAME);
              CSVParser parser = CSVFormat.DEFAULT.
                      withFirstRecordAsHeader().
                      parse(in)) {
@@ -45,9 +46,9 @@ public class ProjectStatuses {
     }
 
     public void write() throws IOException {
-        try(Writer out = new FileWriter("upgrade.csv");
-            CSVPrinter printer = CSVFormat.DEFAULT.printer()) {
-            printer.printRecord("Project", "Status");
+        try(Writer out = new FileWriter(FILE_NAME);
+            CSVPrinter printer = CSVFormat.DEFAULT.withHeader("Project", "Status").
+                    print(out)) {
             for (ProjectStatus projectStatus : projectStatuses) {
                 printer.printRecord(projectStatus.getProject(), projectStatus.getStatus());
             }

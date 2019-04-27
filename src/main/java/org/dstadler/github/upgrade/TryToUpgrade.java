@@ -40,7 +40,7 @@ public class TryToUpgrade {
 
         readLines(files, projects);
 
-        System.out.println("Looking at " + projects.size() + " projects");
+        System.out.println("Having " + projects.size() + " unique projects");
 
         Map<String, String> projectsOfInterest = filterForProjectsOfInterest(projects);
 
@@ -108,6 +108,7 @@ public class TryToUpgrade {
                     buildViaMaven(project, localPath);
                 } else {
                     System.out.println("Don't know how to build project " + remoteUrl);
+                    projectStatuses.add(new ProjectStatus(project, UpgradeStatus.UnknownBuildSystem));
                 }
             } catch (ExecuteException e) {
                 e.printStackTrace();
@@ -139,7 +140,9 @@ public class TryToUpgrade {
 
     private static void buildViaGradleWrapper(String project, File localPath) throws IOException {
         try (OutputStream out = createLogFile(project)) {
-            CommandLine cmd = new CommandLine("gradlew");
+            CommandLine cmd = new CommandLine("bash");
+            cmd.addArgument("-c");
+            cmd.addArgument("gradlew");
             cmd.addArgument("check");
             ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
                     0, TimeUnit.HOURS.toMillis(1), out);
