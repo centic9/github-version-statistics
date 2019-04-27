@@ -117,11 +117,7 @@ public class ProcessResults {
 
 
     public static void main(String[] args) throws IOException, ParseException {
-        // read stats
-        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
-        Preconditions.checkNotNull(files);
-
-        Arrays.sort(files);
+        File[] files = getStatsFiles();
 
         Table<String,String,Data> values = HashBasedTable.create();
         Table<String,String,Data> valuesAccumulative = HashBasedTable.create();
@@ -150,6 +146,17 @@ public class ProcessResults {
         writeVersionChanges(changesFile, changes);
 
         System.out.println("Wrote results to " + results + ", " + current + " and " + all);
+    }
+
+    protected static File[] getStatsFiles() {
+        // read stats
+        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
+        Preconditions.checkNotNull(files);
+
+        Arrays.sort(files);
+
+        System.out.println("Found " + files.length + " stats-files");
+        return files;
     }
 
     private static class Data {
