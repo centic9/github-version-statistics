@@ -14,7 +14,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 public class JSONWriter {
-    protected static final ObjectMapper mapper = new ObjectMapper()
+    public static final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new GuavaModule())
             ;
 
@@ -43,7 +43,7 @@ public class JSONWriter {
     }
 
     @SuppressWarnings("unused")
-    protected static class Holder {
+    public static class Holder {
         private String date;
 
         /**

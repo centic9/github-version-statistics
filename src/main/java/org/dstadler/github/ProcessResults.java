@@ -148,7 +148,7 @@ public class ProcessResults {
         System.out.println("Wrote results to " + results + ", " + current + " and " + all);
     }
 
-    protected static File[] getStatsFiles() {
+    public static File[] getStatsFiles() {
         // read stats
         File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
         Preconditions.checkNotNull(files);

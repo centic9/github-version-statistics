@@ -1,9 +1,13 @@
-package org.dstadler.github;
+package org.dstadler.github.upgrade;
 
 import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.dstadler.commons.exec.ExecutionHelper;
+import org.dstadler.github.BaseSearch;
+import org.dstadler.github.JSONWriter;
 import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.ProcessResults;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
 import org.eclipse.jgit.lib.TextProgressMonitor;
@@ -13,6 +17,7 @@ import org.kohsuke.github.GitHub;
 import org.kohsuke.github.HttpException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -24,6 +29,10 @@ import java.util.concurrent.TimeUnit;
 
 public class TryToUpgrade {
     public static void main(String[] args) throws IOException {
+        ProjectStatuses projectStatuses = new ProjectStatuses();
+
+        projectStatuses.read();
+
         File[] files = ProcessResults.getStatsFiles();
 
         // project, version
@@ -37,20 +46,39 @@ public class TryToUpgrade {
 
         System.out.println("Found " + projectsOfInterest.size() + " repositories with stars or watchers");
 
-        cloneBuildAndUpgrade(projectsOfInterest);
+        filterProjects(projectsOfInterest, projectStatuses);
+
+        cloneBuildAndUpgrade(projectsOfInterest, projectStatuses);
+
+        projectStatuses.write();
     }
 
-    private static void cloneBuildAndUpgrade(Map<String, String> projects) throws IOException {
-        for (String project : projects.keySet()) {
-            try {
-                cloneBuildAndUpgradeOneProject(project);
-            } catch (GitAPIException e) {
-                System.out.println("Failed for project " + project + ": " + e);
+    private static void filterProjects(Map<String, String> projectsOfInterest, ProjectStatuses projectStatuses) {
+        Iterator<Map.Entry<String, String>> it = projectsOfInterest.entrySet().iterator();
+        while(it.hasNext()) {
+            Map.Entry<String, String> project = it.next();
+            ProjectStatus projectStatus = projectStatuses.get(project.getKey());
+
+            //noinspection VariableNotUsedInsideIf
+            if(projectStatus != null) {
+                // for now do not try again if we tried a project already
+                it.remove();
             }
         }
     }
 
-    private static void cloneBuildAndUpgradeOneProject(String project) throws IOException, GitAPIException {
+    private static void cloneBuildAndUpgrade(Map<String, String> projects, ProjectStatuses projectStatuses) throws IOException {
+        for (String project : projects.keySet()) {
+            try {
+                cloneBuildAndUpgradeOneProject(project, projectStatuses);
+            } catch (GitAPIException e) {
+                System.out.println("Failed for project " + project + ": " + e);
+                projectStatuses.add(new ProjectStatus(project, UpgradeStatus.NotAccessible));
+            }
+        }
+    }
+
+    private static void cloneBuildAndUpgradeOneProject(String project, ProjectStatuses projectStatuses) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("TestGitRepository", "");
         if(!localPath.delete()) {
@@ -68,32 +96,22 @@ public class TryToUpgrade {
             //noinspection resource
             System.out.println("Having repository: " + result.getRepository().getDirectory());
 
-            if(new File(localPath, "gradlew").exists()) {
-                // build using Gradle Wrapper
-                try (OutputStream out = new FileOutputStream("/tmp/github_build_" + project + ".log")) {
-                    CommandLine cmd = new CommandLine("gradlew");
-                    cmd.addArgument("check");
-                    ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
-                            0, TimeUnit.HOURS.toMillis(1), out);
+            try {
+                if (new File(localPath, "gradlew").exists()) {
+                    // build using Gradle Wrapper
+                    buildViaGradleWrapper(project, localPath);
+                } else if (new File(localPath, "build.gradle").exists()) {
+                    // build using Gradle Wrapper
+                    buildViaGradle(project, localPath);
+                } else if (new File(localPath, "pom.xml").exists()) {
+                    // build using Maven
+                    buildViaMaven(project, localPath);
+                } else {
+                    System.out.println("Don't know how to build project " + remoteUrl);
                 }
-            } else if(new File(localPath, "build.gradle").exists()) {
-                // build using Gradle Wrapper
-                try (OutputStream out = new FileOutputStream("/tmp/github_build_" + project + ".log")) {
-                    CommandLine cmd = new CommandLine("/usr/bin/gradle");
-                    cmd.addArgument("check");
-                    ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
-                            0, TimeUnit.HOURS.toMillis(1), out);
-                }
-            } else if(new File(localPath, "pom.xml").exists()) {
-                // build using Maven
-                try (OutputStream out = new FileOutputStream("/tmp/github_build_" + project + ".log")) {
-                    CommandLine cmd = new CommandLine("/usr/bin/mvn");
-                    cmd.addArgument("package");
-                    ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
-                            0, TimeUnit.HOURS.toMillis(1), out);
-                }
-            } else {
-                System.out.println("Don't know how to build project " + remoteUrl);
+            } catch (ExecuteException e) {
+                e.printStackTrace();
+                projectStatuses.add(new ProjectStatus(project, UpgradeStatus.BuildFailed));
             }
         } finally {
             // clean up here to not keep the sources and build-results
@@ -101,12 +119,43 @@ public class TryToUpgrade {
         }
     }
 
+    private static void buildViaMaven(String project, File localPath) throws IOException {
+        try (OutputStream out = createLogFile(project)) {
+            CommandLine cmd = new CommandLine("/usr/bin/mvn");
+            cmd.addArgument("package");
+            ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
+                    0, TimeUnit.HOURS.toMillis(1), out);
+        }
+    }
+
+    protected static void buildViaGradle(String project, File localPath) throws IOException {
+        try (OutputStream out = createLogFile(project)) {
+            CommandLine cmd = new CommandLine("/usr/bin/gradle");
+            cmd.addArgument("check");
+            ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
+                    0, TimeUnit.HOURS.toMillis(1), out);
+        }
+    }
+
+    private static void buildViaGradleWrapper(String project, File localPath) throws IOException {
+        try (OutputStream out = createLogFile(project)) {
+            CommandLine cmd = new CommandLine("gradlew");
+            cmd.addArgument("check");
+            ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
+                    0, TimeUnit.HOURS.toMillis(1), out);
+        }
+    }
+
+    private static FileOutputStream createLogFile(String project) throws FileNotFoundException {
+        return new FileOutputStream("/tmp/github_build_" + project.replace("/", "_") + ".log");
+    }
+
     private static Map<String, String> filterForProjectsOfInterest(Map<String, String> projects) throws IOException {
         GitHub github = BaseSearch.connect();
 
         Map<String, String> projectsOfInterest = new HashMap<>();
         Iterator<Map.Entry<String, String>> it = projects.entrySet().iterator();
-        for(int i = 0;i < 100;i++) {
+        for(int i = 0;i < 50;i++) {
             Map.Entry<String, String> repo = it.next();
             try {
                 GHRepository repository = github.getRepository(repo.getKey());

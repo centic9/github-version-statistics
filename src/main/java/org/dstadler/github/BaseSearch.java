@@ -141,7 +141,7 @@ public abstract class BaseSearch {
         return matcher.group(1);
     }
 
-    protected static GitHub connect() throws IOException {
+    public static GitHub connect() throws IOException {
         return GitHub.connect();
     }
 }
