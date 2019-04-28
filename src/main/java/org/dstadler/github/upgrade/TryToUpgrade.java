@@ -26,7 +26,7 @@ public class TryToUpgrade {
         // remove projects that were handled before
         filterProjects(projects, projectStatuses);
 
-        System.out.println("Read " + projects.size() + " projects after filtering");
+        System.out.println("Having " + projects.size() + " projects after filtering");
 
         // look for "interesting" projects, currently we use only the ones with stars or watchers
         Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);

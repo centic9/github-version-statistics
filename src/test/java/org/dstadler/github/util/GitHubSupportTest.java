@@ -3,6 +3,7 @@ package org.dstadler.github.util;
 import org.dstadler.github.upgrade.ProjectStatuses;
 import org.dstadler.github.upgrade.UpgradeStatus;
 import org.junit.Test;
+import org.kohsuke.github.HttpException;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ public class GitHubSupportTest {
         projects.put("project/project", "1.0");     // non-existing
         projects.put("muthu1809/RB", "3.16");       // zero stars/watchers
         projects.put("centic9/jgit-cookbook", "1.0");   // has stars/watchers
+        //projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
         Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
@@ -33,5 +35,14 @@ public class GitHubSupportTest {
         assertEquals(UpgradeStatus.NoStarsOrWatchers, projectStatuses.get("muthu1809/RB").getStatus());
         assertNull(projectStatuses.get("centic9/jgit-cookbook"));
         assertEquals(2, projectStatuses.size());
+    }
+
+    @Test(expected = HttpException.class)
+    public void testInvalidProject() throws IOException {
+        Map<String, String> projects = new HashMap<>();
+        projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
+
+        ProjectStatuses projectStatuses = new ProjectStatuses();
+        GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
     }
 }
