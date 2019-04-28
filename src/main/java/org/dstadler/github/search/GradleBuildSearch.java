@@ -1,4 +1,4 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
 import com.google.common.collect.Multimap;
 import org.apache.commons.lang3.StringUtils;

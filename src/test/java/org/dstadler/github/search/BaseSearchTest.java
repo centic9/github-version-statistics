@@ -1,14 +1,15 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
-import static org.junit.Assert.*;
-
-import java.io.IOException;
-
+import com.google.common.collect.Multimap;
 import org.junit.Assume;
 import org.junit.Test;
 import org.kohsuke.github.GitHub;
 
-import com.google.common.collect.Multimap;
+import java.io.IOException;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class BaseSearchTest {
     @Test

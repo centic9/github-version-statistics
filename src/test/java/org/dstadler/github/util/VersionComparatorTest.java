@@ -1,10 +1,13 @@
-package org.dstadler.github;
+package org.dstadler.github.util;
 
 import org.dstadler.commons.testing.TestHelpers;
-import org.dstadler.github.VersionComparator.Version;
+import org.dstadler.github.util.VersionComparator.Version;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.TreeSet;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

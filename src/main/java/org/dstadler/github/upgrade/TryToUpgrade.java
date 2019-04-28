@@ -4,9 +4,8 @@ import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
 import org.dstadler.commons.exec.ExecutionHelper;
-import org.dstadler.github.BaseSearch;
-import org.dstadler.github.JSONWriter;
-import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.search.BaseSearch;
+import org.dstadler.github.util.JSONWriter.Holder;
 import org.dstadler.github.ProcessResults;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -23,7 +22,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -114,6 +112,7 @@ public class TryToUpgrade {
                     projectStatuses.add(new ProjectStatus(project, UpgradeStatus.UnknownBuildSystem));
                 }
             } catch (ExecuteException e) {
+                //noinspection CallToPrintStackTrace
                 e.printStackTrace();
                 projectStatuses.add(new ProjectStatus(project, UpgradeStatus.BuildFailed));
             }

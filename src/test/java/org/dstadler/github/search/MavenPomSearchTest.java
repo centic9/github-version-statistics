@@ -1,11 +1,14 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.junit.Test;
 
-import static org.dstadler.github.MavenPomSearch.PATTERN_NO_VERSION;
-import static org.junit.Assert.*;
+import static org.dstadler.github.search.MavenPomSearch.PATTERN_NO_VERSION;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class MavenPomSearchTest {
     private final Multimap<String, String> versions = HashMultimap.create();

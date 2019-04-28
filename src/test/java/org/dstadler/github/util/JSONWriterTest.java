@@ -1,9 +1,9 @@
-package org.dstadler.github;
+package org.dstadler.github.util;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.io.FileUtils;
-import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.util.JSONWriter.Holder;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class JSONWriterTest {
     private static final String URL_1 = "https://github.com/centic9/poi-mail-merge/blob/074d96b0d798ded4fb349d7fdf301d1d8a4daa2d//build.gradle";

@@ -1,7 +1,8 @@
 package org.dstadler.github;
 
 import com.google.common.collect.SetMultimap;
-import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.util.JSONWriter;
+import org.dstadler.github.util.JSONWriter.Holder;
 import org.dstadler.github.ProcessResults.VersionChange;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.dstadler.github.JSONWriter.addHigherVersions;
+import static org.dstadler.github.util.JSONWriter.addHigherVersions;
 import static org.dstadler.github.ProcessResults.compareToPrevious;
 import static org.junit.Assert.assertEquals;
 

@@ -1,6 +1,7 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
 import com.google.common.collect.Multimap;
+import org.dstadler.github.util.JSONWriter;
 import org.junit.Test;
 import org.kohsuke.github.GitHub;
 
@@ -8,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Date;
 
-import static org.dstadler.github.JSONWriter.DATE_FORMAT;
+import static org.dstadler.github.util.JSONWriter.DATE_FORMAT;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeFalse;
 

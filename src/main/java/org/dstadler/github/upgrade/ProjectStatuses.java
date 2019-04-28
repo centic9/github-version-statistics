@@ -11,12 +11,18 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
+/**
+ * Collection of results from trying to download, build and upgrade projects.
+ *
+ * Can be read from a file to include projects tried before.
+ * Can be written to a file to persist results across runs.
+ */
 public class ProjectStatuses {
     private static final String FILE_NAME = "upgrades.csv";
 
-    private final List<ProjectStatus> projectStatuses = new ArrayList<>();
+    private final Collection<ProjectStatus> projectStatuses = new ArrayList<>();
 
     public void add(ProjectStatus status) {
         projectStatuses.add(status);

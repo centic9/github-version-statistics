@@ -2,7 +2,8 @@ package org.dstadler.github;
 
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.io.FileUtils;
-import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.util.JSONWriter;
+import org.dstadler.github.util.JSONWriter.Holder;
 
 import java.io.File;
 import java.io.IOException;

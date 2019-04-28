@@ -1,4 +1,4 @@
-package org.dstadler.github;
+package org.dstadler.github.util;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;

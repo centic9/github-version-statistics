@@ -1,13 +1,14 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
+import org.dstadler.github.util.JSONWriter;
 import org.kohsuke.github.GitHub;
 
 import java.io.IOException;
 import java.util.Date;
 
-import static org.dstadler.github.JSONWriter.DATE_FORMAT;
+import static org.dstadler.github.util.JSONWriter.DATE_FORMAT;
 
 /**
  * Combined application which calls the various code-searches

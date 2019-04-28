@@ -1,5 +1,14 @@
 package org.dstadler.github.upgrade;
 
+/**
+ * Enumeration for the different results when looking at a project
+ */
 enum UpgradeStatus {
-    BuildFailed,CanUpgrade,UpgradeFailed, NotAccessible, UnknownBuildSystem, BuildSucceeded
+    NotAccessible,
+    UnknownBuildSystem,
+    BuildFailed,
+    BuildSucceeded,
+    CanUpgrade,
+    UpgradeFailed,
+    UpgradePossible,
 }

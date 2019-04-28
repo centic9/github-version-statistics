@@ -5,7 +5,9 @@ import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
-import org.dstadler.github.JSONWriter.Holder;
+import org.dstadler.github.util.JSONWriter;
+import org.dstadler.github.util.JSONWriter.Holder;
+import org.dstadler.github.util.VersionComparator;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -15,7 +17,7 @@ import java.util.*;
 import java.util.Map.Entry;
 import java.util.regex.Pattern;
 
-import static org.dstadler.github.JSONWriter.DATE_FORMAT;
+import static org.dstadler.github.util.JSONWriter.DATE_FORMAT;
 
 public class ProcessResults {
     private static final Date START_DATE;

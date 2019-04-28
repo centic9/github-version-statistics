@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class TryToUpgradeTest {
-    @Ignore
+    @Ignore("Just used for local testing")
     @Test
     public void testLocalBuild() throws IOException {
         TryToUpgrade.buildViaGradle("nd-team/goddess-java", new File("/tmp/TestGitRepository6087905793861044471"));

@@ -1,16 +1,19 @@
-package org.dstadler.github;
+package org.dstadler.github.search;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-
 import org.dstadler.commons.testing.TestHelpers;
 import org.junit.Test;
 
 import java.util.regex.Pattern;
 
-import static org.dstadler.github.BaseSearch.GROUP;
-import static org.dstadler.github.GradleBuildSearch.EXCLUDE_REGEX;
-import static org.junit.Assert.*;
+import static org.dstadler.github.search.BaseSearch.GROUP;
+import static org.dstadler.github.search.GradleBuildSearch.EXCLUDE_REGEX;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class GradleBuildSearchTest {
     private static final Pattern EXCLUDE_PATTERN = Pattern.compile(EXCLUDE_REGEX);

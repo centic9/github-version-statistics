@@ -1,4 +1,4 @@
-package org.dstadler.github;
+package org.dstadler.github.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +8,7 @@ import com.google.common.collect.*;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.dstadler.github.search.BaseSearch;
 
 import java.io.*;
 import java.util.*;
@@ -155,7 +156,7 @@ public class JSONWriter {
      * @param seenRepositoryVersions A set of repositories and their versions as values
      * @param repositoryVersions A multimap with version as key and the matching repositories as value
      */
-    protected static void addHigherVersions(Map<String, String> seenRepositoryVersions, Multimap<String, String> repositoryVersions) {
+    public static void addHigherVersions(Map<String, String> seenRepositoryVersions, Multimap<String, String> repositoryVersions) {
         // entry is <version, repository>
         for (Entry<String, String> entry : repositoryVersions.entries()) {
             String version = seenRepositoryVersions.get(entry.getValue());
