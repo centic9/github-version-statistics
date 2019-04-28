@@ -3,7 +3,7 @@ package org.dstadler.github.upgrade;
 /**
  * Enumeration for the different results when looking at a project
  */
-enum UpgradeStatus {
+public enum UpgradeStatus {
     NotAccessible,
     UnknownBuildSystem,
     BuildFailed,
@@ -11,4 +11,5 @@ enum UpgradeStatus {
     CanUpgrade,
     UpgradeFailed,
     UpgradePossible,
+    NoStarsOrWatchers,
 }

@@ -4,7 +4,7 @@ package org.dstadler.github.upgrade;
  * Information about one project, mostly GitHub-name and any result from
  * trying to download, build and upgrade the project
  */
-class ProjectStatus {
+public class ProjectStatus {
     private final String project;
     private final UpgradeStatus status;
 

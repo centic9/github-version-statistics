@@ -38,8 +38,12 @@ public class ProjectStatuses {
         return null;
     }
 
-    public void read() throws IOException {
-        try (Reader in = new FileReader(FILE_NAME);
+    public int size() {
+        return projectStatuses.size();
+    }
+
+    public void read(String fileName) throws IOException {
+        try (Reader in = new FileReader(fileName);
              CSVParser parser = CSVFormat.DEFAULT.
                      withFirstRecordAsHeader().
                      parse(in)) {
@@ -49,6 +53,12 @@ public class ProjectStatuses {
                 projectStatuses.add(status);
             }
         }
+    }
+
+    public static ProjectStatuses read() throws IOException {
+        ProjectStatuses projectStatuses = new ProjectStatuses();
+        projectStatuses.read(FILE_NAME);
+        return projectStatuses;
     }
 
     public void write() throws IOException {

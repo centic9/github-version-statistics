@@ -12,9 +12,7 @@ import java.util.Map;
 
 public class TryToUpgrade {
     public static void main(String[] args) throws IOException {
-        ProjectStatuses projectStatuses = new ProjectStatuses();
-
-        projectStatuses.read();
+        ProjectStatuses projectStatuses = ProjectStatuses.read();
 
         File[] files = Stats.getFiles();
 
@@ -23,16 +21,20 @@ public class TryToUpgrade {
 
         readLines(files, projects);
 
-        System.out.println("Having " + projects.size() + " unique projects");
+        System.out.println("Read " + projects.size() + " unique projects from " + files.length + " stats-files");
 
-        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects);
+        // remove projects that were handled before
+        filterProjects(projects, projectStatuses);
+
+        // look for "interesting" projects, currently we use only the ones with stars or watchers
+        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
 
         System.out.println("Found " + projectsOfInterest.size() + " repositories with stars or watchers");
 
-        filterProjects(projectsOfInterest, projectStatuses);
-
+        // now try to build and upgrade them
         ProjectBuilder.cloneBuildAndUpgrade(projectsOfInterest, projectStatuses);
 
+        // persist resulting list of projects and their state to not re-do the work for them
         projectStatuses.write();
     }
 
