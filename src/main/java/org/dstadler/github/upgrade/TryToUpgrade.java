@@ -38,6 +38,8 @@ public class TryToUpgrade {
 
         // persist resulting list of projects and their state to not re-do the work for them
         projectStatuses.write();
+
+        System.out.println("Done, having " + projectStatuses.size() + " results overall now");
     }
 
     private static void filterProjects(Map<String, String> projectsOfInterest, ProjectStatuses projectStatuses) {

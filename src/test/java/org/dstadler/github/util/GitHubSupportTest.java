@@ -15,21 +15,23 @@ public class GitHubSupportTest {
     @Test
     public void testFilter() throws IOException {
         Map<String, String> projects = new HashMap<>();
-        projects.put("project/project", "1.0");
-        projects.put("centic9/jgit-cookbook", "1.0");
+        projects.put("project/project", "1.0");     // non-existing
+        projects.put("muthu1809/RB", "3.16");       // zero stars/watchers
+        projects.put("centic9/jgit-cookbook", "1.0");   // has stars/watchers
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
         Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
 
         assertEquals("Original map not changed, but had: " + projects,
-                2, projects.size());
+                3, projects.size());
 
-        assertEquals("One project should be filtered out, but had: " + projects,
+        assertEquals("Two projects should be filtered out, but had: " + projects,
                 1, projectsOfInterest.size());
         assertEquals("1.0", projectsOfInterest.get("centic9/jgit-cookbook"));
 
         assertEquals(UpgradeStatus.NotAccessible, projectStatuses.get("project/project").getStatus());
+        assertEquals(UpgradeStatus.NoStarsOrWatchers, projectStatuses.get("muthu1809/RB").getStatus());
         assertNull(projectStatuses.get("centic9/jgit-cookbook"));
-        assertEquals(1, projectStatuses.size());
+        assertEquals(2, projectStatuses.size());
     }
 }
