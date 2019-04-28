@@ -42,7 +42,6 @@ public class JSONWriter {
         }
     }
 
-    @SuppressWarnings("unused")
     public static class Holder {
         private String date;
 
@@ -54,6 +53,7 @@ public class JSONWriter {
          */
         private SetMultimap<String, String> versions;
 
+        @SuppressWarnings("unused")
         public Holder() {
         }
 
@@ -99,6 +99,26 @@ public class JSONWriter {
                 repositories.put(entry.getKey(), BaseSearch.getRepository(entry.getValue()));
             }
             return repositories;
+        }
+
+        /**
+         * Read the contents of the stats-file and add it to the map of GitHub-project name
+         * and version
+         *
+         * @param projects The map to populate with the projects from the given stats file
+         * @param file The JSON-file to read.
+         * @throws IOException If reading the file fails.
+         */
+        public static void readFile(Map<String, String> projects, File file) throws IOException {
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
+
+            for (String line : lines) {
+                Holder holder = mapper.readValue(line, Holder.class);
+
+                for (Map.Entry<String, String> entry : holder.getRepositoryVersions().entries()) {
+                    projects.put(entry.getValue(), entry.getKey());
+                }
+            }
         }
     }
 

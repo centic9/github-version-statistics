@@ -80,7 +80,7 @@ public class TryToUpgrade {
 
     private static void cloneBuildAndUpgradeOneProject(String project, ProjectStatuses projectStatuses) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
-        File localPath = File.createTempFile("TestGitRepository", "");
+        File localPath = File.createTempFile("UpgradeGitRepository" + project, "");
         if(!localPath.delete()) {
             throw new IOException("Could not delete temporary file " + localPath);
         }
@@ -100,12 +100,15 @@ public class TryToUpgrade {
                 if (new File(localPath, "gradlew").exists()) {
                     // build using Gradle Wrapper
                     buildViaGradleWrapper(project, localPath);
+                    projectStatuses.add(new ProjectStatus(project, UpgradeStatus.BuildSucceeded));
                 } else if (new File(localPath, "build.gradle").exists()) {
                     // build using Gradle Wrapper
                     buildViaGradle(project, localPath);
+                    projectStatuses.add(new ProjectStatus(project, UpgradeStatus.BuildSucceeded));
                 } else if (new File(localPath, "pom.xml").exists()) {
                     // build using Maven
                     buildViaMaven(project, localPath);
+                    projectStatuses.add(new ProjectStatus(project, UpgradeStatus.BuildSucceeded));
                 } else {
                     System.out.println("Don't know how to build project " + remoteUrl);
                     projectStatuses.add(new ProjectStatus(project, UpgradeStatus.UnknownBuildSystem));
@@ -183,15 +186,7 @@ public class TryToUpgrade {
 
     protected static void readLines(File[] files, Map<String, String> projects) throws IOException {
         for(File file : files) {
-            List<String> lines = FileUtils.readLines(file, "UTF-8");
-
-            for (String line : lines) {
-                Holder holder = JSONWriter.mapper.readValue(line, Holder.class);
-
-                for (Map.Entry<String, String> entry : holder.getRepositoryVersions().entries()) {
-                    projects.put(entry.getValue(), entry.getKey());
-                }
-            }
+            Holder.readFile(projects, file);
         }
     }
 }
