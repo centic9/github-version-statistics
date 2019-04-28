@@ -17,7 +17,15 @@ public class TryToUpgradeTest {
     @Ignore("Just used for local testing")
     @Test
     public void testLocalBuild() throws IOException {
-        ProjectBuilder.buildViaGradle("nd-team/goddess-java", new File("/tmp/TestGitRepository6087905793861044471"));
+        ProjectBuilder.buildViaGradleWrapper("Aiybe/PDFData",
+                new File("/tmp/PDFData10440014023250259522"));
+    }
+
+    @Ignore("Just used for local testing")
+    @Test
+    public void testLocalCloneAndBuild() throws Exception {
+        ProjectStatuses statuses = new ProjectStatuses();
+        ProjectBuilder.cloneBuildAndUpgradeOneProject("Aiybe/PDFData", statuses);
     }
 
     @Test

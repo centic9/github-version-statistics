@@ -30,7 +30,7 @@ public class ProjectBuilder {
         }
     }
 
-    private static void cloneBuildAndUpgradeOneProject(String project, ProjectStatuses projectStatuses) throws IOException, GitAPIException {
+    protected static void cloneBuildAndUpgradeOneProject(String project, ProjectStatuses projectStatuses) throws IOException, GitAPIException {
         // prepare a new folder for the cloned repository
         File localPath = File.createTempFile("UpgradeGitRepository" + project, "");
         if(!localPath.delete()) {
@@ -75,7 +75,7 @@ public class ProjectBuilder {
         }
     }
 
-    private static void buildViaMaven(String project, File localPath) throws IOException {
+    protected static void buildViaMaven(String project, File localPath) throws IOException {
         CommandLine cmd = new CommandLine("/usr/bin/mvn");
         cmd.addArgument("package");
 
@@ -89,8 +89,15 @@ public class ProjectBuilder {
         executeBuild(project, localPath, cmd);
     }
 
-    private static void buildViaGradleWrapper(String project, File localPath) throws IOException {
-        CommandLine cmd = new CommandLine("bash");
+    protected static void buildViaGradleWrapper(String project, File localPath) throws IOException {
+        // make script executable
+        CommandLine cmd = new CommandLine("chmod");
+        cmd.addArgument("a+x");
+        cmd.addArgument("./gradlew");
+
+        executeBuild(project, localPath, cmd);
+
+        cmd = new CommandLine("bash");
         cmd.addArgument("-c");
         cmd.addArgument("./gradlew");
         cmd.addArgument("check");
@@ -100,7 +107,7 @@ public class ProjectBuilder {
 
     private static void executeBuild(String project, File localPath, CommandLine cmd) throws IOException {
         try (OutputStream out = createLogFile(project)) {
-            out.write(cmd.toString().getBytes(StandardCharsets.UTF_8));
+            out.write((cmd + "\n").getBytes(StandardCharsets.UTF_8));
 
             ExecutionHelper.getCommandResultIntoStream(cmd, localPath,
                     0, TimeUnit.HOURS.toMillis(1), out);
