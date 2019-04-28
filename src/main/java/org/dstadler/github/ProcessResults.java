@@ -1,20 +1,32 @@
 package org.dstadler.github;
 
 import com.google.common.base.Preconditions;
-import com.google.common.collect.*;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
+import com.google.common.collect.Table;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.WildcardFileFilter;
 import org.apache.commons.lang3.time.DateUtils;
 import org.dstadler.github.util.JSONWriter;
 import org.dstadler.github.util.JSONWriter.Holder;
+import org.dstadler.github.util.Stats;
 import org.dstadler.github.util.VersionComparator;
 
 import java.io.File;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Pattern;
 
 import static org.dstadler.github.util.JSONWriter.DATE_FORMAT;
@@ -119,7 +131,7 @@ public class ProcessResults {
 
 
     public static void main(String[] args) throws IOException, ParseException {
-        File[] files = getStatsFiles();
+        File[] files = Stats.getFiles();
 
         Table<String,String,Data> values = HashBasedTable.create();
         Table<String,String,Data> valuesAccumulative = HashBasedTable.create();
@@ -148,17 +160,6 @@ public class ProcessResults {
         writeVersionChanges(changesFile, changes);
 
         System.out.println("Wrote results to " + results + ", " + current + " and " + all);
-    }
-
-    public static File[] getStatsFiles() {
-        // read stats
-        File[] files = JSONWriter.STATS_DIR.listFiles((FilenameFilter)new WildcardFileFilter("stats*.json"));
-        Preconditions.checkNotNull(files);
-
-        Arrays.sort(files);
-
-        System.out.println("Found " + files.length + " stats-files");
-        return files;
     }
 
     private static class Data {

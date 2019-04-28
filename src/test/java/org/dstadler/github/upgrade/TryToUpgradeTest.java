@@ -1,6 +1,6 @@
 package org.dstadler.github.upgrade;
 
-import org.dstadler.github.ProcessResults;
+import org.dstadler.github.util.Stats;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -17,12 +17,12 @@ public class TryToUpgradeTest {
     @Ignore("Just used for local testing")
     @Test
     public void testLocalBuild() throws IOException {
-        TryToUpgrade.buildViaGradle("nd-team/goddess-java", new File("/tmp/TestGitRepository6087905793861044471"));
+        ProjectBuilder.buildViaGradle("nd-team/goddess-java", new File("/tmp/TestGitRepository6087905793861044471"));
     }
 
     @Test
     public void testReadLines() throws IOException {
-        File[] files = ProcessResults.getStatsFiles();
+        File[] files = Stats.getFiles();
         Map<String, String> projects = new HashMap<>();
 
         TryToUpgrade.readLines(
