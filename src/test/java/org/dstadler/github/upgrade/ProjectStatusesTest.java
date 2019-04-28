@@ -1,0 +1,32 @@
+package org.dstadler.github.upgrade;
+
+import org.junit.Test;
+
+import java.io.IOException;
+
+import static org.junit.Assert.*;
+
+public class ProjectStatusesTest {
+    @Test
+    public void test() {
+        ProjectStatuses statuses = new ProjectStatuses();
+        assertNull(statuses.get("project1"));
+        statuses.add(new ProjectStatus("project2", UpgradeStatus.BuildSucceeded));
+
+        assertNull(statuses.get("project1"));
+        ProjectStatus project2 = statuses.get("project2");
+        assertEquals("project2", project2.getProject());
+        assertEquals(UpgradeStatus.BuildSucceeded, project2.getStatus());
+    }
+
+    @Test
+    public void testReadWrite() throws IOException {
+        ProjectStatuses statuses = new ProjectStatuses();
+        statuses.read();
+
+        assertNotNull(statuses.get("blezek/Notion"));
+
+        // for now only write the same data back
+        statuses.write();
+    }
+}
