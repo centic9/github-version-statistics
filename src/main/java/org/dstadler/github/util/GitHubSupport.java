@@ -20,7 +20,7 @@ public class GitHubSupport {
 
         Map<String, String> projectsOfInterest = new HashMap<>();
         Iterator<Map.Entry<String, String>> it = projects.entrySet().iterator();
-        for(int i = 0;i < 50 && it.hasNext();i++) {
+        for(int i = 0;i < 100 && it.hasNext();i++) {
             Map.Entry<String, String> repo = it.next();
             try {
                 GHRepository repository = github.getRepository(repo.getKey());
