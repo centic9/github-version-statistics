@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2019-04-30,GitHub4Peter/wust-spring-cloud,<new>,3.10.1
+2019-04-30,teamnugen/nextgen,<new>,3.17
+2019-04-30,Jeansding/elasticsearch,<new>,${versions.poi}
+2019-04-30,producted/spring,<new>,3.13
 2019-04-29,Avishekkj/Selenium,<new>,3.6
 2019-04-29,ZS9527/idea-daily-accumulation,<new>,3.10
 2019-04-29,Cobbleopolis/SWE3643GroupProject,<new>,4.1.0
