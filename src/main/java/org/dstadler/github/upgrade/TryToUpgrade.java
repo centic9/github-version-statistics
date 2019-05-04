@@ -29,7 +29,8 @@ public class TryToUpgrade {
         System.out.println("Having " + projects.size() + " projects after filtering");
 
         // look for "interesting" projects, currently we use only the ones with stars or watchers
-        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
+        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses,
+                300);
 
         System.out.println("Found " + projectsOfInterest.size() + " repositories with stars or watchers");
 

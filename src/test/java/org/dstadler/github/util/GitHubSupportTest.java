@@ -22,7 +22,7 @@ public class GitHubSupportTest {
         //projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
-        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
+        Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
 
         assertEquals("Original map not changed, but had: " + projects,
                 3, projects.size());
@@ -43,6 +43,6 @@ public class GitHubSupportTest {
         projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
-        GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses);
+        GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
     }
 }

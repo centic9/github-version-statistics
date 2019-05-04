@@ -15,12 +15,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class GitHubSupport {
-    public static Map<String, String> filterForProjectsOfInterest(Map<String, String> projects, ProjectStatuses projectStatuses) throws IOException {
+    public static Map<String, String> filterForProjectsOfInterest(Map<String, String> projects, ProjectStatuses projectStatuses, int maxProjects) throws IOException {
         GitHub github = BaseSearch.connect();
 
         Map<String, String> projectsOfInterest = new HashMap<>();
         Iterator<Map.Entry<String, String>> it = projects.entrySet().iterator();
-        for(int i = 0;i < 100 && it.hasNext();i++) {
+        for(int i = 0; i < maxProjects && it.hasNext(); i++) {
             Map.Entry<String, String> repo = it.next();
             try {
                 GHRepository repository = github.getRepository(repo.getKey());
