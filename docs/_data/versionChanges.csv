@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2019-05-10,sanjanas1/DemoKeySelenium,<new>,4.0.0
+2019-05-10,shsaha/Data_Driven_Testing_Grid_and_Docker,<new>,3.6
+2019-05-10,Carambis/imageMathCheck,<new>,4.1.0
+2019-05-10,tsjensen/abfall,<new>,4.1.0
+2019-05-10,stuckata/android-bundle-parser,<new>,4.1.0
+2019-05-10,sreshtha3004/FreeCRMTest,<new>,3.16-beta2
 2019-05-09,yakworks/grails-jasper-reports,3.9,versionPoi
 2019-05-09,junyamut/CreatePowerPointSlideShowFromExcelList,<new>,3.17
 2019-05-09,mrsyedhasan/alexaPrice,<new>,3.17
