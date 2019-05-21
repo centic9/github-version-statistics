@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-05-22,piglete/boots,<new>,3.17
+2019-05-22,cos2a/quick-sigma-micorservice,<new>,${apachePOI}
+2019-05-22,fuseAware/appium-ios-fat,<new>,4.0.0
+2019-05-22,ChenHouZhen/spring-boot-example,<new>,4.0.0
+2019-05-22,dpozinen/pass-hack,<new>,4.1.0
 2019-05-21,VasuSelenium1/Maven2,<new>,3.17
 2019-05-21,StockAccounting/Selenium,<new>,3.17
 2019-05-21,bhosaleaarti/BDD,<new>,3.17
