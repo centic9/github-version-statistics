@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2019-05-29,sigmako/quick-sigma-micorservice,<new>,${apachePOI}
+2019-05-29,shankar184/netBankingv1,<new>,4.0.1
+2019-05-29,Smrutips/automation,<new>,3.12
+2019-05-29,surbhi-garg/test,<new>,4.1.0
+2019-05-29,ramagirisrikanth/Gitdemo,<new>,4.1.0
+2019-05-29,rncyjsph/NewRepo,<new>,4.1.0
+2019-05-29,rmeda236/FreeCRMRepo,<new>,3.16-beta2
+2019-05-29,shariarqa/restApi_Java_Framework,<new>,3.16-beta2
 2019-05-28,StockAccoun/guru,<new>,3.17
 2019-05-28,xigexb/case,<new>,4.1.0
 2019-05-28,panache-chinmay/Selenium,<new>,3.16-beta2
