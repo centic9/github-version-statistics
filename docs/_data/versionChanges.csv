@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2019-05-30,xuxucong/syhb,<new>,3.8-beta4
+2019-05-30,bdhillon2390/Gmail_Automate,<new>,3.16
+2019-05-30,jacsonteixeira/projeto-exemplo-selenium,<new>,3.17
+2019-05-30,harshsethi/Automation,<new>,4.0.1
+2019-05-30,wic-key/Testcase-for-flipkart,<new>,3.10
+2019-05-30,xuxucong/llwhh,<new>,${poiVersion}
 2019-05-29,sigmako/quick-sigma-micorservice,<new>,${apachePOI}
 2019-05-29,shankar184/netBankingv1,<new>,4.0.1
 2019-05-29,Smrutips/automation,<new>,3.12
