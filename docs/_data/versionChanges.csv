@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-06-01,anandpatole/pdfcreation,<new>,3.9
+2019-06-01,codexehan/java-related,<new>,3.9
+2019-06-01,Nalinakshee/SCC3CapsuleCRM,<new>,3.9
+2019-06-01,smartan/elasticsearch-7.0,<new>,${versions.poi}
+2019-06-01,suchangwei1/trade2,<new>,$poiVersion
 2019-05-31,StkAccounting/Accounting,<new>,3.17
 2019-05-31,Anshuman1990/Digit-Recognition,<new>,4.1.0
 2019-05-30,xuxucong/syhb,<new>,3.8-beta4
