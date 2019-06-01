@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2019-06-02,tvajjala/decision-tables,<new>,${poiVersion}
 2019-06-01,anandpatole/pdfcreation,<new>,3.9
 2019-06-01,codexehan/java-related,<new>,3.9
 2019-06-01,Nalinakshee/SCC3CapsuleCRM,<new>,3.9
