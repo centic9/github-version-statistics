@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-06-04,Galifbdchad/POM,<new>,3.17
+2019-06-04,zengl123/young-module,<new>,3.17
+2019-06-04,zaghir/excel-with-poi,<new>,3.15
+2019-06-04,ranjithsekar/java-xml-parser,<new>,4.1.0
+2019-06-04,varunhiriyannaiah/EclipseWorkspace,<new>,3.16-beta2
 2019-06-03,nezam83uddin/MavenAutomation,<new>,3.17
 2019-06-03,yohankarunathilaka/SeleniumProject1,<new>,4.0.1
 2019-06-03,RyeField/elastic_test,<new>,${versions.poi}
