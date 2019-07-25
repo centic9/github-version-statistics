@@ -23,8 +23,8 @@ configurations {
 
 dependencies {
     compile 'commons-io:commons-io:2.6'
-    compile 'org.apache.commons:commons-lang3:3.8.1'
-    compile 'org.apache.commons:commons-csv:1.6'
+    compile 'org.apache.commons:commons-lang3:3.9'
+    compile 'org.apache.commons:commons-csv:1.7'
 
     compile 'org.dstadler:commons-dost:1.0.0.27'
     compile 'org.kohsuke:github-api:1.95'
