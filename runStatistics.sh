@@ -11,5 +11,5 @@ rm -rf build && \
 ./gradlew --no-daemon check installDist && \
 build/install/github-version-statistics/bin/github-version-statistics && \
 ./gradlew --no-daemon processResults && \
-git add stats* && git add docs && git ci -m "Add daily results" && \
+git add stats* && git add docs && git ci -m "[ci skip] Add daily results" && \
 git push
