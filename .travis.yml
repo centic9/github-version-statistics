@@ -8,7 +8,6 @@ jdk:
 
 before_install:
  - chmod +x gradlew
- - touch ~/.github
 
 script:
   - ./gradlew check installDist
