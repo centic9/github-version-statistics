@@ -42,7 +42,7 @@ Then you can run it via
 be done for other buildsystems that use declarative dependencies of third-party libraries,
  e.g. Apache Ivy
 * The GitHub API currently limits the number of results to 1000, so you only 
-get 1000 results at max per type of buildsystem and the statistics for popular 
+get 1000 results at max per type of buildsystem and thus the statistics for popular 
 Java libraries will not be complete.
 
 ## Cron-entry to run the job every night
@@ -62,7 +62,7 @@ send pull requests or create [issues](https://github.com/centic9/github-version-
 
 #### Licensing
 
-   Copyright 2013-2017 Dominik Stadler
+   Copyright 2013-2019 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
