@@ -3,6 +3,7 @@ package org.dstadler.github.upgrade;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.ExecuteException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.dstadler.commons.exec.ExecutionHelper;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -91,18 +92,27 @@ public class ProjectBuilder {
 
     protected static void buildViaGradleWrapper(String project, File localPath) throws IOException {
         // make script executable
-        CommandLine cmd = new CommandLine("chmod");
-        cmd.addArgument("a+x");
-        cmd.addArgument("./gradlew");
+        if(SystemUtils.IS_OS_WINDOWS) {
+            CommandLine cmd = new CommandLine("cmd");
+            cmd.addArgument("/c");
+            cmd.addArgument("gradlew.bat");
+            cmd.addArgument("check");
 
-        executeBuild(project, localPath, cmd);
+            executeBuild(project, localPath, cmd);
+        } else {
+            CommandLine cmd = new CommandLine("chmod");
+            cmd.addArgument("a+x");
+            cmd.addArgument("./gradlew");
 
-        cmd = new CommandLine("bash");
-        cmd.addArgument("-c");
-        cmd.addArgument("./gradlew");
-        cmd.addArgument("check");
+            executeBuild(project, localPath, cmd);
 
-        executeBuild(project, localPath, cmd);
+            cmd = new CommandLine("bash");
+            cmd.addArgument("-c");
+            cmd.addArgument("./gradlew");
+            cmd.addArgument("check");
+
+            executeBuild(project, localPath, cmd);
+        }
     }
 
     private static void executeBuild(String project, File localPath, CommandLine cmd) throws IOException {
@@ -115,6 +125,6 @@ public class ProjectBuilder {
     }
 
     private static FileOutputStream createLogFile(String project) throws FileNotFoundException {
-        return new FileOutputStream("/tmp/github_build_" + project.replace("/", "_") + ".log");
+        return new FileOutputStream(System.getProperty("java.io.tmpdir") + "/github_build_" + project.replace("/", "_") + ".log");
     }
 }
