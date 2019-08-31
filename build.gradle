@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'org.dstadler.github.Search'
+mainClassName = 'org.dstadler.github.search.Search'
 
 sourceCompatibility = 1.8
 
@@ -31,11 +31,11 @@ dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.2.1.201812262042-r'
     compile 'org.slf4j:slf4j-simple:1.7.26'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.8'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.8'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.9'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.9.1'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.8'
 
-    testCompile "junit:junit:4.12"
+    testCompile 'junit:junit:4.12'
     testCompile 'org.dstadler:commons-test:1.0.0.16'
 }
 
