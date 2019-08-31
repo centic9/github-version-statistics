@@ -1,3 +1,3 @@
 *.sh text eol=lf
 gradlew text eol=lf
-*.csv text eol=lf
+*.csv text eol=crlf
