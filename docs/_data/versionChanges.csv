@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2019-09-04,ten-ken/java-wheel,<new>,3.17
+2019-09-04,rohitmodeltown/TestAutomation,<new>,3.7
+2019-09-04,DBGzxx1001/elasticsearch1,<new>,${versions.poi}
+2019-09-04,hkanduri/Demorep,<new>,3.16-beta2
+2019-09-04,BharathKoneru471/FreeCrmPageObjectModel,<new>,3.16-beta2
+2019-09-04,IshanSharma-123/Web-Practise,<new>,3.16-beta2
+2019-09-04,zdanxsm/AutoTest_UI,<new>,3.16-beta2
+2019-09-04,madhumohan/PageObjectModel,<new>,3.16-beta2
+2019-09-04,sandeshlamsal/Java_Selenium_PageObjetModel_CRM_Hybrid,<new>,3.16-beta2
+2019-09-04,yashu0906/sample2,<new>,3.16-beta2
 2019-09-03,Abhai0999/MyMavenActitime,<new>,4.1.0
 2019-09-02,venkatunr/DataDriven,<new>,3.17
 2019-09-02,ManjunathMGowda92/maven-multi-modules-projects,<new>,4.0.1
