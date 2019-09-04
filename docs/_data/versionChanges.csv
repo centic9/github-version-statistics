@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2019-09-05,Gmaan2/testrepo2,<new>,3.17
+2019-09-05,saranyashanmugam04/sample123,<new>,4.0.1
+2019-09-05,Linyuzai/jpoi,<new>,4.1.0
+2019-09-05,natrajan0409/Maveen1,<new>,4.1.0
+2019-09-05,dipakkumar1225/CustomReportWithExtentReport,<new>,4.1.0
+2019-09-05,jmintegr1/Maven-Motor-,<new>,3.16-beta2
 2019-09-04,ten-ken/java-wheel,<new>,3.17
 2019-09-04,rohitmodeltown/TestAutomation,<new>,3.7
 2019-09-04,DBGzxx1001/elasticsearch1,<new>,${versions.poi}
