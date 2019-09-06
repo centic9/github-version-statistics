@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2019-09-07,li123sai/osp,<new>,3.9
+2019-09-07,rqwxin/albedo-boot,<new>,3.9
+2019-09-07,kavinkumarmani/SathyaPOM,<new>,4.1.0
 2019-09-06,Linfini/Lin,<new>,3.17
 2019-09-06,amarjeetsingh0110/Hallwaze,<new>,3.6
 2019-09-06,cihaneraslan/test,<new>,${versions.poi}
