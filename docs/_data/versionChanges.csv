@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2019-11-08,axbaretto/drill,<new>,3.17
+2019-11-08,qanegisandeep/SplashmathDemoRepo,<new>,3.9
+2019-11-08,KunBetter/elasticsearch-7.4.0-study,<new>,${versions.poi}
+2019-11-08,jesussalatiel/QA-Automation-Samples,<new>,4.1.0
+2019-11-08,gurupreeth6/AmazonAddBestSeller,<new>,4.1.0
+2019-11-08,JeyhunAli/Selenium-Basics-,<new>,4.1.0
+2019-11-08,thsalsgh1234/MavenProject,<new>,4.1.1
+2019-11-08,shubham7105/ShubAvactis,<new>,3.16-beta2
 2019-11-07,mohit6350/excelParser,<new>,3.17
 2019-11-07,ravilella1234/demo,<new>,3.17
 2019-11-07,ravilella1234/March_6_30AM_Batch,<new>,3.17
