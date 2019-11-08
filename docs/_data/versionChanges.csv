@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2019-11-09,jontycristo/Java-and-Selenium,<new>,3.17
+2019-11-09,VijayUndrajavarapu/DataDrivenFramework,<new>,3.9
+2019-11-09,ylvaldes/FacturatoWaller,<new>,3.15
+2019-11-09,Prachi176/GCR-Website-Selenium-Code,<new>,3.16-beta2
+2019-11-09,hkharoon78/MonsterIndia,<new>,3.16-beta2
+2019-11-09,arunqa2016/TGHybridListener,<new>,3.16-beta2
+2019-11-09,abhishekbun/SeleniumCodingChallange3_Abhishek,<new>,3.16-beta2
+2019-11-09,Chi10ya/onlineShopAuto,<new>,3.16-beta2
+2019-11-09,adguser/DemoRepo1,<new>,3.16-beta2
+2019-11-09,sonti-hanumanth/automation-tasks,<new>,3.16-beta2
 2019-11-08,axbaretto/drill,<new>,3.17
 2019-11-08,qanegisandeep/SplashmathDemoRepo,<new>,3.9
 2019-11-08,KunBetter/elasticsearch-7.4.0-study,<new>,${versions.poi}
