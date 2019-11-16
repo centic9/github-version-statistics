@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2019-11-17,rongdi/poi-example,<new>,noVersion
+2019-11-17,xiaohai-pig/elasticsearch,<new>,${versions.poi}
+2019-11-17,ravikirandomala/myrepository,<new>,4.1.0
+2019-11-17,pradeepkumar90/Automation_Selenium,<new>,4.1.1
 2019-11-16,Subham-sahoo/Subham-,<new>,4.0.0
 2019-11-16,socar-jace/kotlin_practice,<new>,${poiVersion}
 2019-11-16,Tahayari/ToolsWeb,<new>,4.1.1
