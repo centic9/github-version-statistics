@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2019-12-18,javasoftarun/MediCare,<new>,3.17
+2019-12-18,tkzc0552/MFW2.0,<new>,$poi_version
+2019-12-18,AlexBobko/erip,<new>,${poiVersion}
+2019-12-18,nm1987/PageObjectModelBasics,<new>,4.1.0
+2019-12-18,swathigopinath/selenium1,<new>,4.1.1
 2019-12-17,JyotiProkash/UI-Test-Automation-Projects,<new>,3.16
 2019-12-17,sayedahmadzoy/test2,<new>,3.17
 2019-12-17,YusufKucukvatan/FreeCRMTest,<new>,4.1.1
