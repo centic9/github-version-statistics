@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2019-12-20,nik-tsilikov/grant_java,<new>,3.17
+2019-12-20,slyang520/java_base,<new>,3.17
+2019-12-20,vincentdk77/emergency-handle-server,<new>,4.0.1
+2019-12-20,saurav1501/ArcSelenium,<new>,3.9
+2019-12-20,abgitt/SeleniumFramework,<new>,3.9
+2019-12-20,BE-Kits/UDLA,<new>,${apachePoiVersion}
+2019-12-20,BE-Kits/spring-examples,<new>,${apachePoiVersion}
+2019-12-20,QuietnessBoy/dataServer,<new>,4.1.0
+2019-12-20,wrlu/SecIoT-Web,4.1.0,4.1.1
 2019-12-19,hfchensq1/LearningProject,<new>,${poiVersion}
 2019-12-19,LimHanGyeol/springboot_excel_parse,<new>,4.1.1
 2019-12-19,Anushi01/FreeCRM,<new>,3.16-beta2
