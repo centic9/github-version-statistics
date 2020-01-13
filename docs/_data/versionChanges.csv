@@ -1,4 +1,14 @@
 date,repository,versionBefore,versionNow
+2020-01-14,ranit1666/JavaDemo,<new>,3.17
+2020-01-14,khairnarswapna/DDT,<new>,3.17
+2020-01-14,hegdenir/WebTabletoExcel,<new>,3.9
+2020-01-14,chen0401/elasticsearch-7.1.1,<new>,${versions.poi}
+2020-01-14,FreshSnack/ecps,<new>,4.1.0
+2020-01-14,pareekshith1989/lastbatch,<new>,4.1.1
+2020-01-14,savinov85/reader-java-from-excel,<new>,4.1.1
+2020-01-14,manuqa/buddymojo,<new>,3.16-beta2
+2020-01-14,Saikrishna-Automation/Saikrishna-Automation,<new>,3.16-beta2
+2020-01-14,Nikhil-QA653/sampleTests,<new>,3.16-beta2
 2020-01-12,dzjaaa/anoah,<new>,3.17
 2020-01-12,VanitaKate/CucumberFramework,<new>,4.0.1
 2020-01-12,tkzc0552/mfw-sc,<new>,$poi_version
