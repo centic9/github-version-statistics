@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-01-15,khairnarswapna/DDTWITHPOM,<new>,3.17
+2020-01-15,Java-zhuo/it_demo,<new>,4.0.1
+2020-01-15,dioufcs/TP1_LOG8371,<new>,${versions.poi}
+2020-01-15,rmbraga/parallel-framework,<new>,3.11
+2020-01-15,chavansanjay/Framework,<new>,3.16-beta2
 2020-01-14,ranit1666/JavaDemo,<new>,3.17
 2020-01-14,khairnarswapna/DDT,<new>,3.17
 2020-01-14,hegdenir/WebTabletoExcel,<new>,3.9
