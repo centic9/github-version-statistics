@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2020-01-23,seb9465/log8371-tp1,<new>,${versions.poi}
+2020-01-23,grkarolis/tool,<new>,4.1.0
+2020-01-23,romilpatel13/Demo,<new>,4.1.0
+2020-01-23,centic9/poi-mail-merge,4.1.0,4.1.1
+2020-01-23,Swamy17/Newpush,<new>,3.16-beta2
+2020-01-23,NemishaNewell2525/KurtGeiger-TestEngineer-TechTest,<new>,3.16-beta2
+2020-01-23,arnabK199/POMWithPageFactoriesNaveen,<new>,3.16-beta2
+2020-01-23,juliusriestra/selenium-demo-tours,<new>,3.16-beta2
 2020-01-22,AhmadHatziq/infineon-output-data-analysis,<new>,3.9
 2020-01-22,ocean-mink/Rest-Assured,<new>,3.11
 2020-01-22,ruchi0402/TESTING,<new>,4.1.1
