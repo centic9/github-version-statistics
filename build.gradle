@@ -26,17 +26,17 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.9'
     compile 'org.apache.commons:commons-csv:1.7'
 
-    compile 'org.dstadler:commons-dost:1.0.0.27'
+    compile 'org.dstadler:commons-dost:1.0.0.30'
     compile 'org.kohsuke:github-api:1.95'
-    compile 'org.eclipse.jgit:org.eclipse.jgit:5.2.1.201812262042-r'
-    compile 'org.slf4j:slf4j-simple:1.7.26'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.6.0.201912101111-r'
+    compile 'org.slf4j:slf4j-simple:1.7.30'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.9.9'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.9.1'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.10.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.8'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'org.dstadler:commons-test:1.0.0.16'
+    testCompile 'org.dstadler:commons-test:1.0.0.18'
 }
 
 wrapper {
