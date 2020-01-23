@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-01-24,chandaniG12/MavenProjectFramework,<new>,4.0.1
+2020-01-24,MouradLachhab/LOG8371,<new>,${versions.poi}
+2020-01-24,subodhwithspar/SPAR-CCG,<new>,4.1.1
 2020-01-23,seb9465/log8371-tp1,<new>,${versions.poi}
 2020-01-23,grkarolis/tool,<new>,4.1.0
 2020-01-23,romilpatel13/Demo,<new>,4.1.0
