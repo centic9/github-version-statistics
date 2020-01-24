@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-01-25,zhouzhiwengang/common-fun,<new>,3.10.1
+2020-01-25,ashwin-kallingal/RFCRM,<new>,3.17
+2020-01-25,Chuvava/W2ADataDrivenFramework,<new>,3.17
+2020-01-25,Reza-Moein-21/comprehensive,<new>,3.9
+2020-01-25,rameshdodle/NewTours,<new>,3.16-beta2
 2020-01-24,chandaniG12/MavenProjectFramework,<new>,4.0.1
 2020-01-24,MouradLachhab/LOG8371,<new>,${versions.poi}
 2020-01-24,subodhwithspar/SPAR-CCG,<new>,4.1.1
