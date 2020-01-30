@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-01-31,BitExplorer/raspi-finance-endpoint,<new>,${poiVersion}
+2020-01-31,ruchi0402/RestAssured,<new>,4.1.1
+2020-01-31,MudassirAbdulSattar/TestProject,<new>,4.1.1
+2020-01-31,cherry23415/springboot_demo1,<new>,4.1.1
+2020-01-31,vignathajella/casestudy,<new>,4.1.1
 2020-01-30,LuckyToMeet-Dian-N/note,<new>,4.0.0
 2020-01-30,Vaishali0501/SDET_BookMyFurniture,<new>,3.9
 2020-01-30,Davidseccc/BaseEE-template,<new>,4.1.0
