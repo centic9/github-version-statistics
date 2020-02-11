@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-02-12,lkumarra/parabank,3.16-beta2,3.16
+2020-02-12,cartand/LOG8371,<new>,${versions.poi}
 2020-02-11,shabiel/eHMP,<new>,$versions.poi
 2020-02-11,karthikkumarraju/AderantOmegaWithGrouping,<new>,4.1.0
 2020-02-10,AngrryRabbit/wsdb,<new>,3.17
