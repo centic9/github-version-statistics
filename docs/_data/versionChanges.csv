@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2020-02-13,keene5/excel-reader-writer,<new>,3.17
+2020-02-13,logicahealth/eHMP,<new>,$versions.poi
+2020-02-13,lakshman6379/TestGit,<new>,4.0.0
+2020-02-13,fretamal/GestionDeEncargos,<new>,4.0.0
+2020-02-13,gautham99qa/DEC2019POMSeries1,<new>,3.9
+2020-02-13,Epsa1993/SeleniumPromo,<new>,4.1.1
 2020-02-12,lkumarra/parabank,3.16-beta2,3.16
 2020-02-12,cartand/LOG8371,<new>,${versions.poi}
 2020-02-11,shabiel/eHMP,<new>,$versions.poi
