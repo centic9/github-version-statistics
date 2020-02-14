@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-02-15,chelsybinet/LOG8371,<new>,${versions.poi}
+2020-02-15,WF1683497569/exam,<new>,3.10
+2020-02-15,mitsip25/NAL2020POMSeries,<new>,4.1.1
+2020-02-15,Shagrawal20/Demo_Framework,<new>,3.16-beta2
 2020-02-14,Shisher-AutoLab/S_A_F,<new>,japicmpversion
 2020-02-14,shobhitj34/NRM-test,<new>,3.11
 2020-02-14,sgangaiah/weapi,<new>,4.1.0
