@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-02-18,MohanBalajiV/ReCall,<new>,3.17
+2020-02-18,SideWinder1010/SeleniumAutomationFurnitureFramework,<new>,3.9
+2020-02-18,totri/log8371tp1,<new>,${versions.poi}
+2020-02-18,pascal-db/LOG8371-elastic,<new>,${versions.poi}
+2020-02-18,camarois/log8371,<new>,${versions.poi}
 2020-02-17,CKTanguay/ES_8371,<new>,${versions.poi}
 2020-02-17,nablar/LOG8371,<new>,${versions.poi}
 2020-02-17,kovaloid/iresolver,<new>,3.15
