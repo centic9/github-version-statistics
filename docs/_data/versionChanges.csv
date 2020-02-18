@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-02-19,logominov/WordToPdf1,<new>,4.0.1
+2020-02-19,alexisloiselle/LOG8371,<new>,${versions.poi}
+2020-02-19,darkvelopoer/myTest,<new>,4.1.1
+2020-02-19,MounicaRahul/inetbanking,<new>,3.16-beta2
 2020-02-18,MohanBalajiV/ReCall,<new>,3.17
 2020-02-18,SideWinder1010/SeleniumAutomationFurnitureFramework,<new>,3.9
 2020-02-18,totri/log8371tp1,<new>,${versions.poi}
