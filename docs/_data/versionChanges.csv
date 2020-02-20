@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2020-02-21,akhilsami/hybrid,<new>,3.16
+2020-02-21,rajib7777/stock-accounting,<new>,3.16
+2020-02-21,wu0655/pctools,<new>,3.17
+2020-02-21,geekxingyun/transport-excel-data-to-word,<new>,4.1.0
+2020-02-21,nirmala-ilavarasan/Github_Demo,<new>,4.1.2
+2020-02-21,carlkuesters/text-scraping,<new>,4.1.1
 2020-02-20,qatestingakshay/appium_learn,<new>,3.9
 2020-02-20,hnspn/LOG8371,<new>,${versions.poi}
 2020-02-20,ridasaleem/AmazonDemo,<new>,3.16-beta2
