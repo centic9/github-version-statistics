@@ -31,16 +31,16 @@ dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.6.0.201912101111-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.10.1'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.1'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.10.2'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.8'
 
-    testCompile 'junit:junit:4.12'
+    testCompile 'junit:junit:4.13'
     testCompile 'org.dstadler:commons-test:1.0.0.18'
 }
 
 wrapper {
-    gradleVersion = '4.10.3'
+    gradleVersion = '5.6.4'
 }
 
 task processResults(type:JavaExec) {
