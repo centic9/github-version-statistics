@@ -10,6 +10,7 @@ import org.kohsuke.github.HttpException;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -75,7 +76,7 @@ public abstract class BaseSearch {
             return null;
         }
 
-        String str = IOUtils.toString(stream, "UTF-8");
+        String str = IOUtils.toString(stream, StandardCharsets.UTF_8);
 
         // filter out some unwanted matches
         str = str.replaceAll(getExcludeRegex(), "");
