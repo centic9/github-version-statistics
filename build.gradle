@@ -27,13 +27,13 @@ dependencies {
     compile 'org.apache.commons:commons-csv:1.7'
 
     compile 'org.dstadler:commons-dost:1.0.0.30'
-    compile 'org.kohsuke:github-api:1.95'
+    compile 'org.kohsuke:github-api:1.107'
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.6.0.201912101111-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
     compile 'com.fasterxml.jackson.core:jackson-core:2.10.2'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.10.2'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.9.8'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.10.2'
 
     testCompile 'junit:junit:4.13'
     testCompile 'org.dstadler:commons-test:1.0.0.18'
