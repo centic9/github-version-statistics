@@ -5,7 +5,6 @@ import org.dstadler.github.upgrade.UpgradeStatus;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
-import org.kohsuke.github.HttpException;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +13,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class GitHubSupportTest {
     @Before
@@ -49,12 +49,20 @@ public class GitHubSupportTest {
         assertEquals(2, projectStatuses.size());
     }
 
-    @Test(expected = HttpException.class)
+    @Test//(expected = HttpException.class)
     public void testInvalidProject() throws IOException {
         Map<String, String> projects = new HashMap<>();
         projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
-        GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
+        Map<String, String> map = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
+        assertTrue(map.isEmpty());
+
+        /*GitHub github = BaseSearch.connect();
+        GHRepository repository = github.getRepository(projects.keySet().iterator().next());
+        assertTrue(0 < repository.getStargazersCount());
+        assertTrue(0 < repository.getWatchers());
+
+        fail("Should catch Exception, but had: " + map);*/
     }
 }
