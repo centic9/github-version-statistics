@@ -30,6 +30,7 @@ public class Search {
         // use a SetMultimap here to not record duplicates
         SetMultimap<String,String> versions = HashMultimap.create();
         for (BaseSearch search : searches) {
+            System.out.println("Searching with: " + search.getClass().getSimpleName());
             search.search(github, versions);
         }
 

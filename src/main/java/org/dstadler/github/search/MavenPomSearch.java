@@ -61,7 +61,7 @@ public class MavenPomSearch extends BaseSearch {
     protected void search(GitHub github, Multimap<String, String> versions) throws IOException {
         // start search
         final PagedSearchIterable<GHContent> list = github.searchContent().filename("pom.xml").in("file").language("maven").q(GROUP_REGEX).list();
-        System.out.println("Had: " + list.getTotalCount() + " total results");
+        System.out.println("Had: " + list.getTotalCount() + " total results with " + getClass().getSimpleName());
 
         // paginate through results, filtering out interesting files
         processResults(github, versions, list);
