@@ -5,13 +5,18 @@ import org.dstadler.github.upgrade.UpgradeStatus;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
+import org.kohsuke.github.GHContent;
+import org.kohsuke.github.GitHub;
+import org.kohsuke.github.PagedSearchIterable;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
@@ -64,5 +69,24 @@ public class GitHubSupportTest {
         assertTrue(0 < repository.getWatchers());
 
         fail("Should catch Exception, but had: " + map);*/
+    }
+
+    @Test
+    public void testNullPointerException() throws IOException {
+        GitHub github = GitHub.connect();
+
+        final PagedSearchIterable<GHContent> list = github.searchContent().
+                repo("Savyonify/cryptApiSet/").
+                filename("build.gradle").list();
+
+        for(GHContent match : list) {
+            System.out.println("Reading " + match.getHtmlUrl());
+            //noinspection ProhibitedExceptionCaught
+            try (final InputStream stream = match.read()) {
+                assertNotNull(stream);
+            } catch (NullPointerException e) {
+                Assume.assumeNoException("See https://github.com/github-api/github-api/issues/729", e);
+            }
+        }
     }
 }

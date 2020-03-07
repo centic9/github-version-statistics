@@ -67,6 +67,14 @@ public abstract class BaseSearch {
     }
 
     protected String readFileContent(GHContent match, String htmlUrl, String repo) throws IOException {
+        // This is a workaround for https://github.com/github-api/github-api/issues/729
+        match.refresh();
+        if(match.getEncoding() == null) {
+            System.out.println("Could not read content of " + htmlUrl + " of repo " + repo + ", encoding is not set: " +
+                    match.getHtmlUrl());
+            return null;
+        }
+
         final InputStream stream;
         try {
             //noinspection resource
