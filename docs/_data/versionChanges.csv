@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2020-03-10,Helloes/ES7.6.0,<new>,${versions.poi}
+2020-03-10,18109611570/ruangong-java,<new>,3.10
+2020-03-10,billingoss/product_202002,<new>,4.1.0
+2020-03-10,kodejava/kodejava.project,3.15,4.1.0
+2020-03-10,bigbluebutton/bigbluebutton,4.0.0,4.1.2
+2020-03-10,Anveshrajuk/Sample_template,<new>,4.1.2
+2020-03-10,Shweta-mahajan611/Demo,<new>,4.1.1
+2020-03-10,bunny8751/pubG,<new>,3.16-beta2
 2020-03-09,294793076/myGit,<new>,3.10
 2020-03-09,shivakumar3271/naveenanimation20-RestAssuredFramework,<new>,3.16-beta2
 2020-03-08,StephenTao/CodeGenerators,<new>,3.17
