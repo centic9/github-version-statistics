@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-03-11,tanmayautomation/MyFramw,<new>,3.17
+2020-03-11,hanks512mecom/swift,<new>,4.0.0
+2020-03-11,click-ap/Lingo,<new>,4.0.0
+2020-03-11,solitasu/testSSM,<new>,3.10
 2020-03-10,Helloes/ES7.6.0,<new>,${versions.poi}
 2020-03-10,18109611570/ruangong-java,<new>,3.10
 2020-03-10,billingoss/product_202002,<new>,4.1.0
