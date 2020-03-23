@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2020-03-24,RajatShandilya25/Selenium,<new>,3.16-beta2
 2020-03-23,xxnjdg/elasticsearch7.6.1,<new>,${versions.poi}
 2020-03-22,tkzc0552/MMall,<new>,$poi_version
 2020-03-22,Ashwin2829/pageObjectBasics,<new>,3.6
