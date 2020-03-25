@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-03-26,uloing/poi-join-docx,<new>,3.7
+2020-03-26,BE-Kits/java-boilerplates,<new>,${apachePoiVersion}
+2020-03-26,ShreyasGarla/product,<new>,4.1.2
 2020-03-25,schandrasekhar-idc/NetAppNGDCLG,<new>,3.17
 2020-03-25,Iftaker23/orangeHrm,<new>,3.17
 2020-03-25,changeYe/spring-cloud-list,<new>,3.17
