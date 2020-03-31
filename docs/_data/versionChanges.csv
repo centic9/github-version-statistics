@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2020-04-01,SatyawanPawar/March31,<new>,4.0.1
+2020-04-01,addesh19/AutomationBankWebsite,<new>,3.7
+2020-04-01,Kobar-Demo/Elasticsearch_Clone,<new>,${versions.poi}
+2020-04-01,Testfolks/firstydata,<new>,4.1.0
+2020-04-01,syamgpillai/TestNGSeleniumSampleFramework,<new>,4.1.1
+2020-04-01,YusufKucukvatan/DataDrivenTestingBasic,<new>,4.1.1
+2020-04-01,robinthotha/SeleniumFrameworkTestRobin,<new>,3.16-beta2
 2020-03-31,zikas1997/meteo,<new>,3.13
 2020-03-31,atinsingh/selbatch19,<new>,4.1.2
 2020-03-31,chenshuyuhhh/SoftwareTest,<new>,4.1.2
