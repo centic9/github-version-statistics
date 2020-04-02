@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2020-04-03,shantosh25/actiqa,<new>,4.0.0
 2020-04-02,abley1874/elasticsearch7.3.2,<new>,${versions.poi}
 2020-04-02,liferay/liferay-portal,4.1.1,4.1.2
 2020-04-01,SatyawanPawar/March31,<new>,4.0.1
