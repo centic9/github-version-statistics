@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-04-04,shaohj/spring-boot-plugins,<new>,3.16
+2020-04-04,oosgroup/BigBlueButton,<new>,4.0.0
+2020-04-04,vics-server/vics-core,<new>,4.0.0
+2020-04-04,mallikarjunbaldha/irctctest,<new>,4.1.0
+2020-04-04,amuthansakthivel/MavenTestNG,<new>,3.16-beta2
 2020-04-03,shantosh25/actiqa,<new>,4.0.0
 2020-04-02,abley1874/elasticsearch7.3.2,<new>,${versions.poi}
 2020-04-02,liferay/liferay-portal,4.1.1,4.1.2
