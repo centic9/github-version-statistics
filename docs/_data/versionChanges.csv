@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2020-04-14,chiikamma/p1,<new>,3.17
+2020-04-14,MakhotaDmitry/sunpp_acs,3.15,3.17
+2020-04-14,1071870068/ZXBK_Channel,<new>,3.9
+2020-04-14,chikalabouka/TP2_LOG8371,<new>,${versions.poi}
+2020-04-14,xwgoon/ltt,<new>,4.1.2
+2020-04-14,reachsgo/BaddyTally,<new>,4.1.2
 2020-04-13,Rajkamal1234789/CucumberprojectPavanSirCompletePerftectcode,<new>,3.16
 2020-04-13,ShahShailavi/Selenium-Hybrid-Framework-With-POM,<new>,3.9
 2020-04-13,ruchi0402/BookMyFurniture,<new>,4.1.1
