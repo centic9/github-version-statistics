@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2020-04-17,RundyDeng/demo-test,<new>,3.17
+2020-04-17,shyamalaKagitha001/AuzmoreAutomationProject,<new>,3.9
+2020-04-17,mhmmtkkl/KeywordDriven1,<new>,3.9
+2020-04-17,sirann/elasticsearch-7.6.2,<new>,${versions.poi}
+2020-04-17,noelsison/ApachePOI-Gradle,<new>,3.10
+2020-04-17,noelsison/Project3-Libgdx,<new>,3.10
+2020-04-17,jlniveiro/portletMapa,<new>,3.13
 2020-04-16,nilaynarlawar/Smart-Expense-Manager,<new>,3.16
 2020-04-16,Raju0248/SeleniumLearningProject,<new>,4.0.1
 2020-04-16,lyc88/MFW2.0,<new>,$poi_version
