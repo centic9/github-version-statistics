@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2020-05-07,shuiaben/new,<new>,noVersion
+2020-05-07,FabioRodriguezR/Prueba,<new>,3.17
+2020-05-07,rjb80/els,<new>,${versions.poi}
+2020-05-07,Linyuzai/janalyzer,<new>,4.1.0
+2020-05-07,kannan1001/HybridCucumber,<new>,4.1.2
+2020-05-07,moromoi/lista.atzmaim_2020,<new>,4.1.1
+2020-05-07,jeifersonalmeida/institutional-document-manager,<new>,4.1.1
+2020-05-07,vishalgupta2711/Guru99BanksTest,<new>,3.16-beta2
+2020-05-07,Esha-sinha/practice-automation,<new>,3.16-beta2
 2020-05-06,bfyxzls/basic,<new>,3.17
 2020-05-06,mithun-kumar7/CRMtest-POM,<new>,4.0.1
 2020-05-06,Vipulsajjanwar/Page-Object-Model-,<new>,4.1.1
