@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2020-05-08,StockAccountingProject/SeleniumJava,<new>,3.17
+2020-05-08,sidi-unofficial/inetBankingv1,<new>,3.9
+2020-05-08,AskhatKBTU/CognizantMicroProject,<new>,3.6
+2020-05-08,ramesh805124/PageObjectModel_Jenkin,<new>,3.16-beta2
+2020-05-08,mansi-sharma11/test23,<new>,3.16-beta2
+2020-05-08,mnvinay91-lang/HSTestProject,<new>,3.16-beta2
 2020-05-07,shuiaben/new,<new>,noVersion
 2020-05-07,FabioRodriguezR/Prueba,<new>,3.17
 2020-05-07,rjb80/els,<new>,${versions.poi}
