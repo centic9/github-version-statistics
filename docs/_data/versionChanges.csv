@@ -1,4 +1,15 @@
 date,repository,versionBefore,versionNow
+2020-05-14,sunilbabbu/Mercury,<new>,3.17
+2020-05-14,renukapanneerselvam/EntireDemo,<new>,4.0.1
+2020-05-14,anuradhayendluri/TestingTest,<new>,4.0.0
+2020-05-14,indranilp/javaprograms,<new>,3.9
+2020-05-14,mvinchoo/elasticsearch,<new>,${versions.poi}
+2020-05-14,shi4ts/Analyzing-similarity,<new>,3.15
+2020-05-14,suprithamallikarjuna/com.capgemini.cucumber,<new>,4.1.0
+2020-05-14,qtpsudhakar/June17Batch,<new>,4.1.0
+2020-05-14,Santhoshraj2525/Selenium-With-Gradle,<new>,4.1.0
+2020-05-14,bogdanbilcan/HTRODealersApp,3.17,4.1.2
+2020-05-14,Princekra94/TestReprository,<new>,3.16-beta2
 2020-05-13,warroyave/AutomationChronus,<new>,4.0.1
 2020-05-13,usha-gupta/POC-For-Apache-POI,<new>,3.9
 2020-05-13,Nagendra1326/FreeCRMTestRepo,<new>,4.1.2
