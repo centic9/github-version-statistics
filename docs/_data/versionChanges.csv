@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-05-19,hexiaoxia/farcloud-collect,<new>,$poiVersion
+2020-05-19,usha-gupta/POC-For-Apache-POI,3.9,4.1.2
+2020-05-19,prateekmaithil/operations,<new>,3.16-beta2
 2020-05-18,sravanvadla/CodingInterview,<new>,3.17
 2020-05-18,vishal04dixt/selenuimTest,<new>,3.9
 2020-05-18,Romario001/Dungeons,<new>,4.1.0
