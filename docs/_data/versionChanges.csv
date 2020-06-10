@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-06-11,sarangholey/mystore,<new>,3.9
+2020-06-11,ramadarsh/Testzomato,<new>,4.1.2
 2020-06-10,karishmayadava23/GitHub.com,<new>,3.7
 2020-06-10,fake-elastic/elasticsearch,<new>,${versions.poi}
 2020-06-10,datastudioplace/CucumberFramework,<new>,3.11
