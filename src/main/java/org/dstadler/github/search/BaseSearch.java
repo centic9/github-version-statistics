@@ -31,11 +31,18 @@ public abstract class BaseSearch {
 
     protected void processResults(GitHub github, Multimap<String, String> versions, Iterable<GHContent> list) throws IOException {
         // try up to three times to cater for some connection issues that
-        // we see from time to time
+        // we see from time to time.
+
+        // This is done around the whole loop as the iterator also
+        // fetches new pages.
+        // Note that getNonForkRepository() does it's own retry as well
         int retries = 3;
         while(true) {
             try {
+                int i = 0;
                 for(GHContent match : list) {
+                    i++;
+
                     final String htmlUrl = match.getHtmlUrl();
                     String repo = getNonForkRepository(github, htmlUrl);
                     if (repo == null) {
@@ -48,7 +55,13 @@ public abstract class BaseSearch {
                     }
 
                     parseVersion(versions, htmlUrl, repo, str);
+
+                    if(i % 1000 == 0) {
+                        System.out.println("Having " + i + " results");
+                    }
                 }
+
+                System.out.println("Processed " + i + " results overall");
 
                 //noinspection BreakStatement
                 break;
