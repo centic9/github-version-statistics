@@ -27,7 +27,7 @@ dependencies {
     compile 'org.apache.commons:commons-csv:1.8'
 
     compile 'org.dstadler:commons-dost:1.0.0.31'
-    compile 'org.kohsuke:github-api:1.109'
+    compile 'org.kohsuke:github-api:1.113'
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.7.0.202003110725-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
