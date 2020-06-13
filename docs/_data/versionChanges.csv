@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2020-06-14,elveahuang/platform,<new>,${poiVersion}
+2020-06-14,kshyk/selenium-kshyk,<new>,4.1.2
+2020-06-14,Firkhraag/KotlinABM,<new>,4.1.1
+2020-06-14,Neshaminy1/RIViR_Qlarant,<new>,4.1.1
+2020-06-14,PraveenKoppula/TechMTimeTracker,<new>,3.16-beta2
+2020-06-14,aneetha-er/SeleniumJavaFramework,<new>,3.16-beta2
+2020-06-14,sriam12/QaToolsDemo1,<new>,3.16-beta2
+2020-06-14,nidhigupta18/FacebookFirstAutomationProject,<new>,3.16-beta1
 2020-06-13,adilakshmi91/SalesforceApp,<new>,3.17
 2020-06-13,testLearn2019/sampleproject,<new>,4.0.1
 2020-06-13,Ramyaswetha540/Testng,<new>,4.0.1
