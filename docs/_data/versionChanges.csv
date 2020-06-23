@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2020-06-24,happy-sb/elasticsearch-7.2.1,<new>,${versions.poi}
 2020-06-23,rakeshsangoli/Assignment,<new>,3.9
 2020-06-23,sma-dev/Rvuz,<new>,3.9
 2020-06-23,sujaybose/Sujay2018,<new>,3.7
