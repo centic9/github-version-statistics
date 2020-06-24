@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-06-25,PriyankaPrabhu97/CTS_PriyankaPrabu,<new>,4.1.2
+2020-06-25,szsiddiqui/digiCRMTest,<new>,4.1.1
+2020-06-25,asitdas321/CogmentoCRM-Test,<new>,3.16-beta2
 2020-06-24,happy-sb/elasticsearch-7.2.1,<new>,${versions.poi}
 2020-06-23,rakeshsangoli/Assignment,<new>,3.9
 2020-06-23,sma-dev/Rvuz,<new>,3.9
