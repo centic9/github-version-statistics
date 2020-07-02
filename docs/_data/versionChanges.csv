@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-07-03,lokeshbsloki/FreeCRMPOMTEST,<new>,4.1.2
+2020-07-03,ajayyadavdevops/B1Automation,<new>,3.16-beta2
 2020-07-02,rajmurugan183/SEGit,<new>,3.9
 2020-07-02,ent-search-demo-org/elasticsearch-mirror,<new>,${versions.poi}
 2020-07-02,yeguoxing730/corejava,<new>,3.15
