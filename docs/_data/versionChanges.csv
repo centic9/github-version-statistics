@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2020-07-13,aravindanath/JioMartAutomation,<new>,3.17
+2020-07-13,tomducky/hdys-support,<new>,3.17
+2020-07-13,logbasex/a-little-bit-about-spring,<new>,3.9
+2020-07-13,mirches/elasticsearch-clean,<new>,${versions.poi}
+2020-07-13,dinislam09/Hospital-all,<new>,3.12-beta1
+2020-07-13,Overlode/web_jwglxt,<new>,4.1.2
+2020-07-13,gvenkatesh-trillium/ProjectXApiAutomation,<new>,4.1.1
+2020-07-13,compiliaacademy/EBFS_POM,<new>,3.16-beta2
+2020-07-13,mohammadahsan14/FramWork,<new>,3.16-beta2
 2020-07-12,zshaikhonline/JavaCodeCentral,<new>,3.7
 2020-07-12,dragonli-people/dragonli-office2html,<new>,3.15
 2020-07-12,PrabodhGhosh/HybridFrame,<new>,3.16-beta2
