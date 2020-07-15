@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-07-16,FFFro/elasticsearch-source-analysis,<new>,${versions.poi}
+2020-07-16,liu1818/BigdataLearn,<new>,${versions.poi}
+2020-07-16,upkarsinghrathaur/AutomationPractice,<new>,3.11
+2020-07-16,salesforcenarasimha/Selenium-Framework,<new>,4.1.1
+2020-07-16,sagarkisanrakshe/AutomationScriptsWithFramework,<new>,3.16-beta2
 2020-07-15,prashant2906/RA3,<new>,3.16-beta2
 2020-07-14,vijayjoshi24/datatable-pdf-generator,<new>,4.1.0
 2020-07-13,aravindanath/JioMartAutomation,<new>,3.17
