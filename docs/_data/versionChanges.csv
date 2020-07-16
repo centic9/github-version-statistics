@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-07-17,anilreddy123456/p2ptest,<new>,4.1.0
+2020-07-17,shadab2510/PageObjectModel,<new>,4.1.2
+2020-07-17,yogeshanthati/15thJuly2020Framework,<new>,3.16-beta2
 2020-07-16,FFFro/elasticsearch-source-analysis,<new>,${versions.poi}
 2020-07-16,liu1818/BigdataLearn,<new>,${versions.poi}
 2020-07-16,upkarsinghrathaur/AutomationPractice,<new>,3.11
