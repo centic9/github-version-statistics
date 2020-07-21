@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-07-22,OliverRhyme/Snorlax,<new>,3.17
+2020-07-22,TissyTitus/AutomationTraining,<new>,3.17
+2020-07-22,IndiraSaravanan1121/MySql,<new>,3.9
+2020-07-22,bekaleves/elastic_copy,<new>,${versions.poi}
+2020-07-22,boy13148687/SupervisionSystem,<new>,3.10
 2020-07-21,R-RohitRanjan/Free-CRMPRO-2020,<new>,4.1.2
 2020-07-20,shinhyocheol/SpringBoot_Api,<new>,3.9
 2020-07-20,Shamimsama/OSA1221201905A,<new>,3.12-beta1
