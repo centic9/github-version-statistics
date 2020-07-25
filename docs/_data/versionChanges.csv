@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-07-26,opencpsv2-conghm/conghm-org-opencpsv2,<new>,4.0.1
+2020-07-26,zTgx/es-v78,<new>,${versions.poi}
+2020-07-26,BE-Kits/udma,<new>,${apachePoiVersion}
+2020-07-26,suwarna91/bulbasaur,<new>,4.1.2
+2020-07-26,Prabhakaran2209/Excel-utilities-in-selenium,<new>,4.1.1
 2020-07-25,Dharanesh/Demo_Automation1,<new>,3.16-beta2
 2020-07-25,akshaya1987/HPApplicationsCenter,<new>,3.16-beta2
 2020-07-25,SrinivasSana/Jenkins,<new>,3.16-beta2
