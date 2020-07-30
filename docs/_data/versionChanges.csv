@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2020-07-31,superyoshino/actualboot,<new>,3.16
+2020-07-31,Niwesboy20/Screenplay_Serenity_Beginner,<new>,3.16
+2020-07-31,joyfulbean/LSExtra,<new>,3.17
+2020-07-31,joyfulbean/JavaFinalProject,<new>,3.17
+2020-07-31,huangxinping/elasticsearch,<new>,${versions.poi}
+2020-07-31,Jovines/Assessment,<new>,4.1.2
+2020-07-31,Mayureshpavnoji1/Naveens-Project,<new>,3.16-beta2
 2020-07-30,kwonyoungran/springboot2-webservice,<new>,3.17
 2020-07-30,haribs/POMFramework,<new>,3.9
 2020-07-30,mahendimahendi/SeleniumPOMHybridFramework1,<new>,4.1.0
