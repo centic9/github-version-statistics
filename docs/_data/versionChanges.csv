@@ -1,4 +1,12 @@
 date,repository,versionBefore,versionNow
+2020-08-03,kkewwei/elasticsearch,<new>,${versions.poi}
+2020-08-03,datastudioplace/cucumber,<new>,3.11
+2020-08-03,Manoj-Jha/seleniumFramework,<new>,4.1.0
+2020-08-03,soyastudio/Workshop,<new>,4.1.2
+2020-08-03,preetigupta9286/my-first-repo,<new>,4.1.2
+2020-08-03,JohnyK-Tech/HybridFrameworkPOM,<new>,3.16-beta2
+2020-08-03,ladimanish/CNOS_Automation,<new>,3.16-beta2
+2020-08-03,snailCls/exportExcel,<new>,${poi.version}
 2020-08-02,Salomon88/intellij-performance-toolbox-plugin,<new>,3.17
 2020-08-02,elirehema/arcolis,<new>,3.9
 2020-08-02,nehal9996/webdriver,<new>,4.1.2
