@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-08-05,ahamedaariz/github-upload,<new>,3.17
+2020-08-05,PierreJiji/test.io,<new>,4.1.2
 2020-08-04,ukitinu/dox-embed,<new>,4.1.2
 2020-08-03,kkewwei/elasticsearch,<new>,${versions.poi}
 2020-08-03,datastudioplace/cucumber,<new>,3.11
