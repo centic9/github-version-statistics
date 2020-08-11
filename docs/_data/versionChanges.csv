@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-08-12,Savyonify/cryptApiSet,<new>,3.9
+2020-08-12,chenejac/LuceneAnalyzerTester,<new>,3.10.1
+2020-08-12,Piyush-Automation/learnAutomation,<new>,4.1.0
+2020-08-12,sup06aec/seleniumTest,<new>,4.1.1
+2020-08-12,ppadimala/TestMavenProject,<new>,3.16-beta2
 2020-08-11,eliasyaoyc/elasticsearch-7.6.2,<new>,${versions.poi}
 2020-08-10,RRRryo/xiandu_report,<new>,4.1.2
 2020-08-10,BhatkarSameer/Selenium-Java,<new>,4.1.1
