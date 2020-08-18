@@ -1,4 +1,9 @@
 date,repository,versionBefore,versionNow
+2020-08-19,msapna717/Maven,<new>,4.0.1
+2020-08-19,ashish77777778/TestAutomation,<new>,3.9
+2020-08-19,drunkGod/springCloudDemo,<new>,3.15
+2020-08-19,Casioopiik/sdc-task,<new>,4.1.2
+2020-08-19,amiriahmad72/bigbluebutton,<new>,4.1.2
 2020-08-18,balasrikanth48/StcokAccounting_hyd_maven,<new>,3.16
 2020-08-18,girishbagineni/MAVENcrm,<new>,3.16-beta2
 2020-08-17,strapdata/elassandra,<new>,${versions.poi}
