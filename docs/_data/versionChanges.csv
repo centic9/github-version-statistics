@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-08-22,sunmeet40/sba-test-automation,<new>,3.17
+2020-08-22,jimmykarns/elastic-search,<new>,${versions.poi}
+2020-08-22,db117/example,<new>,4.1.1
+2020-08-22,rajwindersingh1013/rajdemo,<new>,3.16-beta2
 2020-08-21,sergey-nikolaev-spbu/DailyReport,<new>,3.9
 2020-08-21,jairo123a/Pruebatecnicajairo,<new>,3.9
 2020-08-21,kronographTL/portfolio-manager,<new>,3.15
