@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-08-23,SaiKrishna1210/DemoRepo,<new>,3.16-beta2
+2020-08-23,RinatGalip/TestProject,<new>,3.16-beta2
+2020-08-23,Arpan0703/RegressionTestingFrameWork,<new>,3.16-beta2
+2020-08-23,Edenredindia/Automationpracticepom,<new>,3.16-beta2
 2020-08-22,sunmeet40/sba-test-automation,<new>,3.17
 2020-08-22,jimmykarns/elastic-search,<new>,${versions.poi}
 2020-08-22,db117/example,<new>,4.1.1
