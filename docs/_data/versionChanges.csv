@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-08-30,TilakQA/MavennTestNG,<new>,3.17
+2020-08-30,brianjcarroll8/Elasticsearch,<new>,${versions.poi}
+2020-08-30,CMBHARGAVI/automation,<new>,3.16-beta2
 2020-08-29,RanjaniGuru1/DEMO-EXCEL,<new>,4.1.2
 2020-08-29,ladimanish/eInvoice,<new>,3.16-beta2
 2020-08-28,dhananjaybachhav/BigBlueButton,<new>,4.0.0
