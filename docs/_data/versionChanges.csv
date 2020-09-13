@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-09-14,Ayush0216/KangnaTest,<new>,3.16
+2020-09-14,JavaFamilyClub/jfoa,<new>,${poiVersion}
 2020-09-13,177kp/bigbluebutton,<new>,4.0.0
 2020-09-12,wx-chevalier/spring-examples,<new>,${apachePoiVersion}
 2020-09-12,way181992699/SGM,<new>,3.11
