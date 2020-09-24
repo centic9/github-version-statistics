@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-09-25,sqlchan/elasticsearch74,<new>,${versions.poi}
+2020-09-25,rajkuamrirathore/zomatoapiautomation,<new>,4.1.2
+2020-09-25,PeterSalamun/NEMESYS-application,<new>,4.1.2
+2020-09-25,debkumar-das/POMCICD,<new>,3.16-beta2
 2020-09-24,sachinjagtap4141/PomObjectModel,<new>,4.1.2
 2020-09-24,swathipranav/Info-sun,<new>,4.1.2
 2020-09-24,ArulmozhiAyyanar/PageObjectModel,<new>,3.16-beta2
