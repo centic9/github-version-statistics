@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-09-27,c0deoo1/elasticsearch,<new>,${versions.poi}
+2020-09-27,YangjeeR/Vaultd,<new>,4.1.0
+2020-09-27,Bindu18First/inetBankingV1,<new>,4.1.2
+2020-09-27,Rashmishree03/FlipkartWeb,<new>,4.1.2
 2020-09-26,ahadmd/ahadproject,<new>,3.17
 2020-09-26,jairo123a/automatizacion_DBanco_demos,<new>,3.9
 2020-09-26,jairo123a/automatizacion_dbankdemo,<new>,3.9
