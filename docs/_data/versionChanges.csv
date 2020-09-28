@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2020-09-29,AnnaYDan/SeleniumForTesting,<new>,3.17
+2020-09-29,zhangjiayu139/Grails4Isssue,<new>,4.0.1
+2020-09-29,Nandhini-LittlePassport/Automationservice,<new>,3.9
+2020-09-29,jairo123a/dbank_demo,<new>,3.9
+2020-09-29,pavelrukin/exceldata,<new>,4.1.2
+2020-09-29,Tapaswikumar/Web-Core-AutomationFramework,<new>,4.1.2
 2020-09-28,AnnaYDan/FrameworkForTesting,<new>,3.17
 2020-09-28,Divyashree1/proj_data1,<new>,4.1.2
 2020-09-27,c0deoo1/elasticsearch,<new>,${versions.poi}
