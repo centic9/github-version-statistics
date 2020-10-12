@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-10-13,wx-chevalier/ms-udma,<new>,${apachePoiVersion}
+2020-10-13,Janardan0017/learning,<new>,4.1.2
+2020-10-13,ansomkrd/bigbluebutton,<new>,4.1.2
+2020-10-13,Dellikumar/FreeCRMnewRepo,<new>,3.16-beta2
 2020-10-12,Renuka-shiva/Venkat,<new>,4.0.1
 2020-10-12,mkmanoj476/POM_repository,<new>,3.16-beta2
 2020-10-11,kyletheawsum/eCQMGenerator_2020,<new>,3.17
