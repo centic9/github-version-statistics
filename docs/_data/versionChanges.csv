@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2020-10-14,scchess/LabKey,<new>,${poiVersion}
+2020-10-14,ahmetosan/MoriningExercise,<new>,4.1.2
+2020-10-14,ashishb2codes/CRMPOM,<new>,4.1.1
+2020-10-14,mohit-dot/OGDTAuto,<new>,3.16-beta2
 2020-10-13,wx-chevalier/ms-udma,<new>,${apachePoiVersion}
 2020-10-13,Janardan0017/learning,<new>,4.1.2
 2020-10-13,ansomkrd/bigbluebutton,<new>,4.1.2
