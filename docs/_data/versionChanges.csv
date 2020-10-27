@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-10-28,childnn/childone,<new>,4.1.2
+2020-10-28,mozzam4/bigbluebutton_mozzam,<new>,4.1.2
 2020-10-27,pranjal-13/AUFIN-NACH,<new>,4.0.1
 2020-10-26,somendu/gcloud,<new>,3.17
 2020-10-26,sk-landry/elastichsearch,<new>,${versions.poi}
