@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-11-05,ennymax/CICOD,<new>,4.0.1
+2020-11-05,sae-bom/elastichsearch,<new>,${versions.poi}
 2020-11-04,cheonsol-lee/knowledge_structure_kirc,<new>,3.9
 2020-11-04,sherlocky/interview,<new>,3.14
 2020-11-01,SonawaneP/PriyankaDemo,<new>,3.16-beta2
