@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2020-11-09,david-buderus/PP-Manager,<new>,4.0.0
 2020-11-08,ahtisham94/PdfTime,<new>,3.9
 2020-11-08,meijer-up/elasticsearch,<new>,${versions.poi}
 2020-11-08,MichaelHegner/p2p-statistic,<new>,4.1.2
