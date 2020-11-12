@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-11-13,3people/testestestest,<new>,${versions.poi}
+2020-11-13,iaiai/cobra,<new>,4.1.2
+2020-11-13,csh0034/springboot-notice-project,<new>,4.1.1
 2020-11-12,jairo123a/automatizacion2,<new>,3.9
 2020-11-12,Swinger-w/dataServer,<new>,4.1.0
 2020-11-12,SnehaAutomationRepo/AmazonTestFrameworkAutomation,<new>,3.16-beta2
