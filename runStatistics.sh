@@ -8,7 +8,7 @@ cd `dirname $0`
 
 echo
 echo Checkout and rebase
-git co upgrades.csv && \
+git checkout upgrades.csv && \
 git fetch && \
 git rebase origin/master
 if [ $? -ne 0 ]
