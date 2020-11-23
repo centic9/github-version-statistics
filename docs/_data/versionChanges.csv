@@ -1,4 +1,6 @@
 date,repository,versionBefore,versionNow
+2020-11-24,shimingxy/blazer,<new>,${poiVersion}
+2020-11-24,dishajardosh/Factorial-POMFramework,<new>,3.16-beta2
 2020-11-23,Lee-Jin-Hyeok/NightSelfLearningSupervisionTableGenerator,<new>,4.1.2
 2020-11-23,Lee-Jin-Hyeok/UserAccountRegistrationMachine,<new>,4.1.2
 2020-11-23,rakhter08/AFS-PatientPortal,<new>,3.16-beta2
