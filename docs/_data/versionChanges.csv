@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-12-01,epiphany20/elasticsearch,<new>,${versions.poi}
+2020-12-01,mdtrsilva/TestAutomationFramework1,<new>,3.11
+2020-12-01,durgabhavaniv/pptx_video,<new>,4.1.2
 2020-11-30,rishabhgupta1528/Tatoc-POM-Model,<new>,4.1.2
 2020-11-29,Xiangxiang-Array/POITest,<new>,3.17
 2020-11-29,Nagababu1810/Guru99,<new>,3.17
