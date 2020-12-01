@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-12-02,teknas312/Gradle_Quickhire,<new>,3.17
+2020-12-02,mezmez44/PageObjectModel,<new>,3.17
+2020-12-02,sreedhersama/SeleniumProj,<new>,3.16-beta2
 2020-12-01,epiphany20/elasticsearch,<new>,${versions.poi}
 2020-12-01,mdtrsilva/TestAutomationFramework1,<new>,3.11
 2020-12-01,durgabhavaniv/pptx_video,<new>,4.1.2
