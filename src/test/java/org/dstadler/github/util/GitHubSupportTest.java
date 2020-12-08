@@ -76,7 +76,7 @@ public class GitHubSupportTest {
         GitHub github = GitHub.connect();
 
         final PagedSearchIterable<GHContent> list = github.searchContent().
-                repo("Savyonify/cryptApiSet/").
+                repo("mutasDev/cryptApiSet").
                 filename("build.gradle").list();
 
         for(GHContent match : list) {
