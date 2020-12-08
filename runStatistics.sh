@@ -39,7 +39,7 @@ fi
 
 echo
 echo Installing
-./gradlew --no-daemon installDist && \
+./gradlew --no-daemon installDist
 if [ $? -ne 0 ]
 then
   echo "Failed to install"
@@ -48,7 +48,7 @@ fi
 
 echo
 echo Executing
-build/install/github-version-statistics/bin/github-version-statistics && \
+build/install/github-version-statistics/bin/github-version-statistics
 if [ $? -ne 0 ]
 then
   echo "Failed to Execute"
@@ -57,7 +57,7 @@ fi
 
 echo
 echo Processing results
-./gradlew --no-daemon processResults && \
+./gradlew --no-daemon processResults
 if [ $? -ne 0 ]
 then
   echo "Failed to process results"
@@ -66,11 +66,13 @@ fi
 
 echo
 echo Commit and push to Github
-git add stats* && git add docs && git ci -m "[ci skip] Add daily results" && \
+git add stats* && \
+git add docs && \
+git commit -m "[ci skip] Add daily results" && \
 git push
 if [ $? -ne 0 ]
 then
-  echo "Failed to Command and Push to github"
+  echo "Failed to Commit and Push to github"
   exit 7
 fi
 
