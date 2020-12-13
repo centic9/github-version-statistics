@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2020-12-14,yipen9/elasticsearch-self,<new>,${versions.poi}
+2020-12-14,juandiegoxi/GIT,<new>,4.1.0
+2020-12-14,Gos2two/ProjectCatheter,<new>,4.1.2
 2020-12-12,divijqa/Practice-to-Perfect,<new>,3.17
 2020-12-12,shanky0207/KeywordDriven,<new>,3.9
 2020-12-11,teknas312/Gradle_ATS,<new>,3.17
