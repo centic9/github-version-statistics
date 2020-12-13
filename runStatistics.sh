@@ -2,6 +2,9 @@
 
 set -u
 
+# limit memory-usage of Gradle process
+export GRADLE_OPTS="-Xmx64m -Dorg.gradle.jvmargs=-Xmx64m"
+
 echo Look at https://centic9.github.io/github-version-statistics/ for results
 
 cd `dirname $0`

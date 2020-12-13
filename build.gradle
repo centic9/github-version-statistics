@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 
 mainClassName = 'org.dstadler.github.search.Search'
+applicationDefaultJvmArgs = ['-Xmx64m', '-XX:+HeapDumpOnOutOfMemoryError']
 
 sourceCompatibility = 1.8
 
