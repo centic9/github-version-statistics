@@ -1,4 +1,5 @@
 date,repository,versionBefore,versionNow
+2020-12-15,expositoluis/GestionGastos,<new>,4.1.0
 2020-12-14,yipen9/elasticsearch-self,<new>,${versions.poi}
 2020-12-14,juandiegoxi/GIT,<new>,4.1.0
 2020-12-14,Gos2two/ProjectCatheter,<new>,4.1.2
