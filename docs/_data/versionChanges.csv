@@ -1,4 +1,11 @@
 date,repository,versionBefore,versionNow
+2020-12-31,HuBlanker/lucene-solr,<new>,noVersion
+2020-12-31,unamatino/Training,<new>,3.17
+2020-12-31,krupenpatel/siteginesis,<new>,3.17
+2020-12-31,liyo001/SeleniumTask,<new>,3.9
+2020-12-31,senthilbalasaphr/shd,<new>,4.1.2
+2020-12-31,MitchellMarinoDev/PixelArtGenerator,<new>,4.1.2
+2020-12-31,DeepakTesting1989/FSCW-PPAS,<new>,4.1.2
 2020-12-30,XavierBrazeau/log8371,<new>,${versions.poi}
 2020-12-30,why154285/comm,<new>,4.1.0
 2020-12-30,ayeshayusufgit/ApiRepositoryCode,<new>,4.1.2
