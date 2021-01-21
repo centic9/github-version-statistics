@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2021-01-22,harshilraja/SpringBoot,<new>,3.17
+2021-01-22,madhan-QA/SDMSAutomation,<new>,4.0.1
+2021-01-22,madhulika99/TestNGFeatures,<new>,3.9
+2021-01-22,vikashvarma94/Webservice,<new>,4.1.2
+2021-01-22,Khosruz/MultiCartAutomationSuit,<new>,4.1.2
+2021-01-22,saifk313/MailerLite,<new>,3.16-beta2
 2021-01-21,neo4j-contrib/neo4j-apoc-procedures,<new>,3.17
 2021-01-21,rakesh202/automationpractice,<new>,3.15
 2021-01-21,anusha-225/one12,<new>,4.1.2
