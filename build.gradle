@@ -32,9 +32,9 @@ dependencies {
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.9.0.202009080501-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.11.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.11.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.12.1'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.12.1'
 
     testCompile 'junit:junit:4.13.1'
     testCompile 'org.dstadler:commons-test:1.0.0.19'
