@@ -1,4 +1,10 @@
 date,repository,versionBefore,versionNow
+2021-01-24,ashrafbaig/BrowserStack-Assignment,<new>,3.17
+2021-01-24,numadykuteko/PhotoPDF,<new>,3.9
+2021-01-24,dipjyotimetia/HybridTestFramewrok,4.1.2,5.0.0
+2021-01-24,dipjyotimetia/MobileTestFramework,4.1.2,5.0.0
+2021-01-24,sky0504/pro,<new>,4.1.2
+2021-01-24,srivallik/RestAssuredFrameWork,<new>,3.16-beta2
 2021-01-23,CsiszerTamas/SimulationReader,<new>,3.17
 2021-01-23,JingxuOuyang/gbeans,<new>,4.1.2
 2021-01-23,sonwanigaurav/Test,<new>,4.1.2
@@ -10822,8 +10828,8 @@ date,repository,versionBefore,versionNow
 2016-09-30,agwlvssainokuni/springapp,<new>,${versionPoi}
 2016-09-30,cittasila/demoAPI,<new>,${poi_version}
 2016-09-30,bhagavathin/Restassured_Gradle,<new>,3.8-beta4
-2016-09-30,andresteingress/gsheets,<new>,3.8-beta5
 2016-09-30,Hubbitus/GExcelBuilder,<new>,3.8-beta5
+2016-09-30,andresteingress/gsheets,<new>,3.8-beta5
 2016-09-30,metridoc-archives/metridoc-job-core,<new>,3.8-beta3
 2016-09-30,metridoc/metridoc-job,<new>,3.8-beta3
 2016-09-30,ashishdd/ERegister,<new>,3.8-beta3
