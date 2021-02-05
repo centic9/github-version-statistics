@@ -177,6 +177,15 @@ public class GradleBuildSearchTest {
         str = "<module.name>org.apache.poi</module.name>";
         assertFalse(str.matches(excludeRegex));
 
+        str = "            [group: 'org.apache.poi', name: 'poi', version: '[4.1.2]'],";
+        assertFalse(str.matches(excludeRegex));
+
+        str = "group: 'org.apache.poi', name: 'poi', version: '[4.1.2]',";
+        assertFalse(str.matches(excludeRegex));
+
+        str = "group: 'org.apache.poi', name: 'poi', version: '[4.1.2]',";
+        assertFalse(str.matches(excludeRegex));
+
         str = "exclude group: 'org.apache.poi', module: 'poi'";
         assertTrue(str.matches(excludeRegex));
 
@@ -190,6 +199,12 @@ public class GradleBuildSearchTest {
         assertTrue(str.matches(excludeRegex));
 
         str = "group: 'org.apache.poi', name: 'com.springsource.org.apache.poi'";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "//            [group: 'org.apache.poi', name: 'poi', version: '[5.0,)'],";
+        assertTrue(str.matches(excludeRegex));
+
+        str = "        //            [group: 'org.apache.poi', name: 'poi', version: '[5.0,)'],";
         assertTrue(str.matches(excludeRegex));
     }
 }

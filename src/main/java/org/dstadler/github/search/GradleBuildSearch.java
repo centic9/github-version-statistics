@@ -37,7 +37,9 @@ public class GradleBuildSearch extends BaseSearch {
             // exclude group: 'org.apache.poi', module: 'poi'
             "exclude group: '" + GROUP_REGEX + "', module: '[-a-z]+'|" +
             // me: 'com.springsource.jxl', version: '2.6.6',configuration: "compile", ext : "jar" compile group: 'org.apache.poi', name: 'com.springsource.org.apache.poi', version: '3.9.0.FINAL',configuration: "com
-            "group: '" + GROUP_REGEX + "', name: 'com.springsource.org.apache.poi'" +
+            "group: '" + GROUP_REGEX + "', name: 'com.springsource.org.apache.poi'|" +
+            // exclude any commented line
+            "^\\s*//.*" +
             ')').
             // adding \\s* and ["'] everywhere makes reading the strings above hard
             replace(" ", "\\s*").
