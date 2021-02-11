@@ -29,7 +29,7 @@ dependencies {
 
     compile 'org.dstadler:commons-dost:1.0.0.32'
     compile 'org.kohsuke:github-api:1.117'
-    compile 'org.eclipse.jgit:org.eclipse.jgit:5.9.0.202009080501-r'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.10.0.202012080955-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
 
     compile 'com.fasterxml.jackson.core:jackson-core:2.12.1'
