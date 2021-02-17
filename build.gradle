@@ -36,7 +36,7 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.12.1'
 
-    testCompile 'junit:junit:4.13.1'
+    testCompile 'junit:junit:4.13.2'
     testCompile 'org.dstadler:commons-test:1.0.0.19'
 }
 
