@@ -207,4 +207,70 @@ public class GradleBuildSearchTest {
         str = "        //            [group: 'org.apache.poi', name: 'poi', version: '[5.0,)'],";
         assertTrue(str.matches(excludeRegex));
     }
+
+    @Test
+    public void testAddVersionEmpty() {
+        GradleBuildSearch.addVersion(versions, null, "", "");
+        assertEquals("{=[null]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionEmpty2() {
+        GradleBuildSearch.addVersion(versions, "url", "", "");
+        assertEquals("{=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersion() {
+        GradleBuildSearch.addVersion(versions, "url", "", "abc");
+        assertEquals("{abc=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable1() {
+        GradleBuildSearch.addVersion(versions, "url", "", "$");
+        assertEquals("{$=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable2() {
+        GradleBuildSearch.addVersion(versions, "url", "", "$abc");
+        assertEquals("{$abc=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable3() {
+        GradleBuildSearch.addVersion(versions, "url", "", "${abc}");
+        assertEquals("{${abc}=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable4() {
+        GradleBuildSearch.addVersion(versions, "url", "abc = '3.10-FINAL'", "${abc}");
+        assertEquals("{3.10=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable5() {
+        GradleBuildSearch.addVersion(versions, "url", "abc = '[3.10-FINAL'", "${abc}");
+        assertEquals("{3.10=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable6() {
+        GradleBuildSearch.addVersion(versions, "url", "abc = '[3.10-FINAL'", "${abc}}");
+        assertEquals("{${abc}}=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable7() {
+        GradleBuildSearch.addVersion(versions, "url", "abc = '[3.10-FINAL'", "${{abc}");
+        assertEquals("{${{abc}=[url]}", versions.toString());
+    }
+
+    @Test
+    public void testAddVersionVariable8() {
+        GradleBuildSearch.addVersion(versions, "url", "abc = '[3.10-FINAL'", "${[abc}");
+        assertEquals("{${[abc}=[url]}", versions.toString());
+    }
 }

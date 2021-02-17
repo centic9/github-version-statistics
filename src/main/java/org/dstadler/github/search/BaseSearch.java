@@ -54,7 +54,11 @@ public abstract class BaseSearch {
                         continue;
                     }
 
-                    parseVersion(versions, htmlUrl, repo, str);
+                    try {
+                        parseVersion(versions, htmlUrl, repo, str);
+                    } catch (RuntimeException e) {
+                        throw new IllegalStateException("Failed for " + htmlUrl + ", repo; " + repo + ", str: " + str, e);
+                    }
 
                     if(i % 1000 == 0) {
                         System.out.println("Having " + i + " results");
@@ -90,7 +94,6 @@ public abstract class BaseSearch {
 
         final InputStream stream;
         try {
-            //noinspection resource
             stream = match.read();
         } catch (IOException e) {
             System.out.println("Could not read content of " + htmlUrl + " of repo " + repo + ": " + e);

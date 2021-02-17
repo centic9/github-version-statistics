@@ -96,7 +96,8 @@ public class GradleBuildSearch extends BaseSearch {
         // try to resolve simple variables
         if(version.startsWith("$")) {
             Matcher matcher = Pattern.compile(
-                    StringUtils.removeStart(StringUtils.removeEnd(version.substring(1), "}"), "{")
+                    Pattern.quote(StringUtils.removeStart(StringUtils.removeEnd(
+                                version.substring(1), "}"), "{"))
                             + VERSION_VAR_PATTERN).matcher(str);
             if(matcher.find()) {
                 version = matcher.group(1);
