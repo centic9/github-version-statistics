@@ -1,4 +1,8 @@
 date,repository,versionBefore,versionNow
+2021-03-16,gsravani-103/Hello-world,<new>,4.0.0
+2021-03-16,njuancuk/remake4,<new>,${versions.poi}
+2021-03-16,shivaT87/SeleniumdFramework,<new>,3.16-beta2
+2021-03-16,Hetal1992/FreeCRMPracticeRepo,<new>,3.16-beta2
 2021-03-15,AnandGitID/POMSeries,<new>,3.9
 2021-03-15,AbdelkarimChamlal/AutoTicketGenerator,<new>,5.0.0
 2021-03-15,carl10086/myes7,<new>,${versions.poi}
