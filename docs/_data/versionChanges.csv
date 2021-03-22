@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2021-03-23,linuxwan/uniworks,<new>,${version.poi}
+2021-03-23,Priyanshuaaa/RestAssured,<new>,3.17
+2021-03-23,prakash90-cpu/prakashrepository,<new>,4.1.1
 2021-03-22,Ionut09/personal-billing,<new>,5.0.0
 2021-03-22,mjalleda/my-app,<new>,3.16-beta2
 2021-03-21,senthilkumar10/NextGenTestAutoFramework,<new>,3.9
