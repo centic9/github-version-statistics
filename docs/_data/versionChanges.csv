@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2021-03-24,AbdelkarimChamlal/xlsx-s-changes-detecter,<new>,5.0.0
+2021-03-24,quake-h/Workers,<new>,4.1.2
+2021-03-24,RanadheerDanda/AppiumMobileTesting,<new>,3.16-beta2
 2021-03-23,linuxwan/uniworks,<new>,${version.poi}
 2021-03-23,Priyanshuaaa/RestAssured,<new>,3.17
 2021-03-23,prakash90-cpu/prakashrepository,<new>,4.1.1
