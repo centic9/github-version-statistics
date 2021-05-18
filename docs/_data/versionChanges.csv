@@ -1,4 +1,7 @@
 date,repository,versionBefore,versionNow
+2021-05-19,yfs666/routine,<new>,${versions.poi}
+2021-05-19,blshao84/jkzx1,<new>,4.1.0
+2021-05-19,fadart/DataBeaverAutomation,<new>,3.16-beta2
 2021-05-17,2015rudra/Ravi,<new>,1.0-beta
 2021-05-17,harilearning1989/SpringRestOracleWeb,<new>,3.9
 2021-05-17,Hazai563/Create-Hybrid-POM-DATA-DRIVEN-framework-in-selenuim-testNG-GIT-CI-tools-Jinkinks-,<new>,3.9
