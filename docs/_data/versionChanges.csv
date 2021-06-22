@@ -1,4 +1,13 @@
 date,repository,versionBefore,versionNow
+2021-06-23,nikhilkahane/InternetBnakingHybridPOM,<new>,3.17
+2021-06-23,codeborne/replay,3.11,3.17
+2021-06-23,mohdmyyusuf/AssignmentQATest,<new>,4.0.1
+2021-06-23,venkatalakshmikameswari/CRMPageObjectModel,<new>,3.9
+2021-06-23,neel59/DemoRepo,<new>,5.0.0
+2021-06-23,Nza6920/springboot-excel-demo,<new>,5.0.0
+2021-06-23,sinterma/qa_guru_7_hw,<new>,5.0.0
+2021-06-23,rajesh-1983/elasticsearch_local,<new>,${versions.poi}
+2021-06-23,ranjithsekar/utilities,<new>,4.1.2
 2021-06-22,SWRevo/XlsToJson,<new>,3.17
 2021-06-22,camilosGarcia/pruebatravcelocity,<new>,4.0.1
 2021-06-22,BhavithaT/AssignmentYantra,<new>,4.0.0
