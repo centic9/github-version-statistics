@@ -10,7 +10,7 @@ version = '1.0'
 
 jar {
     manifest {
-        attributes 'Implementation-Title': 'GitHub Java library version usage Statistics', 'Implementation-Version': version
+        attributes 'Implementation-Title': 'GitHub Java library version usage Statistics', 'Implementation-Version': archiveVersion
     }
 }
 
@@ -27,7 +27,7 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.12.0'
     compile 'org.apache.commons:commons-csv:1.8'
 
-    compile 'org.dstadler:commons-dost:1.0.0.32'
+    compile 'org.dstadler:commons-dost:1.0.0.33'
     compile 'org.kohsuke:github-api:1.117'
     compile 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
     compile 'org.slf4j:slf4j-simple:1.7.30'
