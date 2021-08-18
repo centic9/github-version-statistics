@@ -23,18 +23,18 @@ configurations {
 }
 
 dependencies {
-    compile 'commons-io:commons-io:2.9.0'
+    compile 'commons-io:commons-io:2.11.0'
     compile 'org.apache.commons:commons-lang3:3.12.0'
-    compile 'org.apache.commons:commons-csv:1.8'
+    compile 'org.apache.commons:commons-csv:1.9.0'
 
     compile 'org.dstadler:commons-dost:1.0.0.33'
-    compile 'org.kohsuke:github-api:1.117'
-    compile 'org.eclipse.jgit:org.eclipse.jgit:5.11.1.202105131744-r'
-    compile 'org.slf4j:slf4j-simple:1.7.30'
+    compile 'org.kohsuke:github-api:1.132'
+    compile 'org.eclipse.jgit:org.eclipse.jgit:5.12.0.202106070339-r'
+    compile 'org.slf4j:slf4j-simple:1.7.32'
 
-    compile 'com.fasterxml.jackson.core:jackson-core:2.12.3'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.12.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.12.4'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.12.4'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.12.4'
 
     testCompile 'junit:junit:4.13.2'
     testCompile 'org.dstadler:commons-test:1.0.0.19'
