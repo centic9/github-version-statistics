@@ -53,7 +53,13 @@ public class GradleBuildSearch extends BaseSearch {
     @Override
     protected void search(GitHub github, Multimap<String, String> versions) throws IOException {
         // start search
-        final PagedSearchIterable<GHContent> list = github.searchContent().filename("build.gradle").in("file").language("gradle").q(GROUP_REGEX).list();
+        final PagedSearchIterable<GHContent> list = github.searchContent().
+                filename("build.gradle").
+                in("file").
+                language("gradle").
+                q(GROUP_REGEX).
+                list();
+
         System.out.println("Had: " + list.getTotalCount() + " total results with " + getClass().getSimpleName());
 
         // paginate through results, filtering out interesting files

@@ -6,7 +6,10 @@ import org.apache.commons.io.IOUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
+import org.kohsuke.github.GitHubBuilder;
 import org.kohsuke.github.HttpException;
+import org.kohsuke.github.RateLimitChecker;
+import org.kohsuke.github.RateLimitTarget;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -167,6 +170,9 @@ public abstract class BaseSearch {
     }
 
     public static GitHub connect() throws IOException {
-        return GitHub.connect();
+        return GitHubBuilder.fromEnvironment().
+                // observe rate-limits and wait if we get near the returned remaining number of requests per timeframe
+                withRateLimitChecker(new RateLimitChecker.LiteralValue(1), RateLimitTarget.SEARCH).
+                build();
     }
 }
