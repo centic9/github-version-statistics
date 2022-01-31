@@ -31,7 +31,7 @@ dependencies {
     implementation 'org.dstadler:commons-dost:1.1.0.0'
     implementation 'org.kohsuke:github-api:1.301'
     implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
-    implementation 'org.slf4j:slf4j-simple:1.7.32'
+    implementation 'org.slf4j:slf4j-simple:1.7.35'
 
     implementation 'com.fasterxml.jackson.core:jackson-core:2.13.1'
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
