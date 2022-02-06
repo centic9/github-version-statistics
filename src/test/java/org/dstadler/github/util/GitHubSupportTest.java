@@ -1,11 +1,14 @@
 package org.dstadler.github.util;
 
+import com.google.common.collect.ImmutableSet;
+import org.dstadler.github.search.BaseSearch;
 import org.dstadler.github.upgrade.ProjectStatuses;
 import org.dstadler.github.upgrade.UpgradeStatus;
 import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.kohsuke.github.GHContent;
+import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.kohsuke.github.PagedSearchIterable;
 
@@ -88,5 +91,59 @@ public class GitHubSupportTest {
                 Assume.assumeNoException("See https://github.com/github-api/github-api/issues/729", e);
             }
         }
+    }
+
+    private static final ImmutableSet<String> IGNORED_REPO_ENDS_WITH = ImmutableSet.of(
+            "-ppa",
+            ".ppa",
+            "-fuzz",
+            "jacococoveragecolumn-plugin",
+            "gwt-gradle-example-issue81"
+    );
+
+    @Test
+    public void listRepositories() throws IOException {
+        GitHub github = BaseSearch.connect();
+
+        for (GHRepository repository : github.getUser("centic9").listRepositories()) {
+            if (repository.isFork()) {
+                continue;
+            }
+
+            if (isIgnored(repository)) {
+                continue;
+            }
+
+            printRepo("centic9/" + repository.getName());
+        }
+
+        // include some others
+        printRepo("openambitproject/openambit");
+        printRepo("apache/poi");
+        printRepo("apache/xmlbeans");
+        printRepo("jenkinsci/jacoco-plugin");
+        printRepo("jajuk-team/jajuk");
+
+        // this is manually uploaded to the following page
+        // https://github.com/centic9/centic9.github.io/blob/master/STATUS.md
+    }
+
+    private void printRepo(String repository) {
+        //System.out.println("Had repository: " + repository.getName());
+        // | [rhasspy](https://github.com/rhasspy/rhasspy) | [![Tests](https://github.com/rhasspy/rhasspy/workflows/Tests/badge.svg)](https://github.com/rhasspy/rhasspy/actions) | [![Open issues](https://img.shields.io/github/issues-raw/rhasspy/rhasspy)](https://github.com/rhasspy/rhasspy/issues) | [![Open pull requests](https://img.shields.io/github/issues-pr-raw/rhasspy/rhasspy)](https://github.com/rhasspy/rhasspy/pulls) |
+        System.out.format("| [%s](https://github.com/%s) | " +
+                        "[![Tests](https://github.com/%s/workflows/Build%%20and%%20check/badge.svg)](https://github.com/%s/actions) | " +
+                        "[![Open issues](https://img.shields.io/github/issues-raw/%s)](https://github.com/%s/issues) | " +
+                        "[![Open pull requests](https://img.shields.io/github/issues-pr-raw/%s)](https://github.com/%s/pulls) |\n",
+                repository, repository, repository, repository, repository, repository, repository, repository);
+    }
+
+    private boolean isIgnored(GHRepository repository) {
+        for (String ignoredRepo : IGNORED_REPO_ENDS_WITH) {
+            if (repository.getName().endsWith(ignoredRepo)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
