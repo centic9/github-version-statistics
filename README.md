@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/centic9/github-version-statistics.svg)](https://travis-ci.org/centic9/github-version-statistics) 
+[![Build Status](https://github.com/centic9/github-version-statistics/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/centic9/github-version-statistics/actions)
 [![Gradle Status](https://gradleupdate.appspot.com/centic9/github-version-statistics/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/github-version-statistics/status)
-[![Release](https://img.shields.io/github/release/centic9/github-version-statistics.svg)](https://github.com/centic9/github-version-statistics/releases)
 
 A small application which uses the [GitHub API](https://github.com/kohsuke/github-api) to search for usages of a Java library and 
 prepares some statistics about which versions are used how often.
