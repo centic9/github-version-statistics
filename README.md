@@ -1,6 +1,9 @@
 [![Build Status](https://github.com/centic9/github-version-statistics/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/centic9/github-version-statistics/actions)
 [![Gradle Status](https://gradleupdate.appspot.com/centic9/github-version-statistics/status.svg?branch=master)](https://gradleupdate.appspot.com/centic9/github-version-statistics/status)
 
+*Note: This project cannot access the Github-API any more for searching across the all projects and thus is effectively dormant. If you know how to do this then a PR is highly welcome*
+
+----
 A small application which uses the [GitHub API](https://github.com/kohsuke/github-api) to search for usages of a Java library and 
 prepares some statistics about which versions are used how often.
 
@@ -15,7 +18,7 @@ The results of a daily run of the scan for Apache POI can be found at [https://c
 
 ##### Grab it
 
-    git clone git://github.com/centic9/github-version-statistics
+    git clone https://github.com/centic9/github-version-statistics.git
 
 #### Configure library and credentials
 
@@ -61,7 +64,7 @@ send pull requests or create [issues](https://github.com/centic9/github-version-
 
 #### Licensing
 
-   Copyright 2013-2019 Dominik Stadler
+   Copyright 2013-2022 Dominik Stadler
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
