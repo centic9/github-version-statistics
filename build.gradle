@@ -33,12 +33,12 @@ dependencies {
     implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
     implementation 'org.slf4j:slf4j-simple:1.7.36'
 
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.2'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.2'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.3'
 
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.dstadler:commons-test:1.0.0.19'
+    testImplementation 'org.dstadler:commons-test:1.0.0.20'
 }
 
 wrapper {
