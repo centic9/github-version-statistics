@@ -48,10 +48,13 @@ public class BaseSearchTest {
                 "https://github.com/centic9/jgit-cookbook/blob/README.md"));
 
         assertNull(search.getNonForkRepository(BaseSearch.connect(),
-                "https://github.com/a0xec0/Spoon-Knife/blob/README.md"));
+                "https://github.com/centic9/file-leak-detector/blob/master/README.adoc"));
     }
 
     private static class MyBaseSearch extends BaseSearch {
+        MyBaseSearch() {
+        }
+
         @Override
         void search(GitHub github, Multimap<String, String> versions) {
         }
