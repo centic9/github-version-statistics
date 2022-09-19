@@ -32,10 +32,8 @@ public class JSONWriter {
             Holder holder = new Holder(date, versions);
 
             StringWriter strWriter = new StringWriter();
-            try {
+            try (strWriter) {
                 mapper.writeValue(strWriter, holder);
-            } finally {
-                strWriter.close();
             }
 
             // Need to write in one go as mapper.writeValue() closes the stream...
@@ -77,7 +75,6 @@ public class JSONWriter {
             }
 
             return Multimaps.filterEntries(versions, input -> {
-                //noinspection ConstantConditions
                 for(String version1 : repoVersions.get(BaseSearch.getRepository(input.getValue()))) {
                     if(COMPARATOR.compare(version1, input.getKey()) > 0) {
                         return false;

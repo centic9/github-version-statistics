@@ -4,8 +4,6 @@ apply plugin: 'application'
 mainClassName = 'org.dstadler.github.search.Search'
 applicationDefaultJvmArgs = ['-Xmx64m', '-XX:+HeapDumpOnOutOfMemoryError']
 
-sourceCompatibility = 1.8
-
 version = '1.0'
 
 jar {
@@ -29,13 +27,14 @@ dependencies {
 	implementation 'org.apache.commons:commons-exec:1.3'
 
     implementation 'org.dstadler:commons-dost:1.1.0.1'
-    implementation 'org.kohsuke:github-api:1.301'
-    implementation 'org.eclipse.jgit:org.eclipse.jgit:5.13.0.202109080827-r'
+    implementation 'org.kohsuke:github-api:1.308'
+    implementation 'org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r'
     implementation 'org.slf4j:slf4j-simple:1.7.36'
 
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.3'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.3'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.4'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.4'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.13.4'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.dstadler:commons-test:1.0.0.20'

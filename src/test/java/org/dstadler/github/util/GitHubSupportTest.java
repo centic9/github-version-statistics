@@ -18,10 +18,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class GitHubSupportTest {
     @Before
@@ -60,7 +57,7 @@ public class GitHubSupportTest {
     @Test//(expected = HttpException.class)
     public void testInvalidProject() throws IOException {
         Map<String, String> projects = new HashMap<>();
-        projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
+        projects.put("centic9/invalid project", "1.0");   // invalid project name
 
         ProjectStatuses projectStatuses = new ProjectStatuses();
         Map<String, String> map = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
@@ -72,6 +69,16 @@ public class GitHubSupportTest {
         assertTrue(0 < repository.getWatchers());
 
         fail("Should catch Exception, but had: " + map);*/
+    }
+
+    @Test
+    public void testInvalidProjectName() throws IOException {
+        Map<String, String> projects = new HashMap<>();
+        projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
+
+        ProjectStatuses projectStatuses = new ProjectStatuses();
+        assertThrows(IllegalArgumentException.class,
+                () -> GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10));
     }
 
     @Test
