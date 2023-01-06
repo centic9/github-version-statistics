@@ -31,10 +31,10 @@ dependencies {
     implementation 'org.eclipse.jgit:org.eclipse.jgit:6.3.0.202209071007-r'
     implementation 'org.slf4j:slf4j-simple:1.7.36'
 
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.0'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.14.0'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.14.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.1'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.14.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.14.1'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.dstadler:commons-test:1.0.0.20'
