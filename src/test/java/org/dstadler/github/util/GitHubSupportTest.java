@@ -21,9 +21,24 @@ import java.util.Map;
 import static org.junit.Assert.*;
 
 public class GitHubSupportTest {
+	private static final String HOME;
+	static {
+		String h = System.getenv("HOME");
+		if (h == null) {
+			h = System.getProperty("user.home");
+		}
+
+		assertNotNull("Could not read home-directory: \n" +
+						System.getenv() + "\n" +
+						System.getProperties(),
+				h);
+
+		HOME = h;
+	}
+
     @Before
     public void setUp() {
-        File credFile = new File(System.getenv("HOME") + "/.github");
+		File credFile = new File(HOME + "/.github");
         if(!credFile.exists()) {
             //noinspection ConstantConditions
             Assume.assumeFalse("Credentials need to exist at " + credFile.getAbsolutePath() + " for this test", true);
