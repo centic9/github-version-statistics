@@ -25,7 +25,7 @@ public class GitHubSupportTest {
 	static {
 		String h = System.getenv("HOME");
 		if (h == null) {
-			h = System.getProperty("user.home");
+            h = System.getProperty("user.home");
 		}
 
 		assertNotNull("Could not read home-directory: \n" +
@@ -87,7 +87,7 @@ public class GitHubSupportTest {
     }
 
     @Test
-    public void testInvalidProjectName() throws IOException {
+    public void testInvalidProjectName() {
         Map<String, String> projects = new HashMap<>();
         projects.put("centic9/invalid project &/()", "1.0");   // invalid project name
 
@@ -115,6 +115,7 @@ public class GitHubSupportTest {
         }
     }
 
+    @SuppressWarnings("StaticCollection")
     private static final ImmutableSet<String> IGNORED_REPO_ENDS_WITH = ImmutableSet.of(
             "-ppa",
             ".ppa",
@@ -138,6 +139,15 @@ public class GitHubSupportTest {
 
             printRepo("centic9/" + repository.getName());
         }
+
+        // manually include some forks
+        printRepo("centic9/firmata4j");
+        printRepo("centic9/centic9.github.io");
+        printRepo("centic9/openjpa-gradle-plugin");
+        printRepo("centic9/TM1638plus");
+        printRepo("centic9/file-leak-detector");
+        printRepo("centic9/amazon-product-api");
+        printRepo("centic9/phpmyadmin-cli");
 
         // include some others
         printRepo("openambitproject/openambit");
