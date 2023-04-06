@@ -47,6 +47,6 @@ wrapper {
 task processResults(type:JavaExec) {
     description = 'Post-processes results to charts'
 
-    main = 'org.dstadler.github.ProcessResults'
+    mainClass = 'org.dstadler.github.ProcessResults'
     classpath = sourceSets.main.runtimeClasspath
 }
