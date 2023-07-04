@@ -119,7 +119,6 @@ public class GitHubSupportTest {
     private static final ImmutableSet<String> IGNORED_REPO_ENDS_WITH = ImmutableSet.of(
             "-ppa",
             ".ppa",
-            "-fuzz",
             "jacococoveragecolumn-plugin",
             "gwt-gradle-example-issue81"
     );
