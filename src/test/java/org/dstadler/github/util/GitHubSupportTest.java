@@ -29,7 +29,7 @@ public class GitHubSupportTest {
 		}
 
 		assertNotNull("Could not read home-directory: \n" +
-						System.getenv() + "\n" +
+						System.getenv() + '\n' +
 						System.getProperties(),
 				h);
 
