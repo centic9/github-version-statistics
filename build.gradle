@@ -21,7 +21,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:2.14.0'
+    implementation 'commons-io:commons-io:2.15.0'
     implementation 'org.apache.commons:commons-lang3:3.13.0'
     implementation 'org.apache.commons:commons-csv:1.10.0'
 	implementation 'org.apache.commons:commons-exec:1.3'
