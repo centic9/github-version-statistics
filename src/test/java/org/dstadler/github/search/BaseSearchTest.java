@@ -1,15 +1,13 @@
 package org.dstadler.github.search;
 
 import com.google.common.collect.Multimap;
-import org.junit.Assume;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.Test;
 import org.kohsuke.github.GitHub;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BaseSearchTest {
     @Test
@@ -18,7 +16,7 @@ public class BaseSearchTest {
         try {
             connect = BaseSearch.connect();
         } catch (IOException e) {
-            Assume.assumeFalse("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
+            Assumptions.assumeFalse(e.getMessage().contains("Failed to resolve credentials"), "Ignore missing credentials");
             throw e;
         }
 
@@ -40,7 +38,7 @@ public class BaseSearchTest {
         try {
             assertNull(search.getNonForkRepository(BaseSearch.connect(), ""));
         } catch (IOException e) {
-            Assume.assumeFalse("Ignore missing credentials", e.getMessage().contains("Failed to resolve credentials"));
+            Assumptions.assumeFalse(e.getMessage().contains("Failed to resolve credentials"), "Ignore missing credentials");
             throw e;
         }
 

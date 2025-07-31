@@ -1,13 +1,13 @@
 package org.dstadler.github.upgrade;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProjectStatusesTest {
     @Test
@@ -32,10 +32,12 @@ public class ProjectStatusesTest {
         statuses.write();
     }
 
-    @Test(expected = FileNotFoundException.class)
-    public void testReadInvalid() throws IOException {
-        ProjectStatuses statuses = new ProjectStatuses();
-        statuses.read("unknownFile.csv");
+    @Test
+    public void testReadInvalid() {
+        assertThrows(FileNotFoundException.class, () -> {
+            ProjectStatuses statuses = new ProjectStatuses();
+            statuses.read("unknownFile.csv");
+        });
     }
 
     @Test
@@ -44,8 +46,10 @@ public class ProjectStatusesTest {
 
         try {
             FileUtils.writeStringToFile(tempFile,
-                    "Project,Status\n" +
-                    "shameel0784/ajexp,UnknownBuildSystem\n",
+                    """
+                    Project,Status
+                    shameel0784/ajexp,UnknownBuildSystem
+                    """,
                     "UTF-8");
 
             ProjectStatuses statuses = new ProjectStatuses();

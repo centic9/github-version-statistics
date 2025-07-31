@@ -4,17 +4,14 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.SetMultimap;
 import org.apache.commons.io.FileUtils;
 import org.dstadler.github.util.JSONWriter.Holder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class JSONWriterTest {
     private static final String URL_1 = "https://github.com/centic9/poi-mail-merge/blob/074d96b0d798ded4fb349d7fdf301d1d8a4daa2d//build.gradle";
@@ -100,11 +97,11 @@ public class JSONWriterTest {
         Holder holder = JSONWriter.mapper.readValue(JSON, Holder.class);
 
         SetMultimap<String, String> repos = holder.getVersions();
-        assertEquals("Had: " + repos, 1, repos.keySet().size());
-        assertEquals("Had: " + repos, "3.15", repos.keySet().iterator().next());
+        assertEquals(1, repos.keySet().size(), "Had: " + repos);
+        assertEquals("3.15", repos.keySet().iterator().next(), "Had: " + repos);
 
-        assertEquals("Had: " + repos, 1, repos.values().size());
-        assertEquals("Had: " + repos, "https://github.com/centic9/poi-mail-merge/blob/837194207f83c9274bfd175ca94fbac45282f5e4//build.gradle", repos.values().iterator().next());
+        assertEquals(1, repos.values().size(), "Had: " + repos);
+        assertEquals("https://github.com/centic9/poi-mail-merge/blob/837194207f83c9274bfd175ca94fbac45282f5e4//build.gradle", repos.values().iterator().next(), "Had: " + repos);
     }
 
     @Test
@@ -112,11 +109,11 @@ public class JSONWriterTest {
         Holder holder = JSONWriter.mapper.readValue(JSON, Holder.class);
 
         SetMultimap<String, String> repos = holder.getRepositoryVersions();
-        assertEquals("Had: " + repos, 1, repos.keySet().size());
-        assertEquals("Had: " + repos, "3.15", repos.keySet().iterator().next());
+        assertEquals(1, repos.keySet().size(), "Had: " + repos);
+        assertEquals("3.15", repos.keySet().iterator().next(), "Had: " + repos);
 
-        assertEquals("Had: " + repos, 1, repos.values().size());
-        assertEquals("Had: " + repos, "centic9/poi-mail-merge", repos.values().iterator().next());
+        assertEquals(1, repos.values().size(), "Had: " + repos);
+        assertEquals("centic9/poi-mail-merge", repos.values().iterator().next(), "Had: " + repos);
     }
 
     @Test

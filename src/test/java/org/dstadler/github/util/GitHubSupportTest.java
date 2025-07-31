@@ -4,9 +4,9 @@ import com.google.common.collect.ImmutableSet;
 import org.dstadler.github.search.BaseSearch;
 import org.dstadler.github.upgrade.ProjectStatuses;
 import org.dstadler.github.upgrade.UpgradeStatus;
-import org.junit.Assume;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
@@ -18,7 +18,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GitHubSupportTest {
 	private static final String HOME;
@@ -28,20 +28,20 @@ public class GitHubSupportTest {
             h = System.getProperty("user.home");
 		}
 
-		assertNotNull("Could not read home-directory: \n" +
+		assertNotNull(h,
+				"Could not read home-directory: \n" +
 						System.getenv() + '\n' +
-						System.getProperties(),
-				h);
+						System.getProperties());
 
 		HOME = h;
 	}
 
-    @Before
+    @BeforeEach
     public void setUp() {
 		File credFile = new File(HOME + "/.github");
         if(!credFile.exists()) {
             //noinspection ConstantConditions
-            Assume.assumeFalse("Credentials need to exist at " + credFile.getAbsolutePath() + " for this test", true);
+            Assumptions.assumeFalse(true, "Credentials need to exist at " + credFile.getAbsolutePath() + " for this test");
         }
     }
 
@@ -56,11 +56,9 @@ public class GitHubSupportTest {
         ProjectStatuses projectStatuses = new ProjectStatuses();
         Map<String, String> projectsOfInterest = GitHubSupport.filterForProjectsOfInterest(projects, projectStatuses, 10);
 
-        assertEquals("Original map not changed, but had: " + projects,
-                3, projects.size());
+        assertEquals(3, projects.size(), "Original map not changed, but had: " + projects);
 
-        assertEquals("Two projects should be filtered out, but had: " + projects,
-                1, projectsOfInterest.size());
+        assertEquals(1, projectsOfInterest.size(), "Two projects should be filtered out, but had: " + projects);
         assertEquals("1.0", projectsOfInterest.get("centic9/jgit-cookbook"));
 
         assertEquals(UpgradeStatus.NotAccessible, projectStatuses.get("project/project").getStatus());
@@ -110,7 +108,8 @@ public class GitHubSupportTest {
             try (final InputStream stream = match.read()) {
                 assertNotNull(stream);
             } catch (NullPointerException e) {
-                Assume.assumeNoException("See https://github.com/github-api/github-api/issues/729", e);
+                Assumptions.assumeTrue(false,
+                        "See https://github.com/github-api/github-api/issues/729");
             }
         }
     }

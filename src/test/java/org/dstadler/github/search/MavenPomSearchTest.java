@@ -2,13 +2,10 @@ package org.dstadler.github.search;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.dstadler.github.search.MavenPomSearch.PATTERN_NO_VERSION;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MavenPomSearchTest {
     private final Multimap<String, String> versions = HashMultimap.create();
@@ -17,20 +14,23 @@ public class MavenPomSearchTest {
     public void testRegex() {
         assertFalse(PATTERN_NO_VERSION.matcher("").find());
         assertFalse(PATTERN_NO_VERSION.matcher("compile 'org.apache.poi:poi:3.16-beta1'").find());
-        assertFalse(PATTERN_NO_VERSION.matcher("<dependency>\n" +
-                "      <groupId>org.apache.poi</groupId>\n" +
-                "      <artifactId>poi</artifactId>\n" +
-                "      <version>3.15</version>\n" +
-                "</dependency>").find());
+        assertFalse(PATTERN_NO_VERSION.matcher("""
+                <dependency>
+                      <groupId>org.apache.poi</groupId>
+                      <artifactId>poi</artifactId>
+                      <version>3.15</version>
+                </dependency>""").find());
 
-        assertTrue(PATTERN_NO_VERSION.matcher("<dependency>\n" +
-                "                        <groupId>org.apache.poi</groupId>\n" +
-                "                        <artifactId>poi</artifactId>\n" +
-                "                </dependency>").find());
-        assertTrue(PATTERN_NO_VERSION.matcher("<dependency>\n" +
-                "                        <groupId>org.apache.poi</groupId>\n" +
-                "                        <artifactId>poi-scratchpad</artifactId>\n" +
-                "                </dependency>").find());
+        assertTrue(PATTERN_NO_VERSION.matcher("""
+                <dependency>
+                                        <groupId>org.apache.poi</groupId>
+                                        <artifactId>poi</artifactId>
+                                </dependency>""").find());
+        assertTrue(PATTERN_NO_VERSION.matcher("""
+                <dependency>
+                                        <groupId>org.apache.poi</groupId>
+                                        <artifactId>poi-scratchpad</artifactId>
+                                </dependency>""").find());
     }
 
     @Test
@@ -76,9 +76,10 @@ public class MavenPomSearchTest {
         assertFalse("org.apache.poi".matches(excludeRegex));
 
         String str =
-                "<groupId>org.apache.poi</groupId>\n" +
-                "    <artifactId>poi-parent</artifactId>\n" +
-                "    <packaging>pom</packaging>";
+                """
+                <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-parent</artifactId>
+                    <packaging>pom</packaging>""";
         assertTrue(str.matches(excludeRegex));
 
         str = "<module.name>org.apache.poi</module.name>";
@@ -87,18 +88,20 @@ public class MavenPomSearchTest {
         str = "<org.apache.poi.util.POILogger>org.apache.poi.util.NullLogger</org.apache.poi.util.POILogger>";
         assertTrue(str.matches(excludeRegex));
 
-        str = "<dependency>\n" +
-                "      <groupId>org.apache.poi</groupId>\n" +
-                "      <artifactId>poi-ooxml</artifactId>\n" +
-                "      <type>jar</type>\n" +
-                "    </dependency>";
+        str = """
+                <dependency>
+                      <groupId>org.apache.poi</groupId>
+                      <artifactId>poi-ooxml</artifactId>
+                      <type>jar</type>
+                    </dependency>""";
         assertTrue(str.matches(excludeRegex));
 
-        str = "<dependency>\n" +
-                "      <groupId>org.apache.poi</groupId>\n" +
-                "      <artifactId>poi-ooxml-schemas</artifactId>\n" +
-                "      <type>jar</type>\n" +
-                "    </dependency>";
+        str = """
+                <dependency>
+                      <groupId>org.apache.poi</groupId>
+                      <artifactId>poi-ooxml-schemas</artifactId>
+                      <type>jar</type>
+                    </dependency>""";
         assertTrue(str.matches(excludeRegex));
 
         str = "exclude group:'org.apache.poi',module:'poi-ooxml'";
@@ -112,32 +115,35 @@ public class MavenPomSearchTest {
     public void testParseVersion() {
         MavenPomSearch search = new MavenPomSearch();
         search.parseVersion(versions, "", "", "org.apache.poi");
-        assertTrue("Had: " + versions, versions.isEmpty());
+        assertTrue(versions.isEmpty(), "Had: " + versions);
 
         search.parseVersion(versions, "url", "",
-                "<groupId>org.apache.poi</groupId>\n"
-                + "<artifactId>some</artifactId>\n"
-                + "<version>3.15</version>");
-        assertEquals("Had: " + versions, 1, versions.size());
+                """
+                <groupId>org.apache.poi</groupId>
+                <artifactId>some</artifactId>
+                <version>3.15</version>""");
+        assertEquals(1, versions.size(), "Had: " + versions);
         assertEquals("3.15", versions.keySet().iterator().next());
         assertEquals("url", versions.values().iterator().next());
 
         versions.clear();
         search.parseVersion(versions, "url", "",
-                "<artifactId>some</artifactId>\n"
-                + "<groupId>org.apache.poi</groupId>\n"
-                + "<version>3.15</version>");
-        assertEquals("Had: " + versions, 1, versions.size());
+                """
+                <artifactId>some</artifactId>
+                <groupId>org.apache.poi</groupId>
+                <version>3.15</version>""");
+        assertEquals(1, versions.size(), "Had: " + versions);
         assertEquals("3.15", versions.keySet().iterator().next());
         assertEquals("url", versions.values().iterator().next());
 
         versions.clear();
         search.parseVersion(versions, "url", "",
-                "<dependency>\n"
-                        + "<groupId>org.apache.poi</groupId>\n"
-                        + "<artifactId>poi-some</artifactId>\n"
-                        + "</dependency>");
-        assertEquals("Had: " + versions, 1, versions.size());
+                """
+                <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-some</artifactId>
+                </dependency>""");
+        assertEquals(1, versions.size(), "Had: " + versions);
         assertEquals("noVersion", versions.keySet().iterator().next());
         assertEquals("url", versions.values().iterator().next());
     }

@@ -2,42 +2,42 @@ package org.dstadler.github.util;
 
 import org.dstadler.commons.testing.TestHelpers;
 import org.dstadler.github.util.VersionComparator.Version;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.TreeSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SuppressWarnings("EqualsWithItself")
 public class VersionComparatorTest {
     @SuppressWarnings("RedundantStringFormatCall")
     @Test
     public void compare() {
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "2.0", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.1", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "0.9", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.0-beta1", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.0-BETA1", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "1.0-SNAPSHOT", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0-beta1", String.format("1.0-beta1"), "1.0", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0-beta1", String.format("1.0-beta1"), "1.0-SNAPSHOT", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.10.1", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", String.format("3.10-beta1"), "3.10.1", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", String.format("3.10-beta1"), "3.10.1.2", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.12.1", false);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.9", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", String.format("3.10"), "3.9.1", true);
-        TestHelpers.ComparatorTest(new VersionComparator(), "3.15", String.format("3.15"), "3.9.0", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "2.0", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "1.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "0.9", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "1.0-beta1", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "1.0-BETA1", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "1.0-SNAPSHOT", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0-beta1", "1.0-beta1".formatted(), "1.0", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0-beta1", "1.0-beta1".formatted(), "1.0-SNAPSHOT", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", "3.10".formatted(), "3.10.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", "3.10-beta1".formatted(), "3.10.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10-beta1", "3.10-beta1".formatted(), "3.10.1.2", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", "3.10".formatted(), "3.12.1", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", "3.10".formatted(), "3.9", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.10", "3.10".formatted(), "3.9.1", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "3.15", "3.15".formatted(), "3.9.0", true);
 
         // 'other' currently is sorted lower than numbers
-        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", String.format("1.0"), "other", true);
+        TestHelpers.ComparatorTest(new VersionComparator(), "1.0", "1.0".formatted(), "other", true);
 
         // arbitrary text is still sorted as good as possible
-        TestHelpers.ComparatorTest(new VersionComparator(), "blabla1", String.format("blabla1"), "blabla2", false);
+        TestHelpers.ComparatorTest(new VersionComparator(), "blabla1", "blabla1".formatted(), "blabla2", false);
     }
 
     @Test
@@ -222,8 +222,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("1.0-SNAPSHOT", "1.0");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -238,8 +238,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.0.1", "3.12-SNAPSHOT");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -254,8 +254,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.2", "3.8-beta5");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -270,8 +270,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.2-beta", "3.9");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -286,8 +286,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.2", "3.14-beta1-20151223");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -302,8 +302,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("3.14-beta1-20151223", "3.14-beta2");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test
@@ -318,8 +318,8 @@ public class VersionComparatorTest {
         assertTrue(v2.compareTo(v1) > 0);
 
         final int ret = new VersionComparator().compare("1.0-SNAPSHOT", "1.0");
-        assertTrue("Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret,
-                ret < 0);
+        assertTrue(ret < 0,
+                "Item 'notequal' should be less than item 'equal' in ComparatorTest, but compare was: " + ret);
     }
 
     @Test

@@ -35,13 +35,19 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.2'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.19.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.0'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.0'
 
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.13.4'
     testImplementation 'org.dstadler:commons-test:1.0.0.22'
 }
 
 wrapper {
     gradleVersion = '7.6.1'
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
 }
 
 tasks.register('processResults', JavaExec) {

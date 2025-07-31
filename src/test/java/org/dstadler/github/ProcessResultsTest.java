@@ -4,8 +4,8 @@ import com.google.common.collect.SetMultimap;
 import org.dstadler.github.util.JSONWriter;
 import org.dstadler.github.util.JSONWriter.Holder;
 import org.dstadler.github.ProcessResults.VersionChange;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import static org.dstadler.github.util.JSONWriter.addHigherVersions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.dstadler.github.ProcessResults.compareToPrevious;
-import static org.junit.Assert.assertEquals;
 
 public class ProcessResultsTest {
     private final static String LINE_PREV = "{\"date\":\"2016-11-11\",\"versions\":{\"3.15-beta2\":[\"https://github.com/centic9/poi-mail-merge/blob/074d96b0d798ded4fb349d7fdf301d1d8a4daa2d//build.gradle\"]}}";
@@ -28,7 +28,7 @@ public class ProcessResultsTest {
     private final List<VersionChange> changes = new ArrayList<>();
     private final Map<String, String> seenRepositoryVersions = new HashMap<>();
 
-    @Before
+    @BeforeEach
     public void setUp() throws IOException {
         versions = JSONWriter.mapper.readValue(LINE_NOW, Holder.class).getRepositoryVersions();
     }
@@ -37,10 +37,10 @@ public class ProcessResultsTest {
     public void testCompareToPreviousNewRepo() {
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
-        assertEquals("Had: " + changes, 1, changes.size());
-        assertEquals("Had: " + changes, "centic9/poi-mail-merge", changes.get(0).repository);
-        assertEquals("Had: " + changes, "<new>", changes.get(0).versionBefore);
-        assertEquals("Had: " + changes, "3.15", changes.get(0).versionNow);
+        assertEquals(1, changes.size(), "Had: " + changes);
+        assertEquals("centic9/poi-mail-merge", changes.get(0).repository, "Had: " + changes);
+        assertEquals("<new>", changes.get(0).versionBefore, "Had: " + changes);
+        assertEquals("3.15", changes.get(0).versionNow, "Had: " + changes);
     }
 
     @Test
@@ -48,10 +48,10 @@ public class ProcessResultsTest {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15-beta2");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
-        assertEquals("Had: " + changes, 1, changes.size());
-        assertEquals("Had: " + changes, "centic9/poi-mail-merge", changes.get(0).repository);
-        assertEquals("Had: " + changes, "3.15-beta2", changes.get(0).versionBefore);
-        assertEquals("Had: " + changes, "3.15", changes.get(0).versionNow);
+        assertEquals(1, changes.size(), "Had: " + changes);
+        assertEquals("centic9/poi-mail-merge", changes.get(0).repository, "Had: " + changes);
+        assertEquals("3.15-beta2", changes.get(0).versionBefore, "Had: " + changes);
+        assertEquals("3.15", changes.get(0).versionNow, "Had: " + changes);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ProcessResultsTest {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.15");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
-        assertEquals("Had: " + changes, 0, changes.size());
+        assertEquals(0, changes.size(), "Had: " + changes);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class ProcessResultsTest {
         seenRepositoryVersions.put("centic9/poi-mail-merge", "3.16");
         compareToPrevious("", versions, changes, seenRepositoryVersions);
 
-        assertEquals("Had: " + changes, 0, changes.size());
+        assertEquals(0, changes.size(), "Had: " + changes);
     }
 
     @Test

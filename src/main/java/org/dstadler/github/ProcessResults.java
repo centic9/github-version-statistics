@@ -384,7 +384,7 @@ public class ProcessResults {
 
         for(Entry<String,Data> entry : versions.entrySet()) {
             if(entry.getValue().count != 0) {
-                pieData.append(String.format("%s,%d,%s\n", entry.getKey(), entry.getValue().count, entry.getValue().link));
+                pieData.append("%s,%d,%s\n".formatted(entry.getKey(), entry.getValue().count, entry.getValue().link));
             }
         }
 

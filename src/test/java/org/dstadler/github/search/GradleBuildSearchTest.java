@@ -3,17 +3,13 @@ package org.dstadler.github.search;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import org.dstadler.commons.testing.TestHelpers;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
 
 import static org.dstadler.github.search.BaseSearch.GROUP;
 import static org.dstadler.github.search.GradleBuildSearch.EXCLUDE_REGEX;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GradleBuildSearchTest {
     private static final Pattern EXCLUDE_PATTERN = Pattern.compile(EXCLUDE_REGEX);
@@ -169,9 +165,10 @@ public class GradleBuildSearchTest {
         assertFalse("org.apache.poi".matches(excludeRegex));
 
         String str =
-                "<groupId>org.apache.poi</groupId>\n" +
-                        "    <artifactId>poi-parent</artifactId>\n" +
-                        "    <packaging>pom</packaging>";
+                """
+                <groupId>org.apache.poi</groupId>
+                    <artifactId>poi-parent</artifactId>
+                    <packaging>pom</packaging>""";
         assertFalse(str.matches(excludeRegex));
 
         str = "<module.name>org.apache.poi</module.name>";
