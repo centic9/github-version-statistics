@@ -1,10 +1,17 @@
 apply plugin: 'java'
 apply plugin: 'application'
 
-mainClassName = 'org.dstadler.github.search.Search'
-applicationDefaultJvmArgs = ['-Xmx64m', '-XX:+HeapDumpOnOutOfMemoryError']
+java {
+    toolchain {
+        sourceCompatibility = JavaVersion.VERSION_17
+    }
+}
 
-version = '1.0'
+application {
+    mainClass = 'org.dstadler.github.search.Search'
+    applicationDefaultJvmArgs = ['-Xmx64m', '-XX:+HeapDumpOnOutOfMemoryError']
+    version = '1.0'
+}
 
 jar {
     manifest {
@@ -43,7 +50,7 @@ dependencies {
 }
 
 wrapper {
-    gradleVersion = '7.6.1'
+    gradleVersion = '8.14.2'
 }
 
 tasks.withType(Test).configureEach {
