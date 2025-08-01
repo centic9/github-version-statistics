@@ -27,7 +27,7 @@ import static org.dstadler.github.packaging.ListArtifacts.WORKFLOW_ID;
 
 public class DownloadPackages {
     // bookworm@amd64@ottok_debcraft@main@512b4c356c842ecf7aecb81d23cb4947a910942a
-    protected static final Pattern NAME_REGEX = Pattern.compile("([a-z]+)@([a-z0-9]+)@([-a-z0-9_]+)@([-a-z0-9_+]+)@([0-9a-f]+)");
+    protected static final Pattern NAME_REGEX = Pattern.compile("([a-z]+)@([a-z0-9]+)@([-a-z0-9_]+)@([-a-z0-9_.+]+)@([0-9a-f]+)");
 
     private static final String ROOT_DIR = "/opt/cowbuilder/github";
 
@@ -47,14 +47,18 @@ public class DownloadPackages {
 
             File checkFile = new File(ROOT_DIR, name + ".chk");
             if (checkFile.exists()) {
-                System.out.println("Artifact already downloaded: " + name);
+                System.out.println("Already downloaded: " + name);
                 continue;
             }
 
-            System.out.println("Downloading " + name);
+            File rootDir = new File(ROOT_DIR, artifact.distribution + "-" + artifact.architecture);
+            Preconditions.checkState(rootDir.isDirectory() || rootDir.mkdirs(),
+                    "Could not create directories at %s", rootDir);
+
+            System.out.println("Downloading " + name + " to " + rootDir);
 
             artifact.ghArtifact.download(stream -> {
-                extractArtifactZip(stream, artifact);
+                extractArtifactZip(stream, rootDir);
 
                 return "";
             });
@@ -83,10 +87,7 @@ public class DownloadPackages {
         return artifacts;
     }
 
-    private static void extractArtifactZip(InputStream stream, Artifact artifact) throws IOException {
-        File rootDir = new File(ROOT_DIR, artifact.distribution + "-" + artifact.architecture);
-        Preconditions.checkState(rootDir.isDirectory() || rootDir.mkdirs(),
-                "Could not create directories at %s", rootDir);
+    private static void extractArtifactZip(InputStream stream, File rootDir) throws IOException {
 
         ZipInputStream zis = new ZipInputStream(new BufferedInputStream(stream));
         ZipEntry zipEntry = zis.getNextEntry();
