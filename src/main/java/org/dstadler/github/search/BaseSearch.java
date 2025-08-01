@@ -176,6 +176,7 @@ public abstract class BaseSearch {
         // this can increase rate-limits considerably
         String token = System.getenv("GITHUB_TOKEN");
         if (StringUtils.isNotBlank(token)) {
+            System.out.println("Using provided GITHUB_TOKEN");
             builder.withJwtToken(token);
         }
 

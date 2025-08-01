@@ -34,22 +34,7 @@ public class DownloadPackages {
     public static void main(String[] args) throws IOException {
         GitHub github = BaseSearch.connect();
 
-        System.out.println("Opening repository " + REPO_DEBIAN_PACKAGES);
-        GHRepository repository = github.getRepository(REPO_DEBIAN_PACKAGES);
-
-        List<Artifact> artifacts = new ArrayList<>();
-        for (GHWorkflowRun run : repository.getWorkflow(WORKFLOW_ID).listRuns()) {
-            for (GHArtifact artifact : run.listArtifacts()) {
-                String name = artifact.getName();
-                System.out.println("Artifact: " + name + " at " + artifact.getUrl() + " for " + run.getName());
-
-                Matcher matcher = NAME_REGEX.matcher(name);
-                if (matcher.matches()) {
-                    System.out.println("Match: " + matcher.group(1) + "/"  + matcher.group(2) + "/" + matcher.group(3) + "/" + matcher.group(4));
-                    artifacts.add(Artifact.populate(name, artifact.getUrl(), matcher, artifact));
-                }
-            }
-        }
+        List<Artifact> artifacts = getAvailableArtifacts(github);
 
         System.out.println("Found " + artifacts.size() + " artifacts, downloading to " + ROOT_DIR);
         Preconditions.checkState(new File(ROOT_DIR).isDirectory() || new File(ROOT_DIR).mkdirs(),
@@ -76,6 +61,26 @@ public class DownloadPackages {
 
             FileUtils.writeStringToFile(checkFile, "", StandardCharsets.UTF_8);
         }
+    }
+
+    public static List<Artifact> getAvailableArtifacts(GitHub github) throws IOException {
+        System.out.println("Opening repository " + REPO_DEBIAN_PACKAGES);
+        GHRepository repository = github.getRepository(REPO_DEBIAN_PACKAGES);
+
+        List<Artifact> artifacts = new ArrayList<>();
+        for (GHWorkflowRun run : repository.getWorkflow(WORKFLOW_ID).listRuns()) {
+            for (GHArtifact artifact : run.listArtifacts()) {
+                String name = artifact.getName();
+                System.out.println("Artifact: " + name + " at " + artifact.getUrl() + " for " + run.getName());
+
+                Matcher matcher = NAME_REGEX.matcher(name);
+                if (matcher.matches()) {
+                    System.out.println("Match: " + matcher.group(1) + "/"  + matcher.group(2) + "/" + matcher.group(3) + "/" + matcher.group(4));
+                    artifacts.add(Artifact.populate(name, artifact.getUrl(), matcher, artifact));
+                }
+            }
+        }
+        return artifacts;
     }
 
     private static void extractArtifactZip(InputStream stream, Artifact artifact) throws IOException {
@@ -114,7 +119,7 @@ public class DownloadPackages {
         zis.close();
     }
 
-    private static class Artifact {
+    public static class Artifact {
         String name;
         URL url;
         String distribution;
