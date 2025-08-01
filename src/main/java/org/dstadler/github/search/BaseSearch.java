@@ -3,6 +3,7 @@ package org.dstadler.github.search;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Multimap;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
@@ -170,7 +171,15 @@ public abstract class BaseSearch {
     }
 
     public static GitHub connect() throws IOException {
-        return GitHubBuilder.fromEnvironment().
+        GitHubBuilder builder = GitHubBuilder.fromEnvironment();
+
+        // this can increase rate-limits considerably
+        String token = System.getenv("GITHUB_TOKEN");
+        if (StringUtils.isNotBlank(token)) {
+            builder.withJwtToken(token);
+        }
+
+        return builder.
                 // observe rate-limits and wait if we get near the returned remaining number of requests per timeframe
                 withRateLimitChecker(new RateLimitChecker.LiteralValue(1), RateLimitTarget.SEARCH).
                 build();
