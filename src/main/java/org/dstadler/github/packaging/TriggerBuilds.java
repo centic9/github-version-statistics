@@ -24,37 +24,37 @@ public class TriggerBuilds {
         Pair.of("ottok/debcraft", "main")
     );
 
-    // allow to blacklist some repos which are not necessary any more
+    // allow to blacklist some repos which are not necessary anymore
     private static final List<String> REPOS_TO_IGNORE = List.of(
-            "bless-ppa",
-            "debhelper-ppa",
-            "digikam-ppa",
-            "dpkg-ppa",
-            "git-ftp-ppa",
-            "git-ppa",
-            "kdesvn-ppa",
-            "konsole-ppa",
-            "libmp3splt-ppa",
-            "marble-qt4-ppa",
-            "mp3gain-ppa",
-            "mp3splt-gtk-ppa",
-            "mp3splt-ppa",
-            "ntp-ppa",
-            "ocserv-ppa",
-            "onedrive-ppa",
-            "openambit-ppa",
-            "openconnect-ppa",
-            "scribus-ppa",
-            "soundkonverter-ppa",
-            "subversion-19-ppa",
-            "subversion-ppa",
-            "tpm2-tss-ppa"
+            "centic9/bless-ppa",
+            "centic9/debhelper-ppa",
+            "centic9/digikam-ppa",
+            "centic9/dpkg-ppa",
+            "centic9/git-ftp-ppa",
+            "centic9/git-ppa",
+            "centic9/kdesvn-ppa",
+            "centic9/konsole-ppa",
+            "centic9/libmp3splt-ppa",
+            "centic9/marble-qt4-ppa",
+            "centic9/mp3gain-ppa",
+            "centic9/mp3splt-gtk-ppa",
+            "centic9/mp3splt-ppa",
+            "centic9/ntp-ppa",
+            "centic9/ocserv-ppa",
+            "centic9/onedrive-ppa",
+            "centic9/openambit-ppa",
+            "centic9/openconnect-ppa",
+            "centic9/scribus-ppa",
+            "centic9/soundkonverter-ppa",
+            "centic9/subversion-19-ppa",
+            "centic9/subversion-ppa",
+            "centic9/tpm2-tss-ppa"
     );
 
     // some version-comparisons are too complicated for the simple comparison below
     private static final Multimap<String,String> IGNORED_BRANCHES = HashMultimap.create();
     static {
-        IGNORED_BRANCHES.put("laminar-ppa", "ppa/1.1-1build1");
+        IGNORED_BRANCHES.put("centic9/laminar-ppa", "ppa/1.1-1build1");
     }
 
 
@@ -65,7 +65,7 @@ public class TriggerBuilds {
         // and select which branch should be built
         List<Pair<String,String>> builds = new ArrayList<>();
         for (GHRepository repo : github.getUser("centic9").listRepositories()) {
-            if (repo.getName().endsWith("-ppa") && !REPOS_TO_IGNORE.contains(repo.getName())) {
+            if (repo.getName().endsWith("-ppa") && !REPOS_TO_IGNORE.contains(repo.getFullName())) {
                 //System.out.println("Repository: " + repo.getName());
 
                 // For branches where the name starts with "ppa/", determine the latest branch by version
@@ -73,16 +73,16 @@ public class TriggerBuilds {
                         // only branches where the name starts with "ppa/"
                         .filter(entry -> entry.getKey().startsWith("ppa/"))
                         // filter out some "known" unwanted branches
-                        .filter(entry -> !IGNORED_BRANCHES.containsEntry(repo.getName(), entry.getKey()))
+                        .filter(entry -> !IGNORED_BRANCHES.containsEntry(repo.getFullName(), entry.getKey()))
                         // choose the "latest" branch by version-comparison
                         .max(Comparator.comparing(entry -> extractVersion(entry.getKey())))
                         .ifPresent(entry -> {
-                            System.out.println("Latest branch for " + repo.getName() + ": " + entry.getKey());
-                            builds.add(Pair.of(repo.getName(), entry.getKey()));
+                            System.out.println("Latest branch for " + repo.getFullName() + ": " + entry.getKey());
+                            builds.add(Pair.of(repo.getFullName(), entry.getKey()));
                         });
             }
         }
-
+        System.out.println("Found " + builds.size() + " repos before applying ignores");
         builds.addAll(REPOS_TO_ADD);
 
         List<DownloadPackages.Artifact> artifacts = DownloadPackages.getAvailableArtifacts(github);
@@ -152,13 +152,5 @@ class ComparableVersion implements Comparable<ComparableVersion> {
             }
         }
         return 0;
-    }
-
-    private int parsePart(String part) {
-        try {
-            return Integer.parseInt(part);
-        } catch (NumberFormatException e) {
-            return 0;
-        }
     }
 }
