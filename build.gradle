@@ -33,7 +33,7 @@ dependencies {
     implementation 'org.apache.commons:commons-csv:1.14.0'
 	implementation 'org.apache.commons:commons-exec:1.5.0'
 
-    implementation 'org.dstadler:commons-dost:1.4.2'
+    implementation 'org.dstadler:commons-dost:1.4.3'
     implementation 'org.kohsuke:github-api:1.329'
     implementation 'org.eclipse.jgit:org.eclipse.jgit:7.3.0.202506031305-r'
     implementation 'org.slf4j:slf4j-simple:2.0.17'
@@ -42,15 +42,15 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.19.2'
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.19.2'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.19.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.0'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.13.4'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.13.4'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
 
     testImplementation 'org.dstadler:commons-test:1.0.0.22'
 }
 
 wrapper {
-    gradleVersion = '8.14.2'
+    gradleVersion = '8.14.3'
 }
 
 tasks.withType(Test).configureEach {
