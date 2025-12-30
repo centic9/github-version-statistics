@@ -124,8 +124,11 @@ public class GitHubSupportTest {
 
     @Test
     public void listRepositories() throws IOException {
+        System.out.println("Connecting and fetching repositories...");
         GitHub github = BaseSearch.connect();
 
+        System.out.println();
+        System.out.println();
         for (GHRepository repository : github.getUser("centic9").listRepositories()) {
             if (repository.isFork()) {
                 continue;
@@ -154,8 +157,10 @@ public class GitHubSupportTest {
         printRepo("jenkinsci/jacoco-plugin");
         printRepo("jajuk-team/jajuk");
 
-        // this is manually uploaded to the following page
-        // https://github.com/centic9/centic9.github.io/blob/master/STATUS.md
+        System.out.println();
+        System.out.println();
+        System.out.println("This is manually uploaded to the following page: " +
+                "https://github.com/centic9/centic9.github.io/blob/master/STATUS.md");
     }
 
     private void printRepo(String repository) {
